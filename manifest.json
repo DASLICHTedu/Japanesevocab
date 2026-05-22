@@ -1,0 +1,12 @@
+{
+  "name": "JLPT Study DE",
+  "short_name": "JLPT Study",
+  "description": "Lerne JLPT Vokabeln, Kanji und Grammatik",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#272a48",
+  "icons": "Icon.jpeg"
+    }
+   
+  

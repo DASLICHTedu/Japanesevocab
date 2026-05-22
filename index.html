@@ -377,6 +377,10 @@
         </div>
 
         <button class="btn-main" style="margin-top: 40px;" onclick="startTest()">Test starten →</button>
+
+        <div class="section-label" style="margin-top: 40px;">JLPT Simulation</div>
+        <p class="subtitle">Ein vollständiger Test mit Vokabeln, Kanji, Grammatik und Lesen (ohne Furigana).</p>
+        <button class="btn-main" style="background: var(--accent-pink);" onclick="startFullTest()">Vollständigen JLPT <span class="current-lvl">N5</span> Test starten</button>
     </main>
 
     <main id="view-flashcards" class="hidden">
@@ -429,6 +433,14 @@
             <p id="type-hint" style="color:var(--text-light); font-size:14px; margin-bottom:20px;">Übersetze auf Deutsch</p>
             
             <input type="text" class="typing-input" id="typing-input" placeholder="Tippe hier..." onkeypress="checkTyping(event)">
+            <div id="type-input-area">
+                <input type="text" class="typing-input" id="typing-input" placeholder="Tippe hier..." onkeypress="checkTyping(event)">
+            </div>
+
+            <div id="type-choice-area" class="hidden" style="display: grid; gap: 10px; margin-top: 20px;">
+                <!-- Buttons für Multiple Choice -->
+            </div>
+
             <div class="typing-feedback" id="typing-feedback"></div>
             <button id="btn-next-typing" class="btn-main hidden" style="margin-top: 20px; background: var(--primary-light);" onclick="skipToNext()">Nächste Vokabel →</button>
         </div>
@@ -15519,6 +15531,12 @@
         document.getElementById('fc-total-num').innerText = state.currentQueue.length;
         document.getElementById('fc-progress').style.width = `${((state.currentIndex) / state.currentQueue.length) * 100}%`;
         
+        // UI Reset für den Fall, dass vorher ein Full-Test lief
+        const inputArea = document.getElementById('type-input-area');
+        const choiceArea = document.getElementById('type-choice-area');
+        if(inputArea) inputArea.classList.remove('hidden');
+        if(choiceArea) choiceArea.classList.add('hidden');
+
         document.getElementById('fc-type-front').innerText = word.type;
         document.getElementById('fc-type-back').innerText = word.type;
         document.getElementById('fc-type-front').className = `badge ${getBadgeClass(word.type)}`;
@@ -15596,6 +15614,12 @@
         document.getElementById('type-total-num').innerText = state.currentQueue.length;
         document.getElementById('type-badge').innerText = word.type;
         
+        // UI Reset
+        const inputArea = document.getElementById('type-input-area');
+        const choiceArea = document.getElementById('type-choice-area');
+        if(inputArea) inputArea.classList.remove('hidden');
+        if(choiceArea) choiceArea.classList.add('hidden');
+
         const input = document.getElementById('typing-input');
         input.value = '';
         document.getElementById('typing-feedback').innerHTML = '';
@@ -15614,6 +15638,10 @@
 
     function checkTyping(e) {
         if(e.key === 'Enter') {
+            if (state.mode === 'fulltest') {
+                checkFullTestAnswer(e.target.value);
+                return;
+            }
             const word = state.currentQueue[state.currentIndex];
             const answer = document.getElementById('typing-input').value.toLowerCase().trim();
             const isJpToDe = state.direction === 'jp-de';
@@ -15657,9 +15685,15 @@
     function skipToNext() {
         state.currentIndex++;
         if(state.currentIndex >= state.currentQueue.length) {
+        if (state.currentIndex >= state.currentQueue.length) {
             finishSession();
         } else loadTyping();
-    }
+        } 
+        } 
+            if (state.mode === 'fulltest') loadFullTestItem();
+            else loadTyping();
+        
+    
 
     function retryAll() {
         startLearning(-1, state.lastUsedSource);
@@ -15973,15 +16007,139 @@
         const words = vocabData[state.level] || [];
         if (words.length === 0) {
             alert(`Keine Vokabeln für Level ${state.level} vorhanden. Bitte wähle ein anderes Level oder nutze das Spezial-Training.`);
+            alert(`Keine Vokabeln für Level ${state.level} vorhanden.`);
             return;
         }
         startLearning(-1, words); // Startet das Lernen mit allen Wörtern des aktuellen Levels 
+        startLearning(-1, words); 
     }
     function clearKanjiCanvas() { if(ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); }
     
     function clearKanjiCanvas() { 
         if(canvas && ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
+    function clearKanjiCanvas() { if(canvas && ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+    // --- VOLLSTÄNDIGER JLPT TEST MODUS ---
+    function startFullTest() {
+        const level = state.level;
+        const vPool = vocabData[level] || [];
+        const kPool = kanjiData[level] || [];
+        const gPool = grammarData[level] || [];
+        const rPool = readingData[level] || [];
+
+        if (vPool.length < 5 || kPool.length < 5 || gPool.length < 5 || rPool.length < 1) {
+            return alert("Nicht genügend Daten für einen vollständigen Test in diesem Level vorhanden.");
+        }
+
+        const testQueue = [];
+
+        // 1. Vokabeln (10 Stück, Eintippen)
+        [...vPool].sort(() => Math.random() - 0.5).slice(0, 10).forEach(v => {
+            testQueue.push({ type: 'typing', category: 'Vokabeln', word: v.kanji || v.kana, answer: v.de, hint: v.kanji ? v.kana : 'Übersetze...' });
+        });
+
+        // 2. Kanji (5 Stück, Multiple Choice Bedeutung)
+        [...kPool].sort(() => Math.random() - 0.5).slice(0, 5).forEach(k => {
+            const options = [k.de];
+            while(options.length < 4) {
+                const r = kPool[Math.floor(Math.random() * kPool.length)].de;
+                if(!options.includes(r)) options.push(r);
+            }
+            testQueue.push({ type: 'choice', category: 'Kanji', word: k.kanji, answer: k.de, options: options.sort(() => Math.random() - 0.5), hint: "Was bedeutet dieses Kanji?" });
+        });
+
+        // 3. Grammatik (5 Stück, Multiple Choice)
+        [...gPool].sort(() => Math.random() - 0.5).slice(0, 5).forEach(g => {
+            testQueue.push({ type: 'choice', category: 'Grammatik', word: g.quiz.question, answer: g.quiz.options[g.quiz.correct], options: g.quiz.options, hint: "Wähle die richtige Form" });
+        });
+
+        // 4. Leseverständnis (2 Sätze, Übersetzung tippen, KEIN FURIGANA)
+        const rText = rPool[Math.floor(Math.random() * rPool.length)];
+        [...rText.content].sort(() => Math.random() - 0.5).slice(0, 2).forEach(s => {
+            // Entferne alle <ruby> und <rt> Tags für den Test
+            const cleanJp = s.jp.replace(/<rt>.*?<\/rt>/g, "").replace(/<.*?>/g, "");
+            testQueue.push({ type: 'typing', category: 'Lesen (Kein Furigana)', word: cleanJp, answer: s.de, hint: "Übersetze den Satz auf Deutsch" });
+        });
+
+        state.currentQueue = testQueue;
+        state.currentIndex = 0;
+        state.sessionMistakes = [];
+        state.sessionCorrectCount = 0;
+        state.mode = 'fulltest';
+
+        switchTab('typing');
+        loadFullTestItem();
     }
+
+    function loadFullTestItem() {
+        const item = state.currentQueue[state.currentIndex];
+        if(!item) return finishSession();
+
+        document.getElementById('type-current-num').innerText = state.currentIndex + 1;
+        document.getElementById('type-total-num').innerText = state.currentQueue.length;
+        document.getElementById('type-badge').innerText = item.category;
+        document.getElementById('type-word').innerText = item.word;
+        document.getElementById('type-hint').innerText = item.hint;
+
+        const inputArea = document.getElementById('type-input-area');
+        const choiceArea = document.getElementById('type-choice-area');
+        const feedback = document.getElementById('typing-feedback');
+        const nextBtn = document.getElementById('btn-next-typing');
+        const input = document.getElementById('typing-input');
+
+        feedback.innerHTML = '';
+        nextBtn.classList.add('hidden');
+
+        if(item.type === 'choice') {
+            inputArea.classList.add('hidden');
+            choiceArea.classList.remove('hidden');
+            choiceArea.innerHTML = item.options.map(opt => 
+                `<button class="quiz-option" onclick="checkFullTestAnswer('${opt}')">${opt}</button>`
+            ).join('');
+        } else {
+            inputArea.classList.remove('hidden');
+            choiceArea.classList.add('hidden');
+            input.value = '';
+            input.disabled = false;
+            input.focus();
+        }
+    }
+
+    function checkFullTestAnswer(val) {
+        const item = state.currentQueue[state.currentIndex];
+        const feedback = document.getElementById('typing-feedback');
+        const input = document.getElementById('typing-input');
+        
+        let isCorrect = false;
+        if(item.type === 'choice') {
+            isCorrect = (val === item.answer);
+        } else {
+            const possible = item.answer.toLowerCase().split(/[\/,]/).map(s => s.trim());
+            const inputVal = val.trim().toLowerCase();
+            isCorrect = possible.some(p => p === inputVal || (inputVal.length > 3 && p.includes(inputVal)));
+        }
+
+        if(isCorrect) {
+            feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓</span>';
+            state.sessionCorrectCount++;
+            if(input) input.disabled = true;
+            setTimeout(() => {
+                state.currentIndex++;
+                loadFullTestItem();
+            }, 1000);
+        } else {
+            feedback.innerHTML = `<span class="feedback-wrong">Falsch. Richtig: ${item.answer}</span>`;
+            state.sessionMistakes.push(item);
+            document.getElementById('btn-next-typing').classList.remove('hidden');
+            document.getElementById('btn-next-typing').onclick = () => {
+                state.currentIndex++;
+                loadFullTestItem();
+            };
+        }
+    }
+
+    function clearKanjiCanvas() { if(canvas && ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
     // Tastatur-Shortcuts für Karteikarten
     document.addEventListener('keydown', (e) => {
@@ -15989,7 +16147,7 @@
         if(e.code === 'Space') { flipCard(); e.preventDefault(); }
         if(state.isFlipped && e.code === 'ArrowRight') nextCard(true);
         if(state.isFlipped && e.code === 'ArrowLeft') nextCard(false);
-    });
+    });}
 
     // Start
     init();
