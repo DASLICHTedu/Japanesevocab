@@ -202,6 +202,7 @@
             <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandom(false, true)">Level Mix (Alle)</button>
             <button class="btn-main" style="background: var(--primary-light);" onclick="startRandom(true, true)">Global Mix (Alle)</button>
         </div>
+        <button class="btn-main" style="background: var(--primary-dark); margin-top: 20px;" onclick="startDailyChallenge()">☀️ Tägliche Herausforderung (10 Vokabeln)</button>
     </main>
 
     <main id="view-liste" class="hidden">
@@ -314,13 +315,11 @@
             <div id="kanji-write-view">
                 <div class="kanji-info">
                     <div class="kanji-readings" id="kw-readings"></div>
-                    <div id="kw-readings"></div>
                     <div class="kanji-meaning" id="kw-meaning"></div>
                 </div>
                 <div class="kanji-canvas-container">
                     <div id="kanji-numbers-layer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:4;"></div>
                     <div id="kanji-ghost"></div>
-                    <div id="kanji-numbers-layer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1;"></div>
                     <div class="stroke-order-hint">Strichfolge</div>
                     <canvas id="kanji-canvas" width="300" height="300"></canvas>
                 </div>
@@ -432,7 +431,6 @@
             <div class="fc-word" id="type-word" style="margin-top:20px; color:var(--primary-dark);">ある</div>
             <p id="type-hint" style="color:var(--text-light); font-size:14px; margin-bottom:20px;">Übersetze auf Deutsch</p>
             
-            <input type="text" class="typing-input" id="typing-input" placeholder="Tippe hier..." onkeypress="checkTyping(event)">
             <div id="type-input-area">
                 <input type="text" class="typing-input" id="typing-input" placeholder="Tippe hier..." onkeypress="checkTyping(event)">
             </div>
@@ -4752,69 +4750,7 @@
             }
         ]
     
-    const readingData2 = {}; // Platzhalter für weitere Daten falls nötig
-
-    function renderGrammarList() {
-        const container = document.getElementById('grammar-list');
-        const levelItems = grammarData[state.level] || [];
-        
-        showGrammarList();
-
-        if (levelItems.length === 0) {
-            container.innerHTML = `<p style="text-align:center; padding:20px;">Grammatik-Lektionen für ${state.level} folgen in Kürze.</p>`;
-            return;
-        }
-
-        let html = '';
-        levelItems.forEach((item, idx) => {
-            html += `
-                <div class="reading-card" onclick="displayGrammarLesson(${idx})">
-                    <h3>${item.title}</h3>
-                    <p style="font-size: 13px; color: var(--text-light);">Lerne die Regeln und mache das Quiz</p>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
-    }
-
-    function displayGrammarLesson(idx) {
-        const item = grammarData[state.level][idx];
-        document.getElementById('grammar-list').classList.add('hidden');
-        document.getElementById('grammar-lesson-viewer').classList.remove('hidden');
-
-        document.getElementById('grammar-title').innerText = item.title;
-        document.getElementById('grammar-explanation').innerText = item.explanation;
-        
-        let exHtml = '';
-        item.examples.forEach(ex => {
-            exHtml += `<div style="margin-bottom:10px;"><strong>${ex.jp}</strong><br><span style="color:var(--text-light); font-size:14px;">${ex.de}</span></div>`;
-        });
-        document.getElementById('grammar-examples').innerHTML = exHtml;
-
-        document.getElementById('grammar-quiz-question').innerText = item.quiz.question;
-        let optHtml = '';
-        item.quiz.options.forEach((opt, oIdx) => {
-            optHtml += `<button class="btn-main" style="background:white; color:var(--text-main); border:1px solid var(--border-color); text-align:left;" onclick="checkGrammarQuiz(${oIdx}, ${item.quiz.correct})">${opt}</button>`;
-        });
-        document.getElementById('grammar-quiz-options').innerHTML = optHtml;
-        document.getElementById('grammar-quiz-feedback').innerHTML = '';
-    }
-
-    function checkGrammarQuiz(choice, correctIdx) {
-        const feedback = document.getElementById('grammar-quiz-feedback');
-        if (choice === correctIdx) {
-            feedback.innerHTML = '<span class="feedback-correct">Richtig! Gut gemacht. ✓</span>';
-        } else {
-            feedback.innerHTML = '<span class="feedback-wrong">Leider falsch. Versuche es nochmal!</span>';
-        }
-    }
-
-    function showGrammarList() {
-        document.getElementById('grammar-list').classList.remove('hidden');
-        document.getElementById('grammar-lesson-viewer').classList.add('hidden');
-    }
-
-    const readingDataFix3 = {
+    const readingDataFix3 = { // Keeping this as a placeholder if needed elsewhere
     "N5": [
         {
             title: "Die weiße Katze (白い猫)",
@@ -15248,8 +15184,11 @@
   {"kana": "わるぎ", "kanji": "悪気", "de": "böswillige Absicht / böser Wille", "type": "Nomen", "learned": false},
   {"kana": "わりびき", "kanji": "割引", "de": "Rabatt / Ermäßigung", "type": "Nomen / Verb", "learned": false},
     ]
+};
 
- };
+    // --- KONSTANTEN & ZUSTAND ---
+    const DAILY_CHALLENGE_KEY = 'dailyChallengeWords';
+    const DAILY_CHALLENGE_RESET_KEY = 'dailyChallengeLastReset';
 
     let state = {
         level: 'N5',
@@ -15257,8 +15196,8 @@
         direction: 'jp-de',
         filterType: 'Alle',
         currentQueue: [],
-        lastUsedSource: [], // For "Repeat All"
-        sessionMistakes: [], 
+        lastUsedSource: [],
+        sessionMistakes: [],
         sessionCorrectCount: 0,
         currentIndex: 0,
         isFlipped: false,
@@ -15267,24 +15206,62 @@
             currentIndex: 0,
             subMode: 'write',
             strokesDrawn: 0,
-            quizState: 'write' // 'write' oder 'choice'
+            quizState: 'write'
         },
         testSettings: {
             direction: 'jp-de',
             count: 20
-        }
-        ,
-        kanji: { // Initialize kanji specific state
-            currentBlock: [],
-            currentIndex: 0,
-            subMode: 'write' // Default sub-mode for Kanji
+        },
+        dailyChallenge: {
+            words: [],
+            lastReset: 0
         }
     };
+
+    // --- NAVIGATION & UI ---
+    function switchTab(tabId) {
+        document.querySelectorAll('main').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+
+        if (!['flashcards', 'typing', 'results', 'kanji-results'].includes(tabId)) {
+            const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
+            if (tabBtn) tabBtn.classList.add('active');
+        }
+
+        const targetView = document.getElementById(`view-${tabId}`);
+        if (targetView) targetView.classList.remove('hidden');
+
+        if (tabId === 'liste') renderList();
+        if (tabId === 'lernen') updateStats();
+        if (tabId === 'lesen') renderReadingList();
+        if (tabId === 'grammatik') renderGrammarList();
+        if (tabId === 'kanji') renderKanjiBlocks();
+    }
+
+    function changeLevel(dir) {
+        const levels = ['N5', 'N4', 'N3', 'N2', 'N1'];
+        let idx = levels.indexOf(state.level);
+        idx += dir;
+        if (idx < 0) idx = levels.length - 1;
+        if (idx >= levels.length) idx = 0;
+        state.level = levels[idx];
+
+        document.getElementById('current-level-display').innerText = state.level;
+        document.querySelectorAll('.current-lvl').forEach(el => el.innerText = state.level);
+        const lesenBadge = document.getElementById('lesen-level-badge');
+        const kanjiBadge = document.getElementById('kanji-level-badge');
+        const grammatikBadge = document.getElementById('grammatik-level-badge');
+        if (lesenBadge) lesenBadge.innerText = state.level;
+        if (kanjiBadge) kanjiBadge.innerText = state.level;
+        if (grammatikBadge) grammatikBadge.innerText = state.level;
+
+        updateStats();
+        renderList();
+    }
 
     // --- INITIALISIERUNG ---
     function init() {
         for (let level in vocabData) {
-            // Deduplizierung: Nur eindeutige Einträge pro Level behalten
             const unique = [];
             const seen = new Set();
             vocabData[level].forEach(item => {
@@ -15295,71 +15272,57 @@
                 }
             });
             vocabData[level] = unique;
-            // Alphabetische Sortierung nach Kana für eine bessere Struktur
             vocabData[level].sort((a, b) => a.kana.localeCompare(b.kana, 'ja'));
         }
         initKanjiCanvas();
         updateStats();
-        renderList();
+        generateDailyWords();
     }
 
-    // --- NAVIGATION & UI ---
-    function switchTab(tabId) {
-        document.querySelectorAll('main').forEach(el => el.classList.add('hidden'));
-        document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-        
-        // Fix: Nur Tabs markieren, die auch existieren (verhindert White Screen Fehler bei 'results')
-        if(tabId !== 'flashcards' && tabId !== 'typing' && tabId !== 'results') {
-        if(!['flashcards', 'typing', 'results', 'kanji-results'].includes(tabId)) {
-            const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
-            if(tabBtn) tabBtn.classList.add('active');
+    // --- TÄGLICHE HERAUSFORDERUNG ---
+    function generateDailyWords() {
+        const now = new Date();
+        const todayKey = now.toISOString().slice(0, 10);
+        const lastReset = localStorage.getItem(DAILY_CHALLENGE_RESET_KEY);
+
+        if (lastReset !== todayKey) {
+            const levels = ['N5', 'N4', 'N3', 'N2', 'N1'];
+            let selection = [];
+            levels.forEach(lvl => {
+                const pool = vocabData[lvl] || [];
+                if (pool.length > 0) {
+                    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+                    selection = selection.concat(shuffled.slice(0, 2));
+                }
+            });
+            state.dailyChallenge.words = selection;
+            localStorage.setItem(DAILY_CHALLENGE_KEY, JSON.stringify(selection));
+            localStorage.setItem(DAILY_CHALLENGE_RESET_KEY, todayKey);
+        } else {
+            const stored = localStorage.getItem(DAILY_CHALLENGE_KEY);
+            if (stored) state.dailyChallenge.words = JSON.parse(stored);
         }
+    }
+
+    function startDailyChallenge() {
+        generateDailyWords();
+        if (state.dailyChallenge.words.length === 0) {
+            return alert("Konnte keine täglichen Vokabeln generieren.");
         }
-
-        const targetView = document.getElementById(`view-${tabId}`);
-        if(targetView) targetView.classList.remove('hidden');
-
-        if(tabId === 'liste') renderList();
-        if(tabId === 'lernen') updateStats();
-        if(tabId === 'lesen') renderReadingList();
-        if(tabId === 'grammatik') renderGrammarList();
-        if(tabId === 'kanji') renderKanjiBlocks(); // Render Kanji blocks when switching to Kanji tab
-        if(tabId === 'kanji') renderKanjiBlocks();
+        startLearning(-1, state.dailyChallenge.words);
     }
 
-    
-    function changeLevel(dir) {
-        const levels = ['N5', 'N4', 'N3', 'N2', 'N1'];
-        let idx = levels.indexOf(state.level);
-        idx += dir;
-        if (idx < 0) idx = levels.length - 1;
-        if (idx >= levels.length) idx = 0;
-        state.level = levels[idx];
-        
-        document.getElementById('current-level-display').innerText = state.level;
-        document.querySelectorAll('.current-lvl').forEach(el => el.innerText = state.level);
-        if(document.getElementById('lesen-level-badge')) document.getElementById('lesen-level-badge').innerText = state.level;
-        if(document.getElementById('kanji-level-badge')) document.getElementById('kanji-level-badge').innerText = state.level;
-
-        updateStats();
-        renderList();
-        if(!document.getElementById('view-grammatik').classList.contains('hidden')) renderGrammarList();
-        if(!document.getElementById('view-lesen').classList.contains('hidden')) renderReadingList();
-        if(!document.getElementById('view-kanji').classList.contains('hidden')) renderKanjiBlocks();
-    }
-
+    // --- MODI & EINSTELLUNGEN ---
     function setMode(mode) {
         state.mode = mode;
-        document.getElementById('mode-karteikarten').classList.remove('active');
-        document.getElementById('mode-abfragen').classList.remove('active');
-        document.getElementById(`mode-${mode}`).classList.add('active');
+        document.getElementById('mode-karteikarten').classList.toggle('active', mode === 'karteikarten');
+        document.getElementById('mode-abfragen').classList.toggle('active', mode === 'abfragen');
     }
 
     function setDirection(dir) {
         state.direction = dir;
-        document.getElementById('dir-jp-de').classList.remove('active');
-        document.getElementById('dir-de-jp').classList.remove('active');
-        document.getElementById(`dir-${dir}`).classList.add('active');
+        document.getElementById('dir-jp-de').classList.toggle('active', dir === 'jp-de');
+        document.getElementById('dir-de-jp').classList.toggle('active', dir === 'de-jp');
     }
 
     function updateStats() {
@@ -15372,23 +15335,21 @@
 
     function renderBlocks() {
         const container = document.getElementById('blocks-container');
-        if(!container) return;
+        if (!container) return;
         const words = vocabData[state.level] || [];
         const blockSize = 20;
-        const numBlocks = Math.ceil(words.length / blockSize);
-        
         let html = '';
-        for (let i = 0; i < numBlocks; i++) {
+        for (let i = 0; i < Math.ceil(words.length / blockSize); i++) {
             const start = i * blockSize + 1;
             const end = Math.min((i + 1) * blockSize, words.length);
-            html += `<button class="btn-main" onclick="startLearning(${i})">${state.level} - Block ${i+1} (${start}-${end})</button>`;
+            html += `<button class="btn-main" onclick="startLearning(${i})">${state.level} – Block ${i + 1} (${start}–${end})</button>`;
         }
         container.innerHTML = html;
     }
 
     function getBadgeClass(type) {
-        if(type === 'Nomen') return 'nomen';
-        if(type.includes('Adjektiv')) return 'adjektiv';
+        if (type === 'Nomen') return 'nomen';
+        if (type.includes('Adjektiv')) return 'adjektiv';
         return '';
     }
 
@@ -15398,32 +15359,22 @@
         const filter = state.filterType;
         const container = document.getElementById('list-container');
         const words = vocabData[state.level] || [];
-        
-        let html = '';
-        let count = 0;
-        let learned = 0;
-        let lastChar = '';
+        let html = '', count = 0, learned = 0, lastChar = '';
 
         words.forEach((word, index) => {
-            if(word.learned) learned++;
-            
-            if(filter !== 'Alle' && !word.type.includes(filter)) return;
+            if (word.learned) learned++;
+            if (filter !== 'Alle' && !word.type.includes(filter)) return;
+            if (query && !`${word.kana} ${word.kanji} ${word.de}`.toLowerCase().includes(query)) return;
 
-            const searchText = `${word.kana} ${word.kanji} ${word.de}`.toLowerCase();
-            if(query && !searchText.includes(query)) return;
-            
-            // Gruppierung nach erstem Zeichen (Kana)
             const firstChar = word.kana.charAt(0);
             if (firstChar !== lastChar && !query) {
                 lastChar = firstChar;
-                html += `<div class="section-label" style="background: var(--accent-pink-light); color: var(--accent-pink); padding: 5px 15px; border-radius: 20px; margin-top: 25px; display: inline-block;">${lastChar}</div>`;
+                html += `<div class="section-label" style="background:var(--accent-pink-light);color:var(--accent-pink);padding:5px 15px;border-radius:20px;margin-top:25px;display:inline-block;">${lastChar}</div>`;
             }
 
             count++;
             const displayJp = word.kanji ? `${word.kanji} <span>${word.kana}</span>` : word.kana;
             const check = word.learned ? '<span class="status-check">✓</span>' : '';
-            const badgeClass = getBadgeClass(word.type);
-
             html += `
                 <div class="list-item">
                     <div class="list-num">${index + 1}</div>
@@ -15431,10 +15382,9 @@
                         <div class="list-jp">${displayJp}</div>
                         <div class="list-de">${word.de}</div>
                     </div>
-                    <div class="badge ${badgeClass}">${word.type}</div>
+                    <div class="badge ${getBadgeClass(word.type)}">${word.type}</div>
                     ${check}
-                </div>
-            `;
+                </div>`;
         });
 
         container.innerHTML = html;
@@ -15442,33 +15392,39 @@
         document.getElementById('list-learned').innerText = learned;
     }
 
-    // --- LERNLOGIK (Karteikarten & Abfrage) ---
+    // --- LERNLOGIK ---
     function startLearning(blockIdx = -1, customWords = null) {
         let words = customWords;
-
-        if (!words && blockIdx !== -1) {
+        if (!words) {
             const fullList = vocabData[state.level] || [];
-            const blockSize = 20;
-            words = fullList.slice(blockIdx * blockSize, (blockIdx + 1) * blockSize);
-        } else if (!words) {
-            words = vocabData[state.level] || [];
+            words = blockIdx === -1 ? fullList : fullList.slice(blockIdx * 20, (blockIdx + 1) * 20);
         }
+        if (!words || words.length === 0) return alert("Keine Vokabeln vorhanden.");
 
-        if(!words || words.length === 0) return alert("Keine Vokabeln ausgewählt!");
-
-        state.lastUsedSource = words; 
+        state.lastUsedSource = words;
         state.sessionMistakes = [];
         state.sessionCorrectCount = 0;
-        state.currentQueue = [...words].sort(() => Math.random() - 0.5); // Mischen
         state.currentIndex = 0;
+        state.currentQueue = [...words].sort(() => Math.random() - 0.5);
 
-        if(state.mode === 'karteikarten') {
+        if (state.mode === 'karteikarten') {
             switchTab('flashcards');
             loadFlashcard();
         } else {
             switchTab('typing');
             loadTyping();
         }
+    }
+
+    function startRandom(allLevels = false, fullPool = false) {
+        let pool = [];
+        if (allLevels) {
+            Object.values(vocabData).forEach(levelList => pool = pool.concat(levelList));
+        } else {
+            pool = vocabData[state.level] || [];
+        }
+        const selection = fullPool ? [...pool].sort(() => Math.random() - 0.5) : [...pool].sort(() => Math.random() - 0.5).slice(0, 20);
+        startLearning(-1, selection);
     }
 
     // --- TEST LOGIK ---
@@ -15487,37 +15443,10 @@
     function startTest() {
         const pool = vocabData[state.level] || [];
         if (pool.length === 0) return alert("Keine Vokabeln vorhanden!");
-
         const count = Math.min(state.testSettings.count, pool.length);
         const selection = [...pool].sort(() => Math.random() - 0.5).slice(0, count);
-        
         state.direction = state.testSettings.direction;
-        state.mode = 'abfragen'; // Tests nutzen standardmäßig den Abfrage-Modus
-        
-        startLearning(-1, selection);
-    }
-
-    // --- ZUFALLS-MODI ---
-    function startRandom(allLevels = false, fullPool = false) {
-        let pool = [];
-        if (allLevels) {
-            // Alle Vokabeln aus allen JLPT Stufen sammeln
-            Object.values(vocabData).forEach(levelList => {
-                pool = pool.concat(levelList);
-            });
-        } else {
-            pool = vocabData[state.level] || [];
-        }
-
-        if (pool.length === 0) return alert("Keine Vokabeln vorhanden!");
-
-        // 20 zufällige Vokabeln auswählen
-        let selection;
-        if (fullPool) {
-            selection = [...pool].sort(() => Math.random() - 0.5);
-        } else {
-            selection = [...pool].sort(() => Math.random() - 0.5).slice(0, 20);
-        }
+        state.mode = 'abfragen';
         startLearning(-1, selection);
     }
 
@@ -15525,18 +15454,11 @@
     function loadFlashcard() {
         const word = state.currentQueue[state.currentIndex];
         const isJpToDe = state.direction === 'jp-de';
-        
-        document.getElementById('fc-direction-display').innerText = isJpToDe ? "JP → DE" : "DE → JP";  
+
+        document.getElementById('fc-direction-display').innerText = isJpToDe ? "JP → DE" : "DE → JP";
         document.getElementById('fc-current-num').innerText = state.currentIndex + 1;
         document.getElementById('fc-total-num').innerText = state.currentQueue.length;
-        document.getElementById('fc-progress').style.width = `${((state.currentIndex) / state.currentQueue.length) * 100}%`;
-        
-        // UI Reset für den Fall, dass vorher ein Full-Test lief
-        const inputArea = document.getElementById('type-input-area');
-        const choiceArea = document.getElementById('type-choice-area');
-        if(inputArea) inputArea.classList.remove('hidden');
-        if(choiceArea) choiceArea.classList.add('hidden');
-
+        document.getElementById('fc-progress').style.width = `${(state.currentIndex / state.currentQueue.length) * 100}%`;
         document.getElementById('fc-type-front').innerText = word.type;
         document.getElementById('fc-type-back').innerText = word.type;
         document.getElementById('fc-type-front').className = `badge ${getBadgeClass(word.type)}`;
@@ -15554,7 +15476,6 @@
             document.getElementById('fc-trans-back').innerText = word.kanji ? `${word.kanji} (${word.kana})` : word.kana;
         }
 
-        // Reset Karte
         state.isFlipped = false;
         document.getElementById('flashcard').classList.remove('flipped');
         document.getElementById('fc-actions').classList.remove('visible');
@@ -15567,186 +15488,138 @@
     }
 
     function nextCard(knewIt) {
-        if(knewIt) {
+        if (knewIt) {
             state.currentQueue[state.currentIndex].learned = true;
             state.sessionCorrectCount++;
-            document.getElementById('fc-learned-count').innerText = 
-                parseInt(document.getElementById('fc-learned-count').innerText) + 1;
+            const counter = document.getElementById('fc-learned-count');
+            if (counter) counter.innerText = parseInt(counter.innerText) + 1;
         } else {
             const currentWord = state.currentQueue[state.currentIndex];
-            if (!state.sessionMistakes.includes(currentWord)) {
-                state.sessionMistakes.push(currentWord);
-            }
+            if (!state.sessionMistakes.includes(currentWord)) state.sessionMistakes.push(currentWord);
         }
-        
         state.currentIndex++;
-        if(state.currentIndex >= state.currentQueue.length) {
-            finishSession();
-        } else {
-            loadFlashcard();
-        }
+        if (state.currentIndex >= state.currentQueue.length) finishSession();
+        else loadFlashcard();
     }
 
     function finishSession() {
         switchTab('results');
         const correct = state.sessionCorrectCount;
-        const total = state.currentQueue.length;
-        const wrong = total - correct;
-
+        const wrong = state.currentQueue.length - correct;
         document.getElementById('res-correct-count').innerText = correct;
         document.getElementById('res-wrong-count').innerText = wrong;
 
-        const retryMistakesBtn = document.getElementById('btn-retry-mistakes');
+        const retryBtn = document.getElementById('btn-retry-mistakes');
         if (state.sessionMistakes.length === 0) {
-            retryMistakesBtn.classList.add('hidden');
+            retryBtn.classList.add('hidden');
         } else {
-            retryMistakesBtn.classList.remove('hidden');
-            retryMistakesBtn.innerText = `Nur Fehler wiederholen (${state.sessionMistakes.length})`;
+            retryBtn.classList.remove('hidden');
+            retryBtn.innerText = `Nur Fehler wiederholen (${state.sessionMistakes.length})`;
         }
     }
 
-    // --- ABFRAGE (Typing) ---
+    // --- ABFRAGE (Tippen) ---
     function loadTyping() {
         const word = state.currentQueue[state.currentIndex];
         const isJpToDe = state.direction === 'jp-de';
-        
+
         document.getElementById('type-current-num').innerText = state.currentIndex + 1;
         document.getElementById('type-total-num').innerText = state.currentQueue.length;
         document.getElementById('type-badge').innerText = word.type;
-        
-        // UI Reset
+
         const inputArea = document.getElementById('type-input-area');
         const choiceArea = document.getElementById('type-choice-area');
-        if(inputArea) inputArea.classList.remove('hidden');
-        if(choiceArea) choiceArea.classList.add('hidden');
+        if (inputArea) inputArea.classList.remove('hidden');
+        if (choiceArea) choiceArea.classList.add('hidden');
 
         const input = document.getElementById('typing-input');
         input.value = '';
+        input.disabled = false;
         document.getElementById('typing-feedback').innerHTML = '';
         document.getElementById('btn-next-typing').classList.add('hidden');
-        input.disabled = false;
-        input.focus();
 
         if (isJpToDe) {
             document.getElementById('type-word').innerText = word.kanji || word.kana;
             document.getElementById('type-hint').innerText = "Übersetze auf Deutsch";
         } else {
             document.getElementById('type-word').innerText = word.de;
-            document.getElementById('type-hint').innerText = "Tippe das japanische Wort (Kana/Romaji)";
+            document.getElementById('type-hint').innerText = "Tippe das japanische Wort (Kana)";
         }
+        input.focus();
     }
 
     function checkTyping(e) {
-        if(e.key === 'Enter') {
-            if (state.mode === 'fulltest') {
-                checkFullTestAnswer(e.target.value);
-                return;
-            }
-            const word = state.currentQueue[state.currentIndex];
-            const answer = document.getElementById('typing-input').value.toLowerCase().trim();
-            const isJpToDe = state.direction === 'jp-de';
-            
-            let isCorrect = false;
-            let correctAnswers = [];
+        if (e.key !== 'Enter') return;
+        if (state.mode === 'fulltest') { checkFullTestAnswer(e.target.value); return; }
 
-            if (isJpToDe) {
-                correctAnswers = word.de.toLowerCase().split(/[\/,]/).map(s => s.trim());
-                isCorrect = correctAnswers.some(ans => ans === answer || ans.includes(answer) && answer.length > 2);
-            } else {
-                isCorrect = (answer === word.kana || answer === word.kanji);
-            }
+        const word = state.currentQueue[state.currentIndex];
+        const answer = document.getElementById('typing-input').value.toLowerCase().trim();
+        const isJpToDe = state.direction === 'jp-de';
+        const feedback = document.getElementById('typing-feedback');
 
-            const feedback = document.getElementById('typing-feedback');
-            if (isCorrect) {
-                feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓</span>';
-                word.learned = true;
-                // If it wasn't already marked as a mistake, count it as correct
-                if (!state.sessionMistakes.includes(word)) {
-                    state.sessionCorrectCount++;
-                }
+        let isCorrect = false;
+        if (isJpToDe) {
+            const correctAnswers = word.de.toLowerCase().split(/[\/,]/).map(s => s.trim());
+            isCorrect = correctAnswers.some(ans => ans === answer || (ans.includes(answer) && answer.length > 2));
+        } else {
+            isCorrect = (answer === word.kana || answer === word.kanji);
+        }
 
-                setTimeout(() => {
-                    state.currentIndex++;
-                    if(state.currentIndex >= state.currentQueue.length) {
-                        finishSession();
-                    } else loadTyping();
-                }, 1000);
-            } else {
-                feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? word.de : word.kana}</span>`;
-                if (!state.sessionMistakes.includes(word)) {
-                    state.sessionMistakes.push(word);
-                }
-                // Zeige "Nächste" Button bei Fehlern
-                document.getElementById('btn-next-typing').classList.remove('hidden');
-            }
+        if (isCorrect) {
+            feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓</span>';
+            word.learned = true;
+            if (!state.sessionMistakes.includes(word)) state.sessionCorrectCount++;
+            setTimeout(() => {
+                state.currentIndex++;
+                if (state.currentIndex >= state.currentQueue.length) finishSession();
+                else loadTyping();
+            }, 1000);
+        } else {
+            feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? word.de : word.kana}</span>`;
+            if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
+            document.getElementById('btn-next-typing').classList.remove('hidden');
         }
     }
 
     function skipToNext() {
         state.currentIndex++;
-        if(state.currentIndex >= state.currentQueue.length) {
-        if (state.currentIndex >= state.currentQueue.length) {
-            finishSession();
-        } else loadTyping();
-        } 
-        } 
-            if (state.mode === 'fulltest') loadFullTestItem();
-            else loadTyping();
-        
-    
-
-    function retryAll() {
-        startLearning(-1, state.lastUsedSource);
+        if (state.currentIndex >= state.currentQueue.length) finishSession();
+        else if (state.mode === 'fulltest') loadFullTestItem();
+        else loadTyping();
     }
 
-    function retryMistakes() {
-        startLearning(-1, state.sessionMistakes);
-    }
+    function retryAll() { startLearning(-1, state.lastUsedSource); }
+    function retryMistakes() { startLearning(-1, state.sessionMistakes); }
 
-    // --- LESEN ANSICHT LOGIK ---
+    // --- LESEN ANSICHT ---
     function renderReadingList() {
         const container = document.getElementById('reading-list');
         const levelTexts = readingData[state.level] || [];
-        
         showReadingList();
-
         if (levelTexts.length === 0) {
-            container.innerHTML = `<p style="text-align:center; padding:20px;">Keine Texte für dieses Level verfügbar.</p>`;
+            container.innerHTML = `<p style="text-align:center;padding:20px;">Keine Texte für ${state.level} verfügbar.</p>`;
             return;
         }
-
-        let html = '';
-        levelTexts.forEach((text, idx) => {
-            html += `
-                <div class="reading-card" onclick="displayReadingText(${idx})">
-                    <h3>${text.title}</h3>
-                    <p style="font-size: 12px; color: var(--text-light);">${text.content.length} Sätze</p>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
+        container.innerHTML = levelTexts.map((text, idx) => `
+            <div class="reading-card" onclick="displayReadingText(${idx})">
+                <h3>${text.title}</h3>
+                <p style="font-size:12px;color:var(--text-light);">${text.content.length} Sätze</p>
+            </div>`).join('');
     }
 
     function displayReadingText(idx) {
         const text = readingData[state.level][idx];
-        if(!text) return;
-
+        if (!text) return;
         document.getElementById('reading-list').classList.add('hidden');
         document.getElementById('reading-viewer').classList.remove('hidden');
-
         const display = document.getElementById('reading-text-display');
-        display.innerHTML = `<h2 style="margin-bottom:20px; color:var(--primary-dark);">${text.title}</h2>`;
-
+        display.innerHTML = `<h2 style="margin-bottom:20px;color:var(--primary-dark);">${text.title}</h2>`;
         text.content.forEach((item, sIdx) => {
-            const sentenceId = `s-${sIdx}`;
             display.innerHTML += `
                 <div style="margin-bottom:15px;">
-                    <span class="reading-sentence" onclick="document.getElementById('${sentenceId}').classList.toggle('hidden')">
-                        ${item.jp}
-                    </span>
-                    <div id="${sentenceId}" class="sentence-translation hidden">${item.de}</div>
-                </div>
-            `;
+                    <span class="reading-sentence" onclick="document.getElementById('s-${sIdx}').classList.toggle('hidden')">${item.jp}</span>
+                    <div id="s-${sIdx}" class="sentence-translation hidden">${item.de}</div>
+                </div>`;
         });
     }
 
@@ -15758,22 +15631,16 @@
     function toggleFurigana() {
         const viewer = document.getElementById('reading-text-display');
         viewer.classList.toggle('hide-furigana');
-        const btn = document.getElementById('btn-furigana');
-        if (viewer.classList.contains('hide-furigana')) {
-            btn.innerText = "Hiragana einblenden";
-        } else {
-            btn.innerText = "Hiragana ausblenden";
-        }
+        document.getElementById('btn-furigana').innerText =
+            viewer.classList.contains('hide-furigana') ? "Hiragana einblenden" : "Hiragana ausblenden";
     }
 
     // --- KANJI TRAINER ---
     function renderKanjiBlocks() {
         const container = document.getElementById('kanji-blocks-container');
-        const levelKanjis = kanjiData[state.level] || [];
-        const blockSize = 5;
+        const kanjis = kanjiData[state.level] || [];
         let html = '';
-        
-        for (let i = 0; i < Math.ceil(levelKanjis.length / blockSize); i++) {
+        for (let i = 0; i < Math.ceil(kanjis.length / 5); i++) {
             html += `<div class="kanji-block-btn" onclick="startKanjiBlock(${i})">Block ${i + 1}</div>`;
         }
         container.innerHTML = html;
@@ -15782,64 +15649,34 @@
 
     function toggleKanjiOverview() {
         const area = document.getElementById('kanji-overview-area');
-        const isHidden = area.classList.toggle('hidden');
-        if (!isHidden) renderKanjiOverviewTable();
+        if (!area.classList.toggle('hidden')) renderKanjiOverviewTable();
     }
 
     function renderKanjiOverviewTable() {
-        const container = document.getElementById('kanji-overview-list');
         const list = kanjiData[state.level] || [];
-        let html = '<table class="kanji-overview-table"><thead><tr><th>Kanji</th><th>Lesungen</th><th>Bedeutung</th></tr></thead><tbody>';
-        
-        list.forEach(item => {
-            html += `
+        document.getElementById('kanji-overview-list').innerHTML =
+            `<table class="kanji-overview-table"><thead><tr><th>Kanji</th><th>Lesungen</th><th>Bedeutung</th></tr></thead><tbody>` +
+            list.map(k => `
                 <tr>
-                    <td style="font-size: 24px; font-weight: bold;">${item.kanji}</td>
+                    <td style="font-size:24px;font-weight:bold;">${k.kanji}</td>
                     <td>
-                        <span class="kanji-reading-label">On-yomi:</span> ${item.on || '-'}
-                        <span class="kanji-reading-label">Kun-yomi:</span> ${item.kun || '-'}
+                        <span class="kanji-reading-label">On:</span> ${k.on || '-'}<br>
+                        <span class="kanji-reading-label">Kun:</span> ${k.kun || '-'}
                     </td>
-                    <td>${item.de}</td>
-                </tr>
-            `;
-        });
-        html += '</tbody></table>';
-        container.innerHTML = html;
+                    <td>${k.de}</td>
+                </tr>`).join('') +
+            `</tbody></table>`;
     }
 
     function startKanjiBlock(idx) {
-        const levelKanjis = kanjiData[state.level] || [];
-        state.kanji.currentBlock = levelKanjis.slice(idx * 5, (idx + 1) * 5);
+        const kanjis = kanjiData[state.level] || [];
+        state.kanji.currentBlock = kanjis.slice(idx * 5, (idx + 1) * 5);
         state.kanji.currentIndex = 0;
         state.kanji.quizState = 'write';
-        
-        // Übersicht ausblenden, wenn ein Block gestartet wird
         document.getElementById('kanji-overview-area').classList.add('hidden');
-
-        document.querySelectorAll('.kanji-block-btn').forEach((btn, i) => {
-            btn.classList.toggle('active', i === idx);
-        });
-
-        // Hinweis: Für eine exakte Nummerierung jedes Strichs wären SVG-Daten nötig.
-        // Das "Ghost"-Kanji dient als primäre visuelle Vorlage.
-
+        document.querySelectorAll('.kanji-block-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
         document.getElementById('kanji-learning-area').classList.remove('hidden');
         updateKanjiView();
-    }
-
-    function showKanjiNumbers(item) {
-        const layer = document.getElementById('kanji-numbers-layer');
-        layer.innerHTML = '';
-        if(item.positions) {
-            item.positions.forEach((pos, i) => {
-                const div = document.createElement('div');
-                div.className = 'stroke-num';
-                div.style.left = pos.x + 'px';
-                div.style.top = pos.y + 'px';
-                div.innerText = i + 1;
-                layer.appendChild(div);
-            });
-        }
     }
 
     function setKanjiSubMode(mode) {
@@ -15854,25 +15691,15 @@
     function updateKanjiView() {
         const item = state.kanji.currentBlock[state.kanji.currentIndex];
         if (!item) return;
-
         if (state.kanji.subMode === 'write') {
-            document.getElementById('kw-readings').innerText = item.kana;
-            document.getElementById('kw-readings').innerHTML = `
-                <span class="kanji-reading-label">On: ${item.on || '-'}</span>
-                <span class="kanji-kana-large">Kun: ${item.kun || '-'}</span>
-            `;
+            document.getElementById('kw-readings').innerHTML =
+                `<span class="kanji-reading-label">On: ${item.on || '-'}</span>
+                 <span class="kanji-kana-large">Kun: ${item.kun || '-'}</span>`;
             document.getElementById('kw-meaning').innerText = item.de;
             document.getElementById('kanji-ghost').innerText = item.kanji;
-            document.getElementById('kanji-ghost').style.display = 'flex';
-            
-            // Platzhalter für Strichnummern-Ebene
-            document.getElementById('kanji-numbers-layer').innerHTML = ''; 
-            showKanjiNumbers(item);
-            
             state.kanji.strokesDrawn = 0;
             document.getElementById('kw-feedback').innerText = '';
             clearKanjiCanvas();
-            document.getElementById('view-kanji').scrollIntoView();
         } else {
             renderKanjiQuiz();
         }
@@ -15882,11 +15709,9 @@
         state.kanji.currentIndex++;
         if (state.kanji.currentIndex >= state.kanji.currentBlock.length) {
             state.kanji.currentIndex = 0;
-            if(state.kanji.subMode === 'quiz') {
+            if (state.kanji.subMode === 'quiz') {
                 switchTab('kanji-results');
                 return;
-            } else {
-                state.kanji.currentIndex = 0;
             }
         }
         state.kanji.quizState = 'write';
@@ -15895,38 +15720,34 @@
 
     function renderKanjiQuiz() {
         const item = state.kanji.currentBlock[state.kanji.currentIndex];
+        if (!item) return;
         document.getElementById('kq-kanji').innerText = item.kanji;
-        // Schatten im Quiz-Modus ausblenden
-        if(state.kanji.quizState === 'write') {
+
+        if (state.kanji.quizState === 'write') {
             document.getElementById('kq-question').innerText = "Schreibe das Kanji aus dem Gedächtnis:";
             document.getElementById('kq-options').innerHTML = `
                 <div class="kanji-canvas-container" style="margin-bottom:20px;">
-                    <canvas id="kanji-canvas-quiz" width="300" height="300" style="border:1px solid #ccc;"></canvas>
+                    <canvas id="kanji-canvas-quiz" width="300" height="300"></canvas>
                 </div>
-                <button class="btn-main" onclick="finishWritingQuiz()">Fertig gezeichnet</button>
-            `;
-            setTimeout(initKanjiCanvasQuiz, 100);
-            return;
+                <button class="btn-main" onclick="finishWritingQuiz()">Fertig gezeichnet</button>`;
+            setTimeout(() => {
+                const qc = document.getElementById('kanji-canvas-quiz');
+                if (qc) setupCanvasEvents(qc);
+            }, 100);
+        } else {
+            document.getElementById('kq-question').innerText = "Was bedeutet dieses Kanji?";
+            document.getElementById('kq-feedback').innerHTML = '';
+            const levelKanjis = kanjiData[state.level] || [];
+            const options = [item.de];
+            while (options.length < 4 && levelKanjis.length > 1) {
+                const rand = levelKanjis[Math.floor(Math.random() * levelKanjis.length)].de;
+                if (!options.includes(rand)) options.push(rand);
+            }
+            options.sort(() => Math.random() - 0.5);
+            document.getElementById('kq-options').innerHTML = options.map(opt =>
+                `<button class="quiz-option" onclick="checkKanjiQuiz('${opt.replace(/'/g,"\\'")}','${item.de.replace(/'/g,"\\'")}',this)">${opt}</button>`
+            ).join('');
         }
-
-        document.getElementById('kq-question').innerText = "Was bedeutet dieses Kanji?";
-        document.getElementById('kanji-ghost').style.display = 'none';
-        
-        document.getElementById('kq-feedback').innerHTML = '';
-        
-        const levelKanjis = kanjiData[state.level];
-        const options = [item.de];
-        while(options.length < 4) {
-            const rand = levelKanjis[Math.floor(Math.random() * levelKanjis.length)].de;
-            if(!options.includes(rand)) options.push(rand);
-        }
-        options.sort(() => Math.random() - 0.5);
-
-        let html = '';
-        options.forEach(opt => {
-            html += `<button class="quiz-option" onclick="checkKanjiQuiz('${opt}', '${item.de}', this)">${opt}</button>`;
-        });
-        document.getElementById('kq-options').innerHTML = html;
     }
 
     function finishWritingQuiz() {
@@ -15946,191 +15767,102 @@
         }
     }
 
-    let canvas, ctx, drawing = false;
-
-    function handleStrokeEnd() {
-        const item = state.kanji.currentBlock[state.kanji.currentIndex];
-        if(!item || !item.strokes) return;
-
-        state.kanji.strokesDrawn++;
-        if(state.kanji.strokesDrawn > item.strokes) {
-            document.getElementById('kw-feedback').innerText = "Falsche Strichfolge! Zurückgesetzt.";
-            setTimeout(() => {
-                clearKanjiCanvas();
-                state.kanji.strokesDrawn = 0;
-                document.getElementById('kw-feedback').innerText = "";
-            }, 1000);
-        }
-    }
-
-    function initKanjiCanvasQuiz() {
-        const qCanvas = document.getElementById('kanji-canvas-quiz');
-        if(!qCanvas) return;
-        setupCanvasEvents(qCanvas);
-    }
-
     function initKanjiCanvas() {
-        canvas = document.getElementById('kanji-canvas');
-        if(!canvas) return;
-        ctx = canvas.getContext('2d');
-        setupCanvasEvents(canvas);
+        const c = document.getElementById('kanji-canvas');
+        if (c) setupCanvasEvents(c);
     }
 
     function setupCanvasEvents(cvs) {
         const ctx = cvs.getContext('2d');
+        let drawing = false;
         ctx.strokeStyle = '#272a48';
         ctx.lineWidth = 12;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
-       const getPos = (e) => {
-    const rect = cvs.getBoundingClientRect();
 
-    return {
-        x: (e.touches ? e.touches[0].clientX : e.clientX) - rect.left,
-        y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top
-    };
-};
-        const start = (e) => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
-        const move = (e) => { if(!drawing) return; e.preventDefault(); const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); };
-        const end = () => { drawing = false; };
-        canvas.addEventListener('mousedown', start); canvas.addEventListener('mousemove', move); window.addEventListener('mouseup', end);
-        canvas.addEventListener('touchstart', start); canvas.addEventListener('touchmove', move); window.addEventListener('touchend', end);
-        cvs.addEventListener('mousedown', start); cvs.addEventListener('mousemove', move); window.addEventListener('mouseup', end);
-        cvs.addEventListener('touchstart', start); cvs.addEventListener('touchmove', move); window.addEventListener('touchend', end);
+        const getPos = (e) => {
+            const rect = cvs.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: clientX - rect.left, y: clientY - rect.top };
+        };
+
+        cvs.addEventListener('mousedown', e => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
+        cvs.addEventListener('mousemove', e => { if (!drawing) return; e.preventDefault(); const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+        window.addEventListener('mouseup', () => drawing = false);
+        cvs.addEventListener('touchstart', e => { drawing = true; const p = getPos(e.touches[0]); ctx.beginPath(); ctx.moveTo(p.x, p.y); }, { passive: false });
+        cvs.addEventListener('touchmove', e => { if (!drawing) return; e.preventDefault(); const p = getPos(e.touches[0]); ctx.lineTo(p.x, p.y); ctx.stroke(); }, { passive: false });
+        cvs.addEventListener('touchend', () => drawing = false);
     }
 
-    // Funktion für den neuen "Lernen starten" Button
-    function startLearningCurrentLevel() {}
-    // Function for the "Lernen starten" button, no changes needed here.
-    // The empty function was a placeholder, now it has content.
-    function startLearningCurrentLevel() {
-        const words = vocabData[state.level] || [];
-        if (words.length === 0) {
-            alert(`Keine Vokabeln für Level ${state.level} vorhanden. Bitte wähle ein anderes Level oder nutze das Spezial-Training.`);
-            alert(`Keine Vokabeln für Level ${state.level} vorhanden.`);
-            return;
-        }
-        startLearning(-1, words); // Startet das Lernen mit allen Wörtern des aktuellen Levels 
-        startLearning(-1, words); 
+    function clearKanjiCanvas() {
+        const id = state.kanji.subMode === 'write' ? 'kanji-canvas' : 'kanji-canvas-quiz';
+        const cvs = document.getElementById(id);
+        if (cvs) cvs.getContext('2d').clearRect(0, 0, cvs.width, cvs.height);
     }
-    function clearKanjiCanvas() { if(ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); }
-    
-    function clearKanjiCanvas() { 
-        if(canvas && ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); 
 
-    function clearKanjiCanvas() { if(canvas && ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); }
-
-    // --- VOLLSTÄNDIGER JLPT TEST MODUS ---
+    // --- VOLLTEST ---
     function startFullTest() {
-        const level = state.level;
-        const vPool = vocabData[level] || [];
-        const kPool = kanjiData[level] || [];
-        const gPool = grammarData[level] || [];
-        const rPool = readingData[level] || [];
-
-        if (vPool.length < 5 || kPool.length < 5 || gPool.length < 5 || rPool.length < 1) {
-            return alert("Nicht genügend Daten für einen vollständigen Test in diesem Level vorhanden.");
-        }
-
-        const testQueue = [];
-
-        // 1. Vokabeln (10 Stück, Eintippen)
-        [...vPool].sort(() => Math.random() - 0.5).slice(0, 10).forEach(v => {
-            testQueue.push({ type: 'typing', category: 'Vokabeln', word: v.kanji || v.kana, answer: v.de, hint: v.kanji ? v.kana : 'Übersetze...' });
-        });
-
-        // 2. Kanji (5 Stück, Multiple Choice Bedeutung)
-        [...kPool].sort(() => Math.random() - 0.5).slice(0, 5).forEach(k => {
-            const options = [k.de];
-            while(options.length < 4) {
-                const r = kPool[Math.floor(Math.random() * kPool.length)].de;
-                if(!options.includes(r)) options.push(r);
+        const lvl = state.level;
+        const q = [];
+        (vocabData[lvl] || []).sort(() => Math.random() - 0.5).slice(0, 10).forEach(v =>
+            q.push({ type: 'typing', cat: 'Vokabeln', word: v.kanji || v.kana, ans: v.de, hint: v.kana }));
+        const kanjis = kanjiData[lvl] || [];
+        kanjis.sort(() => Math.random() - 0.5).slice(0, 5).forEach(k => {
+            const opts = [k.de];
+            while (opts.length < 4 && kanjis.length > 1) {
+                const r = kanjis[Math.floor(Math.random() * kanjis.length)].de;
+                if (!opts.includes(r)) opts.push(r);
             }
-            testQueue.push({ type: 'choice', category: 'Kanji', word: k.kanji, answer: k.de, options: options.sort(() => Math.random() - 0.5), hint: "Was bedeutet dieses Kanji?" });
+            q.push({ type: 'choice', cat: 'Kanji', word: k.kanji, ans: k.de, opts: opts.sort(() => Math.random() - 0.5) });
         });
-
-        // 3. Grammatik (5 Stück, Multiple Choice)
-        [...gPool].sort(() => Math.random() - 0.5).slice(0, 5).forEach(g => {
-            testQueue.push({ type: 'choice', category: 'Grammatik', word: g.quiz.question, answer: g.quiz.options[g.quiz.correct], options: g.quiz.options, hint: "Wähle die richtige Form" });
-        });
-
-        // 4. Leseverständnis (2 Sätze, Übersetzung tippen, KEIN FURIGANA)
-        const rText = rPool[Math.floor(Math.random() * rPool.length)];
-        [...rText.content].sort(() => Math.random() - 0.5).slice(0, 2).forEach(s => {
-            // Entferne alle <ruby> und <rt> Tags für den Test
-            const cleanJp = s.jp.replace(/<rt>.*?<\/rt>/g, "").replace(/<.*?>/g, "");
-            testQueue.push({ type: 'typing', category: 'Lesen (Kein Furigana)', word: cleanJp, answer: s.de, hint: "Übersetze den Satz auf Deutsch" });
-        });
-
-        state.currentQueue = testQueue;
+        state.currentQueue = q;
         state.currentIndex = 0;
-        state.sessionMistakes = [];
         state.sessionCorrectCount = 0;
+        state.sessionMistakes = [];
         state.mode = 'fulltest';
-
         switchTab('typing');
         loadFullTestItem();
     }
 
     function loadFullTestItem() {
-        const item = state.currentQueue[state.currentIndex];
-        if(!item) return finishSession();
-
+        const it = state.currentQueue[state.currentIndex];
+        if (!it) return finishSession();
+        document.getElementById('type-word').innerText = it.word;
+        document.getElementById('type-badge').innerText = it.cat;
         document.getElementById('type-current-num').innerText = state.currentIndex + 1;
         document.getElementById('type-total-num').innerText = state.currentQueue.length;
-        document.getElementById('type-badge').innerText = item.category;
-        document.getElementById('type-word').innerText = item.word;
-        document.getElementById('type-hint').innerText = item.hint;
+        document.getElementById('typing-feedback').innerHTML = '';
+        document.getElementById('btn-next-typing').classList.add('hidden');
 
         const inputArea = document.getElementById('type-input-area');
         const choiceArea = document.getElementById('type-choice-area');
-        const feedback = document.getElementById('typing-feedback');
-        const nextBtn = document.getElementById('btn-next-typing');
-        const input = document.getElementById('typing-input');
 
-        feedback.innerHTML = '';
-        nextBtn.classList.add('hidden');
-
-        if(item.type === 'choice') {
+        if (it.type === 'choice') {
             inputArea.classList.add('hidden');
             choiceArea.classList.remove('hidden');
-            choiceArea.innerHTML = item.options.map(opt => 
-                `<button class="quiz-option" onclick="checkFullTestAnswer('${opt}')">${opt}</button>`
+            choiceArea.innerHTML = it.opts.map(o =>
+                `<button class="quiz-option" onclick="checkFullTestAnswer('${o.replace(/'/g,"\\'")}'">${o}</button>`
             ).join('');
         } else {
             inputArea.classList.remove('hidden');
             choiceArea.classList.add('hidden');
+            document.getElementById('type-hint').innerText = it.hint || 'Übersetze auf Deutsch';
+            const input = document.getElementById('typing-input');
             input.value = '';
             input.disabled = false;
             input.focus();
         }
     }
 
-    function checkFullTestAnswer(val) {
-        const item = state.currentQueue[state.currentIndex];
-        const feedback = document.getElementById('typing-feedback');
-        const input = document.getElementById('typing-input');
-        
-        let isCorrect = false;
-        if(item.type === 'choice') {
-            isCorrect = (val === item.answer);
-        } else {
-            const possible = item.answer.toLowerCase().split(/[\/,]/).map(s => s.trim());
-            const inputVal = val.trim().toLowerCase();
-            isCorrect = possible.some(p => p === inputVal || (inputVal.length > 3 && p.includes(inputVal)));
-        }
-
-        if(isCorrect) {
-            feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓</span>';
+    function checkFullTestAnswer(v) {
+        const it = state.currentQueue[state.currentIndex];
+        if (v.toLowerCase().trim() === it.ans.toLowerCase().trim()) {
             state.sessionCorrectCount++;
-            if(input) input.disabled = true;
-            setTimeout(() => {
-                state.currentIndex++;
-                loadFullTestItem();
-            }, 1000);
+            state.currentIndex++;
+            loadFullTestItem();
         } else {
-            feedback.innerHTML = `<span class="feedback-wrong">Falsch. Richtig: ${item.answer}</span>`;
-            state.sessionMistakes.push(item);
+            document.getElementById('typing-feedback').innerHTML = `<span class="feedback-wrong">Falsch! Richtig: ${it.ans}</span>`;
             document.getElementById('btn-next-typing').classList.remove('hidden');
             document.getElementById('btn-next-typing').onclick = () => {
                 state.currentIndex++;
@@ -16139,17 +15871,62 @@
         }
     }
 
-    function clearKanjiCanvas() { if(canvas && ctx) ctx.clearRect(0, 0, canvas.width, canvas.height); }
+    // --- GRAMMATIK ---
+    function renderGrammarList() {
+        const container = document.getElementById('grammar-list');
+        const levelItems = grammarData[state.level] || [];
+        showGrammarList();
+        if (levelItems.length === 0) {
+            container.innerHTML = `<p style="text-align:center;padding:20px;">Grammatik für ${state.level} folgt in Kürze.</p>`;
+            return;
+        }
+        container.innerHTML = levelItems.map((item, idx) => `
+            <div class="reading-card" onclick="displayGrammarLesson(${idx})">
+                <h3>${item.title}</h3>
+                <p style="font-size:13px;color:var(--text-light);">Lerne die Regeln und mache das Quiz</p>
+            </div>`).join('');
+    }
 
-    // Tastatur-Shortcuts für Karteikarten
+    function displayGrammarLesson(idx) {
+        const item = grammarData[state.level][idx];
+        if (!item) return;
+        document.getElementById('grammar-list').classList.add('hidden');
+        document.getElementById('grammar-lesson-viewer').classList.remove('hidden');
+        document.getElementById('grammar-title').innerText = item.title;
+        document.getElementById('grammar-explanation').innerText = item.explanation;
+
+        document.getElementById('grammar-examples').innerHTML = item.examples.map(ex =>
+            `<div style="margin-bottom:10px;"><strong>${ex.jp}</strong><br><span style="color:var(--text-light);font-size:14px;">${ex.de}</span></div>`
+        ).join('');
+
+        document.getElementById('grammar-quiz-question').innerText = item.quiz.question;
+        document.getElementById('grammar-quiz-options').innerHTML = item.quiz.options.map((opt, oIdx) =>
+            `<button class="btn-main" style="background:white;color:var(--text-main);border:1px solid var(--border-color);text-align:left;margin-bottom:5px;" onclick="checkGrammarQuiz(${oIdx},${item.quiz.correct})">${opt}</button>`
+        ).join('');
+        document.getElementById('grammar-quiz-feedback').innerHTML = '';
+    }
+
+    function checkGrammarQuiz(choice, correctIdx) {
+        const feedback = document.getElementById('grammar-quiz-feedback');
+        feedback.innerHTML = choice === correctIdx
+            ? '<span class="feedback-correct">Richtig! Gut gemacht. ✓</span>'
+            : '<span class="feedback-wrong">Leider falsch. Versuche es nochmal!</span>';
+    }
+
+    function showGrammarList() {
+        document.getElementById('grammar-list').classList.remove('hidden');
+        document.getElementById('grammar-lesson-viewer').classList.add('hidden');
+    }
+
+    // --- KEYBOARD SHORTCUTS ---
     document.addEventListener('keydown', (e) => {
-        if(document.getElementById('view-flashcards').classList.contains('hidden')) return;
-        if(e.code === 'Space') { flipCard(); e.preventDefault(); }
-        if(state.isFlipped && e.code === 'ArrowRight') nextCard(true);
-        if(state.isFlipped && e.code === 'ArrowLeft') nextCard(false);
-    });}
+        if (document.getElementById('view-flashcards').classList.contains('hidden')) return;
+        if (e.code === 'Space') { flipCard(); e.preventDefault(); }
+        if (state.isFlipped && e.code === 'ArrowRight') nextCard(true);
+        if (state.isFlipped && e.code === 'ArrowLeft') nextCard(false);
+    });
 
-    // Start
+    // --- START ---
     init();
 
 </script>
