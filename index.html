@@ -159,12 +159,12 @@
             <span onclick="changeLevel(1)" style="padding: 5px 10px; cursor: pointer;">&gt;</span>
         </div>
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('lernen')">📚 Lernen</button>
-            <button class="tab" onclick="switchTab('liste')">📖 Liste</button>
-            <button class="tab" onclick="switchTab('lesen')">📝 Lesen</button>
-            <button class="tab" onclick="switchTab('kanji')">⛩️ Kanji</button>
-            <button class="tab" onclick="switchTab('grammatik')">✍️ Grammatik</button>
-            <button class="tab" onclick="switchTab('test')">🧪 Test</button>
+            <button class="tab active" onclick="switchTab('lernen')">Lernen</button>
+            <button class="tab" onclick="switchTab('liste')">Liste</button>
+            <button class="tab" onclick="switchTab('lesen')">Lesen</button>
+            <button class="tab" onclick="switchTab('kanji')">Kanji</button>
+            <button class="tab" onclick="switchTab('grammatik')">Grammatik</button>
+            <button class="tab" onclick="switchTab('test')">Test</button>
         </div>
     </header>
 
@@ -175,11 +175,11 @@
         <div class="section-label">Lernmodus</div>
         <div class="card-grid">
             <div class="option-card active" id="mode-karteikarten" onclick="setMode('karteikarten')">
-                <h3>📚 Karteikarten</h3>
+                <h3>Karteikarten</h3>
                 <p>Karte umdrehen & bewerten</p>
             </div>
             <div class="option-card" id="mode-abfragen" onclick="setMode('abfragen')">
-                <h3>✍️ Abfragen</h3>
+                <h3>Abfragen</h3>
                 <p>Übersetzung eintippen</p>
             </div>
         </div>
@@ -202,7 +202,7 @@
             <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandom(false, true)">Level Mix (Alle)</button>
             <button class="btn-main" style="background: var(--primary-light);" onclick="startRandom(true, true)">Global Mix (Alle)</button>
         </div>
-        <button class="btn-main" style="background: var(--primary-dark); margin-top: 20px;" onclick="startDailyChallenge()">☀️ Tägliche Herausforderung (10 Vokabeln)</button>
+        <button class="btn-main" style="background: var(--primary-dark); margin-top: 20px;" onclick="startDailyChallenge()">Tägliche Herausforderung (10 Vokabeln)</button>
     </main>
 
     <main id="view-liste" class="hidden">
@@ -308,8 +308,8 @@
 
         <div id="kanji-learning-area" class="hidden">
             <div class="toggle-group" style="margin-bottom: 20px;">
-                <button class="toggle-btn active" id="kanji-mode-write" onclick="setKanjiSubMode('write')">✍️ Schreiben</button>
-                <button class="toggle-btn" id="kanji-mode-quiz" onclick="setKanjiSubMode('quiz')">🧪 Quiz</button>
+                <button class="toggle-btn active" id="kanji-mode-write" onclick="setKanjiSubMode('write')">Schreiben</button>
+                <button class="toggle-btn" id="kanji-mode-quiz" onclick="setKanjiSubMode('quiz')">Quiz</button>
             </div>
 
             <div id="kanji-write-view">
@@ -473,12 +473,12 @@
         "N5": [
             {
                 title: "Personalpronomen (私, あなた, 彼, 彼女 etc.)",
-                explanation: "Im Japanischen gibt es verschiedene Personalpronomen, die je nach Geschlecht, Alter und Höflichkeitsgrad variieren. 私 (watashi) ist die neutrale und höfliche Form für 'ich'. 僕 (boku) und 俺 (ore) sind informelle männliche Formen. あなた (anata) ist 'du' (oft vermieden, stattdessen Name + さん). 彼 (kare) ist 'er' oder 'Freund', 彼女 (kanojo) ist 'sie' oder 'Freundin'.",
+                explanation: "Im Japanischen variieren Personalpronomen stark nach Höflichkeit und Geschlecht. 私 (watashi) ist neutral/höflich. 私 (watakushi) ist sehr formell. 僕 (boku) ist eher jungenhaft/bescheiden, 俺 (ore) sehr maskulin/informell. あたし (atashi) ist weiblich-informell. あなた (anata) ist 'du', wird aber oft durch den Namen + さん ersetzt. 君 (kimi) ist 'du' für Jüngere oder unter Freunden.",
                 examples: [
                     { jp: "私は学生です。", de: "Ich bin Student." },
                     { jp: "彼は日本人です。", de: "Er ist Japaner." },
                     { jp: "彼女は先生ですか。", de: "Ist sie Lehrerin?" },
-                    { jp: "僕も行きます。", de: "Ich gehe auch (männlich, informell)." }
+                    { jp: "僕も行きます。", de: "Ich gehe auch (männlich, eher bescheiden)." }
                 ],
                 quiz: {
                     question: "Welches Personalpronomen ist die neutrale und höflichste Form für 'ich'?",
@@ -700,19 +700,6 @@
             quiz: {
                 question: "Was bedeutet 'パンと水'?",
                 options: ["Brot oder Wasser", "Brot und Wasser", "Brot im Wasser"],
-                correct: 1
-            }
-        },
-        {
-            title: "Die Frage-Partikel か (ka)",
-            explanation: "Wird einfach am Ende eines Aussagesatzes angehängt, um ihn in eine Frage zu verwandeln. Ein Fragezeichen ist im Japanischen dann oft nicht nötig.",
-            examples: [
-                { jp: "学生ですか。", de: "Bist du Student?" },
-                { jp: "わかりますか。", de: "Verstehst du?" }
-            ],
-            quiz: {
-                question: "Wie macht man den Satz 'たべます' zur Frage 'Isst du?'",
-                options: ["たべますね", "たべますか", "たべますよ"],
                 correct: 1
             }
         },
@@ -1607,9 +1594,22 @@
                     correct: 0
                 }
             }
+        ],
+        "N1": [
+            // N1 Grammatikpunkte bereits oben definiert. 
+            {   title: "Extremer Zustand ～極まりない (~kiwamarinai)",
+                explanation: "Drückt aus, dass ein Zustand das höchstmögliche Maß erreicht hat. Formeller als 'sehr'.",
+                examples: [
+                    { jp: "彼の発言は不愉快極まりない。", de: "Seine Äußerung ist äußerst unangenehm." }
+                ],
+                quiz: {
+                    question: "In welcher Sprachebene wird '~kiwamarinai' verwendet?",
+                    options: ["Umgangssprache", "Sehr formelle Schriftsprache", "Kindersprache"],
+                    correct: 1
+                }
+            }
         ]
     };
-    const grammarData1 = { /* (Inhalt unverändert gelassen für Kürze) */ };
 
     const kanjiData = {
         "N5": [
@@ -4844,66 +4844,6 @@
     ]
 };
 
-    
-        "N4"; [
-            {
-                title: "Bitten mit 〜てください (~te kudasai)",
-                explanation: "Verwende die te-Form eines Verbs plus 'kudasai', um jemanden höflich zu bitten, etwas zu tun.",
-                examples: [
-                    { jp: "ここで待ってください。", de: "Bitte warten Sie hier." },
-                    { jp: "日本語で話してください。", de: "Bitte sprechen Sie auf Japanisch." }
-                ],
-                quiz: {
-                    question: "Was ist die korrekte Bitte für 'essen' (taberu)?",
-                    options: ["たべてください", "たべでください", "たべるてください"],
-                    correct: 0
-                }
-            }
-        ],
-        "N3"; [
-            {
-                title: "Erfahrungen ausdrücken mit 〜たことがある",
-                explanation: "Verwende die Vergangenheitsform (ta-Form) + 'koto ga aru', um zu sagen, dass man etwas schon einmal getan hat.",
-                examples: [
-                    { jp: "日本へ行ったことがあります。", de: "Ich war schon einmal in Japan." },
-                    { jp: "納豆を食べたことがありません。", de: "Ich habe noch nie Natto gegessen." }
-                ],
-                quiz: {
-                    question: "Wie sagst du: 'Ich habe diesen Film schon gesehen'?",
-                    options: ["この映画を見る。 ", "この映画を見たことがある。", "この映画を見ていた。"],
-                    correct: 1
-                }
-            }
-        ],
-        "N2"; [
-            {
-                title: "Gleichzeitigkeit: 〜に際して (ni saishite)",
-                explanation: "Wird verwendet, um einen formellen Anlass oder eine Zeitspanne zu markieren, bei der etwas geschieht (ähnlich wie 'bei Gelegenheit von').",
-                examples: [
-                    { jp: "受験に際して、写真が必要です。", de: "Bei der Anmeldung zur Prüfung wird ein Foto benötigt." }
-                ],
-                quiz: {
-                    question: "Welche Bedeutung passt zu 'ni saishite'?",
-                    options: ["Anlässlich / Bei", "Trotz", "Wegen"],
-                    correct: 0
-                }
-            }
-        ],
-        "N1"; [
-            {
-                title: "Extremer Grad: 〜の至りだ (no itari da)",
-                explanation: "Ein sehr formeller Ausdruck, um ein extremes Gefühl von Dankbarkeit, Ehre oder Schande auszudrücken.",
-                examples: [
-                    { jp: "光栄の至りです。", de: "Es ist mir eine außerordentliche Ehre." },
-                ],
-                quiz: {
-                    question: "In welchem Kontext wird 'no itari da' verwendet?",
-                    options: ["Alltag", "Sehr formell / emotional", "Nur schriftlich"],
-                    correct: 1
-                }
-            }
-        ]
-    
     const readingDataFix3 = { // Keeping this as a placeholder if needed elsewhere
     "N5": [
         {
