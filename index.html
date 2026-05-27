@@ -472,6 +472,173 @@
     const grammarData = {
         "N5": [
             {
+                title: "Personalpronomen (私, あなた, 彼, 彼女 etc.)",
+                explanation: "Im Japanischen gibt es verschiedene Personalpronomen, die je nach Geschlecht, Alter und Höflichkeitsgrad variieren. 私 (watashi) ist die neutrale und höfliche Form für 'ich'. 僕 (boku) und 俺 (ore) sind informelle männliche Formen. あなた (anata) ist 'du' (oft vermieden, stattdessen Name + さん). 彼 (kare) ist 'er' oder 'Freund', 彼女 (kanojo) ist 'sie' oder 'Freundin'.",
+                examples: [
+                    { jp: "私は学生です。", de: "Ich bin Student." },
+                    { jp: "彼は日本人です。", de: "Er ist Japaner." },
+                    { jp: "彼女は先生ですか。", de: "Ist sie Lehrerin?" },
+                    { jp: "僕も行きます。", de: "Ich gehe auch (männlich, informell)." }
+                ],
+                quiz: {
+                    question: "Welches Personalpronomen ist die neutrale und höflichste Form für 'ich'?",
+                    options: ["僕", "俺", "私", "あなた"],
+                    correct: 2
+                }
+            },
+            {
+                title: "Demonstrativpronomen für Objekte (これ, それ, あれ, どれ)",
+                explanation: "Diese Pronomen werden verwendet, um auf Objekte zu verweisen. これ (kore) ist für Objekte nahe am Sprecher. それ (sore) ist für Objekte nahe am Hörer. あれ (are) ist für Objekte, die weit entfernt von beiden sind. どれ (dore) ist die Frageform ('welches?').",
+                examples: [
+                    { jp: "これは何ですか。", de: "Was ist das hier?" },
+                    { jp: "それは私の本です。", de: "Das da ist mein Buch." },
+                    { jp: "あれは富士山です。", de: "Das dort ist der Berg Fuji." },
+                    { jp: "あなたのカバンはどれですか。", de: "Welches ist Ihre Tasche?" }
+                ],
+                quiz: {
+                    question: "Welches Demonstrativpronomen wird für ein Objekt verwendet, das sich in der Nähe des Hörers befindet?",
+                    options: ["これ", "それ", "あれ", "どれ"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Demonstrativpronomen für Nomen (この, その, あの, どの)",
+                explanation: "Diese Pronomen stehen direkt vor einem Nomen, um es zu spezifizieren. この (kono) für Nomen nahe am Sprecher. その (sono) für Nomen nahe am Hörer. あの (ano) für Nomen, die weit entfernt von beiden sind. どの (dono) ist die Frageform ('welches/welche/welcher?').",
+                examples: [
+                    { jp: "このペンは新しいです。", de: "Dieser Stift ist neu." },
+                    { jp: "その本をください。", de: "Geben Sie mir bitte das Buch da." },
+                    { jp: "あの人は誰ですか。", de: "Wer ist diese Person dort?" },
+                    { jp: "どのリンゴが好きですか。", de: "Welchen Apfel mögen Sie?" }
+                ],
+                quiz: {
+                    question: "Welches Demonstrativpronomen wird verwendet, um ein Nomen zu beschreiben, das weit entfernt von Sprecher und Hörer ist?",
+                    options: ["この", "その", "あの", "どの"],
+                    correct: 2
+                }
+            },
+            {
+                title: "Interrogativpronomen (誰, 何, どこ, いつ etc.)",
+                explanation: "Dies sind grundlegende Fragewörter. 誰 (dare) fragt nach Personen ('wer?'). 何 (nani/nan) fragt nach Dingen ('was?'). どこ (doko) fragt nach Orten ('wo?'). いつ (itsu) fragt nach der Zeit ('wann?'). いくつ (ikutsu) fragt nach der Anzahl von Dingen ('wie viele?'). いくら (ikura) fragt nach dem Preis ('wie viel?').",
+                examples: [
+                    { jp: "あの人は誰ですか。", de: "Wer ist diese Person dort?" },
+                    { jp: "これは何ですか。", de: "Was ist das hier?" },
+                    { jp: "駅はどこですか。", de: "Wo ist der Bahnhof?" },
+                    { jp: "誕生日はいつですか。", de: "Wann ist Ihr Geburtstag?" },
+                    { jp: "リンゴはいくつありますか。", de: "Wie viele Äpfel gibt es?" },
+                    { jp: "これはいくらですか。", de: "Wie viel kostet das hier?" }
+                ],
+                quiz: {
+                    question: "Welches Fragewort wird verwendet, um nach dem Preis zu fragen?",
+                    options: ["誰", "何", "いつ", "いくら"],
+                    correct: 3
+                }
+            },
+            {
+                title: "Thema-Partikel は (wa)",
+                explanation: "Die Partikel は markiert das Thema eines Satzes. Es stellt vor, worüber gesprochen wird. Im Deutschen oft mit 'Was ... betrifft' oder einfach als Subjekt übersetzt.",
+                examples: [
+                    { jp: "私は学生です。", de: "Ich bin Student." },
+                    { jp: "これは本です。", de: "Dies ist ein Buch." }
+                ],
+                quiz: {
+                    question: "Wähle die richtige Partikel: 私___ 田中です (Ich bin Tanaka).",
+                    options: ["が", "は", "を"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Grundlegender Satzbau (Subjekt-Objekt-Verb)",
+                explanation: "Im Japanischen ist die grundlegende Satzstellung Subjekt-Objekt-Verb (SOV). Das Subjekt wird oft mit は (wa) oder が (ga) markiert, das Objekt mit を (o). Das Verb steht immer am Ende des Satzes.",
+                examples: [
+                    { jp: "私は水を飲みます。", de: "Ich trinke Wasser." },
+                    { jp: "田中さんが本を読みます。", de: "Herr Tanaka liest ein Buch." }
+                ],
+                quiz: {
+                    question: "Welche Satzstellung ist im Japanischen am häufigsten?",
+                    options: ["Subjekt-Verb-Objekt", "Subjekt-Objekt-Verb", "Objekt-Subjekt-Verb"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Nomen-Sätze mit です/だ (Kopula)",
+                explanation: "Um auszudrücken, dass etwas etwas ist, verwendet man nach einem Nomen です (höflich) oder だ (informell). Dies ist die japanische Entsprechung von 'sein'. です/だ fungiert als Prädikat.",
+                examples: [
+                    { jp: "これはペンです。", de: "Das ist ein Stift." },
+                    { jp: "彼は学生だ。", de: "Er ist Student." }
+                ],
+                quiz: {
+                    question: "Welches Wort wird verwendet, um ein Nomen höflich als Prädikat zu nutzen ('ist')?",
+                    options: ["は", "が", "です"],
+                    correct: 2
+                }
+            },
+            {
+                title: "Satzbau mit i-Adjektiven",
+                explanation: "i-Adjektive enden auf い und können direkt vor einem Nomen stehen, um es zu beschreiben, oder als Prädikat am Satzende verwendet werden. Sie benötigen kein です, um höflich zu sein, aber です kann hinzugefügt werden, um die Höflichkeit zu betonen.",
+                examples: [
+                    { jp: "高い山です。", de: "Es ist ein hoher Berg." },
+                    { jp: "この本は面白いです。", de: "Dieses Buch ist interessant." }
+                ],
+                quiz: {
+                    question: "Welches ist ein korrektes i-Adjektiv?",
+                    options: ["きれい", "しずか", "寒い"],
+                    correct: 2
+                }
+            },
+            {
+                title: "Satzbau mit na-Adjektiven",
+                explanation: "na-Adjektive benötigen ein な, wenn sie direkt vor einem Nomen stehen, um es zu beschreiben. Als Prädikat am Satzende verwenden sie です/だ.",
+                examples: [
+                    { jp: "きれいな花です。", de: "Es ist eine schöne Blume." },
+                    { jp: "この部屋は静かです。", de: "Dieses Zimmer ist ruhig." }
+                ],
+                quiz: {
+                    question: "Wie verbindet man 'genki' (gesund) mit 'hito' (Mensch)?",
+                    options: ["元気い人", "元気な人", "元気の人"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Fragesätze mit か",
+                explanation: "Um einen Aussagesatz in eine Frage zu verwandeln, hängt man einfach die Partikel か an das Satzende. Ein Fragezeichen ist im Japanischen optional, aber die Intonation steigt am Ende.",
+                examples: [
+                    { jp: "これは本ですか。", de: "Ist das ein Buch?" },
+                    { jp: "田中さんは学生ですか。", de: "Ist Herr Tanaka Student?" }
+                ],
+                quiz: {
+                    question: "Wie wird der Satz 'あなたは日本人です' (Sie sind Japaner) zu einer Frage?",
+                    options: ["あなたは日本人です！", "あなたは日本人ですか。", "あなたは日本人です、ね。"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Verneinung von Nomen und na-Adjektiven",
+                explanation: "Die Verneinung von Nomen- und na-Adjektiv-Sätzen erfolgt mit ではありません (höflich) oder じゃない (informell). じゃない ist die informelle Form von ではありません.",
+                examples: [
+                    { jp: "これはペンではありません。", de: "Das ist kein Stift." },
+                    { jp: "この部屋は静かじゃない。", de: "Dieses Zimmer ist nicht ruhig." }
+                ],
+                quiz: {
+                    question: "Was ist die höfliche Verneinung von '先生です' (ist Lehrer)?",
+                    options: ["先生じゃない", "先生ではありません", "先生ないです"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Sätze verbinden mit der て-Form (Verben & Adjektive)",
+                explanation: "Die て-Form eines Verbs oder Adjektivs kann verwendet werden, um zwei oder mehr Sätze zu verbinden, die eine Reihenfolge von Handlungen oder Zuständen beschreiben. Bei i-Adjektiven wird い zu くて, bei na-Adjektiven und Nomen wird だ/です zu で.",
+                examples: [
+                    { jp: "本を読んで、寝ます。", de: "Ich lese ein Buch und gehe dann schlafen." },
+                    { jp: "この部屋は広くて、明るいです。", de: "Dieses Zimmer ist groß und hell." },
+                    { jp: "彼は日本人で、学生です。", de: "Er ist Japaner und Student." }
+                ],
+                quiz: {
+                    question: "Wie verbindet man 'Das Buch ist alt' und 'Es ist interessant'?",
+                    options: ["本は古くて、面白いです。", "本は古いです、面白いです。", "本は古くて、面白です。"],
+                    correct: 0
+                }
+            },
+            {
             title: "Existenz-Verb (belebte Objekte) いる (iru)",
             explanation: "Wird verwendet, um die Anwesenheit oder Existenz von Menschen oder Tieren auszudrücken. Partikel が markiert das Subjekt.",
             examples: [
@@ -601,19 +768,6 @@
                 correct: 1
             }
         },
-            {
-                title: "Thema-Partikel は (wa)",
-                explanation: "Die Partikel は markiert das Thema eines Satzes. Es stellt vor, worüber gesprochen wird. Im Deutschen oft mit 'Was ... betrifft' oder einfach als Subjekt übersetzt.",
-                examples: [
-                    { jp: "私は学生です。", de: "Ich bin Student." },
-                    { jp: "これは本です。", de: "Dies ist ein Buch." }
-                ],
-                quiz: {
-                    question: "Wähle die richtige Partikel: 私___ 田中です (Ich bin Tanaka).",
-                    options: ["が", "は", "を"],
-                    correct: 1
-                }
-            },
             {
                 title: "Besitzanzeigende Partikel の (no)",
                 explanation: "Die Partikel の verbindet zwei Nomen und zeigt Besitz oder Zugehörigkeit an (A の B = B von A).",
