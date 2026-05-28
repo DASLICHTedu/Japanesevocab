@@ -472,27 +472,98 @@
     const grammarData = {
         "N5": [
             {
-                title: "Personalpronomen (私, あなた, 彼, 彼女 etc.)",
-                explanation: "Im Japanischen variieren Personalpronomen stark nach Höflichkeit und Geschlecht. 私 (watashi) ist neutral/höflich. 私 (watakushi) ist sehr formell. 僕 (boku) ist eher jungenhaft/bescheiden, 俺 (ore) sehr maskulin/informell. あたし (atashi) ist weiblich-informell. あなた (anata) ist 'du', wird aber oft durch den Namen + さん ersetzt. 君 (kimi) ist 'du' für Jüngere oder unter Freunden.",
+                title: "Die <ruby>て<rt>te</rt></ruby>-Form (Verbindungen & Bitten)",
+                explanation: "Die te-Form ist eine der wichtigsten Verb-Endungen. Sie verbindet Sätze oder leitet Bitten ein. Bildung:\nGruppe 2 (Ru): -ru weg + te.\nGruppe 1 (U): ku -> ite, gu -> ide, su -> shite, mu/bu/nu -> nde, u/tsu/ru -> tte.\nAusnahme: iku -> itte.",
                 examples: [
-                    { jp: "私は学生です。", de: "Ich bin Student." },
-                    { jp: "彼は日本人です。", de: "Er ist Japaner." },
-                    { jp: "彼女は先生ですか。", de: "Ist sie Lehrerin?" },
-                    { jp: "僕も行きます。", de: "Ich gehe auch (männlich, eher bescheiden)." }
+                    { jp: "<ruby>食<rt>た</rt></ruby>べてください。", de: "Bitte essen Sie." },
+                    { jp: "<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んで、<ruby>寝<rt>ね</rt></ruby>ます。", de: "Ich lese ein Buch und schlafe dann." },
+                    { jp: "<ruby>立<rt>た</rt></ruby>ってください。", de: "Bitte stehen Sie auf." }
+                ],
+                quiz: {
+                    question: "Was ist die te-Form von 'yomu' (lesen)?",
+                    options: ["よみて", "よんで", "よって"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Die <ruby>ない<rt>nai</rt></ruby>-Form (Informelle Verneinung)",
+                explanation: "Die nai-Form wird für informelle Sätze oder komplexe Strukturen wie 'müssen' genutzt. Bildung:\nGruppe 2 (Ru): -ru weg + nai.\nGruppe 1 (U): u-Laut zu a-Laut + nai (u wird zu wa).",
+                examples: [
+                    { jp: "<ruby>今日<rt>きょう</rt></ruby>は<ruby>行<rt>い</rt></ruby>かない。", de: "Heute gehe ich nicht (informell)." },
+                    { jp: "<ruby>肉<rt>にく</rt></ruby>を<ruby>食<rt>た</rt></ruby>べない。", de: "Ich esse kein Fleisch." },
+                    { jp: "<ruby>話<rt>はな</rt></ruby>さないでください。", de: "Bitte sprechen Sie nicht." }
+                ],
+                quiz: {
+                    question: "Was ist die nai-Form von 'kau' (kaufen)?",
+                    options: ["かない", "かわない", "かいない"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Die <ruby>た<rt>ta</rt></ruby>-Form (Informelle Vergangenheit)",
+                explanation: "Die ta-Form wird für die informelle Vergangenheit benutzt. Die Regeln zur Bildung sind identisch mit der て-Form, nur dass am Ende ein 'ta' oder 'da' steht statt 'te' oder 'de'.\nBeispiel: ku -> ita, gu -> ida, mu/bu/nu -> nda, u/tsu/ru -> tta, su -> shite.",
+                examples: [
+                    { jp: "<ruby>昨日<rt>きのう</rt></ruby>、すしを<ruby>食<rt>た</rt></ruby>べた。", de: "Gestern habe ich Sushi gegessen (informell)." },
+                    { jp: "<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んだ。", de: "Ich habe das Buch gelesen (informell)." },
+                    { jp: "<ruby>日本<rt>にほん</rt></ruby>に<ruby>行<rt>い</rt></ruby>った。", de: "Ich bin nach Japan gegangen (informell)." }
+                ],
+                quiz: {
+                    question: "Was ist die ta-Form von 'kaku' (schreiben)?",
+                    options: ["かいた", "かいたった", "かいたた"],
+                    correct: 0
+                }
+            },
+            {
+                title: "Verlauf und Zustand mit <ruby>～ている<rt>te-iru</rt></ruby>",
+                explanation: "Diese Form drückt eine gerade ablaufende Handlung (Präsens Progressiv) oder einen resultierenden Zustand aus.\nBildung: te-Form des Verbs + iru (höflich: imasu).",
+                examples: [
+                    { jp: "<ruby>今<rt>いま</rt></ruby>、<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>している。", de: "Ich lerne gerade Japanisch." },
+                    { jp: "<ruby>窓<rt>まど</rt></ruby>が<ruby>開<rt>あ</rt></ruby>いている。", de: "Das Fenster ist offen (Zustand nach dem Öffnen)." },
+                    { jp: "<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んでいます。", de: "Ich lese gerade ein Buch (höflich)." }
+                ],
+                quiz: {
+                    question: "Wie sagst du 'Ich esse gerade'?",
+                    options: ["たべている", "たべます", "たべるいる"],
+                    correct: 0
+                }
+            },
+            {
+                title: "ください (kudasai) vs <ruby>何卒<rt>なにとぞ</rt></ruby> <ruby>御願<rt>おねが</rt></ruby>いします (onegai shimasu)",
+                explanation: "KUDASAI: Benutzt man mit 'o' für Dinge, die man physisch bekommt, oder mit der 'te-Form' für Bitten.\nONEGAI SHIMASU: Höflicher. Wird für Dienstleistungen (Taxi, Restaurant-Bestellung), Abstraktes oder Namen/Personen am Telefon genutzt. Wenn kein Verb im Satz steht, ist Onegai meist die sicherere Wahl.",
+                examples: [
+                    { jp: "<ruby>水<rt>みず</rt></ruby>をください。", de: "Wasser bitte (Geben Sie mir Wasser)." },
+                    { jp: "<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>教<rt>おし</rt></ruby>えてください。", de: "Bitte bringen Sie mir Japanisch bei (Verb-te)." },
+                    { jp: "<ruby>タクシー<rt>たくしー</rt></ruby>をお<ruby>願<rt>ねが</rt></ruby>いします。", de: "Einen Taxi bitte (Dienstleistung)." },
+                    { jp: "メニューをお<ruby>願<rt>ねが</rt></ruby>いします。", de: "Die Speisekarte bitte (Höfliche Bestellung)." }
+                ],
+                quiz: {
+                    question: "Was sagst du im Restaurant, wenn du die Rechnung (kaikei) willst?",
+                    options: ["お会計(かいけい)をください", "お会計(かいけい)をおねがいします", "お会計(かいけい)を食べてください"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Personalpronomen (<ruby>私<rt>わたし</rt></ruby>, あなた, <ruby>彼<rt>かれ</rt></ruby>, <ruby>彼女<rt>かのじょ</rt></ruby> etc.)",
+                explanation: "Im Japanischen variieren Personalpronomen stark nach Höflichkeit und Geschlecht. <ruby>私<rt>わたし</rt></ruby> (watashi) ist neutral/höflich. <ruby>僕<rt>ぼく</rt></ruby> (boku) ist eher jungenhaft/bescheiden, <ruby>俺<rt>おれ</rt></ruby> (ore) sehr maskulin/informell. あなた (anata) ist 'du', wird aber oft durch den Namen + さん ersetzt.",
+                examples: [
+                    { jp: "<ruby>私<rt>わたし</rt></ruby>は<ruby>学生<rt>がくせい</rt></ruby>です。", de: "Ich bin Student." },
+                    { jp: "<ruby>彼<rt>かれ</rt></ruby>は<ruby>日本人<rt>にほんじん</rt></ruby>です。", de: "Er ist Japaner." },
+                    { jp: "<ruby>彼女<rt>かのじょ</rt></ruby>は<ruby>先生<rt>せんせい</rt></ruby>ですか。", de: "Ist sie Lehrerin?" },
+                    { jp: "<ruby>僕<rt>ぼく</rt></ruby>も<ruby>行<rt>い</rt></ruby>きます。", de: "Ich gehe auch (männlich, eher bescheiden)." }
                 ],
                 quiz: {
                     question: "Welches Personalpronomen ist die neutrale und höflichste Form für 'ich'?",
-                    options: ["僕", "俺", "私", "あなた"],
+                    options: ["僕 (boku)", "俺 (ore)", "私 (watashi)", "あなた (anata)"],
                     correct: 2
                 }
             },
             {
-                title: "Demonstrativpronomen für Objekte (これ, それ, あれ, どれ)",
+                title: "Demonstrativpronomen für Objekte (<ruby>これ<rt>kore</rt></ruby>, <ruby>それ<rt>sore</rt></ruby>, <ruby>あれ<rt>are</rt></ruby>, <ruby>どれ<rt>dore</rt></ruby>)",
                 explanation: "Diese Pronomen werden verwendet, um auf Objekte zu verweisen. これ (kore) ist für Objekte nahe am Sprecher. それ (sore) ist für Objekte nahe am Hörer. あれ (are) ist für Objekte, die weit entfernt von beiden sind. どれ (dore) ist die Frageform ('welches?').",
                 examples: [
-                    { jp: "これは何ですか。", de: "Was ist das hier?" },
-                    { jp: "それは私の本です。", de: "Das da ist mein Buch." },
-                    { jp: "あれは富士山です。", de: "Das dort ist der Berg Fuji." },
+                    { jp: "これは<ruby>何<rt>なん</rt></ruby>ですか。", de: "Was ist das hier?" },
+                    { jp: "それは<ruby>私<rt>わたし</rt></ruby>の<ruby>本<rt>ほん</rt></ruby>です。", de: "Das da ist mein Buch." },
+                    { jp: "あれは<ruby>富士山<rt>ふじさん</rt></ruby>です。", de: "Das dort ist der Berg Fuji." },
                     { jp: "あなたのカバンはどれですか。", de: "Welches ist Ihre Tasche?" }
                 ],
                 quiz: {
@@ -502,35 +573,88 @@
                 }
             },
             {
-                title: "Demonstrativpronomen für Nomen (この, その, あの, どの)",
-                explanation: "Diese Pronomen stehen direkt vor einem Nomen, um es zu spezifizieren. この (kono) für Nomen nahe am Sprecher. その (sono) für Nomen nahe am Hörer. あの (ano) für Nomen, die weit entfernt von beiden sind. どの (dono) ist die Frageform ('welches/welche/welcher?').",
+                title: "Interrogativpronomen (<ruby>誰<rt>だれ</rt></ruby>, <ruby>何<rt>なに</rt></ruby>, <ruby>どこ<rt>doko</rt></ruby>, <ruby>いつ<rt>itsu</rt></ruby> etc.)",
+                explanation: "Dies sind grundlegende Fragewörter. <ruby>誰<rt>だれ</rt></ruby> (dare) fragt nach Personen ('wer?'). <ruby>何<rt>なに</rt></ruby> (nani/nan) fragt nach Dingen ('was?'). <ruby>どこ<rt>doko</rt></ruby> (doko) fragt nach Orten ('wo?'). <ruby>いつ<rt>いつ</rt></ruby> (itsu) fragt nach der Zeit ('wann?'). <ruby>いくら<rt>いくら</rt></ruby> (ikura) fragt nach dem Preis ('wie viel?').",
                 examples: [
-                    { jp: "このペンは新しいです。", de: "Dieser Stift ist neu." },
-                    { jp: "その本をください。", de: "Geben Sie mir bitte das Buch da." },
-                    { jp: "あの人は誰ですか。", de: "Wer ist diese Person dort?" },
-                    { jp: "どのリンゴが好きですか。", de: "Welchen Apfel mögen Sie?" }
-                ],
-                quiz: {
-                    question: "Welches Demonstrativpronomen wird verwendet, um ein Nomen zu beschreiben, das weit entfernt von Sprecher und Hörer ist?",
-                    options: ["この", "その", "あの", "どの"],
-                    correct: 2
-                }
-            },
-            {
-                title: "Interrogativpronomen (誰, 何, どこ, いつ etc.)",
-                explanation: "Dies sind grundlegende Fragewörter. 誰 (dare) fragt nach Personen ('wer?'). 何 (nani/nan) fragt nach Dingen ('was?'). どこ (doko) fragt nach Orten ('wo?'). いつ (itsu) fragt nach der Zeit ('wann?'). いくつ (ikutsu) fragt nach der Anzahl von Dingen ('wie viele?'). いくら (ikura) fragt nach dem Preis ('wie viel?').",
-                examples: [
-                    { jp: "あの人は誰ですか。", de: "Wer ist diese Person dort?" },
-                    { jp: "これは何ですか。", de: "Was ist das hier?" },
-                    { jp: "駅はどこですか。", de: "Wo ist der Bahnhof?" },
-                    { jp: "誕生日はいつですか。", de: "Wann ist Ihr Geburtstag?" },
-                    { jp: "リンゴはいくつありますか。", de: "Wie viele Äpfel gibt es?" },
+                    { jp: "あの<ruby>人<rt>ひと</rt></ruby>は<ruby>誰<rt>だれ</rt></ruby>ですか。", de: "Wer ist diese Person dort?" },
+                    { jp: "これは<ruby>何<rt>なん</rt></ruby>ですか。", de: "Was ist das hier?" },
+                    { jp: "<ruby>駅<rt>えき</rt></ruby>はどこですか。", de: "Wo ist der Bahnhof?" },
+                    { jp: "<ruby>誕生日<rt>たんじょうび</rt></ruby>はいつですか。", de: "Wann ist Ihr Geburtstag?" },
                     { jp: "これはいくらですか。", de: "Wie viel kostet das hier?" }
                 ],
                 quiz: {
                     question: "Welches Fragewort wird verwendet, um nach dem Preis zu fragen?",
-                    options: ["誰", "何", "いつ", "いくら"],
+                    options: ["誰 (dare)", "何 (nani)", "いつ (itsu)", "いくら (ikura)"],
                     correct: 3
+                }
+            },
+            {
+                title: "Fragewörter für Orte und Dinge (<ruby>どこ<rt>doko</rt></ruby>, <ruby>どれ<rt>dore</rt></ruby>, <ruby>どちら<rt>dochira</rt></ruby>)",
+                explanation: "どこ (doko) fragt nach dem Ort ('wo'). どれ (dore) fragt nach einem spezifischen Gegenstand aus einer Gruppe ('welches'). どちら (dochira) ist die höfliche Form von 'wo' oder fragt nach einer Auswahl zwischen ZWEI Dingen.",
+                examples: [
+                    { jp: "トイレはどこですか。", de: "Wo ist die Toilette?" },
+                    { jp: "あなたのカバンはどれですか。", de: "Welches (hier) ist deine Tasche?" },
+                    { jp: "コーヒーと<ruby>紅茶<rt>こうちゃ</rt></ruby>、どちらがいいですか。", de: "Kaffee oder Tee, welches ist (Ihnen) lieber?" }
+                ],
+                quiz: {
+                    question: "Welches Wort nutzt du, um zwischen ZWEI Dingen zu wählen?",
+                    options: ["どれ", "どこ", "どちら", "なに"],
+                    correct: 2
+                }
+            },
+            {
+                title: "Verb-Kategorien (U-Verben vs. Ru-Verben)",
+                explanation: "Es gibt drei Gruppen: 1. U-Verben (Godan): Enden auf u, ku, gu, su, tsu, nu, bu, mu, ru. 2. Ru-Verben (Ichidan): Enden auf -iru oder -eru. 3. Unregelmäßige Verben: Nur <ruby>来<rt>く</rt></ruby>る (kuru) und する (suru).",
+                examples: [
+                    { jp: "<ruby>書<rt>か</rt></ruby>く (<ruby>か<rt>ka</rt></ruby>く) - Gruppe 1", de: "schreiben" },
+                    { jp: "<ruby>食<rt>た</rt></ruby>べる (<ruby>た<rt>ta</rt></ruby>べる) - Gruppe 2", de: "essen" },
+                    { jp: "する (<ruby>す<rt>su</rt></ruby>る) - Gruppe 3", de: "machen / tun" }
+                ],
+                quiz: {
+                    question: "Zu welcher Gruppe gehört 'taberu'?",
+                    options: ["Gruppe 1 (Godan)", "Gruppe 2 (Ichidan)", "Gruppe 3 (Irregulär)"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Schein-Ru-Verben (Gefährliche Godan-Verben)",
+                explanation: "Manche Verben sehen aus wie Ru-Verben (enden auf -iru/-eru), sind aber eigentlich U-Verben (Gruppe 1). Die häufigsten sind: <ruby>帰<rt>かえ</rt></ruby>る (kaeru - zurückkehren), <ruby>入<rt>はい</rt></ruby>る (hairu - eintreten), <ruby>走<rt>はし</rt></ruby>る (hashiru - rennen), <ruby>切<rt>き</rt></ruby>る (kiru - schneiden) und <ruby>知<rt>し</rt></ruby>る (shiru - wissen).",
+                examples: [
+                    { jp: "<ruby>家<rt>うち</rt></ruby>へ<ruby>帰<rt>かえ</rt></ruby>ります。", de: "Ich kehre nach Hause zurück (kaeru -> kaerimasu, NICHT kaemasu)." },
+                    { jp: "<ruby>道<rt>みち</rt></ruby>を<ruby>走<rt>はし</rt></ruby>ります。", de: "Ich renne/laufe auf der Straße." }
+                ],
+                quiz: {
+                    question: "Was ist die Masu-Form von 'kaeru' (zurückkehren)?",
+                    options: ["かえます (kaemasu)", "かえります (kaerimasu)", "かえるます (kaerumasu)"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Die höfliche Masu-Form (Gegenwart)",
+                explanation: "Die Masu-Form wird für höfliche Sätze in der Gegenwart oder Zukunft benutzt. Bildung: Bei Ru-Verben: ru weg + masu. Bei U-Verben: u-Laut zu i-Laut machen + masu. する wird zu します, <ruby>来<rt>く</rt></ruby>る zu <ruby>来<rt>き</rt></ruby>ます.",
+                examples: [
+                    { jp: "<ruby>行<rt>い</rt></ruby>く → <ruby>行<rt>い</rt></ruby>きます", de: "gehen" },
+                    { jp: "<ruby>見<rt>み</rt></ruby>る → <ruby>見<rt>み</rt></ruby>ます", de: "sehen" },
+                    { jp: "する → します", de: "machen" }
+                ],
+                quiz: {
+                    question: "Was ist die Masu-Form von 'kaku' (schreiben)?",
+                    options: ["かきます", "かくます", "かきします"],
+                    correct: 0
+                }
+            },
+            {
+                title: "Die unregelmäßigen Verben (<ruby>する<rt>suru</rt></ruby> & <ruby>来<rt>く</rt></ruby>る)",
+                explanation: "Es gibt im Japanischen nur zwei wirklich unregelmäßige Verben. Sie folgen keinen festen Gruppenregeln:\n1. する (suru - tun/machen): wird zu します (masu), しない (nai), した (ta).\n2. 来る (kuru - kommen): wird zu 来ます (kimasu), 来ない (konai), 来た (kita).\n*Hinweis: 行く (iku - gehen) ist fast regelmäßig, hat aber eine Ausnahme in der te-Form: 行って (NICHT iite).",
+                examples: [
+                    { jp: "<ruby>散歩<rt>さんぽ</rt></ruby>をします。", de: "Ich mache einen Spaziergang." },
+                    { jp: "<ruby>明日<rt>あした</rt></ruby>、<ruby>友達<rt>ともだち</rt></ruby>が<ruby>来<rt>く</rt></ruby>る。", de: "Morgen kommt ein Freund." },
+                    { jp: "<ruby>東京<rt>とうきょう</rt></ruby>へ<ruby>行<rt>い</rt></ruby>った。", de: "Ich bin nach Tokio gegangen (Ausnahme-Konjugation)." }
+                ],
+                quiz: {
+                    question: "Was ist die verneinte Form (nai-Form) von 'kuru' (kommen)?",
+                    options: ["きない", "くない", "こない"],
+                    correct: 2
                 }
             },
             {
@@ -607,7 +731,7 @@
                 ],
                 quiz: {
                     question: "Wie wird der Satz 'あなたは日本人です' (Sie sind Japaner) zu einer Frage?",
-                    options: ["あなたは日本人です！", "あなたは日本人ですか。", "あなたは日本人です、ね。"],
+                    options: ["あなたは日本人です！", "あなたは日本人ですか (ka).", "あなたは日本人です、ね (ne)."],
                     correct: 1
                 }
             },
@@ -819,6 +943,62 @@
             }
         ],
         "N4": [
+            {
+                title: "Die <ruby>ば<rt>ba</rt></ruby>-Form (Konditional 'Falls')",
+                explanation: "Die ba-Form drückt eine Bedingung aus ('wenn' / 'falls'). Sie wird oft für allgemeine Wahrheiten oder Ratschläge genutzt.\nBildung:\nGruppe 1 (U): u-Laut zu e-Laut + ba.\nGruppe 2 (Ru): -ru weg + reba.\nUnregelmäßig: kuru -> kureba, suru -> sureba.",
+                examples: [
+                    { jp: "<ruby>安<rt>やす</rt></ruby>ければ、<ruby>買<rt>か</rt></ruby>います。", de: "Wenn es billig ist (wäre), kaufe ich es." },
+                    { jp: "<ruby>薬<rt>くすり</rt></ruby>を<ruby>飲<rt>の</rt></ruby>めば、<ruby>良<rt>よ</rt></ruby>くなります。", de: "Wenn Sie die Medizin nehmen, wird es besser." },
+                    { jp: "<ruby>行<rt>い</rt></ruby>けば、わかります。", de: "Wenn du hingehst, wirst du es verstehen." }
+                ],
+                quiz: {
+                    question: "Was ist die ba-Form von 'miru' (sehen)?",
+                    options: ["みば", "みれば", "みればあ"],
+                    correct: 1
+                }
+            },
+            {
+                title: "Die <ruby>意向形<rt>いこうけい</rt></ruby> (Volitiv / Informelles 'Lass uns')",
+                explanation: "Wird für informelle Vorschläge oder den festen Entschluss genutzt. Bildung:\nGruppe 1 (U): u-Laut zu o-Laut + u (z.B. iku -> ikou).\nGruppe 2 (Ru): -ru weg + you (z.B. taberu -> tabeyou).\nUnregelmäßig: suru -> shiyou, kuru -> koyou.",
+                examples: [
+                    { jp: "<ruby>一緒<rt>いっしょ</rt></ruby>に<ruby>行<rt>い</rt></ruby>こう！", de: "Lass uns zusammen gehen!" },
+                    { jp: "<ruby>何<rt>なに</rt></ruby>かを<ruby>食<rt>た</rt></ruby>べよう。", de: "Lass uns etwas essen." },
+                    { jp: "<ruby>勉強<rt>べんきょう</rt></ruby>しよう。", de: "Lass uns lernen." }
+                ],
+                quiz: {
+                    question: "Was ist die Volitiv-Form von 'kau' (kaufen)?",
+                    options: ["かおう", "かよう", "かこう"],
+                    correct: 0
+                }
+            },
+            {
+                title: "Die <ruby>使役形<rt>しえきけい</rt></ruby> (Kausativ-Form 'Lassen/Machen')",
+                explanation: "Drückt aus, dass man jemanden dazu bringt oder ihm erlaubt, etwas zu tun. Bildung:\nGruppe 1 (U): u-Laut zu a-Laut + seru (u -> waseru).\nGruppe 2 (Ru): -ru weg + saseru.\nUnregelmäßig: suru -> saseru, kuru -> kosaseru.",
+                examples: [
+                    { jp: "<ruby>子供<rt>こども</rt></ruby>に<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>ませます。", de: "Ich lasse das Kind ein Buch lesen." },
+                    { jp: "<ruby>彼<rt>かれ</rt></ruby>を<ruby>待<rt>ま</rt></ruby>たせた。", de: "Ich habe ihn warten lassen." },
+                    { jp: "<ruby>野菜<rt>やさい</rt></ruby>を<ruby>食<rt>た</rt></ruby>べさせました。", de: "Ich habe (ihn/sie) Gemüse essen lassen." }
+                ],
+                quiz: {
+                    question: "Was ist die Kausativ-Form von 'iku' (gehen)?",
+                    options: ["いかせる", "いきさせる", "いこせる"],
+                    correct: 0
+                }
+            },
+            {
+                title: "Die <ruby>命令形<rt>めいれいけい</rt></ruby> (Imperativ / Befehlsform)",
+                explanation: "Wird für direkte, oft schroffe Befehle genutzt. Bildung:\nGruppe 1 (U): u-Laut zu e-Laut (z.B. iku -> ike).\nGruppe 2 (Ru): -ru weg + ro (z.B. taberu -> tabero).\nUnregelmäßig: suru -> shiro, kuru -> koi.",
+                examples: [
+                    { jp: "<ruby>早<rt>はや</rt></ruby>く<ruby>行<rt>い</rt></ruby>け！", de: "Geh schnell!" },
+                    { jp: "<ruby>全部<rt>ぜんぶ</rt></ruby><ruby>食<rt>た</rt></ruby>べろ！", de: "Iss alles auf!" },
+                    { jp: "こっちへ<ruby>来<rt>こ</rt></ruby>い！", de: "Komm her!" }
+                ],
+                quiz: {
+                    question: "Was ist der Imperativ von 'yomu' (lesen)?",
+                    options: ["よめ", "よろ", "よみろ"],
+                    correct: 1
+                }
+            },
             {
             title: "Versuch/Probieren mit ～てみる (~te miru)",
             explanation: "Drückt aus, dass man etwas versucht oder zum ersten Mal ausprobiert, um zu sehen, wie es ist.",
@@ -3871,7 +4051,7 @@
         document.getElementById('grammar-list').classList.add('hidden');
         document.getElementById('grammar-lesson-viewer').classList.remove('hidden');
 
-        document.getElementById('grammar-title').innerText = item.title;
+        document.getElementById('grammar-title').innerHTML = item.title;
         document.getElementById('grammar-explanation').innerText = item.explanation;
         
         let exHtml = '';
@@ -15986,7 +16166,7 @@
         if (!item) return;
         document.getElementById('grammar-list').classList.add('hidden');
         document.getElementById('grammar-lesson-viewer').classList.remove('hidden');
-        document.getElementById('grammar-title').innerText = item.title;
+        document.getElementById('grammar-title').innerHTML = item.title;
         document.getElementById('grammar-explanation').innerText = item.explanation;
 
         document.getElementById('grammar-examples').innerHTML = item.examples.map(ex =>
