@@ -71,7 +71,7 @@
         .progress-fill { height: 100%; background: var(--primary-dark); width: 5%; transition: width 0.3s; }
         
         .flashcard { width: 100%; aspect-ratio: 4/3; perspective: 1000px; cursor: pointer; }
-        .fc-inner { width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; position: relative; }
+        .fc-inner { width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; position: relative; will-change: transform; backface-visibility: hidden; }
         .flashcard.flipped .fc-inner { transform: rotateY(180deg); }
         .fc-front, .fc-back { width: 100%; height: 100%; position: absolute; backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
         .fc-front { background: var(--white); }
@@ -115,6 +115,69 @@
         .btn-small { padding: 8px 15px; border-radius: 20px; font-size: 12px; }
         .stroke-error { color: var(--accent-pink); font-weight: bold; text-align: center; margin-top: 10px; height: 20px; }
         .stroke-num { position: absolute; background: var(--primary-dark); color: white; width: 18px; height: 18px; border-radius: 50%; font-size: 10px; display: flex; align-items: center; justify-content: center; z-index: 3; }
+        
+        /* --- PATH STYLES (Duolingo Style) --- */
+        .path-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 15px; 
+            padding: 40px 0; 
+            max-width: 400px; 
+            margin: 0 auto; 
+        }
+        .path-step-wrapper { display: flex; flex-direction: column; align-items: center; position: relative; }
+        .path-step { 
+            width: 75px; 
+            height: 75px; 
+            border-radius: 50%; 
+            background: #e5e5e5; 
+            border: none; 
+            border-bottom: 6px solid #afafaf; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 28px; 
+            cursor: pointer; 
+            transition: 0.1s; 
+            z-index: 2; 
+            color: white; 
+            position: relative; 
+        }
+        .path-step:active { transform: translateY(4px); border-bottom-width: 2px; }
+        .path-step.completed { background: #58cc02; border-bottom-color: #46a302; }
+        .path-step.current { background: #58cc02; border-bottom-color: #46a302; transform: scale(1.15); box-shadow: 0 0 20px rgba(88, 204, 2, 0.4); }
+        .path-step.locked { background: #e5e5e5; border-bottom-color: #afafaf; cursor: not-allowed; }
+        .path-step-label { margin-top: 10px; font-weight: 800; color: #4b4b4b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .path-step-wrapper:nth-child(4n+2) { transform: translateX(60px); }
+        .path-step-wrapper:nth-child(4n+4) { transform: translateX(-60px); }
+        .path-connector { width: 12px; height: 35px; background: #e5e5e5; margin: -10px 0; z-index: 1; border-radius: 6px; }
+        .path-connector.completed { background: #58cc02; }
+
+        /* --- LEVEL UP ANIMATION STYLES --- */
+        #view-level-up { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: var(--white); z-index: 1000; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; overflow: hidden;
+        }
+        .level-up-container { animation: slideUp 0.5s ease-out; padding: 20px; }
+        .level-up-star { font-size: 100px; animation: bounce 1s infinite alternate; margin-bottom: 20px; }
+        .level-up-title { font-size: 32px; color: #58cc02; font-weight: 900; margin-bottom: 10px; }
+        .level-up-msg { font-size: 18px; color: var(--text-light); margin-bottom: 40px; }
+        
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes bounce { from { transform: scale(1); } to { transform: scale(1.2); } }
+
+        .streak-badge { background: #fff3e0; color: #ff9800; padding: 10px 20px; border-radius: 25px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; border: 2px solid #ffb74d; }
+        #confetti-canvas { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            pointer-events: none; z-index: 1001; 
+        }
+
+        /* --- SPEECH STYLES --- */
+        .btn-speak { background: #6b46c1; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-top: 10px; display: flex; align-items: center; gap: 8px; justify-content: center; width: auto; margin-inline: auto; }
+        .listening-task { background: var(--badge-blue-bg); padding: 20px; border-radius: 15px; margin-bottom: 20px; }
         
         .quiz-option { width: 100%; padding: 15px; background: white; border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 10px; text-align: left; cursor: pointer; transition: 0.2s; font-size: 16px; }
         .quiz-option:hover { background: #f8f9fc; }
@@ -164,6 +227,8 @@
             <button class="tab" onclick="switchTab('lesen')">Lesen</button>
             <button class="tab" onclick="switchTab('kanji')">Kanji</button>
             <button class="tab" onclick="switchTab('grammatik')">Grammatik</button>
+            <button class="tab" onclick="switchTab('alltag')">Alltag</button>
+            <button class="tab" onclick="switchTab('pfad')">Pfad</button>
             <button class="tab" onclick="switchTab('test')">Test</button>
         </div>
     </header>
@@ -203,6 +268,49 @@
             <button class="btn-main" style="background: var(--primary-light);" onclick="startRandom(true, true)">Global Mix (Alle)</button>
         </div>
         <button class="btn-main" style="background: var(--primary-dark); margin-top: 20px;" onclick="startDailyChallenge()">Tägliche Herausforderung (10 Vokabeln)</button>
+    </main>
+
+    <main id="view-alltag" class="hidden">
+        <h1>Alltags-Japanisch</h1>
+        <p class="subtitle">Echtes Japanisch für reale Situationen.</p>
+        <div class="card-grid" id="alltag-categories">
+            <!-- Kategorien werden per JS geladen -->
+        </div>
+    </main>
+
+    <main id="view-pfad" class="hidden">
+        <h1>Dein Lernpfad</h1>
+        <p class="subtitle">Meistere Lektionen und schalte neue frei.</p>
+        <div class="path-container" id="learning-path-display">
+            <!-- Pfad-Nodes werden hier generiert -->
+        </div>
+    </main>
+
+    <main id="view-path-lesson" class="hidden">
+        <div class="fc-header">
+            <span style="cursor:pointer;" onclick="switchTab('pfad')">← Pfad</span>
+            <span id="path-lesson-title">Lektion</span>
+            <span id="path-progress-num">1/5</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="path-lesson-progress"></div></div>
+        
+        <div id="path-content-area">
+            <!-- Dynamischer Content: Vocab, Listening, Speaking, Quiz -->
+        </div>
+        
+        <div id="path-feedback-area" class="typing-feedback"></div>
+        <button id="btn-path-next" class="btn-main hidden" onclick="nextPathStep()">Weiter →</button>
+    </main>
+
+    <main id="view-level-up" class="hidden">
+        <canvas id="confetti-canvas"></canvas>
+        <div class="level-up-container">
+            <div class="level-up-star">🌟</div>
+            <h1 class="level-up-title">UNIT ABGESCHLOSSEN!</h1>
+            <div class="streak-badge">🔥 <span id="streak-count-display">0</span> TAGE STREAK!</div>
+            <p class="level-up-msg">Du wirst immer besser. Weiter so!</p>
+            <button class="btn-main" onclick="switchTab('pfad')">Zum Pfad →</button>
+        </div>
     </main>
 
     <main id="view-liste" class="hidden">
@@ -469,6 +577,192 @@
 </div>
 
 <script>
+    // --- NEUE DATEN FÜR ALLTAG & PFAD ---
+    const everydayVocabData = {
+        "Begrüßung & Höflichkeit": [
+            { kana: "おはようございます", kanji: "おはようございます", de: "Guten Morgen (höflich)", type: "Begrüßung" },
+            { kana: "おやすみなさい", kanji: "おやすみなさい", de: "Gute Nacht", type: "Begrüßung" },
+            { kana: "はじめまして", kanji: "初めまして", de: "Sehr erfreut (beim ersten Treffen)", type: "Höflichkeit" },
+            { kana: "どうぞよろしくお願いします", kanji: "どうぞよろしくお願いします", de: "Auf gute Zusammenarbeit / Bitte seien Sie mir gewogen", type: "Höflichkeit" },
+            { kana: "お元気ですか", kanji: "お元気ですか", de: "Wie geht es Ihnen?", type: "Konversation" },
+            { kana: "おかげさまで元気です", kanji: "おかげさまて元気です", de: "Danke, mir geht es gut.", type: "Konversation" }
+        ],
+        "Essen & Trinken": [
+            { kana: "いただきます", kanji: "頂きます", de: "Guten Appetit (vor dem Essen)", type: "Höflichkeit" },
+            { kana: "ごちそうさまでした", kanji: "ご馳走様でした", de: "Danke für das Essen (danach)", type: "Höflichkeit" },
+            { kana: "おなかがすきました", kanji: "お腹が空きました", de: "Ich habe Hunger", type: "Ausdruck" },
+            { kana: "のどがかわきました", kanji: "喉が渇きました", de: "Ich habe Durst", type: "Ausdruck" },
+            { kana: "メニューをお願いします", kanji: "メニューをおねがいします", de: "Die Speisekarte bitte", type: "Restaurant" },
+            { kana: "これをお願いします", kanji: "これをおねがいします", de: "Das hier bitte", type: "Restaurant" },
+            { kana: "お会計をお願いします", kanji: "おかいけいをおねがいします", de: "Die Rechnung bitte", type: "Restaurant" },
+            { kana: "おいしそうです", kanji: "美味しそうです", de: "Das sieht lecker aus", type: "Ausdruck" }
+        ],
+        "Bahnhof & Transport": [
+            { kana: "えきはどこですか", kanji: "駅はどこですか", de: "Wo ist der Bahnhof?", type: "Transport" },
+            { kana: "きっぷをください", kanji: "切符をください", de: "Ein Ticket bitte", type: "Transport" },
+            { kana: "つぎのでんしゃはなんじですか", kanji: "次の電車は何時ですか", de: "Wann fährt der nächste Zug?", type: "Transport" },
+            { kana: "よやくしたいです", kanji: "予約したいです", de: "Ich möchte reservieren", type: "Reisen" },
+            { kana: "ここにとまりますか", kanji: "ここに止まりますか", de: "Hält der Zug hier?", type: "Transport" }
+        ],
+        "Hotel & Unterkunft": [
+            { kana: "チェックインをお願いします", kanji: "チェックインをおねがいします", de: "Check-in bitte", type: "Hotel" },
+            { kana: "わたしのなまえはヨナスです", kanji: "私の名前はヨナスです", de: "Mein Name ist Jonas", type: "Vorstellung" },
+            { kana: "へやばんごうはなんばんですか", kanji: "部屋番号は何番ですか", de: "Was ist meine Zimmernummer?", type: "Hotel" },
+            { kana: "Wi-Fiはありますか", kanji: "Wi-Fiはありますか", de: "Gibt es Wi-Fi?", type: "Hotel" },
+            { kana: "あさごはんをたべたいです", kanji: "朝食を食べたいです", de: "Ich möchte frühstücken", type: "Hotel" }
+        ],
+        "Beim Arzt & Apotheke": [
+            { kana: "ぐあいがわるいです", kanji: "具合が悪いです", de: "Ich fühle mich nicht gut", type: "Medizin" },
+            { kana: "ねつがあります", kanji: "熱があります", de: "Ich habe Fieber", type: "Medizin" },
+            { kana: "くすりをください", kanji: "薬をください", de: "Geben Sie mir bitte Medizin", type: "Apotheke" },
+            { kana: "おなかがいたいです", kanji: "お腹が痛いです", de: "Ich habe Bauchschmerzen", type: "Medizin" },
+            { kana: "だいじょうぶです", kanji: "大丈夫です", de: "Mir geht es gut / Schon okay", type: "Ausdruck" }
+        ],
+        "Arbeit & Business": [
+            { kana: "お疲れ様です", kanji: "おつかれさまです", de: "Gute Arbeit / Hallo (unter Kollegen)", type: "Business" },
+            { kana: "失礼します", kanji: "しつれいします", de: "Entschuldigen Sie (beim Betreten/Verlassen)", type: "Business" },
+            { kana: "お先に失礼します", kanji: "おさきにしつれいします", de: "Ich gehe dann mal (vor den anderen)", type: "Business" },
+            { kana: "よろしくお願いします", kanji: "おねがいします", de: "Auf gute Zusammenarbeit", type: "Höflichkeit" },
+            { kana: "かしこまりました", kanji: "かしこまりました", de: "Verstanden (sehr höflich)", type: "Business" },
+            { kana: "確認します", kanji: "かくにんします", de: "Ich werde es überprüfen", type: "Business" },
+            { kana: "名刺をどうぞ", kanji: "めいしをどうぞ", de: "Hier ist meine Visitenkarte", type: "Business" }
+        ],
+        "Einkaufen": [
+            { kana: "いくらですか", kanji: "いくらですか", de: "Wie viel kostet das?", type: "Shopping" },
+            { kana: "これをください", kanji: "これをください", de: "Das hier bitte", type: "Shopping" },
+            { kana: "カードは使えますか", kanji: "カードはつかえますか", de: "Kann ich mit Karte zahlen?", type: "Shopping" },
+            { kana: "袋はいりません", kanji: "ふくろはいりません", de: "Ich brauche keine Tüte", type: "Shopping" },
+            { kana: "試着してもいいですか", kanji: "しちゃくしてもいいですか", de: "Darf ich das anprobieren?", type: "Shopping" },
+            { kana: "ちょっと高いです", kanji: "ちょっとたかいです", de: "Es ist ein bisschen teuer", type: "Shopping" }
+        ]
+    };
+
+    const pathLevels = [
+        { id: 'p1', label: 'Unit 1', title: 'Grundlagen & Begrüßung', tasks: [
+            { type: 'vocab', word: 'こんにちは', de: 'Guten Tag' },
+            { type: 'listening', word: 'ありがとう', de: 'Danke' },
+            { type: 'grammar_quiz', question: "Wie sagt man 'Ich bin Student' (Gakusei)?", options: ["Gakusei desu", "Gakusei no"], correct: 0 },
+            { type: 'speaking', word: 'おはよう' }
+        ]},
+        { id: 'p2', label: 'Unit 2', title: 'Tiere & Natur', tasks: [
+            { type: 'vocab', word: 'いぬ', de: 'Hund' },
+            { type: 'listening', word: 'ねこ', de: 'Katze' },
+            { type: 'vocab', word: 'とり', de: 'Vogel' },
+            { type: 'grammar_quiz', question: "Wie sagt man 'Da ist eine Katze'?", options: ["Neko ga imasu", "Neko ga arimasu"], correct: 0 }
+        ]},
+        { id: 'p3', label: 'Unit 3', title: 'Im Restaurant', tasks: [
+            { type: 'vocab', word: 'メニュー', de: 'Menü' },
+            { type: 'speaking', word: 'これをお願いします' },
+            { type: 'listening', word: 'おいしい', de: 'lecker' },
+            { type: 'grammar_quiz', question: "Höfliche Bitte um Wasser (Mizu)?", options: ["Mizu o kudasai", "Mizu desu"], correct: 0 }
+        ]},
+        { id: 'p4', label: 'Unit 4', title: 'Einkaufen gehen', tasks: [
+            { type: 'vocab', word: 'いくらですか', de: 'Wie viel kostet das?' },
+            { type: 'listening', word: 'ちょっと高いです', de: 'Ein bisschen teuer' },
+            { type: 'speaking', word: 'カードは使えますか' },
+            { type: 'vocab', word: 'これをください', de: 'Das hier bitte' }
+        ]},
+        { id: 'p5', label: 'Unit 5', title: 'Farben & Beschreibungen', tasks: [
+            { type: 'vocab', word: 'あかい', de: 'rot' },
+            { type: 'listening', word: 'あおい', de: 'blau' },
+            { type: 'grammar_quiz', question: "Was bedeutet 'kirei'?", options: ["Hässlich", "Schön/Sauber"], correct: 1 },
+            { type: 'speaking', word: 'しろい' }
+        ]},
+        { id: 'p6', label: 'Unit 6', title: 'Körper & Gesundheit', tasks: [
+            { type: 'vocab', word: 'あたま', de: 'Kopf' },
+            { type: 'listening', word: 'め', de: 'Auge' },
+            { type: 'speaking', word: 'ぐあいがわるいです' }
+        ]},
+        { id: 'p7', label: 'Unit 7', title: 'Wetter & Zeit', tasks: [
+            { type: 'vocab', word: 'あめ', de: 'Regen' },
+            { type: 'listening', word: 'いま', de: 'jetzt' },
+            { type: 'grammar_quiz', question: "Wie sagt man 'Es schneit'?", options: ["Yuki ga furu", "Ame ga furu"], correct: 0 }
+        ]},
+        { id: 'p8', label: 'Test', title: 'Meilenstein I', tasks: [
+            { type: 'mixed_quiz' }, { type: 'mixed_quiz' }, { type: 'mixed_quiz' }, { type: 'mixed_quiz' }
+        ]},
+        { id: 'p9', label: 'Unit 9', title: 'Familie & Freunde', tasks: [
+            { type: 'vocab', word: 'ちち', de: 'Vater' },
+            { type: 'listening', word: 'はは', de: 'Mutter' },
+            { type: 'speaking', word: 'かぞく' },
+            { type: 'vocab', word: 'あね', de: 'ältere Schwester' }
+        ]},
+        { id: 'p10', label: 'Unit 10', title: 'Hobbys & Freizeit', tasks: [
+            { type: 'vocab', word: 'うた', de: 'Lied' },
+            { type: 'listening', word: 'おんがく', de: 'Musik' },
+            { type: 'grammar_quiz', question: "Was bedeutet 'suki'?", options: ["Hassen", "Mögen"], correct: 1 },
+            { type: 'speaking', word: 'うたをうたう' }
+        ]},
+        { id: 'p11', label: 'Unit 11', title: 'In der Stadt', tasks: [
+            { type: 'vocab', word: 'えき', de: 'Bahnhof' },
+            { type: 'listening', word: 'でんしゃ', de: 'Zug' },
+            { type: 'speaking', word: 'くるま' }
+        ]},
+        { id: 'p12', label: 'Test', title: 'Meilenstein II', tasks: [
+            { type: 'mixed_quiz' }, { type: 'mixed_quiz' }, { type: 'mixed_quiz' }, { type: 'mixed_quiz' }
+        ]},
+        { id: 'p13', label: 'Unit 13', title: 'Berufe & Arbeit', tasks: [
+            { type: 'vocab', word: 'いしゃ', de: 'Arzt' },
+            { type: 'listening', word: 'せんせい', de: 'Lehrer' },
+            { type: 'speaking', word: 'かいしゃいん' }
+        ]},
+        { id: 'p14', label: 'Unit 14', title: 'Zeit & Datum', tasks: [
+            { type: 'vocab', word: 'きょう', de: 'heute' },
+            { type: 'listening', word: 'あした', de: 'morgen' },
+            { type: 'grammar_quiz', question: "Was bedeutet 'Kinou'?", options: ["Heute", "Gestern"], correct: 1 }
+        ]},
+        { id: 'p15', label: 'Unit 15', title: 'Farben & Formen', tasks: [
+            { type: 'vocab', word: 'まるい', de: 'rund' },
+            { type: 'listening', word: 'しかくい', de: 'viereckig' },
+            { type: 'speaking', word: 'あかい' }
+        ]},
+    ];
+
+    let pathProgress = JSON.parse(localStorage.getItem('pathProgress') || '["p1"]');
+    let currentPathLesson = null;
+    let currentPathStepIdx = 0;
+
+    // --- ALLTAGS MODUS ---
+    function renderAlltagCategories() {
+        const container = document.getElementById('alltag-categories');
+        container.innerHTML = Object.keys(everydayVocabData).map(cat => `
+            <div class="option-card" onclick="startAlltagLesson('${cat}')">
+                <h3>${cat}</h3>
+                <p>${everydayVocabData[cat].length} Vokabeln</p>
+            </div>
+        `).join('');
+    }
+
+    function startAlltagLesson(cat) {
+        startLearning(-1, everydayVocabData[cat]);
+    }
+
+    // --- LERNPFAD LOGIK ---
+    function renderPath() {
+        const container = document.getElementById('learning-path-display');
+        let html = '';
+        pathLevels.forEach((lv, idx) => {
+            const isCompleted = pathProgress.includes(pathLevels[idx+1]?.id);
+            const isCurrent = lv.id === pathProgress[pathProgress.length - 1] && !isCompleted;
+            const isLocked = !pathProgress.includes(lv.id);
+            
+            let statusClass = isLocked ? 'locked' : (isCompleted ? 'completed' : 'current');
+            
+            html += `
+            <div class="path-step-wrapper">
+                <div class="path-step ${statusClass}" onclick="startPathLesson('${lv.id}')">
+                    ${isCompleted ? '✓' : (isLocked ? '🔒' : '★')}
+                </div>
+                <div class="path-step-label">${lv.label}</div>
+            </div>`;
+            
+            if (idx < pathLevels.length - 1) {
+                html += `<div class="path-connector ${isCompleted ? 'completed' : ''}"></div>`;
+            }
+        });
+        container.innerHTML = html;
+    }
+
     const grammarData = {
         "N5": [
             {
@@ -4072,8 +4366,10 @@
     function checkGrammarQuiz(choice, correctIdx) {
         const feedback = document.getElementById('grammar-quiz-feedback');
         if (choice === correctIdx) {
+            playSound('correct');
             feedback.innerHTML = '<span class="feedback-correct">Richtig! Gut gemacht. ✓</span>';
         } else {
+            playSound('wrong');
             feedback.innerHTML = '<span class="feedback-wrong">Leider falsch. Versuche es nochmal!</span>';
         }
     }
@@ -15497,14 +15793,252 @@
         document.querySelectorAll('main').forEach(el => el.classList.add('hidden'));
         document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
 
-        if (!['flashcards', 'typing', 'results', 'kanji-results'].includes(tabId)) {
-            const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
-            if (tabBtn) tabBtn.classList.add('active');
+        const targetView = document.getElementById(`view-${tabId}`);
+        if (targetView) targetView.classList.remove('hidden');
+        
+        const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
+        if (tabBtn) tabBtn.classList.add('active');
+
+        if (tabId === 'alltag') renderAlltagCategories();
+        if (tabId === 'pfad') renderPath();
+        if (tabId === 'lernen') updateStats();
+        if (tabId === 'liste') renderList();
+    }
+
+    // --- SPRACHFUNKTIONEN ---
+    function speak(text) {
+        const msg = new SpeechSynthesisUtterance();
+        msg.text = text;
+        msg.lang = 'ja-JP';
+        window.speechSynthesis.speak(msg);
+    }
+
+    // --- SOUND SYSTEM ---
+    function playSound(type) {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            if (type === 'correct') {
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1); // A5
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.2);
+            } else {
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+                oscillator.frequency.linearRampToValueAtTime(50, audioCtx.currentTime + 0.3);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.3);
+            }
+        } catch (e) {}
+    }
+
+    function startSpeechRecognition(correctText) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Spracherkennung wird von deinem Browser nicht unterstützt (probiere Chrome oder Safari).");
+            return;
         }
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'ja-JP';
+        recognition.start();
+        
+        const feedback = document.getElementById('path-feedback-area');
+        feedback.innerHTML = "Ich höre zu... 🎤";
+        
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            feedback.innerHTML = `Du hast gesagt: "${transcript}"`;
+            if (transcript.includes(correctText) || correctText.includes(transcript)) {
+                playSound('correct');
+                feedback.innerHTML += '<br><span class="feedback-correct">Richtig erkannt! ✓</span>';
+                document.getElementById('btn-path-next').classList.remove('hidden');
+                speak(correctText);
+            } else {
+                playSound('wrong');
+                feedback.innerHTML += `<br><span class="feedback-wrong">Nicht ganz. Versuchs nochmal!</span>`;
+            }
+        };
+        recognition.onerror = () => { feedback.innerHTML = "Fehler bei der Erkennung. Versuchs nochmal."; };
+    }
+
+    // --- STREAK LOGIC ---
+    function updateStreak() {
+        const today = new Date().toISOString().slice(0, 10);
+        let streak = parseInt(localStorage.getItem('streakCount') || '0');
+        const lastDate = localStorage.getItem('lastPracticeDate');
+
+        if (lastDate === today) return streak;
+
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = yesterday.toISOString().slice(0, 10);
+
+        if (lastDate === yesterdayStr) {
+            streak++;
+        } else {
+            streak = 1;
+        }
+
+        localStorage.setItem('streakCount', streak);
+        localStorage.setItem('lastPracticeDate', today);
+        return streak;
+    }
+
+    // --- CONFETTI ANIMATION ---
+    function fireConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+        const colors = ['#df4478', '#272a48', '#58cc02', '#ff9800', '#3266d6'];
+
+        for (let i = 0; i < 150; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                r: Math.random() * 6 + 4,
+                d: Math.random() * 10,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                tilt: Math.random() * 10 - 10,
+                tiltAngleIncremental: Math.random() * 0.07 + 0.05,
+                tiltAngle: 0
+            });
+        }
+
+        let animationActive = true;
+        function draw() {
+            if (!animationActive) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                p.tiltAngle += p.tiltAngleIncremental;
+                p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                p.x += Math.sin(p.d);
+                p.tilt = Math.sin(p.tiltAngle) * 15;
+
+                ctx.beginPath();
+                ctx.lineWidth = p.r;
+                ctx.strokeStyle = p.color;
+                ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                ctx.stroke();
+
+                if (p.y > canvas.height) {
+                    particles[i].y = -20;
+                    particles[i].x = Math.random() * canvas.width;
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+        setTimeout(() => { animationActive = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }, 5000);
+    }
+
+    function startPathLesson(id) {
+        if (!pathProgress.includes(id)) return;
+        currentPathLesson = pathLevels.find(l => l.id === id);
+        currentPathStepIdx = 0;
+        switchTab('path-lesson');
+        loadPathStep();
+    }
+
+    function loadPathStep() {
+        const area = document.getElementById('path-content-area');
+        const lesson = currentPathLesson;
+        document.getElementById('path-lesson-title').innerText = lesson.title;
+        document.getElementById('btn-path-next').classList.add('hidden');
+        document.getElementById('path-feedback-area').innerHTML = '';
+
+        if (lesson.type === 'listening') {
+            const item = lesson.items[currentPathStepIdx % lesson.items.length];
+            area.innerHTML = `
+                <div class="typing-container">
+                    <h3>Hör genau zu:</h3>
+                    <button class="btn-speak" onclick="speak('${item.kana}')">🔊 Hören</button>
+                    <input type="text" class="typing-input" id="path-input" placeholder="Was hast du gehört?">
+                </div>
+            `;
+            document.getElementById('path-input').addEventListener('keypress', e => {
+                if(e.key === 'Enter') checkPathAnswer(e.target.value, item.kana);
+            });
+        } else if (lesson.type === 'vocab') {
+            const item = lesson.items[currentPathStepIdx % lesson.items.length];
+            area.innerHTML = `
+                <div class="typing-container">
+                    <div class="fc-word">${item.kana}</div>
+                    <p>Übersetze ins Deutsche:</p>
+                    <input type="text" class="typing-input" id="path-input">
+                </div>
+            `;
+            document.getElementById('path-input').addEventListener('keypress', e => {
+                if(e.key === 'Enter') checkPathAnswer(e.target.value, item.de);
+            });
+        }
+        // Speaking placeholder logic
+        else if (lesson.type === 'speaking') {
+            area.innerHTML = `
+                <div class="typing-container">
+                    <h3>Sprich das nach:</h3>
+                    <div class="fc-word">${lesson.word}</div>
+                    <button class="btn-speak" style="background:#ef4444" onclick="alert('Spracherkennung startet...')">🎤 Jetzt sprechen</button>
+                    <p style="font-size:12px; margin-top:10px">Tipp: Aktiviere dein Mikrofon.</p>
+                    <button class="tab" style="margin-top:20px" onclick="checkPathAnswer('skip','skip')">Überspringen (Demo)</button>
+                </div>`;
+        }
+    }
+
+    function checkPathAnswer(input, correct) {
+        const isCorrect = input.toLowerCase().trim() === correct.toLowerCase().trim() || input === 'skip';
+        const feedback = document.getElementById('path-feedback-area');
+        if (isCorrect) {
+            feedback.innerHTML = '<span class="feedback-correct">Ausgezeichnet! ✓</span>';
+            document.getElementById('btn-path-next').classList.remove('hidden');
+            speak(correct !== 'skip' ? correct : "");
+        } else {
+            feedback.innerHTML = `<span class="feedback-wrong">Nicht ganz. Richtig: ${correct}</span>`;
+        }
+    }
+
+    function nextPathStep() {
+        currentPathStepIdx++;
+        if (currentPathStepIdx < currentPathLesson.tasks.length) {
+            loadPathStep();
+        } else {
+            // Ende der Lektion -> Nächste Lektion freischalten
+            const nextIdx = pathLevels.findIndex(l => l.id === currentPathLesson.id) + 1;
+            if (nextIdx < pathLevels.length && !pathProgress.includes(pathLevels[nextIdx].id)) {
+                pathProgress.push(pathLevels[nextIdx].id);
+                localStorage.setItem('pathProgress', JSON.stringify(pathProgress));
+            }
+            switchTab('pfad');
+        }
+    }
+
+    function switchTab(tabId) {
+        document.querySelectorAll('main').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
 
         const targetView = document.getElementById(`view-${tabId}`);
         if (targetView) targetView.classList.remove('hidden');
 
+        const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
+        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson'].includes(tabId)) {
+            tabBtn.classList.add('active');
+        }
+
+        if (tabId === 'alltag') renderAlltagCategories();
+        if (tabId === 'pfad') renderPath();
         if (tabId === 'liste') renderList();
         if (tabId === 'lernen') updateStats();
         if (tabId === 'lesen') renderReadingList();
@@ -15763,11 +16297,13 @@
 
     function nextCard(knewIt) {
         if (knewIt) {
+            playSound('correct');
             state.currentQueue[state.currentIndex].learned = true;
             state.sessionCorrectCount++;
             const counter = document.getElementById('fc-learned-count');
             if (counter) counter.innerText = parseInt(counter.innerText) + 1;
         } else {
+            playSound('wrong');
             const currentWord = state.currentQueue[state.currentIndex];
             if (!state.sessionMistakes.includes(currentWord)) state.sessionMistakes.push(currentWord);
         }
@@ -15840,6 +16376,7 @@
         }
 
         if (isCorrect) {
+            playSound('correct');
             feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓</span>';
             word.learned = true;
             if (!state.sessionMistakes.includes(word)) state.sessionCorrectCount++;
@@ -15849,6 +16386,7 @@
                 else loadTyping();
             }, 1000);
         } else {
+            playSound('wrong');
             feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? word.de : word.kana}</span>`;
             if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
             document.getElementById('btn-next-typing').classList.remove('hidden');
@@ -16032,10 +16570,12 @@
     function checkKanjiQuiz(choice, correct, btn) {
         const feedback = document.getElementById('kq-feedback');
         if (choice === correct) {
+            playSound('correct');
             btn.classList.add('correct');
             feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓</span>';
             setTimeout(nextKanjiInBlock, 1500);
         } else {
+            playSound('wrong');
             btn.classList.add('wrong');
             feedback.innerHTML = '<span class="feedback-wrong">Versuch es nochmal!</span>';
         }
@@ -16132,10 +16672,12 @@
     function checkFullTestAnswer(v) {
         const it = state.currentQueue[state.currentIndex];
         if (v.toLowerCase().trim() === it.ans.toLowerCase().trim()) {
+            playSound('correct');
             state.sessionCorrectCount++;
             state.currentIndex++;
             loadFullTestItem();
         } else {
+            playSound('wrong');
             document.getElementById('typing-feedback').innerHTML = `<span class="feedback-wrong">Falsch! Richtig: ${it.ans}</span>`;
             document.getElementById('btn-next-typing').classList.remove('hidden');
             document.getElementById('btn-next-typing').onclick = () => {
