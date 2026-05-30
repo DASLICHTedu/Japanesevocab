@@ -98,6 +98,14 @@
         .feedback-correct { color: #10b981; }
         .feedback-wrong { color: var(--accent-pink); }
 
+        /* --- NEW PATH FEEDBACK STYLES (from React Code) --- */
+        .path-feedback-card { margin-top: 20px; padding: 20px; border-radius: 12px; border: 2px solid transparent; display: none; }
+        .path-feedback-card.correct { display: block; background: rgba(16, 185, 129, 0.1); border-color: #10b981; color: #065f46; }
+        .path-feedback-card.wrong { display: block; background: rgba(223, 68, 120, 0.1); border-color: var(--accent-pink); color: #9d174d; }
+        .path-feedback-header { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 18px; margin-bottom: 8px; }
+        .path-option-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
+        @media (min-width: 600px) { .path-option-grid { grid-template-columns: 1fr 1fr; } }
+
         /* --- RESULTS VIEW --- */
         .kanji-canvas-container { position: relative; width: 300px; height: 300px; margin: 20px auto; border: 2px solid var(--primary-dark); background: white; border-radius: 10px; cursor: crosshair; }
         #kanji-canvas { position: absolute; top: 0; left: 0; z-index: 2; }
@@ -126,8 +134,11 @@
             max-width: 400px; 
             margin: 0 auto; 
         }
-        .path-step-wrapper { display: flex; flex-direction: column; align-items: center; position: relative; }
-        .path-step { 
+        .path-unit-header { width: 100%; padding: 20px; background: var(--primary-dark); color: white; border-radius: 15px; margin: 20px 0; text-align: center; box-shadow: 0 4px 0 #1a1c31; }
+        .path-unit-header h2 { color: white; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .path-step-wrapper { display: flex; flex-direction: column; align-items: center; position: relative; width: 100%; }
+        .path-step {
             width: 75px; 
             height: 75px; 
             border-radius: 50%; 
@@ -145,14 +156,22 @@
             position: relative; 
         }
         .path-step:active { transform: translateY(4px); border-bottom-width: 2px; }
-        .path-step.completed { background: #58cc02; border-bottom-color: #46a302; }
-        .path-step.current { background: #58cc02; border-bottom-color: #46a302; transform: scale(1.15); box-shadow: 0 0 20px rgba(88, 204, 2, 0.4); }
+        .path-step.completed { background: #58cc02; border-bottom-color: #46a302; color: white; }
+        .path-step.current { background: #58cc02; border-bottom-color: #46a302; transform: scale(1.1); box-shadow: 0 0 20px rgba(88, 204, 2, 0.4); color: white; }
         .path-step.locked { background: #e5e5e5; border-bottom-color: #afafaf; cursor: not-allowed; }
         .path-step-label { margin-top: 10px; font-weight: 800; color: #4b4b4b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .path-step-wrapper:nth-child(4n+2) { transform: translateX(60px); }
-        .path-step-wrapper:nth-child(4n+4) { transform: translateX(-60px); }
-        .path-connector { width: 12px; height: 35px; background: #e5e5e5; margin: -10px 0; z-index: 1; border-radius: 6px; }
+        
+        .path-lesson-node:nth-child(4n+2) { transform: translateX(50px); }
+        .path-lesson-node:nth-child(4n+4) { transform: translateX(-50px); }
+        .path-connector { width: 12px; height: 25px; background: #e5e5e5; margin: -5px 0; z-index: 1; border-radius: 6px; }
         .path-connector.completed { background: #58cc02; }
+        
+        .level-complete-card { 
+            width: 100%; padding: 30px; background: #fff3e0; border: 2px dashed #ff9800; 
+            border-radius: 15px; margin: 40px 0; text-align: center; color: #e65100;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
         /* --- LEVEL UP ANIMATION STYLES --- */
         #view-level-up { 
@@ -260,6 +279,11 @@
         <div class="section-label" style="margin-top:40px;">Wähle einen Block (je 20 Vokabeln)</div>
         <div id="blocks-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;"></div>
 
+        <div id="path-blocks-section" class="hidden">
+            <div class="section-label">Vokabeln aus dem Pfad</div>
+            <div id="path-blocks-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;"></div>
+        </div>
+
         <div class="section-label">Spezial-Training</div>
         <div style="display: flex; gap: 15px; margin-bottom: 40px;">
             <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandom(false, false)">Level Mix (20)</button>
@@ -281,7 +305,19 @@
     <main id="view-pfad" class="hidden">
         <h1>Dein Lernpfad</h1>
         <p class="subtitle">Meistere Lektionen und schalte neue frei.</p>
-        <div class="path-container" id="learning-path-display">
+        <div id="unit-selection-area">
+            <div class="path-container" id="learning-path-display">
+                <!-- Units werden hier generiert -->
+            </div>
+        </div>
+    </main>
+
+    <main id="view-unit-lessons" class="hidden">
+        <div class="fc-header">
+            <span style="cursor:pointer;" onclick="switchTab('pfad')">← Zurück zum Pfad</span>
+            <h1 id="selected-unit-title" style="margin: 0; font-size: 20px;">Unit</h1>
+        </div>
+        <div class="card-grid" id="lesson-selection-display" style="margin-top: 20px;">
             <!-- Pfad-Nodes werden hier generiert -->
         </div>
     </main>
@@ -298,8 +334,30 @@
             <!-- Dynamischer Content: Vocab, Listening, Speaking, Quiz -->
         </div>
         
-        <div id="path-feedback-area" class="typing-feedback"></div>
+        <div id="path-feedback-card" class="path-feedback-card">
+            <div class="path-feedback-header">
+                <span id="path-feedback-icon"></span>
+                <span id="path-feedback-title"></span>
+            </div>
+            <p id="path-feedback-msg"></p>
+            <p id="path-feedback-explanation" style="font-size: 14px; margin-top: 5px; opacity: 0.8;"></p>
+        </div>
+
         <button id="btn-path-next" class="btn-main hidden" onclick="nextPathStep()">Weiter →</button>
+    </main>
+
+    <main id="view-path-results" class="hidden">
+        <h1 style="text-align: center;">Lektion beendet!</h1>
+        <p class="subtitle" style="text-align: center;">Diese Vokabeln hast du gerade gesehen:</p>
+        
+        <div id="path-results-vocab-list" style="margin-bottom: 30px;">
+            <!-- Liste der Wörter -->
+        </div>
+
+        <div class="results-actions">
+            <button class="btn-main" id="btn-path-repeat-vocab">Vokabeln dieser Lektion üben</button>
+            <button class="btn-main" style="background: var(--accent-pink); margin-top:10px;" onclick="finishPathLessonAndProceed()">Weiter zum Pfad →</button>
+        </div>
     </main>
 
     <main id="view-level-up" class="hidden">
@@ -634,93 +692,109 @@
             { kana: "袋はいりません", kanji: "ふくろはいりません", de: "Ich brauche keine Tüte", type: "Shopping" },
             { kana: "試着してもいいですか", kanji: "しちゃくしてもいいですか", de: "Darf ich das anprobieren?", type: "Shopping" },
             { kana: "ちょっと高いです", kanji: "ちょっとたかいです", de: "Es ist ein bisschen teuer", type: "Shopping" }
+        ],
+        "Hobbys & Freizeit": [
+            { kana: "しゅみはなんですか", kanji: "趣味は何ですか", de: "Was ist dein Hobby?", type: "Hobby" },
+            { kana: "おんがくをきくのがすきです", kanji: "音楽を聴くのが好きです", de: "Ich höre gerne Musik", type: "Hobby" },
+            { kana: "えいがをみます", kanji: "映画を見ます", de: "Ich schaue Filme", type: "Freizeit" },
+            { kana: "いっしょにあそびましょう", kanji: "一緒に遊びましょう", de: "Lass uns zusammen spielen/etwas unternehmen", type: "Freizeit" }
+        ],
+        "Wetter & Natur": [
+            { kana: "いいてんきですね", kanji: "いい天気ですね", de: "Schönes Wetter, nicht wahr?", type: "Wetter" },
+            { kana: "あめがふっています", kanji: "雨が降っています", de: "Es regnet", type: "Wetter" },
+            { kana: "きょうはあついです", kanji: "今日は暑いです", de: "Heute ist es heiß", type: "Wetter" },
+            { kana: "ふじさんがみえます", kanji: "富士山が見えます", de: "Man kann den Berg Fuji sehen", type: "Natur" }
+        ],
+        "Reisen & Weg": [
+            { kana: "みちを教えてください", kanji: "道を教えてください", de: "Bitte zeigen Sie mir den Weg", type: "Reisen" },
+            { kana: "まっすぐ行ってください", kanji: "真っ直ぐ行ってください", de: "Gehen Sie bitte geradeaus", type: "Weg" },
+            { kana: "ここを左にまがります", kanji: "ここを左に曲がります", de: "Biegen Sie hier links ab", type: "Weg" },
+            { kana: "とおいですから、タクシーで行きましょう", kanji: "遠いですから、タクシーで行きましょう", de: "Es ist weit, lass uns mit dem Taxi fahren", type: "Reisen" }
         ]
     };
 
-    const pathLevels = [
-        { id: 'p1', label: 'Unit 1', title: 'Grundlagen & Begrüßung', tasks: [
-            { type: 'vocab', word: 'こんにちは', de: 'Guten Tag' },
-            { type: 'listening', word: 'ありがとう', de: 'Danke' },
-            { type: 'grammar_quiz', question: "Wie sagt man 'Ich bin Student' (Gakusei)?", options: ["Gakusei desu", "Gakusei no"], correct: 0 },
-            { type: 'speaking', word: 'おはよう' }
-        ]},
-        { id: 'p2', label: 'Unit 2', title: 'Tiere & Natur', tasks: [
-            { type: 'vocab', word: 'いぬ', de: 'Hund' },
-            { type: 'listening', word: 'ねこ', de: 'Katze' },
-            { type: 'vocab', word: 'とり', de: 'Vogel' },
-            { type: 'grammar_quiz', question: "Wie sagt man 'Da ist eine Katze'?", options: ["Neko ga imasu", "Neko ga arimasu"], correct: 0 }
-        ]},
-        { id: 'p3', label: 'Unit 3', title: 'Im Restaurant', tasks: [
-            { type: 'vocab', word: 'メニュー', de: 'Menü' },
-            { type: 'speaking', word: 'これをお願いします' },
-            { type: 'listening', word: 'おいしい', de: 'lecker' },
-            { type: 'grammar_quiz', question: "Höfliche Bitte um Wasser (Mizu)?", options: ["Mizu o kudasai", "Mizu desu"], correct: 0 }
-        ]},
-        { id: 'p4', label: 'Unit 4', title: 'Einkaufen gehen', tasks: [
-            { type: 'vocab', word: 'いくらですか', de: 'Wie viel kostet das?' },
-            { type: 'listening', word: 'ちょっと高いです', de: 'Ein bisschen teuer' },
-            { type: 'speaking', word: 'カードは使えますか' },
-            { type: 'vocab', word: 'これをください', de: 'Das hier bitte' }
-        ]},
-        { id: 'p5', label: 'Unit 5', title: 'Farben & Beschreibungen', tasks: [
-            { type: 'vocab', word: 'あかい', de: 'rot' },
-            { type: 'listening', word: 'あおい', de: 'blau' },
-            { type: 'grammar_quiz', question: "Was bedeutet 'kirei'?", options: ["Hässlich", "Schön/Sauber"], correct: 1 },
-            { type: 'speaking', word: 'しろい' }
-        ]},
-        { id: 'p6', label: 'Unit 6', title: 'Körper & Gesundheit', tasks: [
-            { type: 'vocab', word: 'あたま', de: 'Kopf' },
-            { type: 'listening', word: 'め', de: 'Auge' },
-            { type: 'speaking', word: 'ぐあいがわるいです' }
-        ]},
-        { id: 'p7', label: 'Unit 7', title: 'Wetter & Zeit', tasks: [
-            { type: 'vocab', word: 'あめ', de: 'Regen' },
-            { type: 'listening', word: 'いま', de: 'jetzt' },
-            { type: 'grammar_quiz', question: "Wie sagt man 'Es schneit'?", options: ["Yuki ga furu", "Ame ga furu"], correct: 0 }
-        ]},
-        { id: 'p8', label: 'Test', title: 'Meilenstein I', tasks: [
-            { type: 'mixed_quiz' }, { type: 'mixed_quiz' }, { type: 'mixed_quiz' }, { type: 'mixed_quiz' }
-        ]},
-        { id: 'p9', label: 'Unit 9', title: 'Familie & Freunde', tasks: [
-            { type: 'vocab', word: 'ちち', de: 'Vater' },
-            { type: 'listening', word: 'はは', de: 'Mutter' },
-            { type: 'speaking', word: 'かぞく' },
-            { type: 'vocab', word: 'あね', de: 'ältere Schwester' }
-        ]},
-        { id: 'p10', label: 'Unit 10', title: 'Hobbys & Freizeit', tasks: [
-            { type: 'vocab', word: 'うた', de: 'Lied' },
-            { type: 'listening', word: 'おんがく', de: 'Musik' },
-            { type: 'grammar_quiz', question: "Was bedeutet 'suki'?", options: ["Hassen", "Mögen"], correct: 1 },
-            { type: 'speaking', word: 'うたをうたう' }
-        ]},
-        { id: 'p11', label: 'Unit 11', title: 'In der Stadt', tasks: [
-            { type: 'vocab', word: 'えき', de: 'Bahnhof' },
-            { type: 'listening', word: 'でんしゃ', de: 'Zug' },
-            { type: 'speaking', word: 'くるま' }
-        ]},
-        { id: 'p12', label: 'Test', title: 'Meilenstein II', tasks: [
-            { type: 'mixed_quiz' }, { type: 'mixed_quiz' }, { type: 'mixed_quiz' }, { type: 'mixed_quiz' }
-        ]},
-        { id: 'p13', label: 'Unit 13', title: 'Berufe & Arbeit', tasks: [
-            { type: 'vocab', word: 'いしゃ', de: 'Arzt' },
-            { type: 'listening', word: 'せんせい', de: 'Lehrer' },
-            { type: 'speaking', word: 'かいしゃいん' }
-        ]},
-        { id: 'p14', label: 'Unit 14', title: 'Zeit & Datum', tasks: [
-            { type: 'vocab', word: 'きょう', de: 'heute' },
-            { type: 'listening', word: 'あした', de: 'morgen' },
-            { type: 'grammar_quiz', question: "Was bedeutet 'Kinou'?", options: ["Heute", "Gestern"], correct: 1 }
-        ]},
-        { id: 'p15', label: 'Unit 15', title: 'Farben & Formen', tasks: [
-            { type: 'vocab', word: 'まるい', de: 'rund' },
-            { type: 'listening', word: 'しかくい', de: 'viereckig' },
-            { type: 'speaking', word: 'あかい' }
-        ]},
-    ];
+    // Strukturierte Daten nach JLPT Level
+    const pathLevelsByJLPT = {
+        "N5": [
+            { id: 'n5-u1', label: 'Unit 1', title: 'Grundlagen', lessons: [
+                { id: 'n5-u1-l1', title: 'Begrüßung', exercises: [
+                    { type: 'info', title: 'Willkommen!', content: 'In dieser Lektion lernst du die wichtigsten Begrüßungen.' },
+                    { type: 'multiple_choice', question: 'Was bedeutet "こんにちは"?', options: ['Guten Tag', 'Danke', 'Entschuldigung'], correct: 'Guten Tag', explanation: 'Konnichiwa ist der Standardgruß am Tag.' },
+                    { type: 'text_input', question: 'Schreibe "Danke" auf Japanisch (Kana):', correct: 'ありがとう' },
+                    { type: 'listening', question: 'Was hörst du?', audio: 'おはよう', correct: 'おはよう', explanation: 'Ohayou bedeutet Guten Morgen.' },
+                    { type: 'speaking', question: 'Sprich "Guten Tag" nach:', word: 'こんにちは' },
+                    { type: 'multiple_choice', question: 'Wie sagt man "Guten Morgen" (informell)?', options: ['おはよう', 'おやすみ', 'さようなら'], correct: 'おはよう' },
+                    { type: 'text_input', question: 'Schreibe "Guten Morgen" (Kana):', correct: 'おはよう' },
+                    { type: 'listening', question: 'Höre genau hin:', audio: 'ありがとう', correct: 'ありがとう' },
+                    { type: 'speaking', question: 'Sprich "Guten Morgen" nach:', word: 'おはよう' },
+                    { type: 'info', title: 'Grammatik-Tipp', content: 'Das "ha" in Konnichiwa (こんにちは) wird als "wa" ausgesprochen.' },
+                    { type: 'multiple_choice', question: 'Was bedeutet "さようなら"?', options: ['Guten Tag', 'Auf Wiedersehen', 'Danke'], correct: 'Auf Wiedersehen' },
+                    { type: 'text_input', question: 'Schreibe "Auf Wiedersehen" (Kana):', correct: 'さようなら' },
+                    { type: 'speaking', question: 'Verabschiede dich:', word: 'さようなら' }
+                ] },
+                { id: 'n5-u1-l2', title: 'Zahlen 1-5', exercises: [
+                    { type: 'info', title: 'Zahlen lernen', content: 'Heute lernst du die Zahlen von 1 bis 5.' },
+                    { type: 'multiple_choice', question: 'Was ist die Zahl 1?', options: ['ichi', 'ni', 'san'], correct: 'ichi' },
+                    { type: 'multiple_choice', question: 'Was ist die Zahl 2?', options: ['ichi', 'ni', 'san'], correct: 'ni' },
+                    { type: 'multiple_choice', question: 'Was ist die Zahl 3?', options: ['ichi', 'ni', 'san'], correct: 'san' },
+                    { type: 'text_input', question: 'Schreibe "4" auf Japanisch (yon):', correct: 'よん' },
+                    { type: 'text_input', question: 'Schreibe "5" auf Japanisch (go):', correct: 'ご' },
+                    { type: 'listening', question: 'Welche Zahl hörst du?', audio: 'いち', correct: 'いち' },
+                    { type: 'listening', question: 'Welche Zahl hörst du?', audio: 'さん', correct: 'さん' },
+                    { type: 'speaking', question: 'Sprich "Ni" (2):', word: 'に' },
+                    { type: 'speaking', question: 'Sprich "Go" (5):', word: 'ご' },
+                    { type: 'multiple_choice', question: 'Wie viel ist 2 + 1?', options: ['ni', 'san', 'yon'], correct: 'san' }
+                ] },
+                { id: 'n5-u1-l3', title: 'Vorstellung', exercises: [{ type: 'info', title: 'Ich bin...', content: 'Watashi wa... desu.' }] },
+                { id: 'n5-u1-l4', title: 'Objekte', exercises: [{ type: 'text_input', question: 'Buch?', correct: 'ほん' }] },
+                { id: 'n5-u1-l5', title: 'Farben', exercises: [{ type: 'multiple_choice', question: 'Rot?', options: ['aka', 'ao'], correct: 'aka' }] },
+                { id: 'n5-u1-l6', title: 'Tiere 1', exercises: [{ type: 'listening', question: 'Tier?', audio: 'いぬ', correct: 'いぬ' }] },
+                { id: 'n5-u1-l7', title: 'Essen', exercises: [{ type: 'multiple_choice', question: 'Reis?', options: ['gohan', 'mizu'], correct: 'gohan' }] },
+                { id: 'n5-u1-l8', title: 'Trinken', exercises: [{ type: 'text_input', question: 'Wasser?', correct: 'みず' }] },
+                { id: 'n5-u1-l9', title: 'Fragen', exercises: [{ type: 'multiple_choice', question: 'Was?', options: ['nani', 'doko'], correct: 'nani' }] },
+                { id: 'n5-u1-l10', title: 'Review 1', exercises: [{ type: 'multiple_choice', question: 'Danke?', options: ['Arigatou', 'Konnichiwa'], correct: 'Arigatou' }] }
+            ]},
+            { id: 'n5-u2', label: 'Unit 2', title: 'Alltag', lessons: [
+                { id: 'n5-u2-l1', title: 'Verben 1', exercises: [{ type: 'multiple_choice', question: 'Gehen?', options: ['iku', 'taberu'], correct: 'iku' }] },
+                { id: 'n5-u2-l2', title: 'Verben 2', exercises: [{ type: 'text_input', question: 'Essen?', correct: 'たべる' }] },
+                { id: 'n5-u2-l3', title: 'Zeit', exercises: [{ type: 'multiple_choice', question: 'Jetzt?', options: ['ima', 'kako'], correct: 'ima' }] },
+                { id: 'n5-u2-l4', title: 'Familie', exercises: [{ type: 'text_input', question: 'Mutter?', correct: 'はは' }] },
+                { id: 'n5-u2-l5', title: 'Haus', exercises: [{ type: 'multiple_choice', question: 'Zimmer?', options: ['heya', 'niwa'], correct: 'heya' }] },
+                { id: 'n5-u2-l6', title: 'Schule', exercises: [{ type: 'text_input', question: 'Schule?', correct: 'がっこう' }] },
+                { id: 'n5-u2-l7', title: 'Stadt', exercises: [{ type: 'listening', question: 'Bahnhof?', audio: 'えき', correct: 'えき' }] },
+                { id: 'n5-u2-l8', title: 'Wetter', exercises: [{ type: 'multiple_choice', question: 'Regen?', options: ['ame', 'yuki'], correct: 'ame' }] },
+                { id: 'n5-u2-l9', title: 'Kleidung', exercises: [{ type: 'text_input', question: 'Schuh?', correct: 'くつ' }] },
+                { id: 'n5-u2-l10', title: 'Review 2', exercises: [{ type: 'multiple_choice', question: 'Gehen?', options: ['iku', 'kuru'], correct: 'iku' }] }
+            ]}
+        ],
+        "N4": [
+            { id: 'n4-u1', label: 'Unit 1', title: 'Fortgeschritten', lessons: [
+                { id: 'n4-u1-l1', title: 'Potentialform', exercises: [{ type: 'info', title: 'Können', content: 'Verb + rareru' }] },
+                { id: 'n4-u1-l2', title: 'Wünsche', exercises: [{ type: 'text_input', question: 'Ich möchte...', correct: 'たい' }] },
+                { id: 'n4-u1-l3', title: 'Reisen', exercises: [{ type: 'multiple_choice', question: 'Flugzeug?', options: ['hikouki', 'densha'], correct: 'hikouki' }] },
+                { id: 'n4-u1-l4', title: 'Gesundheit', exercises: [{ type: 'text_input', question: 'Arzt?', correct: 'いしゃ' }] },
+                { id: 'n4-u1-l5', title: 'Einkaufen', exercises: [{ type: 'multiple_choice', question: 'Billig?', options: ['yasui', 'takai'], correct: 'yasui' }] },
+                { id: 'n4-u1-l6', title: 'Natur 2', exercises: [{ type: 'listening', question: 'Meer?', audio: 'うみ', correct: 'うみ' }] },
+                { id: 'n4-u1-l7', title: 'Arbeit', exercises: [{ type: 'text_input', question: 'Firma?', correct: 'かいしゃ' }] },
+                { id: 'n4-u1-l8', title: 'Hobby 2', exercises: [{ type: 'multiple_choice', question: 'Lied?', options: ['uta', 'e'], correct: 'uta' }] },
+                { id: 'n4-u1-l9', title: 'Gefühle', exercises: [{ type: 'text_input', question: 'Traurig?', correct: 'かなしい' }] },
+                { id: 'n4-u1-l10', title: 'Review 3', exercises: [{ type: 'multiple_choice', question: 'Meer?', options: ['umi', 'yama'], correct: 'umi' }] }
+            ]}
+        ]
+        // N3, N2, N1 folgen dem gleichen Muster
+    };
 
-    let pathProgress = JSON.parse(localStorage.getItem('pathProgress') || '["p1"]');
+    let pathProgress = JSON.parse(localStorage.getItem('pathProgress') || '[]'); 
+    if (pathProgress.length === 0) {
+        // Initialisierung mit der ersten Lektion des ersten Levels
+        pathProgress = [pathLevelsByJLPT["N5"][0].lessons[0].id];
+        localStorage.setItem('pathProgress', JSON.stringify(pathProgress));
+    }
+
     let currentPathLesson = null;
     let currentPathStepIdx = 0;
+    let pathCorrectAnswers = 0;
+    let currentLessonWords = [];
 
     // --- ALLTAGS MODUS ---
     function renderAlltagCategories() {
@@ -740,28 +814,105 @@
     // --- LERNPFAD LOGIK ---
     function renderPath() {
         const container = document.getElementById('learning-path-display');
-        let html = '';
-        pathLevels.forEach((lv, idx) => {
-            const isCompleted = pathProgress.includes(pathLevels[idx+1]?.id);
-            const isCurrent = lv.id === pathProgress[pathProgress.length - 1] && !isCompleted;
-            const isLocked = !pathProgress.includes(lv.id);
-            
-            let statusClass = isLocked ? 'locked' : (isCompleted ? 'completed' : 'current');
-            
-            html += `
-            <div class="path-step-wrapper">
-                <div class="path-step ${statusClass}" onclick="startPathLesson('${lv.id}')">
-                    ${isCompleted ? '✓' : (isLocked ? '🔒' : '★')}
-                </div>
-                <div class="path-step-label">${lv.label}</div>
-            </div>`;
-            
-            if (idx < pathLevels.length - 1) {
-                html += `<div class="path-connector ${isCompleted ? 'completed' : ''}"></div>`;
-            }
+        container.innerHTML = '';
+        
+        const currentLevelPath = pathLevelsByJLPT[state.level] || [];
+
+        if (currentLevelPath.length === 0) {
+            container.innerHTML = `<p style="text-align:center; padding:20px;">Pfad für ${state.level} kommt bald!</p>`;
+            return;
+        }
+
+        // Sicherstellen, dass mindestens die erste Lektion des Levels freigeschaltet ist, wenn das Level erreicht wurde
+        if (!pathProgress.includes(currentLevelPath[0].lessons[0].id)) {
+            // Hier könnte Logik stehen, die prüft, ob das vorherige Level fertig ist
+        }
+
+        let allPassedInLevel = true;
+
+        let globalLessonIdx = 0;
+        currentLevelPath.forEach((unit) => {
+            // Unit Header hinzufügen
+            const unitHeader = document.createElement('div');
+            unitHeader.className = 'path-unit-header';
+            unitHeader.innerHTML = `<h2>${unit.label}: ${unit.title}</h2>`;
+            container.appendChild(unitHeader);
+
+            unit.lessons.forEach((lesson, lIdx) => {
+                globalLessonIdx++;
+                
+                const isAlreadyPassed = pathProgress.includes(lesson.id) && pathProgress.indexOf(lesson.id) < pathProgress.length - 1;
+                const isCurrent = pathProgress[pathProgress.length - 1] === lesson.id;
+                const isLocked = !pathProgress.includes(lesson.id);
+
+                if (isLocked) allPassedInLevel = false;
+
+                let statusClass = isLocked ? 'locked' : (isAlreadyPassed ? 'completed' : 'current');
+
+                // Node erstellen
+                const lessonNode = document.createElement('div');
+                lessonNode.className = 'path-step-wrapper path-lesson-node';
+                lessonNode.innerHTML = `
+                    <div class="path-step ${statusClass}" onclick="startSubLesson('${unit.id}', '${lesson.id}')">
+                        ${isAlreadyPassed ? '✓' : (isLocked ? '🔒' : '★')}
+                    </div>
+                    <div class="path-step-label">${lesson.title}</div>
+                `;
+                container.appendChild(lessonNode);
+
+                // Connector erstellen (außer nach der absolut letzten Lektion)
+                const isAbsoluteLast = (unit === currentLevelPath[currentLevelPath.length-1] && lIdx === unit.lessons.length-1);
+                if (!isAbsoluteLast) {
+                    const connector = document.createElement('div');
+                    connector.className = `path-connector ${isAlreadyPassed ? 'completed' : ''}`;
+                    container.appendChild(connector);
+                }
+            });
         });
-        container.innerHTML = html;
+
+        // Abschluss-Nachricht
+        if (allPassedInLevel && state.level !== 'N1') {
+            const completionDiv = document.createElement('div');
+            completionDiv.className = 'level-complete-card';
+            completionDiv.innerHTML = `
+                <h3>🎉 ${state.level} GEMEISTERT!</h3>
+                <p>Du hast alle Units abgeschlossen. Bereit für die nächste Herausforderung?</p>
+                <button class="btn-main" style="margin-top:15px;" onclick="changeLevel(1)">Zum nächsten JLPT Level →</button>
+            `;
+            container.appendChild(completionDiv);
+        }
     }
+
+    function startSubLesson(unitId, lessonId) {
+        if (!pathProgress.includes(lessonId)) {
+            // Animation oder Hinweis, dass es noch gesperrt ist
+            const steps = document.querySelectorAll('.path-step.locked');
+            steps.forEach(s => {
+                 if(s.parentElement.innerText.includes(lessonId)) {
+                     s.style.animation = 'shake 0.5s';
+                     setTimeout(() => s.style.animation = '', 500);
+                 }
+            });
+            return;
+        }
+        const unit = pathLevelsByJLPT[state.level].find(u => u.id === unitId);
+        currentPathLesson = (unit.lessons || []).find(l => l.id === lessonId);
+        currentPathStepIdx = 0;
+        pathCorrectAnswers = 0;
+        switchTab('path-lesson');
+        loadPathStep();
+    }
+
+    // CSS Shake für locked items
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    `;
+    document.head.appendChild(style);
 
     const grammarData = {
         "N5": [
@@ -15862,6 +16013,7 @@
             if (transcript.includes(correctText) || correctText.includes(transcript)) {
                 playSound('correct');
                 feedback.innerHTML += '<br><span class="feedback-correct">Richtig erkannt! ✓</span>';
+                pathCorrectAnswers++;
                 document.getElementById('btn-path-next').classList.remove('hidden');
                 speak(correctText);
             } else {
@@ -15947,81 +16099,169 @@
 
     function startPathLesson(id) {
         if (!pathProgress.includes(id)) return;
-        currentPathLesson = pathLevels.find(l => l.id === id);
+        // Suche die Lektion in allen Units des aktuellen Levels
+        const allLessons = (pathLevelsByJLPT[state.level] || []).flatMap(u => u.lessons);
+        currentPathLesson = allLessons.find(l => l.id === id);
+        
+        if (!currentPathLesson) return;
         currentPathStepIdx = 0;
+        pathCorrectAnswers = 0;
         switchTab('path-lesson');
         loadPathStep();
     }
 
     function loadPathStep() {
         const area = document.getElementById('path-content-area');
-        const lesson = currentPathLesson;
-        document.getElementById('path-lesson-title').innerText = lesson.title;
+        if (!currentPathLesson) return;
+        
+        const exercise = currentPathLesson.exercises[currentPathStepIdx];
+        if (!exercise) return;
+        
+        document.getElementById('path-lesson-title').innerText = currentPathLesson.title;
+        document.getElementById('path-progress-num').innerText = `${currentPathStepIdx + 1}/${currentPathLesson.exercises.length}`;
+        document.getElementById('path-lesson-progress').style.width = `${((currentPathStepIdx + 1) / currentPathLesson.exercises.length) * 100}%`;
+        
         document.getElementById('btn-path-next').classList.add('hidden');
-        document.getElementById('path-feedback-area').innerHTML = '';
+        document.getElementById('path-feedback-card').className = 'path-feedback-card';
+        document.getElementById('path-feedback-msg').innerText = '';
+        document.getElementById('path-feedback-explanation').innerText = '';
 
-        if (lesson.type === 'listening') {
-            const item = lesson.items[currentPathStepIdx % lesson.items.length];
+        if (exercise.type === 'info' || exercise.type === 'grammar') {
             area.innerHTML = `
-                <div class="typing-container">
-                    <h3>Hör genau zu:</h3>
-                    <button class="btn-speak" onclick="speak('${item.kana}')">🔊 Hören</button>
-                    <input type="text" class="typing-input" id="path-input" placeholder="Was hast du gehört?">
-                </div>
-            `;
-            document.getElementById('path-input').addEventListener('keypress', e => {
-                if(e.key === 'Enter') checkPathAnswer(e.target.value, item.kana);
-            });
-        } else if (lesson.type === 'vocab') {
-            const item = lesson.items[currentPathStepIdx % lesson.items.length];
-            area.innerHTML = `
-                <div class="typing-container">
-                    <div class="fc-word">${item.kana}</div>
-                    <p>Übersetze ins Deutsche:</p>
-                    <input type="text" class="typing-input" id="path-input">
-                </div>
-            `;
-            document.getElementById('path-input').addEventListener('keypress', e => {
-                if(e.key === 'Enter') checkPathAnswer(e.target.value, item.de);
-            });
-        }
-        // Speaking placeholder logic
-        else if (lesson.type === 'speaking') {
-            area.innerHTML = `
-                <div class="typing-container">
-                    <h3>Sprich das nach:</h3>
-                    <div class="fc-word">${lesson.word}</div>
-                    <button class="btn-speak" style="background:#ef4444" onclick="alert('Spracherkennung startet...')">🎤 Jetzt sprechen</button>
-                    <p style="font-size:12px; margin-top:10px">Tipp: Aktiviere dein Mikrofon.</p>
-                    <button class="tab" style="margin-top:20px" onclick="checkPathAnswer('skip','skip')">Überspringen (Demo)</button>
+                <div class="typing-container" style="text-align: left;">
+                    <h2 style="color:var(--primary-dark)">${exercise.title || 'Information'}</h2>
+                    <p style="font-size:18px; margin-top:15px; line-height:1.6;">${exercise.content || exercise.question}</p>
+                    ${exercise.examples ? `
+                        <div class="section-label">Beispiele:</div>
+                        <div style="background:#f0f0f0; padding:10px; border-radius:8px; margin-top:10px;">
+                            ${exercise.examples.map(ex => `<div style="margin-bottom:5px;"><strong>${ex.jp}</strong> - ${ex.de}</div>`).join('')}
+                        </div>` : ''}
+                    <button class="btn-main" style="margin-top:20px;" onclick="pathCorrectAnswers++; document.getElementById('btn-path-next').classList.remove('hidden'); this.disabled=true;">Verstanden!</button>
                 </div>`;
+        } else if (exercise.type === 'multiple_choice') {
+            area.innerHTML = `
+                <div class="typing-container">
+                    <h2>${exercise.question}</h2>
+                    <div class="path-option-grid">
+                        ${exercise.options.map(opt => `<button class="quiz-option" onclick="checkPathAnswer('${opt}', '${exercise.correct}')">${opt}</button>`).join('')}
+                    </div>
+                </div>`;
+        } else if (exercise.type === 'text_input') {
+            area.innerHTML = `
+                <div class="typing-container">
+                    <h2>${exercise.question}</h2>
+                    <input type="text" class="typing-input" id="path-input" placeholder="Antwort eingeben...">
+                    <button class="btn-main" style="margin-top:15px" onclick="checkPathAnswer(document.getElementById('path-input').value, '${exercise.correct}')">Prüfen</button>
+                </div>`;
+        } else if (exercise.type === 'listening') {
+            area.innerHTML = `
+                <div class="typing-container">
+                    <h2>${exercise.question}</h2>
+                    <button class="btn-speak" onclick="speak('${exercise.audio}')">🔊 Abspielen</button>
+                    <input type="text" class="typing-input" id="path-input" style="margin-top:20px" placeholder="Was hast du gehört?">
+                    <button class="btn-main" style="margin-top:15px" onclick="checkPathAnswer(document.getElementById('path-input').value, '${exercise.correct}')">Prüfen</button>
+                </div>`;
+        } else if (exercise.type === 'speaking') {
+            area.innerHTML = `
+                <div class="typing-container">
+                    <h2>${exercise.question}</h2><br>
+                    <span id="speaking-debug" style="font-size:12px; color:var(--text-light)">Warte auf Mikrofon...</span>
+                    <div class="fc-word" style="font-size:40px; margin:20px 0;">${exercise.word}</div>
+                    <button id="btn-mic" class="btn-speak" style="background:#ef4444; width:80px; height:80px; border-radius:50%;" onclick="runSpeechRec('${exercise.word}')">🎤</button>
+                    <div id="path-feedback-area" class="typing-feedback"></div>
+                </div>`;
+        } else {
+            // Fallback falls Typ unbekannt
+            area.innerHTML = `<p>Unbekannter Aufgabentyp: ${exercise.type}</p>
+            <button class="btn-main" onclick="document.getElementById('btn-path-next').classList.remove('hidden')">Überspringen</button>`;
         }
+
+        // Focus auf Input falls vorhanden
+        const input = document.getElementById('path-input');
+        if (input) input.focus();
+    }
+
+    // Verbessertes Speech Recognition System
+    function runSpeechRec(expected) {
+        startSpeechRecognition(expected);
     }
 
     function checkPathAnswer(input, correct) {
-        const isCorrect = input.toLowerCase().trim() === correct.toLowerCase().trim() || input === 'skip';
-        const feedback = document.getElementById('path-feedback-area');
+        const exercise = currentPathLesson.exercises[currentPathStepIdx];
+        const isCorrect = input.toLowerCase().trim() === correct.toLowerCase().trim();
+        const card = document.getElementById('path-feedback-card');
+        
         if (isCorrect) {
-            feedback.innerHTML = '<span class="feedback-correct">Ausgezeichnet! ✓</span>';
-            document.getElementById('btn-path-next').classList.remove('hidden');
-            speak(correct !== 'skip' ? correct : "");
+            playSound('correct');
+            pathCorrectAnswers++;
+            card.className = 'path-feedback-card correct';
+            document.getElementById('path-feedback-icon').innerText = '✓';
+            document.getElementById('path-feedback-title').innerText = 'Richtig!';
+            document.getElementById('path-feedback-msg').innerText = 'Gut gemacht.';
         } else {
-            feedback.innerHTML = `<span class="feedback-wrong">Nicht ganz. Richtig: ${correct}</span>`;
+            playSound('wrong');
+            card.className = 'path-feedback-card wrong';
+            document.getElementById('path-feedback-icon').innerText = '✕';
+            document.getElementById('path-feedback-title').innerText = 'Nicht ganz...';
+            document.getElementById('path-feedback-msg').innerText = `Richtige Antwort: ${correct}`;
         }
+        
+        document.getElementById('path-feedback-explanation').innerText = exercise.explanation || '';
+        document.getElementById('btn-path-next').classList.remove('hidden');
+        
+        // Deaktiviere Inputs während Feedback
+        document.querySelectorAll('#path-content-area button, #path-content-area input').forEach(el => el.disabled = true);
+    }
+
+    function showPathRetryScreen(score) {
+        const area = document.getElementById('path-content-area');
+        document.getElementById('btn-path-next').classList.add('hidden');
+        document.getElementById('path-feedback-card').className = 'path-feedback-card';
+        
+        area.innerHTML = `
+            <div class="typing-container">
+                <h1 style="font-size: 50px;">😟</h1>
+                <h2>Nicht ganz gereicht...</h2>
+                <p class="subtitle">Du hast ${Math.round(score)}% erreicht. Du benötigst mindestens 80%, um die Lektion abzuschließen.</p>
+                
+                <div class="results-summary" style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
+                    <div class="result-stat">
+                        <span class="stat-val stat-correct">${pathCorrectAnswers}</span>
+                        <span class="stat-label">Richtig</span>
+                    </div>
+                    <div class="result-stat">
+                        <span class="stat-val stat-wrong">${currentPathLesson.exercises.length - pathCorrectAnswers}</span>
+                        <span class="stat-label">Falsch</span>
+                    </div>
+                </div>
+
+                <button class="btn-main" onclick="restartCurrentPathLesson()">Lektion wiederholen</button>
+                <button class="tab" style="width:100%; margin-top:15px;" onclick="switchTab('pfad')">Abbrechen</button>
+            </div>
+        `;
+    }
+
+    function restartCurrentPathLesson() {
+        currentPathStepIdx = 0;
+        pathCorrectAnswers = 0;
+        loadPathStep();
     }
 
     function nextPathStep() {
         currentPathStepIdx++;
-        if (currentPathStepIdx < currentPathLesson.tasks.length) {
+        if (currentPathStepIdx < currentPathLesson.exercises.length) {
             loadPathStep();
         } else {
-            // Ende der Lektion -> Nächste Lektion freischalten
-            const nextIdx = pathLevels.findIndex(l => l.id === currentPathLesson.id) + 1;
-            if (nextIdx < pathLevels.length && !pathProgress.includes(pathLevels[nextIdx].id)) {
-                pathProgress.push(pathLevels[nextIdx].id);
-                localStorage.setItem('pathProgress', JSON.stringify(pathProgress));
+            // 80% Logik Check
+            const total = currentPathLesson.exercises.length;
+            const score = (pathCorrectAnswers / total) * 100;
+
+            if (score < 80) {
+                showPathRetryScreen(score);
+                return; 
             }
-            switchTab('pfad');
+
+            showPathLessonSummary();
         }
     }
 
@@ -16033,7 +16273,7 @@
         if (targetView) targetView.classList.remove('hidden');
 
         const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
-        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson'].includes(tabId)) {
+        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson', 'path-results'].includes(tabId)) {
             tabBtn.classList.add('active');
         }
 
@@ -16139,6 +16379,7 @@
         document.getElementById('vocab-count').innerText = words.length;
         document.getElementById('learned-count').innerText = learned;
         renderBlocks();
+        renderPathVocabBlocks();
     }
 
     function renderBlocks() {
@@ -16656,7 +16897,7 @@
             inputArea.classList.add('hidden');
             choiceArea.classList.remove('hidden');
             choiceArea.innerHTML = it.opts.map(o =>
-                `<button class="quiz-option" onclick="checkFullTestAnswer('${o.replace(/'/g,"\\'")}'">${o}</button>`
+                `<button class="quiz-option" onclick="checkFullTestAnswer('${o.replace(/'/g,"\\'")}')">${o}</button>`
             ).join('');
         } else {
             inputArea.classList.remove('hidden');
