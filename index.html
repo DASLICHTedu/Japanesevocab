@@ -107,9 +107,9 @@
         @media (min-width: 600px) { .path-option-grid { grid-template-columns: 1fr 1fr; } }
 
         /* --- RESULTS VIEW --- */
-        .kanji-canvas-container { position: relative; width: 300px; height: 300px; margin: 20px auto; border: 2px solid var(--primary-dark); background: white; border-radius: 10px; cursor: crosshair; }
-        #kanji-canvas { position: absolute; top: 0; left: 0; z-index: 2; }
-        #kanji-ghost { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 200px; color: #eee; z-index: 1; user-select: none; }
+        .kanji-canvas-container { position: relative; width: 300px; height: 300px; margin: 20px auto; border: 2px solid var(--primary-dark); background: white; border-radius: 12px; cursor: crosshair; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        #kanji-canvas { position: absolute; top: 0; left: 0; z-index: 5; background: transparent; }
+        #kanji-ghost, #kanji-ghost-radical { font-size: 220px; color: #f5f5f5; z-index: 1; user-select: none; pointer-events: none; }
         .kanji-info { text-align: center; margin-bottom: 20px; }
         .kanji-big { font-size: 80px; font-weight: bold; color: var(--primary-dark); }
         .kanji-info { text-align: center; margin-bottom: 20px; padding: 10px; background: #fff; border-radius: 12px; }
@@ -237,74 +237,77 @@
     <header>
         <div class="level-switch">
             <span onclick="changeLevel(-1)" style="padding: 5px 10px; cursor: pointer;">&lt;</span>
-            漢 JLPT <span id="current-level-display">N5</span>
+            <span id="ui-level-label">漢 JLPT</span> <span id="current-level-display">N5</span>
             <span onclick="changeLevel(1)" style="padding: 5px 10px; cursor: pointer;">&gt;</span>
         </div>
+        <div class="language-switch" onclick="toggleLanguage()" style="cursor:pointer; font-weight:bold; color:var(--accent-pink); padding: 5px 15px; background: white; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
+            <span id="current-lang-display">DE</span>
+        </div>
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('lernen')">Lernen</button>
-            <button class="tab" onclick="switchTab('liste')">Liste</button>
-            <button class="tab" onclick="switchTab('lesen')">Lesen</button>
-            <button class="tab" onclick="switchTab('kanji')">Kanji</button>
-            <button class="tab" onclick="switchTab('grammatik')">Grammatik</button>
-            <button class="tab" onclick="switchTab('alltag')">Alltag</button>
-            <button class="tab" onclick="switchTab('pfad')">Pfad</button>
-            <button class="tab" onclick="switchTab('test')">Test</button>
+            <button class="tab active" onclick="switchTab('lernen')" id="tab-lernen">Lernen</button>
+            <button class="tab" onclick="switchTab('liste')" id="tab-liste">Liste</button>
+            <button class="tab" onclick="switchTab('lesen')" id="tab-lesen">Lesen</button>
+            <button class="tab" onclick="switchTab('kanji')" id="tab-kanji">Kanji</button>
+            <button class="tab" onclick="switchTab('grammatik')" id="tab-grammatik">Grammatik</button>
+            <button class="tab" onclick="switchTab('alltag')" id="tab-alltag">Alltag</button>
+            <button class="tab" onclick="switchTab('pfad')" id="tab-pfad">Pfad</button>
+            <button class="tab" onclick="switchTab('test')" id="tab-test">Test</button>
         </div>
     </header>
 
-    <main id="view-lernen">
-        <h1>Vokabeln lernen</h1>
-        <p class="subtitle"><span id="vocab-count">0</span> Vokabeln · <span id="learned-count">0</span> gelernt</p>
+    <main id="view-lernen" class="">
+        <h1 id="ui-learn-title">Vokabeln lernen</h1>
+        <p class="subtitle"><span id="vocab-count">0</span> <span id="ui-vocab-count-label">Vokabeln</span> · <span id="learned-count">0</span> <span id="ui-learned-label">gelernt</span></p>
 
-        <div class="section-label">Lernmodus</div>
+        <div class="section-label" id="ui-mode-label">Lernmodus</div>
         <div class="card-grid">
             <div class="option-card active" id="mode-karteikarten" onclick="setMode('karteikarten')">
-                <h3>Karteikarten</h3>
-                <p>Karte umdrehen & bewerten</p>
+                <h3 id="ui-mode-flash">Karteikarten</h3>
+                <p id="ui-mode-flash-desc">Karte umdrehen & bewerten</p>
             </div>
             <div class="option-card" id="mode-abfragen" onclick="setMode('abfragen')">
-                <h3>Abfragen</h3>
-                <p>Übersetzung eintippen</p>
+                <h3 id="ui-mode-quiz">Abfragen</h3>
+                <p id="ui-mode-quiz-desc">Übersetzung eintippen</p>
             </div>
         </div>
 
-        <div class="section-label">Richtung</div>
+        <div class="section-label" id="ui-dir-label">Richtung</div>
         <div class="toggle-group">
             <button class="toggle-btn active" id="dir-jp-de" onclick="setDirection('jp-de')">JP → Deutsch</button>
             <button class="toggle-btn" id="dir-de-jp" onclick="setDirection('de-jp')">Deutsch → JP</button>
         </div>
 
-        <button class="btn-main" style="margin-top: 30px;" onclick="startLearningCurrentLevel()">Lernen starten</button>
+        <button class="btn-main" style="margin-top: 30px;" id="ui-start-btn" onclick="startLearning(-1)">Lernen starten</button>
 
-        <div class="section-label" style="margin-top:40px;">Wähle einen Block (je 20 Vokabeln)</div>
+        <div class="section-label" style="margin-top:40px;" id="ui-block-label">Wähle einen Block (je 20 Vokabeln)</div>
         <div id="blocks-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;"></div>
 
         <div id="path-blocks-section" class="hidden">
-            <div class="section-label">Vokabeln aus dem Pfad</div>
+            <div class="section-label" id="ui-path-blocks-label">Vokabeln aus dem Pfad</div>
             <div id="path-blocks-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;"></div>
         </div>
 
-        <div class="section-label">Spezial-Training</div>
+        <div class="section-label" id="ui-special-label">Spezial-Training</div>
         <div style="display: flex; gap: 15px; margin-bottom: 40px;">
             <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandom(false, false)">Level Mix (20)</button>
             <button class="btn-main" style="background: var(--primary-light);" onclick="startRandom(true, false)">Global Mix (20)</button>
             <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandom(false, true)">Level Mix (Alle)</button>
             <button class="btn-main" style="background: var(--primary-light);" onclick="startRandom(true, true)">Global Mix (Alle)</button>
         </div>
-        <button class="btn-main" style="background: var(--primary-dark); margin-top: 20px;" onclick="startDailyChallenge()">Tägliche Herausforderung (10 Vokabeln)</button>
+        <button class="btn-main" style="background: var(--primary-dark); margin-top: 20px;" id="ui-daily-btn" onclick="startDailyChallenge()">Tägliche Herausforderung (10 Vokabeln)</button>
     </main>
 
     <main id="view-alltag" class="hidden">
-        <h1>Alltags-Japanisch</h1>
-        <p class="subtitle">Echtes Japanisch für reale Situationen.</p>
+        <h1 id="ui-alltag-title">Alltags-Japanisch</h1>
+        <p class="subtitle" id="ui-alltag-subtitle">Echtes Japanisch für reale Situationen.</p>
         <div class="card-grid" id="alltag-categories">
             <!-- Kategorien werden per JS geladen -->
         </div>
     </main>
 
     <main id="view-pfad" class="hidden">
-        <h1>Dein Lernpfad</h1>
-        <p class="subtitle">Meistere Lektionen und schalte neue frei.</p>
+        <h1 id="ui-path-title">Dein Lernpfad</h1>
+        <p class="subtitle" id="ui-path-subtitle">Meistere Lektionen und schalte neue frei.</p>
         <div id="unit-selection-area">
             <div class="path-container" id="learning-path-display">
                 <!-- Units werden hier generiert -->
@@ -476,9 +479,11 @@
             <div class="toggle-group" style="margin-bottom: 20px;">
                 <button class="toggle-btn active" id="kanji-mode-write" onclick="setKanjiSubMode('write')">Schreiben</button>
                 <button class="toggle-btn" id="kanji-mode-quiz" onclick="setKanjiSubMode('quiz')">Quiz</button>
+                <button class="toggle-btn" id="kanji-mode-combo" onclick="setKanjiSubMode('combo')">Kombinationen</button>
+                <button class="toggle-btn" id="kanji-mode-radical" onclick="setKanjiSubMode('radical')">Radikale</button>
             </div>
 
-            <div id="kanji-write-view">
+            <div id="kanji-write-view" class="hidden">
                 <div class="kanji-info">
                     <div class="kanji-readings" id="kw-readings"></div>
                     <div class="kanji-meaning" id="kw-meaning"></div>
@@ -598,7 +603,7 @@
             <p id="type-hint" style="color:var(--text-light); font-size:14px; margin-bottom:20px;">Übersetze auf Deutsch</p>
             
             <div id="type-input-area">
-                <input type="text" class="typing-input" id="typing-input" placeholder="Tippe hier..." onkeypress="checkTyping(event)">
+                <input type="text" class="typing-input" id="typing-input" placeholder="Tippe hier..." onkeypress="checkTyping(event)" oninput="applyRomajiToKana(this)">
             </div>
 
             <div id="type-choice-area" class="hidden" style="display: grid; gap: 10px; margin-top: 20px;">
@@ -638,12 +643,12 @@
     // --- NEUE DATEN FÜR ALLTAG & PFAD ---
     const everydayVocabData = {
         "Begrüßung & Höflichkeit": [
-            { kana: "おはようございます", kanji: "おはようございます", de: "Guten Morgen (höflich)", type: "Begrüßung" },
-            { kana: "おやすみなさい", kanji: "おやすみなさい", de: "Gute Nacht", type: "Begrüßung" },
-            { kana: "はじめまして", kanji: "初めまして", de: "Sehr erfreut (beim ersten Treffen)", type: "Höflichkeit" },
-            { kana: "どうぞよろしくお願いします", kanji: "どうぞよろしくお願いします", de: "Auf gute Zusammenarbeit / Bitte seien Sie mir gewogen", type: "Höflichkeit" },
-            { kana: "お元気ですか", kanji: "お元気ですか", de: "Wie geht es Ihnen?", type: "Konversation" },
-            { kana: "おかげさまで元気です", kanji: "おかげさまて元気です", de: "Danke, mir geht es gut.", type: "Konversation" }
+            { kana: "おはようございます", kanji: "おはようございます", de: "Guten Morgen (höflich)", en: "Good morning (polite)", type: "Begrüßung" },
+            { kana: "おやすみなさい", kanji: "おやすみなさい", de: "Gute Nacht", en: "Good night", type: "Begrüßung" },
+            { kana: "はじめまして", kanji: "初めまして", de: "Sehr erfreut (beim ersten Treffen)", en: "Nice to meet you", type: "Höflichkeit" },
+            { kana: "どうぞよろしくお願いします", kanji: "どうぞよろしくお願いします", de: "Auf gute Zusammenarbeit", en: "I look forward to working with you", type: "Höflichkeit" },
+            { kana: "お元気ですか", kanji: "お元気ですか", de: "Wie geht es Ihnen?", en: "How are you?", type: "Konversation" },
+            { kana: "おかげさまで元気です", kanji: "おかげさまて元気です", de: "Danke, mir geht es gut.", en: "Thanks to you, I am fine.", type: "Konversation" }
         ],
         "Essen & Trinken": [
             { kana: "いただきます", kanji: "頂きます", de: "Guten Appetit (vor dem Essen)", type: "Höflichkeit" },
@@ -720,16 +725,15 @@
                 { id: 'n5-u1-l1', title: 'Begrüßung', exercises: [
                     { type: 'info', title: 'Willkommen!', content: 'In dieser Lektion lernst du die wichtigsten Begrüßungen.' },
                     { type: 'multiple_choice', question: 'Was bedeutet "こんにちは"?', options: ['Guten Tag', 'Danke', 'Entschuldigung'], correct: 'Guten Tag', explanation: 'Konnichiwa ist der Standardgruß am Tag.' },
-                    { type: 'text_input', question: 'Schreibe "Danke" auf Japanisch (Kana):', correct: 'ありがとう' },
-                    { type: 'listening', question: 'Was hörst du?', audio: 'おはよう', correct: 'おはよう', explanation: 'Ohayou bedeutet Guten Morgen.' },
+                    { type: 'text_input', question: 'Schreibe "Danke" auf Japanisch:', correct: 'ありがとう', romaji: 'arigatou' },
+                    { type: 'listening', question: 'Was hörst du?', audio: 'おはよう', correct: 'おはよう', romaji: 'ohayou', explanation: 'Ohayou bedeutet Guten Morgen.' },
                     { type: 'speaking', question: 'Sprich "Guten Tag" nach:', word: 'こんにちは' },
                     { type: 'multiple_choice', question: 'Wie sagt man "Guten Morgen" (informell)?', options: ['おはよう', 'おやすみ', 'さようなら'], correct: 'おはよう' },
-                    { type: 'text_input', question: 'Schreibe "Guten Morgen" (Kana):', correct: 'おはよう' },
-                    { type: 'listening', question: 'Höre genau hin:', audio: 'ありがとう', correct: 'ありがとう' },
+                    { type: 'text_input', question: 'Schreibe "Guten Morgen":', correct: 'おはよう', romaji: 'ohayou' },
+                    { type: 'listening', question: 'Höre genau hin:', audio: 'ありがとう', correct: 'ありがとう', romaji: 'arigatou' },
                     { type: 'speaking', question: 'Sprich "Guten Morgen" nach:', word: 'おはよう' },
-                    { type: 'info', title: 'Grammatik-Tipp', content: 'Das "ha" in Konnichiwa (こんにちは) wird als "wa" ausgesprochen.' },
                     { type: 'multiple_choice', question: 'Was bedeutet "さようなら"?', options: ['Guten Tag', 'Auf Wiedersehen', 'Danke'], correct: 'Auf Wiedersehen' },
-                    { type: 'text_input', question: 'Schreibe "Auf Wiedersehen" (Kana):', correct: 'さようなら' },
+                    { type: 'text_input', question: 'Schreibe "Auf Wiedersehen":', correct: 'さようなら', romaji: 'sayounara' },
                     { type: 'speaking', question: 'Verabschiede dich:', word: 'さようなら' }
                 ] },
                 { id: 'n5-u1-l2', title: 'Zahlen 1-5', exercises: [
@@ -737,20 +741,24 @@
                     { type: 'multiple_choice', question: 'Was ist die Zahl 1?', options: ['ichi', 'ni', 'san'], correct: 'ichi' },
                     { type: 'multiple_choice', question: 'Was ist die Zahl 2?', options: ['ichi', 'ni', 'san'], correct: 'ni' },
                     { type: 'multiple_choice', question: 'Was ist die Zahl 3?', options: ['ichi', 'ni', 'san'], correct: 'san' },
-                    { type: 'text_input', question: 'Schreibe "4" auf Japanisch (yon):', correct: 'よん' },
-                    { type: 'text_input', question: 'Schreibe "5" auf Japanisch (go):', correct: 'ご' },
-                    { type: 'listening', question: 'Welche Zahl hörst du?', audio: 'いち', correct: 'いち' },
-                    { type: 'listening', question: 'Welche Zahl hörst du?', audio: 'さん', correct: 'さん' },
+                    { type: 'text_input', question: 'Schreibe "4" auf Japanisch (yon):', correct: 'よん', romaji: 'yon' },
+                    { type: 'text_input', question: 'Schreibe "5" auf Japanisch (go):', correct: 'ご', romaji: 'go' },
+                    { type: 'listening', question: 'Welche Zahl hörst du?', audio: 'いち', correct: 'いち', romaji: 'ichi' },
+                    { type: 'listening', question: 'Welche Zahl hörst du?', audio: 'さん', correct: 'さん', romaji: 'san' },
                     { type: 'speaking', question: 'Sprich "Ni" (2):', word: 'に' },
                     { type: 'speaking', question: 'Sprich "Go" (5):', word: 'ご' },
                     { type: 'multiple_choice', question: 'Wie viel ist 2 + 1?', options: ['ni', 'san', 'yon'], correct: 'san' }
                 ] },
-                { id: 'n5-u1-l3', title: 'Vorstellung', exercises: [{ type: 'info', title: 'Ich bin...', content: 'Watashi wa... desu.' }] },
-                { id: 'n5-u1-l4', title: 'Objekte', exercises: [{ type: 'text_input', question: 'Buch?', correct: 'ほん' }] },
+                { id: 'n5-u1-l3', title: 'Grammatik & Vorstellung', exercises: [
+                    { type: 'info', title: 'Grammatik: Partikel は', content: 'Die Partikel は markiert das Thema. In "こんにちは" (Konnichiwa) wird das "ha" am Ende wie ein "wa" ausgesprochen.' },
+                    { type: 'info', title: 'Sich vorstellen', content: 'Um dich vorzustellen, sagst du einfach: [Name] です (desu). Beispiel: ヨナス です。' },
+                    { type: 'text_input', question: 'Wie schreibt man die Partikel "wa" (gesprochen) in Konnichiwa?', correct: 'は', romaji: 'ha' }
+                ] },
+                { id: 'n5-u1-l4', title: 'Objekte', exercises: [{ type: 'text_input', question: 'Buch?', correct: 'ほん', romaji: 'hon' }] },
                 { id: 'n5-u1-l5', title: 'Farben', exercises: [{ type: 'multiple_choice', question: 'Rot?', options: ['aka', 'ao'], correct: 'aka' }] },
-                { id: 'n5-u1-l6', title: 'Tiere 1', exercises: [{ type: 'listening', question: 'Tier?', audio: 'いぬ', correct: 'いぬ' }] },
+                { id: 'n5-u1-l6', title: 'Tiere 1', exercises: [{ type: 'listening', question: 'Tier?', audio: 'いぬ', correct: 'いぬ', romaji: 'inu' }] },
                 { id: 'n5-u1-l7', title: 'Essen', exercises: [{ type: 'multiple_choice', question: 'Reis?', options: ['gohan', 'mizu'], correct: 'gohan' }] },
-                { id: 'n5-u1-l8', title: 'Trinken', exercises: [{ type: 'text_input', question: 'Wasser?', correct: 'みず' }] },
+                { id: 'n5-u1-l8', title: 'Trinken', exercises: [{ type: 'text_input', question: 'Wasser?', correct: 'みず', romaji: 'mizu' }] },
                 { id: 'n5-u1-l9', title: 'Fragen', exercises: [{ type: 'multiple_choice', question: 'Was?', options: ['nani', 'doko'], correct: 'nani' }] },
                 { id: 'n5-u1-l10', title: 'Review 1', exercises: [{ type: 'multiple_choice', question: 'Danke?', options: ['Arigatou', 'Konnichiwa'], correct: 'Arigatou' }] }
             ]},
@@ -791,6 +799,94 @@
         localStorage.setItem('pathProgress', JSON.stringify(pathProgress));
     }
 
+    // --- SPRACHÜBERSETZUNGEN ---
+    const uiTranslations = {
+        de: {
+            levelLabel: "漢 JLPT",
+            tabLernen: "Lernen",
+            tabListe: "Liste",
+            tabLesen: "Lesen",
+            tabKanji: "Kanji",
+            tabGrammatik: "Grammatik",
+            tabAlltag: "Alltag",
+            tabPfad: "Pfad",
+            tabTest: "Test",
+            learnTitle: "Vokabeln lernen",
+            vocabCountLabel: "Vokabeln",
+            learnedLabel: "gelernt",
+            modeLabel: "Lernmodus",
+            modeFlash: "Karteikarten",
+            modeFlashDesc: "Karte umdrehen & bewerten",
+            modeQuiz: "Abfragen",
+            modeQuizDesc: "Übersetzung eintippen",
+            dirLabel: "Richtung",
+            startBtn: "Lernen starten",
+            blockLabel: "Wähle einen Block (je 20 Vokabeln)",
+            pathBlocksLabel: "Vokabeln aus dem Pfad",
+            specialLabel: "Spezial-Training",
+            dailyBtn: "Tägliche Herausforderung (10 Vokabeln)",
+            searchPlaceholder: "Suchen...",
+            alltagTitle: "Alltags-Japanisch",
+            alltagSubtitle: "Echtes Japanisch für reale Situationen.",
+            pathTitle: "Dein Lernpfad",
+            pathSubtitle: "Meistere Lektionen und schalte neue frei.",
+            hintFlip: "← KLICKEN ZUM UMDREHEN →",
+            btnAgain: "✕ Nochmal",
+            btnKnow: "✓ Gewusst",
+            typingHint: "Übersetze auf Deutsch",
+            typingHintJp: "Tippe das japanische Wort (Kana)",
+            nextVocab: "Nächste Vokabel →"
+        },
+        en: {
+            levelLabel: "漢 JLPT",
+            tabLernen: "Learn",
+            tabListe: "List",
+            tabLesen: "Reading",
+            tabKanji: "Kanji",
+            tabGrammatik: "Grammar",
+            tabAlltag: "Everyday",
+            tabPfad: "Path",
+            tabTest: "Test",
+            learnTitle: "Learn Vocabulary",
+            vocabCountLabel: "Vocabulary",
+            learnedLabel: "learned",
+            modeLabel: "Learning Mode",
+            modeFlash: "Flashcards",
+            modeFlashDesc: "Flip card & rate",
+            modeQuiz: "Quiz",
+            modeQuizDesc: "Type the translation",
+            dirLabel: "Direction",
+            startBtn: "Start Learning",
+            blockLabel: "Select a block (20 words each)",
+            pathBlocksLabel: "Vocabulary from Path",
+            specialLabel: "Special Training",
+            dailyBtn: "Daily Challenge (10 words)",
+            searchPlaceholder: "Search...",
+            alltagTitle: "Everyday Japanese",
+            alltagSubtitle: "Real Japanese for real situations.",
+            pathTitle: "Learning Path",
+            pathSubtitle: "Master lessons and unlock new ones.",
+            hintFlip: "← CLICK TO FLIP →",
+            btnAgain: "✕ Again",
+            btnKnow: "✓ Got it",
+            typingHint: "Translate to English",
+            typingHintJp: "Type the Japanese word (Kana)",
+            nextVocab: "Next word →"
+        }
+    };
+
+    function toggleLanguage() {
+        state.lang = state.lang === 'de' ? 'en' : 'de';
+        document.getElementById('current-lang-display').innerText = state.lang.toUpperCase();
+        updateUILanguage();
+        // Aktuellen View auffrischen
+        const activeTab = document.querySelector('.tab.active').getAttribute('onclick').match(/'([^']+)'/)[1];
+        switchTab(activeTab);
+        // Vokabel-Blöcke neu rendern
+        renderBlocks();
+        renderPathVocabBlocks();
+    }
+
     let currentPathLesson = null;
     let currentPathStepIdx = 0;
     let pathCorrectAnswers = 0;
@@ -809,6 +905,38 @@
 
     function startAlltagLesson(cat) {
         startLearning(-1, everydayVocabData[cat]);
+    }
+
+    function updateUILanguage() {
+        const t = uiTranslations[state.lang];
+        document.getElementById('ui-level-label').innerText = t.levelLabel;
+        document.getElementById('tab-lernen').innerText = t.tabLernen;
+        document.getElementById('tab-liste').innerText = t.tabListe;
+        document.getElementById('tab-lesen').innerText = t.tabLesen;
+        document.getElementById('tab-kanji').innerText = t.tabKanji;
+        document.getElementById('tab-grammatik').innerText = t.tabGrammatik;
+        document.getElementById('tab-alltag').innerText = t.tabAlltag;
+        document.getElementById('tab-pfad').innerText = t.tabPfad;
+        document.getElementById('tab-test').innerText = t.tabTest;
+        document.getElementById('ui-learn-title').innerText = t.learnTitle;
+        document.getElementById('ui-vocab-count-label').innerText = t.vocabCountLabel;
+        document.getElementById('ui-learned-label').innerText = t.learnedLabel;
+        document.getElementById('ui-mode-label').innerText = t.modeLabel;
+        document.getElementById('ui-mode-flash').innerText = t.modeFlash;
+        document.getElementById('ui-mode-flash-desc').innerText = t.modeFlashDesc;
+        document.getElementById('ui-mode-quiz').innerText = t.modeQuiz;
+        document.getElementById('ui-mode-quiz-desc').innerText = t.modeQuizDesc;
+        document.getElementById('ui-dir-label').innerText = t.dirLabel;
+        document.getElementById('ui-start-btn').innerText = t.startBtn;
+        document.getElementById('ui-block-label').innerText = t.blockLabel;
+        document.getElementById('ui-path-blocks-label').innerText = t.pathBlocksLabel;
+        document.getElementById('ui-special-label').innerText = t.specialLabel;
+        document.getElementById('ui-daily-btn').innerText = t.dailyBtn;
+        document.getElementById('ui-alltag-title').innerText = t.alltagTitle;
+        document.getElementById('ui-alltag-subtitle').innerText = t.alltagSubtitle;
+        document.getElementById('ui-path-title').innerText = t.pathTitle;
+        document.getElementById('ui-path-subtitle').innerText = t.pathSubtitle;
+        document.getElementById('search-input').placeholder = t.searchPlaceholder;
     }
 
     // --- LERNPFAD LOGIK ---
@@ -896,7 +1024,48 @@
             return;
         }
         const unit = pathLevelsByJLPT[state.level].find(u => u.id === unitId);
-        currentPathLesson = (unit.lessons || []).find(l => l.id === lessonId);
+        const originalLesson = (unit.lessons || []).find(l => l.id === lessonId);
+        if (!originalLesson) return;
+
+        // Kopie der Lektion erstellen, um die Originaldaten nicht dauerhaft zu verändern
+        currentPathLesson = JSON.parse(JSON.stringify(originalLesson));
+
+        // Einzigartige Vokabeln aus der Lektion für die Vorschau sammeln
+        const vocabItems = [];
+        const seenWords = new Set();
+        
+        currentPathLesson.exercises.forEach(ex => {
+            let word = "";
+            let meaning = "";
+
+            // Wort extrahieren (aus Feldern oder aus Anführungszeichen in der Frage)
+            if (ex.word) word = ex.word;
+            else if (ex.audio) word = ex.audio;
+            else if (ex.correct && /[\u3040-\u30ff\u4e00-\u9faf]/.test(ex.correct)) word = ex.correct;
+            else if (ex.question && /"([^"]+)"/.test(ex.question)) {
+                const match = ex.question.match(/"([^"]+)"/);
+                if (match && /[\u3040-\u30ff\u4e00-\u9faf]/.test(match[1])) word = match[1];
+            }
+
+            if (word && !seenWords.has(word)) {
+                seenWords.add(word);
+                // 1. Versuchen, Bedeutung aus der Übung selbst zu finden
+                if (ex.type === 'multiple_choice' && !/[\u3040-\u30ff\u4e00-\u9faf]/.test(ex.correct)) meaning = ex.correct;
+                else if (ex.explanation) {
+                     const m = ex.explanation.match(/bedeutet ([^.]+)/i) || ex.explanation.match(/"([^"]+)"/);
+                     if (m) meaning = m[1];
+                }
+                
+                // 2. Fallback: Wenn leer, global in allen Vokabellisten suchen
+                if (!meaning) meaning = findMeaningInData(word);
+
+                vocabItems.push({ type: 'path_flashcard', word, meaning });
+            }
+        });
+
+        // Vorschau-Karten an den Anfang der Übungsliste setzen
+        currentPathLesson.exercises = [...vocabItems, ...currentPathLesson.exercises];
+
         currentPathStepIdx = 0;
         pathCorrectAnswers = 0;
         switchTab('path-lesson');
@@ -4514,6 +4683,127 @@
         document.getElementById('grammar-quiz-feedback').innerHTML = '';
     }
 
+    // Echtzeit Romaji zu Hiragana Konvertierung
+    function applyRomajiToKana(el) {
+        const mapping = {
+            'a':'あ','i':'い','u':'う','e':'え','o':'お',
+            'ka':'か','ki':'き','ku':'く','ke':'け','ko':'こ',
+            'sa':'さ','shi':'し','su':'す','se':'せ','so':'そ',
+            'ta':'た','chi':'ち','tsu':'つ','te':'て','to':'と',
+            'na':'な','ni':'に','nu':'ぬ','ne':'ね','no':'の',
+            'ha':'は','hi':'ひ','fu':'ふ','he':'へ','ho':'ほ',
+            'ma':'ま','mi':'み','mu':'む','me':'め','mo':'も',
+            'ya':'や','yu':'ゆ','yo':'よ',
+            'ra':'ら','ri':'り','ru':'る','re':'れ','ro':'ろ',
+            'wa':'わ','wo':'を','nn':'ん',
+            'ga':'が','gi':'ぎ','gu':'ぐ','ge':'げ','go':'ご',
+            'za':'ざ','ji':'じ','zu':'ず','ze':'ぜ','zo':'ぞ',
+            'da':'だ','de':'で','do':'ど',
+            'ba':'ば','bi':'び','bu':'ぶ','be':'べ','bo':'ぼ',
+            'pa':'ぱ','pi':'ぴ','pu':'ぷ','pe':'ぺ','po':'ぽ',
+            'kya':'きゃ','kyu':'きゅ','kyo':'きょ',
+            'sha':'しゃ','shu':'しゅ','sho':'しょ',
+            'cha':'ちゃ','chu':'ちゅ','cho':'ちょ',
+            'nya':'にゃ','nyu':'にゅ','nyo':'にょ',
+            'hya':'ひゃ','hyu':'ひゅ','hyo':'ひょ',
+            'mya':'みゃ','myu':'みゅ','myo':'みょ',
+            'rya':'りゃ','ryu':'りゅ','ryo':'りょ',
+            'gya':'ぎゃ','gyu':'ぎゅ','gyo':'ぎょ',
+            'ja':'じゃ','ju':'じゅ','jo':'じょ',
+            'bya':'びゃ','byu':'びゅ','byo':'びょ',
+            'pya':'ぴゃ','pyu':'ぴゅ','pyo':'ぴょ'
+        };
+        let val = el.value;
+        let out = "";
+        let i = 0;
+        while(i < val.length) {
+            let chunk3 = val.substring(i, i+3).toLowerCase();
+            let chunk2 = val.substring(i, i+2).toLowerCase();
+            let chunk1 = val.substring(i, i+1).toLowerCase();
+            
+            if(mapping[chunk3]) { out += mapping[chunk3]; i += 3; }
+            else if(mapping[chunk2]) { out += mapping[chunk2]; i += 2; }
+            // Doppelte Konsonanten (sokuon)
+            else if(i+1 < val.length && val[i] === val[i+1] && !'aeioun'.includes(val[i])) { out += 'っ'; i++; }
+            else if(mapping[chunk1] && chunk1 !== 'n') { out += mapping[chunk1]; i += 1; }
+            else { out += val[i]; i++; }
+        }
+        if(val !== out) {
+            const start = el.selectionStart;
+            el.value = out;
+            // Cursor-Korrektur (einfach gehalten für Vocabulary Inputs)
+            const diff = out.length - val.length;
+            el.setSelectionRange(start + diff, start + diff);
+        }
+    }
+
+    // Helfer für Romaji-Vergleich
+    function isRomajiMatch(input, kana) {
+        if (!kana || typeof kana !== 'string') return false;
+        const mapping = {
+            'あ': 'a', 'い': 'i', 'う': 'u', 'え': 'e', 'お': 'o',
+            'か': 'ka', 'き': 'ki', 'く': 'ku', 'け': 'ke', 'こ': 'ko',
+            'さ': 'sa', 'し': 'shi', 'す': 'su', 'せ': 'se', 'そ': 'so',
+            'た': 'ta', 'ち': 'chi', 'つ': 'tsu', 'て': 'te', 'と': 'to',
+            'な': 'na', 'に': 'ni', 'ぬ': 'nu', 'ね': 'ne', 'の': 'no',
+            'は': 'ha', 'ひ': 'hi', 'ふ': 'fu', 'へ': 'he', 'ほ': 'ho',
+            'ま': 'ma', 'み': 'mi', 'む': 'mu', 'め': 'me', 'も': 'mo',
+            'や': 'ya', 'ゆ': 'yu', 'よ': 'yo',
+            'ら': 'ra', 'り': 'ri', 'る': 'ru', 'れ': 're', 'ろ': 'ro',
+            'わ': 'wa', 'を': 'wo', 'ん': 'n',
+            'が': 'ga', 'ぎ': 'gi', 'ぐ': 'gu', 'げ': 'ge', 'ご': 'go',
+            'ざ': 'za', 'じ': 'ji', 'ず': 'zu', 'ぜ': 'ze', 'ぞ': 'zo',
+            'だ': 'da', 'ぢ': 'ji', 'づ': 'zu', 'で': 'de', 'ど': 'do',
+            'ば': 'ba', 'び': 'bi', 'ぶ': 'bu', 'べ': 'be', 'ぼ': 'bo',
+            'ぱ': 'pa', 'ぴ': 'pi', 'ぷ': 'pu', 'ぺ': 'pe', 'ぽ': 'po',
+            'きゃ': 'kya', 'きゅ': 'kyu', 'きょ': 'kyo',
+            'しゃ': 'sha', 'しゅ': 'shu', 'しょ': 'sho',
+            'ちゃ': 'cha', 'ちゅ': 'chu', 'ちょ': 'cho',
+            'にゃ': 'nya', 'にゅ': 'nyu', 'にょ': 'nyo',
+            'ひゃ': 'hya', 'ひゅ': 'hyu', 'ひょ': 'hyo',
+            'みゃ': 'mya', 'みゅ': 'myu', 'みょ': 'myo',
+            'りゃ': 'rya', 'りゅ': 'ryu', 'りょ': 'ryo',
+            'ぎゃ': 'gya', 'ぎゅ': 'gyu', 'ぎょ': 'gyo',
+            'じゃ': 'ja', 'じゅ': 'ju', 'じょ': 'jo',
+            'びゃ': 'bya', 'びゅ': 'byu', 'びょ': 'byo',
+            'ぴゃ': 'pya', 'ぴゅ': 'pyu', 'ぴょ': 'pyo'
+        };
+        let converted = '';
+        let i = 0;
+        while (i < kana.length) {
+            let found = false;
+            if (i + 1 < kana.length) {
+                let double = kana.substring(i, i + 2);
+                if (mapping[double]) { converted += mapping[double]; i += 2; found = true; }
+            }
+            if (!found) {
+                let single = kana[i];
+                if (mapping[single]) { converted += mapping[single]; } 
+                else { converted += single; }
+                i++;
+            }
+        }
+        const normInput = input.toLowerCase().trim().replace('ō', 'ou').replace('ū', 'uu');
+        const normConverted = converted.toLowerCase().trim();
+        return normConverted === normInput || normConverted.replace('ou', 'o') === normInput || normConverted.replace('aa', 'a') === normInput;
+    }
+
+    // Helfer zur Suche der Bedeutung in den globalen Daten
+    function findMeaningInData(word) {
+        if (!word) return "";
+        // Suche in Alltag-Vokabeln
+        for (let cat in everydayVocabData) {
+            const item = everydayVocabData[cat].find(v => v.kana === word || v.kanji === word);
+            if (item) return item.de;
+        }
+        // Suche in JLPT-Vokabeln
+        for (let lvl in vocabData) {
+            const item = vocabData[lvl].find(v => v.kana === word || v.kanji === word);
+            if (item) return item.de;
+        }
+        return "";
+    }
+
     function checkGrammarQuiz(choice, correctIdx) {
         const feedback = document.getElementById('grammar-quiz-feedback');
         if (choice === correctIdx) {
@@ -5474,7 +5764,7 @@
     const readingDataFix3 = { // Keeping this as a placeholder if needed elsewhere
     "N5": [
         {
-            title: "Die weiße Katze (白い猫)",
+            title: "The White Cat (白い猫)",
             content: [
                 { jp: "<ruby>公園<rt>こうえん</rt></ruby>に <ruby>白<rt>しろ</rt></ruby>い 猫が いました。", de: "Im Park war eine weiße Katze." },
                 { jp: "猫は <ruby>目<rt>め</rt></ruby>が <ruby>青<rt>あお</rt></ruby>くて、とても 小さかったです。", de: "Die Katze hatte blaue Augen und war sehr klein." },
@@ -5484,7 +5774,7 @@
             ]
         },
         {
-            title: "Ein neuer Lippenstift (新しい口紅)",
+            title: "A New Lipstick (新しい口紅)",
             content: [
                 { jp: "<ruby>昨日<rt>きのう</rt></ruby>、デパートで <ruby>新<rt>あたら</rt></ruby>しい 口紅を <ruby>買<rt>か</rt></ruby>いました。", de: "Gestern habe ich im Kaufhaus einen neuen Lippenstift gekauft." },
                 { jp: "その 口紅は <ruby>明<rt>あか</rt></ruby>るい <ruby>赤<rt>あか</rt></ruby>色です。", de: "Dieser Lippenstift hat eine hellrote Farbe." },
@@ -5494,7 +5784,7 @@
             ]
         },
         {
-            title: "Der verlorene Schlüssel (消えた鍵)",
+            title: "The Lost Key (消えた鍵)",
             content: [
                 { jp: "<ruby>今朝<rt>けさ</rt></ruby>、<ruby>家<rt>いえ</rt></ruby>の <ruby>鍵<rt>かぎ</rt></ruby>が ありませんでした。", de: "Heute Morgen war der Haussschlüssel nicht da." },
                 { jp: "<ruby>私<rt>わたし</rt></ruby>は カバンの <ruby>中<rt>なか</rt></ruby>を <ruby>見<rt>み</rt></ruby>ました。", de: "Ich habe in der Tasche nachgesehen." },
@@ -5504,7 +5794,7 @@
             ]
         },
         {
-            title: "Sonntags-Kaffee (日曜日のコーヒー)",
+            title: "Sunday Coffee (日曜日のコーヒー)",
             content: [
                 { jp: "<ruby>今日<rt>きょう</rt></ruby>は <ruby>日曜日<rt>にちようび</rt></ruby>です。とても いい <ruby>天気<rt>てんき</rt></ruby>です。", de: "Heute ist Sonntag. Es ist sehr schönes Wetter." },
                 { jp: "<ruby>私<rt>わたし</rt></ruby>は 朝、カフェへ <ruby>行<rt>い</rt></ruby>きました。", de: "Ich bin morgens in ein Café gegangen." },
@@ -5514,7 +5804,7 @@
             ]
         },
         {
-            title: "Kinobesuch (初めての映画館)",
+            title: "Cinema Visit (初めての映画館)",
             content: [
                 { jp: "<ruby>先週<rt>せんしゅう</rt></ruby>、日本の <ruby>映画館<rt>えいがかん</rt></ruby>へ <ruby>行<rt>い</rt></ruby>きました。", de: "Letzte Woche bin ich in ein japanisches Kino gegangen." },
                 { jp: "<ruby>切符<rt>きっぷ</rt></ruby>を <ruby>買<rt>か</rt></ruby>うのは <ruby>少<rt>すこ</rt></ruby>し 難しかったです。", de: "Das Ticket zu kaufen war ein bisschen schwierig." },
@@ -5524,7 +5814,7 @@
             ]
         },
         {
-            title: "Mein Fahrrad (私の自転車)",
+            title: "My Bicycle (私の自転車)",
             content: [
                 { jp: "<ruby>私<rt>わたし</rt></ruby>は <ruby>青<rt>あお</rt></ruby>い <ruby>自転車<rt>じてんしゃ</rt></ruby>を <ruby>持<rt>も</rt></ruby>っています。", de: "Ich besitze ein blaues Fahrrad." },
                 { jp: "<ruby>毎日<rt>まいにち</rt></ruby>、この <ruby>自転車<rt>じてんしゃ</rt></ruby>で <ruby>大学<rt>だいがく</rt></ruby>へ <ruby>行<rt>い</rt></ruby>きます。", de: "Jeden Tag fahre ich mit diesem Fahrrad zur Universität." },
@@ -5534,7 +5824,7 @@
             ]
         },
         {
-            title: "Fotografieren im Park (公園の写真)",
+            title: "Taking Photos in the Park (公園の写真)",
             content: [
                 { jp: "<ruby>私<rt>わたし</rt></ruby>は <ruby>写真<rt>しゃしん</rt></ruby>が 大好きです。", de: "Ich liebe Fotos/Fotografieren." },
                 { jp: "<ruby>土曜日<rt>どようび</rt></ruby>に 新しい カメラを <ruby>買<rt>か</rt></ruby>いました。", de: "Am Samstag habe ich eine neue Kamera gekauft." },
@@ -5544,7 +5834,7 @@
             ]
         },
         {
-            title: "Ein kalter Tag (寒い冬)",
+            
             content: [
                 { jp: "<ruby>今日<rt>きょう</rt></ruby>は とても <ruby>寒<rt>さむ</rt></ruby>い <ruby>日<rt>ひ</rt></ruby>です。", de: "Heute ist ein sehr kalter Tag." },
                 { jp: "<ruby>朝<rt>あさ</rt></ruby>から <ruby>雪<rt>ゆき</rt></ruby>が <ruby>降<rt>ふ</rt></ruby>っています。", de: "Seit dem Morgen schneit es." },
@@ -6438,6 +6728,7 @@
     {"kana": "あめ", "kanji": "雨", "de": "Regen", "type": "Nomen", "learned": false},
     {"kana": "あめ", "kanji": "飴", "de": "Süßigkeit", "type": "Nomen", "learned": false},
     {"kana": "あらう", "kanji": "洗う", "de": "waschen", "type": "Verb", "learned": false},
+    {"kana": "ありがとう", "kanji": "", "de": "Danke", "type": "Ausdruck", "learned": false},
     {"kana": "ある", "kanji": "ある", "de": "existieren / haben (unbelebt)", "type": "Verb", "learned": false},
     {"kana": "あるく", "kanji": "歩く", "de": "laufen / gehen", "type": "Verb", "learned": false},
     {"kana": "あれ", "kanji": "あれ", "de": "jenes dort drüben", "type": "Pronomen", "learned": false},
@@ -15912,6 +16203,7 @@
     const DAILY_CHALLENGE_RESET_KEY = 'dailyChallengeLastReset';
 
     let state = {
+        lang: 'de',
         level: 'N5',
         mode: 'karteikarten',
         direction: 'jp-de',
@@ -16136,8 +16428,17 @@
                         <div style="background:#f0f0f0; padding:10px; border-radius:8px; margin-top:10px;">
                             ${exercise.examples.map(ex => `<div style="margin-bottom:5px;"><strong>${ex.jp}</strong> - ${ex.de}</div>`).join('')}
                         </div>` : ''}
-                    <button class="btn-main" style="margin-top:20px;" onclick="pathCorrectAnswers++; document.getElementById('btn-path-next').classList.remove('hidden'); this.disabled=true;">Verstanden!</button>
+                    <button class="btn-main" style="margin-top:20px;" onclick="document.getElementById('btn-path-next').classList.remove('hidden'); this.disabled=true;">Verstanden!</button>
                 </div>`;
+        } else if (exercise.type === 'path_flashcard') {
+            area.innerHTML = `
+                <div class="typing-container" onclick="this.querySelector('.fc-meaning').classList.toggle('hidden')">
+                    <span class="badge">Vokabel-Vorschau</span>
+                    <div class="fc-word" style="font-size:60px; margin:40px 0;">${exercise.word}</div>
+                    <div class="fc-meaning hidden" style="font-size:24px; color:var(--accent-pink); margin-bottom:20px;">${exercise.meaning || 'Bedeutung unbekannt'}</div>
+                    <p style="font-size:12px; color:var(--text-light)">Tippe auf die Karte für die Bedeutung</p>
+                </div>`;
+            document.getElementById('btn-path-next').classList.remove('hidden');
         } else if (exercise.type === 'multiple_choice') {
             area.innerHTML = `
                 <div class="typing-container">
@@ -16150,7 +16451,7 @@
             area.innerHTML = `
                 <div class="typing-container">
                     <h2>${exercise.question}</h2>
-                    <input type="text" class="typing-input" id="path-input" placeholder="Antwort eingeben...">
+                    <input type="text" class="typing-input" id="path-input" placeholder="Antwort eingeben..." oninput="applyRomajiToKana(this)">
                     <button class="btn-main" style="margin-top:15px" onclick="checkPathAnswer(document.getElementById('path-input').value, '${exercise.correct}')">Prüfen</button>
                 </div>`;
         } else if (exercise.type === 'listening') {
@@ -16158,17 +16459,19 @@
                 <div class="typing-container">
                     <h2>${exercise.question}</h2>
                     <button class="btn-speak" onclick="speak('${exercise.audio}')">🔊 Abspielen</button>
-                    <input type="text" class="typing-input" id="path-input" style="margin-top:20px" placeholder="Was hast du gehört?">
+                    <input type="text" class="typing-input" id="path-input" style="margin-top:20px" placeholder="Was hast du gehört?" oninput="applyRomajiToKana(this)">
                     <button class="btn-main" style="margin-top:15px" onclick="checkPathAnswer(document.getElementById('path-input').value, '${exercise.correct}')">Prüfen</button>
+                    <button class="tab" style="margin-top:20px; width:100%; border:1px solid var(--border-color);" onclick="nextPathStep()">Ich kann gerade nicht hören</button>
                 </div>`;
         } else if (exercise.type === 'speaking') {
             area.innerHTML = `
                 <div class="typing-container">
-                    <h2>${exercise.question}</h2><br>
+                    <h2>${exercise.question}</h2>
                     <span id="speaking-debug" style="font-size:12px; color:var(--text-light)">Warte auf Mikrofon...</span>
                     <div class="fc-word" style="font-size:40px; margin:20px 0;">${exercise.word}</div>
                     <button id="btn-mic" class="btn-speak" style="background:#ef4444; width:80px; height:80px; border-radius:50%;" onclick="runSpeechRec('${exercise.word}')">🎤</button>
                     <div id="path-feedback-area" class="typing-feedback"></div>
+                    <button class="tab" style="margin-top:20px; width:100%; border:1px solid var(--border-color);" onclick="nextPathStep()">Ich kann gerade nicht sprechen</button>
                 </div>`;
         } else {
             // Fallback falls Typ unbekannt
@@ -16188,12 +16491,24 @@
 
     function checkPathAnswer(input, correct) {
         const exercise = currentPathLesson.exercises[currentPathStepIdx];
-        const isCorrect = input.toLowerCase().trim() === correct.toLowerCase().trim();
+        const trimmedInput = input.toLowerCase().trim().replace('ō', 'ou').replace('ū', 'uu');
+        const trimmedCorrect = correct.toLowerCase().trim();
+        
+        let isCorrect = trimmedInput === trimmedCorrect || isRomajiMatch(trimmedInput, trimmedCorrect);
+        
+        // Wenn Romaji im Übungsobjekt hinterlegt ist, auch dieses prüfen
+        if (!isCorrect && exercise.romaji) {
+            const romajiOptions = Array.isArray(exercise.romaji) ? exercise.romaji : [exercise.romaji];
+            isCorrect = romajiOptions.some(r => r.toLowerCase().trim() === trimmedInput);
+        }
+
         const card = document.getElementById('path-feedback-card');
         
         if (isCorrect) {
             playSound('correct');
-            pathCorrectAnswers++;
+            if (!card.classList.contains('correct') && !card.classList.contains('wrong')) {
+                pathCorrectAnswers++;
+            }
             card.className = 'path-feedback-card correct';
             document.getElementById('path-feedback-icon').innerText = '✓';
             document.getElementById('path-feedback-title').innerText = 'Richtig!';
@@ -16253,7 +16568,15 @@
             loadPathStep();
         } else {
             // 80% Logik Check
-            const total = currentPathLesson.exercises.length;
+            // Nur Aufgaben zählen, die keine Info oder Flashcards sind
+            const scorable = currentPathLesson.exercises.filter(ex => !['info', 'grammar', 'path_flashcard'].includes(ex.type));
+            const total = scorable.length;
+            
+            if (total === 0) {
+                showPathLessonSummary();
+                return;
+            }
+
             const score = (pathCorrectAnswers / total) * 100;
 
             if (score < 80) {
@@ -16296,6 +16619,7 @@
 
         document.getElementById('current-level-display').innerText = state.level;
         document.querySelectorAll('.current-lvl').forEach(el => el.innerText = state.level);
+        state.kanji.comboIndex = 0;
         const lesenBadge = document.getElementById('lesen-level-badge');
         const kanjiBadge = document.getElementById('kanji-level-badge');
         const grammatikBadge = document.getElementById('grammatik-level-badge');
@@ -16324,6 +16648,17 @@
         }
         initKanjiCanvas();
         updateStats();
+        // Englisch Felder initialisieren falls leer (Fallback auf de)
+        Object.values(vocabData).forEach(lvl => {
+            lvl.forEach(item => {
+                if (!item.en) item.en = item.de;
+            });
+        });
+        Object.values(everydayVocabData).forEach(cat => {
+            cat.forEach(item => {
+                if (!item.en) item.en = item.de;
+            });
+        });
         generateDailyWords();
     }
 
@@ -16386,12 +16721,13 @@
         const container = document.getElementById('blocks-container');
         if (!container) return;
         const words = vocabData[state.level] || [];
+        const t = uiTranslations[state.lang];
         const blockSize = 20;
         let html = '';
         for (let i = 0; i < Math.ceil(words.length / blockSize); i++) {
             const start = i * blockSize + 1;
             const end = Math.min((i + 1) * blockSize, words.length);
-            html += `<button class="btn-main" onclick="startLearning(${i})">${state.level} – Block ${i + 1} (${start}–${end})</button>`;
+            html += `<button class="btn-main" onclick="startLearning(${i})">${state.level} – ${state.lang === 'de' ? 'Block' : 'Block'} ${i + 1} (${start}–${end})</button>`;
         }
         container.innerHTML = html;
     }
@@ -16429,7 +16765,7 @@
                     <div class="list-num">${index + 1}</div>
                     <div class="list-content">
                         <div class="list-jp">${displayJp}</div>
-                        <div class="list-de">${word.de}</div>
+                        <div class="list-de">${word[state.lang]}</div>
                     </div>
                     <div class="badge ${getBadgeClass(word.type)}">${word.type}</div>
                     ${check}
@@ -16503,6 +16839,7 @@
     function loadFlashcard() {
         const word = state.currentQueue[state.currentIndex];
         const isJpToDe = state.direction === 'jp-de';
+        const t = uiTranslations[state.lang];
 
         document.getElementById('fc-direction-display').innerText = isJpToDe ? "JP → DE" : "DE → JP";
         document.getElementById('fc-current-num').innerText = state.currentIndex + 1;
@@ -16512,16 +16849,20 @@
         document.getElementById('fc-type-back').innerText = word.type;
         document.getElementById('fc-type-front').className = `badge ${getBadgeClass(word.type)}`;
         document.getElementById('fc-type-back').className = `badge ${getBadgeClass(word.type)}`;
+        
+        document.querySelector('.fc-hint').innerText = t.hintFlip;
+        document.querySelector('.btn-nochmal').innerText = t.btnAgain;
+        document.querySelector('.btn-gewusst').innerText = t.btnKnow;
 
         if (isJpToDe) {
             document.getElementById('fc-word-front').innerText = word.kanji || word.kana;
             document.getElementById('fc-reading-front').innerText = word.kanji ? word.kana : '';
             document.getElementById('fc-word-back').innerText = word.kanji || word.kana;
-            document.getElementById('fc-trans-back').innerText = word.de;
+            document.getElementById('fc-trans-back').innerText = word[state.lang];
         } else {
-            document.getElementById('fc-word-front').innerText = word.de;
+            document.getElementById('fc-word-front').innerText = word[state.lang];
             document.getElementById('fc-reading-front').innerText = '';
-            document.getElementById('fc-word-back').innerText = word.de;
+            document.getElementById('fc-word-back').innerText = word[state.lang];
             document.getElementById('fc-trans-back').innerText = word.kanji ? `${word.kanji} (${word.kana})` : word.kana;
         }
 
@@ -16556,6 +16897,7 @@
     function finishSession() {
         switchTab('results');
         const correct = state.sessionCorrectCount;
+        const t = uiTranslations[state.lang];
         const wrong = state.currentQueue.length - correct;
         document.getElementById('res-correct-count').innerText = correct;
         document.getElementById('res-wrong-count').innerText = wrong;
@@ -16573,6 +16915,7 @@
     function loadTyping() {
         const word = state.currentQueue[state.currentIndex];
         const isJpToDe = state.direction === 'jp-de';
+        const t = uiTranslations[state.lang];
 
         document.getElementById('type-current-num').innerText = state.currentIndex + 1;
         document.getElementById('type-total-num').innerText = state.currentQueue.length;
@@ -16588,13 +16931,14 @@
         input.disabled = false;
         document.getElementById('typing-feedback').innerHTML = '';
         document.getElementById('btn-next-typing').classList.add('hidden');
+        document.getElementById('btn-next-typing').innerText = t.nextVocab;
 
         if (isJpToDe) {
             document.getElementById('type-word').innerText = word.kanji || word.kana;
-            document.getElementById('type-hint').innerText = "Übersetze auf Deutsch";
+            document.getElementById('type-hint').innerText = t.typingHint;
         } else {
-            document.getElementById('type-word').innerText = word.de;
-            document.getElementById('type-hint').innerText = "Tippe das japanische Wort (Kana)";
+            document.getElementById('type-word').innerText = word[state.lang];
+            document.getElementById('type-hint').innerText = t.typingHintJp;
         }
         input.focus();
     }
@@ -16610,10 +16954,11 @@
 
         let isCorrect = false;
         if (isJpToDe) {
-            const correctAnswers = word.de.toLowerCase().split(/[\/,]/).map(s => s.trim());
+            const correctAnswers = word[state.lang].toLowerCase().split(/[\/,]/).map(s => s.trim());
             isCorrect = correctAnswers.some(ans => ans === answer || (ans.includes(answer) && answer.length > 2));
         } else {
-            isCorrect = (answer === word.kana || answer === word.kanji);
+            // Akzeptiere Kana, Kanji oder Romaji
+            isCorrect = (answer === word.kana || answer === word.kanji || (word.romaji && answer === word.romaji.toLowerCase().trim()) || isRomajiMatch(answer, word.kana));
         }
 
         if (isCorrect) {
@@ -16628,7 +16973,7 @@
             }, 1000);
         } else {
             playSound('wrong');
-            feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? word.de : word.kana}</span>`;
+            feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? word[state.lang] : word.kana}</span>`;
             if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
             document.getElementById('btn-next-typing').classList.remove('hidden');
         }
@@ -16736,9 +17081,16 @@
         state.kanji.subMode = mode;
         document.getElementById('kanji-mode-write').classList.toggle('active', mode === 'write');
         document.getElementById('kanji-mode-quiz').classList.toggle('active', mode === 'quiz');
+        document.getElementById('kanji-mode-combo').classList.toggle('active', mode === 'combo');
+        document.getElementById('kanji-mode-radical').classList.toggle('active', mode === 'radical');
         document.getElementById('kanji-write-view').classList.toggle('hidden', mode !== 'write');
         document.getElementById('kanji-quiz-view').classList.toggle('hidden', mode !== 'quiz');
-        updateKanjiView();
+        document.getElementById('kanji-combo-view').classList.toggle('hidden', mode !== 'combo');
+        document.getElementById('kanji-radical-view').classList.toggle('hidden', mode !== 'radical');
+        
+        if (mode === 'combo') setComboSubMode('list');
+        else if (mode === 'radical') loadRadical();
+        else updateKanjiView();
     }
 
     function updateKanjiView() {
@@ -16752,10 +17104,107 @@
             document.getElementById('kanji-ghost').innerText = item.kanji;
             state.kanji.strokesDrawn = 0;
             document.getElementById('kw-feedback').innerText = '';
+            document.getElementById('kanji-numbers-layer').innerHTML = '';
             clearKanjiCanvas();
-        } else {
+        } else if (state.kanji.subMode === 'quiz') {
             renderKanjiQuiz();
+        } else if (state.kanji.subMode === 'combo') {
+            loadCombo();
         }
+    }
+
+    function showStrokeOrder() {
+        const item = state.kanji.currentBlock[state.kanji.currentIndex];
+        const layer = document.getElementById('kanji-numbers-layer');
+        layer.innerHTML = '';
+        if (item && item.positions) {
+            item.positions.forEach((pos, idx) => {
+                const div = document.createElement('div');
+                div.className = 'stroke-num';
+                div.style.left = pos.x + 'px';
+                div.style.top = pos.y + 'px';
+                div.innerText = idx + 1;
+                layer.appendChild(div);
+            });
+            setTimeout(() => layer.innerHTML = '', 3000);
+        } else {
+            document.getElementById('kw-feedback').innerText = "Strichfolge nicht verfügbar.";
+        }
+    }
+
+    function retryKanji() {
+        clearKanjiCanvas();
+        document.getElementById('kw-feedback').innerText = '';
+        document.getElementById('kanji-numbers-layer').innerHTML = '';
+    }
+
+    function setComboSubMode(mode) {
+        document.getElementById('kc-mode-list').classList.toggle('active', mode === 'list');
+        document.getElementById('kc-mode-fc').classList.toggle('active', mode === 'fc');
+        document.getElementById('kc-list-area').classList.toggle('hidden', mode !== 'list');
+        document.getElementById('kc-fc-area').classList.toggle('hidden', mode !== 'fc');
+        if (mode === 'list') renderKanjiComboList();
+        else loadComboFlashcard();
+    }
+
+    function renderKanjiComboList() {
+        const list = kanjiComboData[state.level] || [];
+        const container = document.getElementById('kc-list-area');
+        if (list.length === 0) {
+            container.innerHTML = `<p style="text-align:center; padding:20px;">Keine Kombis gefunden.</p>`;
+            return;
+        }
+        container.innerHTML = `
+            <table class="kanji-overview-table">
+                <thead><tr><th>Wort</th><th>Lesung</th><th>Bedeutung</th></tr></thead>
+                <tbody>
+                    ${list.map(item => `
+                        <tr>
+                            <td style="font-size:20px; font-weight:bold; cursor:pointer;" onclick="speak('${item.word}')">${item.word}</td>
+                            <td>${item.reading}</td>
+                            <td>${item.de}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+    }
+
+    function loadComboFlashcard() {
+        const list = kanjiComboData[state.level] || [];
+        if (list.length === 0) return;
+        const item = list[state.kanji.comboIndex || 0];
+        document.getElementById('kcf-word').innerText = item.word;
+        document.getElementById('kcf-reading').innerText = item.reading;
+        document.getElementById('kcf-trans').innerText = item.de;
+        document.getElementById('combo-flashcard').classList.remove('flipped');
+    }
+
+    function nextCombo() {
+        const list = kanjiComboData[state.level] || [];
+        state.kanji.comboIndex = (state.kanji.comboIndex + 1) % list.length;
+        loadComboFlashcard();
+    }
+
+    function loadRadical() {
+        if (state.kanji.radicalIndex === undefined) state.kanji.radicalIndex = 0;
+        const item = kanjiRadicalData[state.kanji.radicalIndex];
+        document.getElementById('kr-meaning').innerText = item.de;
+        document.getElementById('kr-name').innerText = item.name;
+        document.getElementById('kanji-ghost-radical').innerText = item.char;
+        clearRadicalCanvas();
+        const cvs = document.getElementById('kanji-canvas-radical');
+        if (cvs && !cvs.dataset.init) { setupCanvasEvents(cvs); cvs.dataset.init = "true"; }
+    }
+
+    function nextRadical() {
+        state.kanji.radicalIndex = (state.kanji.radicalIndex + 1) % kanjiRadicalData.length;
+        loadRadical();
+    }
+
+    function clearRadicalCanvas() {
+        const cvs = document.getElementById('kanji-canvas-radical');
+        if (cvs) cvs.getContext('2d').clearRect(0, 0, cvs.width, cvs.height);
     }
 
     function nextKanjiInBlock() {
@@ -16929,6 +17378,20 @@
     }
 
     // --- GRAMMATIK ---
+    const kanjiRadicalData = [
+        { char: "人", name: "hito", de: "Mensch" },
+        { char: "女", name: "onna", de: "Frau" },
+        { char: "子", name: "ko", de: "Kind" },
+        { char: "日", name: "hi", de: "Sonne / Tag" },
+        { char: "月", name: "tsuki", de: "Mond / Monat" },
+        { char: "木", name: "ki", de: "Baum" },
+        { char: "水", name: "mizu", de: "Wasser" },
+        { char: "火", name: "hi", de: "Feuer" },
+        { char: "土", name: "tsuchi", de: "Erde" },
+        { char: "口", name: "kuchi", de: "Mund" },
+        { char: "手", name: "te", de: "Hand" }
+    ];
+
     function renderGrammarList() {
         const container = document.getElementById('grammar-list');
         const levelItems = grammarData[state.level] || [];
