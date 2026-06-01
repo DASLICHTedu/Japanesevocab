@@ -6,7 +6,12 @@
   "display": "standalone",
   "background_color": "#fafafa",
   "theme_color": "#272a48",
-  "icons": "Icon.jpeg"
+  "icons": [
+        {
+          "src": "Icon.jpeg",
+          "type": "image/jpeg"
+        }
+      ]
     }
    
   
