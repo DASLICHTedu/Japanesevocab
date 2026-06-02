@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+    
     <script src="kanji-logic.js" defer></script>
-    <div id="my-kanji-animation"></div>
-<script>
-    // Einmaliger Aufruf nach dem Laden
-    window.onload = () => initKanjiAnimation('my-kanji-animation', 'pfad/zu/deinem/kanji.svg');
-</script>
-<div id="kanji-display-04e00"></div>
-
-<script>
-    // Einmalig aufrufen für das Kanji '一'
-    renderKanji('04e00', 'kanji-display-04e00');
-</script>
-<div id="kanji-gallery"></div>
-
-<script>
-    window.addEventListener('DOMContentLoaded', showKanjiTrainer);
-</script>
-
-<script>
-    // Initialisiert die Galerie beim Laden der Seite
-    window.addEventListener('DOMContentLoaded', renderAllKanji);
-</script>
+    <style>
+        /* Füge hier dein CSS ein (Animationen, Größe) */
+        .kanji-box svg { width: 200px; height: 200px; }
+        .kanji-box path { fill: none; stroke: black; stroke-width: 3; }
+    </style>
+    <div id="kanji-gallery"></div>
+    <script>
+        // NUR DIESE EINE ZEILE LÄDT DEN TRAINER
+        window.addEventListener('DOMContentLoaded', showKanjiTrainer);
+    </script>
     <!-- Für die Browser-Tabs (Favicon) -->
 <link rel="icon" href="Icon.png" type="image/png">
 <link rel="apple-touch-icon" href="Icon.png">
@@ -31,9 +21,51 @@
     <title>JLPT Study de</title>
     <link rel="manifest" href="manifest.json" />
     <style>
+  @keyframes draw {
+      to { stroke-dashoffset: 0; }
+  }
+  .kanji-box svg {
+      width: 200px;
+      height: 200px;
+      display: block;
+      margin: 0 auto;
+  }
+</style>
         @keyframes draw {
     to { stroke-dashoffset: 0; }
 }
+  /* Das ist für die Zeichnung der Striche */
+  .kanji-box path {
+      fill: none;
+      stroke: black;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 2s linear forwards;
+  }
+  /* Erzwungene Sichtbarkeit für das SVG */
+.kanji-box svg {
+    display: block;
+    width: 200px;
+    height: 200px;
+    stroke: black;
+    stroke-width: 5;
+    fill: none;
+}
+
+  @keyframes draw {
+      to { stroke-dashoffset: 0; }
+  }
+
+  /* Damit das Kanji zentriert ist */
+  #kanji-svg {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+  }
+
 .svg-container path {
     stroke: #333;
     stroke-width: 2;

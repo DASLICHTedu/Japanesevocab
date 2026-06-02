@@ -17,7 +17,39 @@ async function showKanjiTrainer() {
     `;
     loadCurrentKanji();
 }
+// kanji-logic.js
+async function renderKanji(hexCode, targetId) {
+    const container = document.getElementById(targetId);
+    if (!container) return;
 
+    const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+    
+    try {
+        const response = await fetch(url);
+        let svgText = await response.text();
+        
+        // Entferne hart kodierte Styles, die uns blockieren könnten
+        svgText = svgText.replace(/style="[^"]*"/g, '');
+        
+        container.innerHTML = `<div class="kanji-box">${svgText}</div>`;
+        
+        // Erzwungene Stile für alle Pfade im SVG
+        const paths = container.querySelectorAll('path');
+        paths.forEach((path, index) => {
+            const length = path.getTotalLength();
+            path.style.fill = "none";
+            path.style.stroke = "black";
+            path.style.strokeWidth = "3";
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+            
+            // Animation starten
+            path.style.animation = `draw 2s linear forwards ${index * 0.1}s`;
+        });
+    } catch (e) {
+        console.error("Fehler beim Laden:", e);
+    }
+}
 async function loadCurrentKanji() {
     const hex = myKanjiList[currentIndex];
     const display = document.getElementById('display-area');
@@ -90,14 +122,20 @@ async function renderKanji(hexCode, targetId) {
     
     try {
         const response = await fetch(url);
-        const svgData = await response.text();
+        let svgData = await response.text();
         
-        container.innerHTML = `<div class="kanji-box">${svgData}<div class="kanji-copyright">© KanjiVG</div></div>`;
+        // Entferne eventuelle harte CSS-Vorgaben aus dem SVG, 
+        // damit unsere Animation aus der index.html greifen kann
+        svgData = svgData.replace(/style="[^"]*"/g, '');
         
-        // FÜGE DIES HINZU: Ein kleines Timeout, damit der Browser 
-        // das Element erst im DOM registrieren kann
-        setTimeout(() => animatePaths(container), 100);
-        
+        container.innerHTML = `
+            <div class="kanji-box">
+                ${svgData}
+                <div class="kanji-copyright" style="font-size:10px; color:gray;">
+                    © KanjiVG
+                </div>
+            </div>
+        `;
     } catch (e) {
         console.error("Fehler:", e);
     }
