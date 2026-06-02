@@ -13,13 +13,11 @@
     // Einmalig aufrufen für das Kanji '一'
     renderKanji('04e00', 'kanji-display-04e00');
 </script>
-<div id="kanji-gallery" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+<div id="kanji-gallery"></div>
 
 <script>
-    // Einmalig starten, wenn die Seite geladen ist
-    renderAllKanji();
+    window.addEventListener('DOMContentLoaded', showKanjiTrainer);
 </script>
-<div id="kanji-gallery"></div>
 
 <script>
     // Initialisiert die Galerie beim Laden der Seite

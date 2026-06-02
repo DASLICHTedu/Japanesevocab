@@ -1,5 +1,42 @@
 // kanji-logic.js
+let currentIndex = 0;
 
+async function showKanjiTrainer() {
+    const container = document.getElementById('kanji-gallery');
+    if (!container) return;
+
+    // Interface für den Trainer aufbauen
+    container.innerHTML = `
+        <div id="trainer-box" style="text-align:center; padding: 20px;">
+            <div id="display-area" style="min-height: 250px;"></div>
+            <div style="margin-top: 20px;">
+                <button onclick="repeatAnimation()">Wiederholen</button>
+                <button onclick="nextKanji()">Nächstes Kanji</button>
+            </div>
+        </div>
+    `;
+    loadCurrentKanji();
+}
+
+async function loadCurrentKanji() {
+    const hex = myKanjiList[currentIndex];
+    const display = document.getElementById('display-area');
+    display.innerHTML = `<h3>Kanji ${currentIndex + 1} / ${myKanjiList.length}</h3><div id="kanji-svg"></div>`;
+    
+    // Die existierende Render-Funktion nutzen
+    await renderKanji(hex, 'kanji-svg');
+}
+
+function nextKanji() {
+    currentIndex = (currentIndex + 1) % myKanjiList.length;
+    loadCurrentKanji();
+}
+
+function repeatAnimation() {
+    // Einfacher Trick: Element kurz leeren und neu rendern, 
+    // um den Animation-Trigger von renderKanji neu zu starten
+    loadCurrentKanji();
+}
 /**
  * Lädt ein Kanji und animiert die Strichfolge
  * @param {string} kanjiHex - Der Hex-Code des Kanjis (z.B. '04e00' für 一)
