@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+    <script src="kanji-logic.js" defer></script>
+    <div id="my-kanji-animation"></div>
+<script>
+    // Einmaliger Aufruf nach dem Laden
+    window.onload = () => initKanjiAnimation('my-kanji-animation', 'pfad/zu/deinem/kanji.svg');
+</script>
+<div id="kanji-display-04e00"></div>
+
+<script>
+    // Einmalig aufrufen für das Kanji '一'
+    renderKanji('04e00', 'kanji-display-04e00');
+</script>
+<div id="kanji-gallery" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+
+<script>
+    // Einmalig starten, wenn die Seite geladen ist
+    renderAllKanji();
+</script>
+<div id="kanji-gallery"></div>
+
+<script>
+    // Initialisiert die Galerie beim Laden der Seite
+    window.addEventListener('DOMContentLoaded', renderAllKanji);
+</script>
     <!-- Für die Browser-Tabs (Favicon) -->
 <link rel="icon" href="Icon.png" type="image/png">
 <link rel="apple-touch-icon" href="Icon.png">
@@ -9,6 +33,23 @@
     <title>JLPT Study de</title>
     <link rel="manifest" href="manifest.json" />
     <style>
+        @keyframes draw {
+    to { stroke-dashoffset: 0; }
+}
+.svg-container path {
+    stroke: #333;
+    stroke-width: 2;
+    fill: none;
+}
+.kanji-box svg {
+    width: 200px;
+    height: 200px;
+}
+.kanji-box path {
+    stroke: black;
+    stroke-width: 2;
+    fill: none;
+}
         /* --- GRUNDDESIGN & FARBEN --- */
         :root {
             --bg-color: #fafafa;
@@ -642,7 +683,11 @@
     </main>
 
 </div>
-
+<div id="kanji-display"></div>
+<script>
+    // Beispiel für das Kanji "一" (Hex 04e00)
+    loadAndAnimateKanji('04e00', 'kanji-display');
+</script>
 <script>
     // --- NEUE DATEN FÜR ALLTAG & PFAD ---
     const everydayVocabData = {
