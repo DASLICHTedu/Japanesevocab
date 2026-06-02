@@ -50,6 +50,15 @@ async function renderKanji(hexCode, targetId) {
         console.error("Fehler beim Laden:", e);
     }
 }
+// Globales Objekt für deine Funktionen
+window.KanjiApp = {
+    renderKanji: async function(hexCode, targetId) { 
+        /* dein Code hier */ 
+    },
+    init: function() {
+        console.log("Kanji-App gestartet");
+    }
+};
 async function loadCurrentKanji() {
     const hex = myKanjiList[currentIndex];
     const display = document.getElementById('display-area');
