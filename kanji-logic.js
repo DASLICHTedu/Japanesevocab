@@ -1,6 +1,40 @@
 // kanji-logic.js
+// Stelle sicher, dass die Funktionen global verfügbar sind
+window.showKanjiTrainer = showKanjiTrainer;
+window.nextKanji = nextKanji;
+window.repeatAnimation = repeatAnimation;
+window.renderKanji = renderKanji;
 let currentIndex = 0;
+// kanji-logic.js
 
+// Sicherstellen, dass alles global ist
+window.showKanjiTrainer = showKanjiTrainer;
+window.nextKanji = nextKanji;
+window.repeatAnimation = repeatAnimation;
+window.renderKanji = renderKanji;
+
+// ... dein Array ...
+
+async function loadCurrentKanji() {
+    const hex = myKanjiList[currentIndex];
+    const display = document.getElementById('display-area');
+    
+    // Wir setzen das HTML für das Kanji-Display neu
+    display.innerHTML = `<h3>Kanji ${currentIndex + 1} / ${myKanjiList.length}</h3><div id="kanji-svg"></div>`;
+    
+    // Rendern und dabei Animation neu starten
+    await renderKanji(hex, 'kanji-svg');
+}
+
+function repeatAnimation() {
+    // Einfach neu laden, das triggert die CSS-Animation erneut
+    loadCurrentKanji();
+}
+
+function nextKanji() {
+    currentIndex = (currentIndex + 1) % myKanjiList.length;
+    loadCurrentKanji();
+}
 async function showKanjiTrainer() {
     const container = document.getElementById('kanji-gallery');
     if (!container) return;
