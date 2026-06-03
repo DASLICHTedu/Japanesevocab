@@ -195,6 +195,7 @@
         .kana-card { background: white; border: 1px solid var(--border-color); border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; transition: 0.2s; border-bottom: 4px solid var(--border-color); }
         .kana-card:hover { transform: translateY(-2px); }
         .kana-card.completed { border-color: #58cc02; background: #f7ffed; color: #46a302; border-bottom-color: #46a302; }
+        .kana-card { transition: background-color 0.5s ease, border-color 0.5s ease, transform 0.2s; }
         .kana-char-preview { font-size: 24px; font-weight: bold; margin-bottom: 5px; }
         .kana-name { font-size: 14px; color: var(--text-light); font-weight: 600; }
 
@@ -1221,6 +1222,7 @@
     let currentKanaLesson = null;
     let currentKanaStep = 0;
     let kanaPassed = JSON.parse(localStorage.getItem('kanaPassed') || '[]');
+    let kanaMastery = JSON.parse(localStorage.getItem('kanaMastery') || '{}');
 
     function setKanaType(type) {
         currentKanaType = type;
@@ -1232,15 +1234,52 @@
     function renderKanaBlocks() {
         const container = document.getElementById('kana-groups-container');
         const groups = kanaDataFull[currentKanaType];
-        container.innerHTML = groups.map(group => {
+        
+        let html = `
+            <div class="kana-card" style="grid-column: 1 / -1; background: var(--primary-dark); color: white; border-bottom: 4px solid #1a1c31;" onclick="startKanaMix('${currentKanaType}')">
+                <div class="kana-char-preview">🔀 ${currentKanaType === 'hiragana' ? 'Hiragana' : 'Katakana'} Mix</div>
+                <div class="kana-name">Zufällige Übungen aus allen Reihen</div>
+            </div>
+        `;
+
+        html += groups.map(group => {
+            const mastery = kanaMastery[group.id] || 0;
+            const goldIntensity = Math.min(mastery / 5, 1);
+            const bgColor = goldIntensity > 0 ? `rgba(255, 215, 0, ${goldIntensity * 0.3})` : 'white';
+            const borderColor = mastery >= 5 ? '#ffd700' : (mastery > 0 ? '#ffcc00' : 'var(--border-color)');
             const isDone = kanaPassed.includes(group.id);
             return `
-                <div class="kana-card ${isDone ? 'completed' : ''}" onclick="startKanaLesson('${group.id}')">
+                <div class="kana-card ${isDone ? 'completed' : ''}" 
+                     style="background-color: ${bgColor}; border-color: ${borderColor};"
+                     onclick="startKanaLesson('${group.id}')">
                     <div class="kana-char-preview">${group.chars.map(c => c.c).join('')}</div>
-                    <div class="kana-name">${group.name}</div>
+                    <div class="kana-name">${group.name} ${mastery > 0 ? '<span style="color:#d4af37; display:block;">' + '★'.repeat(Math.min(mastery, 5)) + '</span>' : ''}</div>
                 </div>
             `;
         }).join('');
+        container.innerHTML = html;
+    }
+
+    function startKanaMix(type) {
+        const allChars = kanaDataFull[type].flatMap(g => g.chars);
+        const shuffled = allChars.sort(() => Math.random() - 0.5).slice(0, 15);
+        
+        currentKanaLesson = {
+            id: 'mix-' + type,
+            name: (type === 'hiragana' ? 'Hiragana' : 'Katakana') + ' Mix',
+            chars: shuffled
+        };
+        currentKanaStep = 0;
+        
+        const exercises = shuffled.flatMap(char => [
+            { type: 'recognize', char: char.c, romaji: char.r },
+            { type: 'sound_match', char: char.c, romaji: char.r }
+        ]).sort(() => Math.random() - 0.5).slice(0, 20);
+
+        currentPathLesson = null; // Reset path state if active
+        currentKanaLesson.exercises = exercises;
+        switchTab('kana-lesson');
+        loadKanaStep();
     }
 
     function startKanaLesson(groupId) {
@@ -1408,8 +1447,15 @@
         if (currentKanaStep < currentKanaLesson.exercises.length) {
             loadKanaStep();
         } else {
-            if (!kanaPassed.includes(currentKanaLesson.id)) kanaPassed.push(currentKanaLesson.id);
-            localStorage.setItem('kanaPassed', JSON.stringify(kanaPassed));
+            if (!currentKanaLesson.id.startsWith('mix')) {
+                if (!kanaPassed.includes(currentKanaLesson.id)) {
+                    kanaPassed.push(currentKanaLesson.id);
+                    localStorage.setItem('kanaPassed', JSON.stringify(kanaPassed));
+                }
+                // Mastery erhöhen
+                kanaMastery[currentKanaLesson.id] = (kanaMastery[currentKanaLesson.id] || 0) + 1;
+                localStorage.setItem('kanaMastery', JSON.stringify(kanaMastery));
+            }
             switchTab('kana-results');
         }
     }
