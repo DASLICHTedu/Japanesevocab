@@ -25,63 +25,51 @@
     <title>JLPT Study de</title>
     <link rel="manifest" href="manifest.json" />
     <style>
+.kanji-box {
+    position: absolute;
+    top: 50px; /* Anpassen, wo es liegen soll */
+    left: 50px;
+    z-index: 10; /* Damit es vorne liegt */
+}
+  /* 1. Animation definieren */
   @keyframes draw {
       to { stroke-dashoffset: 0; }
   }
+
+  /* 2. Den Container für das SVG definieren */
   .kanji-box svg {
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      height: 250px;
       display: block;
       margin: 0 auto;
   }
-        @keyframes draw {
-    to { stroke-dashoffset: 0; }
-}
-  /* Das ist für die Zeichnung der Striche */
+
+  /* 3. Die Pfade innerhalb des SVGs animieren */
   .kanji-box path {
-      fill: none;
-      stroke: black;
-      stroke-width: 3;
+      fill: none !important;
+      stroke: black !important;
+      stroke-width: 5 !important;
       stroke-linecap: round;
       stroke-linejoin: round;
+      /* Animation wird per JS gesetzt, aber hier ist der Standard */
       stroke-dasharray: 1000;
       stroke-dashoffset: 1000;
-      animation: draw 2s linear forwards;
   }
-  /* Erzwungene Sichtbarkeit für das SVG */
-.kanji-box svg {
-    display: block;
-    width: 200px;
-    height: 200px;
-    stroke: black;
-    stroke-width: 5;
-    fill: none;
+/*SVG auf dem Canvas positionieren*/
+#kanji-svg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    z-index: 2; /* Liegt über dem Ghost, unter dem Canvas */
+    pointer-events: none; /* Klicks gehen durch das SVG zum Canvas */
 }
 
-  @keyframes draw {
-      to { stroke-dashoffset: 0; }
-  }
-
-  /* Damit das Kanji zentriert ist */
-  #kanji-svg {
-      width: 200px;
-      height: 200px;
-      margin: 0 auto;
-  }
-
-.svg-container path {
-    stroke: #333;
-    stroke-width: 2;
-    fill: none;
-}
-.kanji-box svg {
-    width: 200px;
-    height: 200px;
-}
-.kanji-box path {
-    stroke: black;
-    stroke-width: 2;
-    fill: none;
+/* Das SVG im Wrapper soll den Platz ausfüllen */
+#kanji-svg-wrapper svg {
+    width: 100%;
+    height: 100%;
 }
         /* --- GRUNDDESIGN & FARBEN --- */
         :root {

@@ -1,5 +1,70 @@
 // kanji-logic.js
+// kanji-logic.js
+async function showKanjiTrainer() {
+    const container = document.getElementById('kanji-schreiben-tab');
+    
+    // Wir setzen das HTML direkt in den gewünschten Canvas-Container
+    container.innerHTML = `
+        <div class="kanji-canvas-container" id="my-canvas-box">
+            <div id="kanji-svg-wrapper"></div>
+            <canvas id="kanji-canvas" width="300" height="300"></canvas>
+        </div>
+        <button onclick="repeatAnimation()">Wiederholen</button>
+        <button onclick="nextKanji()">Nächstes Kanji</button>
+    `;
+    loadCurrentKanji();
+}
+// 1. Die Logik für die Blöcke
+const KANJI_PER_BLOCK = 5;
+let currentBlock = 0; // Aktueller 5er-Block (0=1-5, 1=6-10...)
 
+async function loadCurrentKanji() {
+    // Berechne den Index innerhalb des Blocks
+    const startIndex = currentBlock * KANJI_PER_BLOCK;
+    const kanjiIndex = startIndex + (currentIndex % KANJI_PER_BLOCK);
+    const hex = myKanjiList[kanjiIndex];
+    
+    if (!hex) {
+        console.error("Kein Kanji gefunden!");
+        return;
+    }
+
+    const display = document.getElementById('display-area');
+    display.innerHTML = `<h3>Kanji ${kanjiIndex + 1} / ${myKanjiList.length}</h3><div id="kanji-svg"></div>`;
+    
+    await renderKanji(hex, 'kanji-svg');
+}
+
+async function renderKanji(hexCode, targetId) {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+
+    // Fix: Wir validieren den Hex-Code (muss 4-5 Stellen haben)
+    const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+    const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(url);
+    
+    try {
+        const response = await fetch(proxyUrl);
+        if (response.status === 404) {
+            container.innerHTML = `<p>Kanji ${hexCode} nicht gefunden (404).</p>`;
+            return;
+        }
+        const svgText = await response.text();
+        container.innerHTML = `<div class="kanji-box">${svgText}</div>`;
+        // ... (dein restlicher Animations-Code)
+    } catch (e) {
+        console.error("Ladefehler:", e);
+    }
+}
+
+function nextKanji() {
+    currentIndex++;
+    // Wenn 5 Kanjis durch sind, Block erhöhen
+    if (currentIndex % KANJI_PER_BLOCK === 0) {
+        currentBlock++;
+    }
+    loadCurrentKanji();
+}
 // Sicherstellen, dass das HTML die Funktionen findet
 window.showTab = showTab;
 window.repeatAnimation = repeatAnimation;
@@ -247,9 +312,7 @@ const myKanjiList = [
 // oder sind leicht unterschiedlich, das Skript filtert das automatisch.
 
 // Die Funktion, die alle durchgeht:
-function renderAllKanji() {
-    const container = document.getElementById('kanji-gallery');
-    if (!container) return;
+
 
     myKanjiList.forEach(hex => {
         // Erstelle den Container für jedes Kanji
@@ -261,11 +324,9 @@ function renderAllKanji() {
         // Rufe die Ladefunktion für jedes auf
         renderKanji(hex, `kanji-${hex}`);
     });
-}
 
-function renderAllKanji() {
-    const container = document.getElementById('kanji-gallery');
-    if (!container) return;
+
+
 
     myKanjiList.forEach(hex => {
         const div = document.createElement('div');
@@ -276,4 +337,3 @@ function renderAllKanji() {
         // Die Funktion, die wir vorher erstellt haben
         renderKanji(hex, `kanji-${hex}`);
     });
-}
