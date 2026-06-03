@@ -62,7 +62,7 @@
 /* Stil für die animierten Kanji-Pfade */
 .kanji-svg-path {
     fill: none !important;
-    stroke: var(--accent-pink) !important; /* Deutliche Farbe zur Orientierung */
+    stroke: #008b8b !important; /* Dunkles Cyan zur Orientierung */
     stroke-width: 6 !important; /* Dickere Linie für bessere Sichtbarkeit */
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -571,6 +571,9 @@
                     <button class="btn-main btn-small" style="background: var(--text-light)" id="btn-toggle-animation" onclick="toggleKanjiAnimation()">Verstecken</button>
                     <button class="btn-main btn-small" style="background: var(--accent-pink)" onclick="repeatKanjiAnimation()">Wiederholen</button>
                     <button class="btn-main btn-small" style="background: var(--primary-light)" onclick="nextKanjiInBlock()">Nächstes Kanji →</button>
+                </div>
+                <div style="font-size: 10px; color: var(--text-light); text-align: center; margin-top: 15px; opacity: 0.8;">
+                    Kanji-Daten von <a href="https://kanjivg.tagaini.net" target="_blank" style="color: var(--text-light); text-decoration: underline;">KanjiVG</a> (CC BY-SA 3.0)
                 </div>
             </div>
 
