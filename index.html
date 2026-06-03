@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+<!-- Dein Menü-Bereich -->
+<div id="tabs">
+    <button onclick="showTab('schreiben')">Schreiben</button>
+    <button onclick="showTab('quiz')">Quiz</button>
+</div>
 
+<!-- Der Trainer-Bereich, der nur bei "Schreiben" sichtbar sein soll -->
+<div id="kanji-schreiben-tab" style="display: none;">
+    <div id="display-area"></div>
+    <button onclick="repeatAnimation()">Wiederholen</button>
+    <button onclick="nextKanji()">Nächstes Kanji</button>
+</div>
     <script src="kanji-logic.js" defer></script>
 
 <body>

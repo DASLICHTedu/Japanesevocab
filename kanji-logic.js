@@ -1,5 +1,24 @@
 // kanji-logic.js
 // Stelle sicher, dass die Funktionen global verfügbar sind
+function showTab(tabName) {
+    const schreibenTab = document.getElementById('kanji-schreiben-tab');
+    
+    if (tabName === 'schreiben') {
+        schreibenTab.style.display = 'block'; // Zeigen
+        // Starte den Trainer erst, wenn der Tab geöffnet wird
+        if (!document.getElementById('kanji-svg')) {
+            showKanjiTrainer();
+        }
+    } else {
+        schreibenTab.style.display = 'none'; // Verstecken
+    }
+}
+function showKanjiTrainer() {
+    // Statt das body zu nehmen, ziele auf den neuen Tab-Container
+    const display = document.getElementById('display-area');
+    
+    // ... restlicher Code zum Rendern ...
+}
 window.showKanjiTrainer = showKanjiTrainer;
 window.nextKanji = nextKanji;
 window.repeatAnimation = repeatAnimation;
