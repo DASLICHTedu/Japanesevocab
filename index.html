@@ -39,40 +39,36 @@
       stroke-dasharray: 1000;
       stroke-dashoffset: 1000;
   }
-/*SVG auf dem Canvas positionieren*/
-#kanji-svg-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 300px;
-    height: 300px;
-    z-index: 2; /* Liegt über dem Ghost, unter dem Canvas */
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* Über dem Ghost (1), unter dem Canvas (5) */
-    pointer-events: none; /* Klicks gehen durch das SVG zum Canvas */
-    width: 100%;
-    height: 100%;
+/* SVG auf dem Canvas positionieren und zentrieren */
 #kanji-svg-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 2; /* Über dem Ghost (1), unter dem Canvas (5) */
     pointer-events: none; /* Klicks gehen durch das SVG zum Canvas */
+}
+
+/* Das SVG im Wrapper etwas größer machen als das Ghost Kanji (220px) */
+#kanji-svg-wrapper svg {
+    width: 260px; 
+    height: 260px;
 }
 
 /* Stil für die animierten Kanji-Pfade */
 .kanji-svg-path {
     fill: none !important;
-    stroke: var(--primary-dark) !important;
-    stroke-width: 4 !important;
+    stroke: var(--accent-pink) !important; /* Deutliche Farbe zur Orientierung */
+    stroke-width: 6 !important; /* Dickere Linie für bessere Sichtbarkeit */
     stroke-linecap: round;
     stroke-linejoin: round;
-    opacity: 0.3; /* Dezent als Guide im Hintergrund */
+    opacity: 0.7; /* Gut sichtbar als Guide */
     transition: stroke-dashoffset 0.5s ease-in-out;
-}}
+}
 
         /* --- GRUNDDESIGN & FARBEN --- */
         :root {
@@ -17285,7 +17281,17 @@
         } else if (state.kanji.subMode === 'quiz') {
             renderKanjiQuiz();
         } else if (state.kanji.subMode === 'combo') {
-            loadCombo();
+            renderKanjiComboList();
+        }
+    }
+
+    function nextKanjiInBlock() {
+        state.kanji.currentIndex++;
+        if (state.kanji.currentIndex < state.kanji.currentBlock.length) {
+            state.kanji.quizState = 'write';
+            updateKanjiView();
+        } else {
+            switchTab('kanji-results');
         }
     }
 
