@@ -189,6 +189,15 @@
         .kanji-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
         .kanji-block-btn { padding: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
         .kanji-block-btn.active { background: var(--primary-dark); color: white; border-color: var(--primary-dark); }
+        
+        /* --- KANA STYLES --- */
+        .kana-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
+        .kana-card { background: white; border: 1px solid var(--border-color); border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; transition: 0.2s; border-bottom: 4px solid var(--border-color); }
+        .kana-card:hover { transform: translateY(-2px); }
+        .kana-card.completed { border-color: #58cc02; background: #f7ffed; color: #46a302; border-bottom-color: #46a302; }
+        .kana-char-preview { font-size: 24px; font-weight: bold; margin-bottom: 5px; }
+        .kana-name { font-size: 14px; color: var(--text-light); font-weight: 600; }
+
         .canvas-actions { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
         .btn-small { padding: 8px 15px; border-radius: 20px; font-size: 12px; }
         .stroke-error { color: var(--accent-pink); font-weight: bold; text-align: center; margin-top: 10px; height: 20px; }
@@ -316,6 +325,7 @@
         <div class="tabs">
             <button class="tab active" onclick="switchTab('lernen')" id="tab-lernen">Lernen</button>
             <button class="tab" onclick="switchTab('liste')" id="tab-liste">Liste</button>
+            <button class="tab" onclick="switchTab('kana')" id="tab-kana">Kana</button>
             <button class="tab" onclick="switchTab('lesen')" id="tab-lesen">Lesen</button>
             <button class="tab" onclick="switchTab('kanji')" id="tab-kanji">Kanji</button>
             <button class="tab" onclick="switchTab('grammatik')" id="tab-grammatik">Grammatik</button>
@@ -522,6 +532,51 @@
         </div>
     </main>
 
+    <main id="view-kana" class="hidden">
+        <h1 id="ui-kana-title">Hiragana & Katakana</h1>
+        <p class="subtitle">Lerne die japanischen Silbenschriften Schritt für Schritt.</p>
+        
+        <div class="toggle-group" style="margin-bottom: 20px;">
+            <button class="toggle-btn active" id="btn-kana-hira" onclick="setKanaType('hiragana')">Hiragana</button>
+            <button class="toggle-btn" id="btn-kana-kata" onclick="setKanaType('katakana')">Katakana</button>
+        </div>
+
+        <div id="kana-groups-container" class="kana-grid">
+            <!-- Kana Gruppen werden hier generiert -->
+        </div>
+    </main>
+
+    <main id="view-kana-lesson" class="hidden">
+        <div class="fc-header">
+            <span style="cursor:pointer;" onclick="switchTab('kana')">← Zurück</span>
+            <span id="kana-lesson-title">Lektion</span>
+            <span id="kana-lesson-progress-text">1/10</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="kana-lesson-progress-fill"></div></div>
+
+        <div id="kana-exercise-area">
+            <!-- Dynamische Übungen: Tracing, Choice, Sound -->
+        </div>
+
+        <div id="kana-feedback" class="path-feedback-card">
+            <div class="path-feedback-header">
+                <span id="kana-feedback-icon"></span>
+                <span id="kana-feedback-title"></span>
+            </div>
+            <p id="kana-feedback-msg"></p>
+        </div>
+        <button id="btn-kana-next" class="btn-main hidden" style="margin-top: 20px;" onclick="nextKanaStep()">Weiter →</button>
+    </main>
+
+    <main id="view-kana-results" class="hidden">
+        <div class="typing-container">
+            <h1 style="font-size: 60px;">🎉</h1>
+            <h2>Lektion abgeschlossen!</h2>
+            <p class="subtitle">Du hast diese Zeichen gelernt.</p>
+            <button class="btn-main" onclick="switchTab('kana')">Zurück zur Übersicht</button>
+        </div>
+    </main>
+
     <main id="view-kanji" class="hidden">
         <h1>Kanji Trainer <span class="badge" id="kanji-level-badge">N5</span></h1>
         <p class="subtitle">Konzentriere dich auf die Schriftzeichen.</p>
@@ -721,6 +776,31 @@
 </script>
 <script>
     // --- NEUE DATEN FÜR ALLTAG & PFAD ---
+    const kanaDataFull = {
+        hiragana: [
+            { id: 'h1', name: 'Vokale', chars: [
+                { c: 'あ', r: 'a' }, { c: 'い', r: 'i' }, { c: 'う', r: 'u' }, { c: 'え', r: 'e' }, { c: 'お', r: 'o' }
+            ]},
+            { id: 'h2', name: 'K-Reihe', chars: [
+                { c: 'か', r: 'ka' }, { c: 'き', r: 'ki' }, { c: 'く', r: 'ku' }, { c: 'け', r: 'ke' }, { c: 'こ', r: 'ko' }
+            ]},
+            { id: 'h3', name: 'S-Reihe', chars: [
+                { c: 'さ', r: 'sa' }, { c: 'し', r: 'shi' }, { c: 'す', r: 'su' }, { c: 'せ', r: 'se' }, { c: 'そ', r: 'so' }
+            ]},
+            { id: 'h4', name: 'T-Reihe', chars: [
+                { c: 'た', r: 'ta' }, { c: 'ち', r: 'chi' }, { c: 'つ', r: 'tsu' }, { c: 'て', r: 'te' }, { c: 'と', r: 'to' }
+            ]}
+        ],
+        katakana: [
+            { id: 'k1', name: 'Vokale', chars: [
+                { c: 'ア', r: 'a' }, { c: 'イ', r: 'i' }, { c: 'ウ', r: 'u' }, { c: 'エ', r: 'e' }, { c: 'オ', r: 'o' }
+            ]},
+            { id: 'k2', name: 'K-Reihe', chars: [
+                { c: 'カ', r: 'キ', r: 'ki' }, { c: 'ク', r: 'ku' }, { c: 'ケ', r: 'ke' }, { c: 'コ', r: 'ko' }
+            ]}
+        ]
+    };
+
     const everydayVocabData = {
         "Begrüßung & Höflichkeit": [
             { kana: "おはようございます", kanji: "おはようございます", de: "Guten Morgen (höflich)", en: "Good morning (polite)", type: "Begrüßung" },
@@ -934,6 +1014,7 @@
             levelLabel: "漢 JLPT",
             tabLernen: "Lernen",
             tabListe: "Liste",
+            tabKana: "Kana",
             tabLesen: "Lesen",
             tabKanji: "Kanji",
             tabGrammatik: "Grammatik",
@@ -944,6 +1025,7 @@
             vocabCountLabel: "Vokabeln",
             learnedLabel: "gelernt",
             modeLabel: "Lernmodus",
+            kanaTitle: "Hiragana & Katakana",
             modeFlash: "Karteikarten",
             modeFlashDesc: "Karte umdrehen & bewerten",
             modeQuiz: "Abfragen",
@@ -970,6 +1052,7 @@
             levelLabel: "漢 JLPT",
             tabLernen: "Learn",
             tabListe: "List",
+            tabKana: "Kana",
             tabLesen: "Reading",
             tabKanji: "Kanji",
             tabGrammatik: "Grammar",
@@ -980,6 +1063,7 @@
             vocabCountLabel: "Vocabulary",
             learnedLabel: "learned",
             modeLabel: "Learning Mode",
+            kanaTitle: "Hiragana & Katakana",
             modeFlash: "Flashcards",
             modeFlashDesc: "Flip card & rate",
             modeQuiz: "Quiz",
@@ -1016,6 +1100,144 @@
         renderPathVocabBlocks();
     }
 
+    // --- KANA TRAINER LOGIC ---
+    let currentKanaType = 'hiragana';
+    let currentKanaLesson = null;
+    let currentKanaStep = 0;
+    let kanaPassed = JSON.parse(localStorage.getItem('kanaPassed') || '[]');
+
+    function setKanaType(type) {
+        currentKanaType = type;
+        document.getElementById('btn-kana-hira').classList.toggle('active', type === 'hiragana');
+        document.getElementById('btn-kana-kata').classList.toggle('active', type === 'katakana');
+        renderKanaBlocks();
+    }
+
+    function renderKanaBlocks() {
+        const container = document.getElementById('kana-groups-container');
+        const groups = kanaDataFull[currentKanaType];
+        container.innerHTML = groups.map(group => {
+            const isDone = kanaPassed.includes(group.id);
+            return `
+                <div class="kana-card ${isDone ? 'completed' : ''}" onclick="startKanaLesson('${group.id}')">
+                    <div class="kana-char-preview">${group.chars.map(c => c.c).join('')}</div>
+                    <div class="kana-name">${group.name}</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function startKanaLesson(groupId) {
+        const group = kanaDataFull[currentKanaType].find(g => group.id === groupId || g.id === groupId);
+        currentKanaLesson = group;
+        currentKanaStep = 0;
+        
+        // Übungen generieren (Duolingo Style: Intro -> Tracing -> Quiz)
+        const exercises = [];
+        group.chars.forEach(char => {
+            exercises.push({ type: 'intro', char: char.c, romaji: char.r });
+            exercises.push({ type: 'trace', char: char.c, romaji: char.r });
+            exercises.push({ type: 'recognize', char: char.c, romaji: char.r });
+        });
+        // Mix der restlichen Quiz-Fragen
+        const quizMix = [...group.chars].sort(() => Math.random() - 0.5);
+        quizMix.forEach(char => {
+            exercises.push({ type: 'sound_match', char: char.c, romaji: char.r });
+        });
+
+        currentKanaLesson.exercises = exercises;
+        switchTab('kana-lesson');
+        loadKanaStep();
+    }
+
+    function loadKanaStep() {
+        const area = document.getElementById('kana-exercise-area');
+        const step = currentKanaLesson.exercises[currentKanaStep];
+        const t = uiTranslations[state.lang];
+        
+        document.getElementById('kana-lesson-title').innerText = currentKanaLesson.name;
+        document.getElementById('kana-lesson-progress-text').innerText = `${currentKanaStep + 1}/${currentKanaLesson.exercises.length}`;
+        document.getElementById('kana-lesson-progress-fill').style.width = `${((currentKanaStep+1)/currentKanaLesson.exercises.length)*100}%`;
+        document.getElementById('btn-kana-next').classList.add('hidden');
+        document.getElementById('kana-feedback').className = 'path-feedback-card';
+
+        if (step.type === 'intro') {
+            area.innerHTML = `
+                <div class="typing-container">
+                    <div class="kanji-big" style="font-size:120px;">${step.char}</div>
+                    <h2 style="color:var(--accent-pink); font-size:40px;">${step.romaji}</h2>
+                    <button class="btn-speak" onclick="speak('${step.char}')">🔊 Hören</button>
+                    <button class="btn-main" style="margin-top:30px;" onclick="nextKanaStep()">Weiter</button>
+                </div>`;
+        } else if (step.type === 'trace') {
+            area.innerHTML = `
+                <div class="typing-container">
+                    <p class="subtitle">Zeichne das Zeichen nach</p>
+                    <div class="kanji-canvas-container">
+                        <div id="kanji-ghost" style="color:#eee;">${step.char}</div>
+                        <div id="kanji-svg-wrapper"></div>
+                        <canvas id="kana-canvas" width="300" height="300" style="position:absolute; top:0; left:0; z-index:5;"></canvas>
+                    </div>
+                    <button class="btn-speak" onclick="speak('${step.char}')">🔊 ${step.romaji}</button>
+                    <button class="btn-main" style="margin-top:20px;" onclick="checkKanaTrace()">Fertig</button>
+                </div>`;
+            setTimeout(() => {
+                setupCanvasEvents(document.getElementById('kana-canvas'));
+                loadAndAnimateKanji(step.char);
+            }, 50);
+        } else if (step.type === 'recognize' || step.type === 'sound_match') {
+            const options = [step.romaji];
+            while(options.length < 4) {
+                const r = currentKanaLesson.chars[Math.floor(Math.random()*currentKanaLesson.chars.length)].r;
+                if(!options.includes(r)) options.push(r);
+            }
+            options.sort(() => Math.random() - 0.5);
+            
+            area.innerHTML = `
+                <div class="typing-container">
+                    <div class="kanji-big">${step.type === 'recognize' ? step.char : '🔊'}</div>
+                    ${step.type === 'sound_match' ? `<button class="btn-main" onclick="speak('${step.char}')">Abspielen</button>` : ''}
+                    <p class="subtitle" style="margin-top:20px;">Wähle die richtige Aussprache</p>
+                    <div class="path-option-grid">
+                        ${options.map(o => `<button class="quiz-option" onclick="checkKanaAnswer('${o}', '${step.romaji}')">${o}</button>`).join('')}
+                    </div>
+                </div>`;
+            if(step.type === 'sound_match') speak(step.char);
+        }
+    }
+
+    function checkKanaAnswer(input, correct) {
+        const feedback = document.getElementById('kana-feedback');
+        if (input === correct) {
+            playSound('correct');
+            feedback.className = 'path-feedback-card correct';
+            document.getElementById('kana-feedback-title').innerText = 'Gut gemacht!';
+            document.getElementById('btn-kana-next').classList.remove('hidden');
+        } else {
+            playSound('wrong');
+            feedback.className = 'path-feedback-card wrong';
+            document.getElementById('kana-feedback-title').innerText = 'Leider falsch';
+            document.getElementById('kana-feedback-msg').innerText = `Richtig wäre: ${correct}`;
+            document.getElementById('btn-kana-next').classList.remove('hidden');
+        }
+    }
+    
+    function checkKanaTrace() {
+        document.getElementById('btn-kana-next').classList.remove('hidden');
+        nextKanaStep();
+    }
+
+    function nextKanaStep() {
+        currentKanaStep++;
+        if (currentKanaStep < currentKanaLesson.exercises.length) {
+            loadKanaStep();
+        } else {
+            if (!kanaPassed.includes(currentKanaLesson.id)) kanaPassed.push(currentKanaLesson.id);
+            localStorage.setItem('kanaPassed', JSON.stringify(kanaPassed));
+            switchTab('kana-results');
+        }
+    }
+
     let currentPathLesson = null;
     let currentPathStepIdx = 0;
     let pathCorrectAnswers = 0;
@@ -1041,6 +1263,7 @@
         document.getElementById('ui-level-label').innerText = t.levelLabel;
         document.getElementById('tab-lernen').innerText = t.tabLernen;
         document.getElementById('tab-liste').innerText = t.tabListe;
+        document.getElementById('tab-kana').innerText = t.tabKana;
         document.getElementById('tab-lesen').innerText = t.tabLesen;
         document.getElementById('tab-kanji').innerText = t.tabKanji;
         document.getElementById('tab-grammatik').innerText = t.tabGrammatik;
@@ -1051,6 +1274,7 @@
         document.getElementById('ui-vocab-count-label').innerText = t.vocabCountLabel;
         document.getElementById('ui-learned-label').innerText = t.learnedLabel;
         document.getElementById('ui-mode-label').innerText = t.modeLabel;
+        document.getElementById('ui-kana-title').innerText = t.kanaTitle;
         document.getElementById('ui-mode-flash').innerText = t.modeFlash;
         document.getElementById('ui-mode-flash-desc').innerText = t.modeFlashDesc;
         document.getElementById('ui-mode-quiz').innerText = t.modeQuiz;
@@ -16716,6 +16940,7 @@
         if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson', 'path-results'].includes(tabId)) {
             tabBtn.classList.add('active');
         }
+        if (tabId === 'kana') renderKanaBlocks();
 
         if (tabId === 'alltag') renderAlltagCategories();
         if (tabId === 'pfad') renderPath();
