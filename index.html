@@ -778,6 +778,9 @@
     // --- NEUE DATEN FÜR ALLTAG & PFAD ---
     const kanaDataFull = {
         hiragana: [
+            { id: 'h1', name: 'Vokale', chars: [
+                { c: 'あ', r: 'a' }, { c: 'い', r: 'i' }, { c: 'う', r: 'u' }, { c: 'え', r: 'e' }, { c: 'お', r: 'o' }
+            ]},
              { id: 'h2', name: 'K-Reihe', chars: [
                 { c: 'か', r: 'ka' }, { c: 'き', r: 'ki' }, { c: 'く', r: 'ku' }, { c: 'け', r: 'ke' }, { c: 'こ', r: 'ko' }
             ]},
@@ -809,16 +812,16 @@
                 { c: 'が', r: 'ga' }, { c: 'ぎ', r: 'gi' }, { c: 'ぐ', r: 'gu' }, { c: 'げ', r: 'ge' }, { c: 'ご', r: 'go' }
             ]},
             { id: 'h_dak2', name: 'Z-Reihe (Dakuten)', chars: [
-                { c: 'ざ', r: 'じ', r: 'ji' }, { c: 'ず', r: 'zu' }, { c: 'ぜ', r: 'ze' }, { c: 'ぞ', r: 'zo' }
+                { c: 'ざ', r: 'za' }, { c: 'じ', r: 'ji' }, { c: 'ず', r: 'zu' }, { c: 'ぜ', r: 'ze' }, { c: 'ぞ', r: 'zo' }
             ]},
             { id: 'h_dak3', name: 'D-Reihe (Dakuten)', chars: [
                 { c: 'だ', r: 'da' }, { c: 'ぢ', r: 'ji' }, { c: 'づ', r: 'zu' }, { c: 'で', r: 'de' }, { c: 'ど', r: 'do' }
             ]},
             { id: 'h_dak4', name: 'B-Reihe (Dakuten)', chars: [
-                { c: 'ば', r: 'bi' }, { c: 'ぶ', r: 'bu' }, { c: 'べ', r: 'be' }, { c: 'ぼ', r: 'bo' }
+                { c: 'ば', r: 'ba' }, { c: 'び', r: 'bi' }, { c: 'ぶ', r: 'bu' }, { c: 'べ', r: 'be' }, { c: 'ぼ', r: 'bo' }
             ]},
             { id: 'h_dak5', name: 'P-Reihe (Handakuten)', chars: [
-                { c: 'ぱ', r: 'pi' }, { c: 'ぷ', r: 'pu' }, { c: 'ぺ', r: 'pe' }, { c: 'ぽ', r: 'po' }
+                { c: 'ぱ', r: 'pa' }, { c: 'ぴ', r: 'pi' }, { c: 'ぷ', r: 'pu' }, { c: 'ぺ', r: 'pe' }, { c: 'ぽ', r: 'po' }
             ]},
             { id: 'h_comb1', name: 'Kombinationen (K/S)', chars: [
                 { c: 'きゃ', r: 'kya' }, { c: 'きゅ', r: 'kyu' }, { c: 'きょ', r: 'kyo' },
@@ -828,6 +831,18 @@
                 { c: 'ちゃ', r: 'cha' }, { c: 'ちゅ', r: 'chu' }, { c: 'ちょ', r: 'cho' },
                 { c: 'にゃ', r: 'nya' }, { c: 'にゅ', r: 'nyu' }, { c: 'にょ', r: 'nyo' },
                 { c: 'ひゃ', r: 'hya' }, { c: 'ひゅ', r: 'hyu' }, { c: 'ひょ', r: 'hyo' }
+            ]},
+            { id: 'h_comb3', name: 'Kombinationen (M/R)', chars: [
+                { c: 'みゃ', r: 'mya' }, { c: 'みゅ', r: 'myu' }, { c: 'みょ', r: 'myo' },
+                { c: 'りゃ', r: 'rya' }, { c: 'りゅ', r: 'ryu' }, { c: 'りょ', r: 'ryo' }
+            ]},
+            { id: 'h_comb4', name: 'Kombinationen (G/Z/J)', chars: [
+                { c: 'ぎゃ', r: 'gya' }, { c: 'ぎゅ', r: 'gyu' }, { c: 'ぎょ', r: 'gyo' },
+                { c: 'じゃ', r: 'ja' }, { c: 'じゅ', r: 'ju' }, { c: 'じょ', r: 'jo' }
+            ]},
+            { id: 'h_comb5', name: 'Kombinationen (B/P)', chars: [
+                { c: 'びゃ', r: 'bya' }, { c: 'びゅ', r: 'byu' }, { c: 'びょ', r: 'byo' },
+                { c: 'ぴゃ', r: 'pya' }, { c: 'ぴゅ', r: 'pyu' }, { c: 'ぴょ', r: 'pyo' }
             ]}
         ],
         katakana: [
@@ -835,7 +850,6 @@
                 { c: 'ア', r: 'a' }, { c: 'イ', r: 'i' }, { c: 'ウ', r: 'u' }, { c: 'エ', r: 'e' }, { c: 'オ', r: 'o' }
             ]},
             { id: 'k2', name: 'K-Reihe', chars: [
-                { c: 'カ', r: 'キ', r: 'ki' }, { c: 'ク', r: 'ku' }, { c: 'ケ', r: 'ke' }, { c: 'コ', r: 'ko' },
                 { c: 'カ', r: 'ka' }, { c: 'キ', r: 'ki' }, { c: 'ク', r: 'ku' }, { c: 'ケ', r: 'ke' }, { c: 'コ', r: 'ko' }
             ]},
             { id: 'k3', name: 'S-Reihe', chars: [
@@ -866,20 +880,37 @@
                 { c: 'ガ', r: 'ga' }, { c: 'ギ', r: 'gi' }, { c: 'グ', r: 'gu' }, { c: 'ゲ', r: 'ge' }, { c: 'ゴ', r: 'go' }
             ]},
             { id: 'k_dak2', name: 'Z-Reihe (Dakuten)', chars: [
-                { c: 'ザ', r: 'ジ', r: 'ji' }, { c: 'ズ', r: 'zu' }, { c: 'ゼ', r: 'ze' }, { c: 'ゾ', r: 'zo' }
+                { c: 'ザ', r: 'za' }, { c: 'ジ', r: 'ji' }, { c: 'ズ', r: 'zu' }, { c: 'ゼ', r: 'ze' }, { c: 'ゾ', r: 'zo' }
             ]},
             { id: 'k_dak3', name: 'D-Reihe (Dakuten)', chars: [
                 { c: 'ダ', r: 'ヂ', r: 'ji' }, { c: 'ヅ', r: 'zu' }, { c: 'デ', r: 'de' }, { c: 'ド', r: 'do' }
             ]},
             { id: 'k_dak4', name: 'B-Reihe (Dakuten)', chars: [
-                { c: 'バ', r: 'bi' }, { c: 'ブ', r: 'bu' }, { c: 'ベ', r: 'be' }, { c: 'ボ', r: 'bo' }
+                { c: 'バ', r: 'ba' }, { c: 'ビ', r: 'bi' }, { c: 'ブ', r: 'bu' }, { c: 'ベ', r: 'be' }, { c: 'ボ', r: 'bo' }
             ]},
             { id: 'k_dak5', name: 'P-Reihe (Handakuten)', chars: [
-                { c: 'パ', r: 'pi' }, { c: 'プ', r: 'pu' }, { c: 'ペ', r: 'pe' }, { c: 'ポ', r: 'po' }
+                { c: 'パ', r: 'pa' }, { c: 'ピ', r: 'pi' }, { c: 'プ', r: 'pu' }, { c: 'ペ', r: 'pe' }, { c: 'ポ', r: 'po' }
             ]},
             { id: 'k_comb1', name: 'Kombinationen (K/S)', chars: [
                 { c: 'キャ', r: 'kya' }, { c: 'キュ', r: 'kyu' }, { c: 'キョ', r: 'kyo' },
                 { c: 'シャ', r: 'sha' }, { c: 'シュ', r: 'shu' }, { c: 'ショ', r: 'sho' }
+            ]},
+            { id: 'k_comb2', name: 'Kombinationen (C/N/H)', chars: [
+                { c: 'チャ', r: 'cha' }, { c: 'チュ', r: 'chu' }, { c: 'チョ', r: 'cho' },
+                { c: 'ニャ', r: 'nya' }, { c: 'ニュ', r: 'nyu' }, { c: 'ニョ', r: 'nyo' },
+                { c: 'ヒャ', r: 'hya' }, { c: 'ヒュ', r: 'hyu' }, { c: 'ヒョ', r: 'hyo' }
+            ]},
+            { id: 'k_comb3', name: 'Kombinationen (M/R)', chars: [
+                { c: 'ミャ', r: 'mya' }, { c: 'ミュ', r: 'myu' }, { c: 'ミョ', r: 'myo' },
+                { c: 'リャ', r: 'rya' }, { c: 'リュ', r: 'ryu' }, { c: 'リョ', r: 'ryo' }
+            ]},
+            { id: 'k_comb4', name: 'Kombinationen (G/Z/J)', chars: [
+                { c: 'ギャ', r: 'gya' }, { c: 'ギュ', r: 'gyu' }, { c: 'ギョ', r: 'gyo' },
+                { c: 'ジャ', r: 'ja' }, { c: 'ジュ', r: 'ju' }, { c: 'ジョ', r: 'jo' }
+            ]},
+            { id: 'k_comb5', name: 'Kombinationen (B/P)', chars: [
+                { c: 'ビャ', r: 'bya' }, { c: 'ビュ', r: 'byu' }, { c: 'ビョ', r: 'byo' },
+                { c: 'ピャ', r: 'pya' }, { c: 'ピュ', r: 'pyu' }, { c: 'ピョ', r: 'pyo' }
             ]}
         ]
     };
