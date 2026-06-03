@@ -1296,27 +1296,82 @@
                     <button class="btn-main" style="margin-top:20px;" onclick="checkKanaTrace()">Fertig</button>
                 </div>`;
             setTimeout(() => {
-                setupCanvasEvents(document.getElementById('kana-canvas'));
+                const canvas = document.getElementById('kana-canvas');
+                if(canvas) setupCanvasEvents(canvas);
                 loadAndAnimateKanji(step.char);
             }, 50);
-        } else if (step.type === 'recognize' || step.type === 'sound_match') {
+        } else if (step.type === 'recognize' || step.type === 'sound_match' || step.type === 'reverse_recognize') {
             const options = [step.romaji];
+            const isReverse = step.type === 'reverse_recognize';
+            
             while(options.length < 4) {
                 const r = currentKanaLesson.chars[Math.floor(Math.random()*currentKanaLesson.chars.length)].r;
                 if(!options.includes(r)) options.push(r);
             }
             options.sort(() => Math.random() - 0.5);
             
+            const getCharByRomaji = (r) => currentKanaLesson.chars.find(c => c.r === r).c;
+
             area.innerHTML = `
                 <div class="typing-container">
-                    <div class="kanji-big">${step.type === 'recognize' ? step.char : '🔊'}</div>
+                    <div class="kanji-big">${isReverse ? step.romaji : (step.type === 'recognize' ? step.char : '🔊')}</div>
                     ${step.type === 'sound_match' ? `<button class="btn-main" onclick="speak('${step.char}')">Abspielen</button>` : ''}
-                    <p class="subtitle" style="margin-top:20px;">Wähle die richtige Aussprache</p>
+                    <p class="subtitle" style="margin-top:20px;">${isReverse ? 'Wähle das richtige Zeichen' : 'Wähle die richtige Aussprache'}</p>
                     <div class="path-option-grid">
-                        ${options.map(o => `<button class="quiz-option" onclick="checkKanaAnswer('${o}', '${step.romaji}')">${o}</button>`).join('')}
+                        ${options.map(o => `
+                            <button class="quiz-option" style="text-align:center; font-size: 24px;" 
+                                onclick="checkKanaAnswer('${o}', '${step.romaji}')">${isReverse ? getCharByRomaji(o) : o}</button>
+                        `).join('')}
                     </div>
                 </div>`;
             if(step.type === 'sound_match') speak(step.char);
+        } else if (step.type === 'matching') {
+            const kanas = [...step.chars].sort(() => Math.random() - 0.5);
+            const romajis = [...step.chars].sort(() => Math.random() - 0.5);
+            area.innerHTML = `
+                <div class="typing-container">
+                    <p class="subtitle">Finde die Paare</p>
+                    <div style="display: flex; gap: 20px; justify-content: center;">
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            ${kanas.map(k => `<button class="quiz-option" id="match-k-${k.c}" onclick="selectMatch('${k.c}', 'kana')">${k.c}</button>`).join('')}
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            ${romajis.map(r => `<button class="quiz-option" id="match-r-${r.r}" onclick="selectMatch('${r.r}', 'romaji')">${r.r}</button>`).join('')}
+                        </div>
+                    </div>
+                </div>`;
+        }
+    }
+
+    let matchSelection = { kana: null, romaji: null };
+    function selectMatch(val, type) {
+        if (matchSelection[type]) {
+            document.getElementById(`match-${type === 'kana' ? 'k' : 'r'}-${matchSelection[type]}`).classList.remove('active');
+        }
+        matchSelection[type] = val;
+        document.getElementById(`match-${type === 'kana' ? 'k' : 'r'}-${val}`).classList.add('active');
+
+        if (matchSelection.kana && matchSelection.romaji) {
+            const char = currentKanaLesson.chars.find(c => c.c === matchSelection.kana);
+            if (char && char.r === matchSelection.romaji) {
+                playSound('correct');
+                document.getElementById(`match-k-${matchSelection.kana}`).style.visibility = 'hidden';
+                document.getElementById(`match-r-${matchSelection.romaji}`).style.visibility = 'hidden';
+                matchSelection = { kana: null, romaji: null };
+                
+                const remaining = Array.from(document.querySelectorAll('.quiz-option')).filter(b => b.style.visibility !== 'hidden');
+                if (remaining.length === 0) nextKanaStep();
+            } else {
+                playSound('wrong');
+                document.querySelectorAll('.quiz-option.active').forEach(b => b.classList.add('wrong'));
+                setTimeout(() => {
+                    document.querySelectorAll('.quiz-option.active').forEach(b => {
+                        b.classList.remove('active');
+                        b.classList.remove('wrong');
+                    });
+                    matchSelection = { kana: null, romaji: null };
+                }, 500);
+            }
         }
     }
 
