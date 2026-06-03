@@ -26,11 +26,32 @@ window.renderKanji = renderKanji;
 let currentIndex = 0;
 // kanji-logic.js
 
-// Sicherstellen, dass alles global ist
+// kanji-logic.js
+
+// Diese Zeilen machen die Funktionen für das HTML-onclick erreichbar
 window.showKanjiTrainer = showKanjiTrainer;
 window.nextKanji = nextKanji;
 window.repeatAnimation = repeatAnimation;
-window.renderKanji = renderKanji;
+
+async function renderKanji(hexCode, targetId) {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+
+    // HIER DER PROXY-FIX gegen den CORS-Fehler
+    const githubUrl = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+    const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(githubUrl);
+    
+    try {
+        const response = await fetch(proxyUrl);
+        const svgText = await response.text();
+        
+        container.innerHTML = `<div class="kanji-box">${svgText}</div>`;
+        
+        // ... (dein restlicher Code für die Pfad-Animation)
+    } catch (e) {
+        console.error("Fehler beim Laden:", e);
+    }
+}
 
 // ... dein Array ...
 

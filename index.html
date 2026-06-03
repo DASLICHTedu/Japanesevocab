@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+    <div id="kanji-gallery"></div>
+
+<script>
+    // Wir warten, bis ALLES geladen ist (auch kanji-logic.js)
+    window.addEventListener('load', () => {
+        // Erst wenn das Skript bereit ist, rufen wir die Funktion auf
+        if (typeof window.showKanjiTrainer === 'function') {
+            window.showKanjiTrainer();
+        } else {
+            console.error("Fehler: showKanjiTrainer wurde in kanji-logic.js nicht gefunden!");
+        }
+    });
+</script>
 <!-- Dein Menü-Bereich -->
 <div id="tabs">
     <button onclick="showTab('schreiben')">Schreiben</button>
@@ -17355,19 +17368,6 @@
     function clearRadicalCanvas() {
         const cvs = document.getElementById('kanji-canvas-radical');
         if (cvs) cvs.getContext('2d').clearRect(0, 0, cvs.width, cvs.height);
-    }
-
-    function nextKanjiInBlock() {
-        state.kanji.currentIndex++;
-        if (state.kanji.currentIndex >= state.kanji.currentBlock.length) {
-            state.kanji.currentIndex = 0;
-            if (state.kanji.subMode === 'quiz') {
-                switchTab('kanji-results');
-                return;
-            }
-        }
-        state.kanji.quizState = 'write';
-        updateKanjiView();
     }
 
     function renderKanjiQuiz() {
