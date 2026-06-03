@@ -568,6 +568,7 @@
                 <div id="kw-feedback" class="stroke-error"></div>
                 <div class="canvas-actions">
                     <button class="btn-main btn-small" onclick="clearKanjiCanvas()">Löschen</button>
+                    <button class="btn-main btn-small" style="background: var(--text-light)" id="btn-toggle-animation" onclick="toggleKanjiAnimation()">Verstecken</button>
                     <button class="btn-main btn-small" style="background: var(--accent-pink)" onclick="repeatKanjiAnimation()">Wiederholen</button>
                     <button class="btn-main btn-small" style="background: var(--primary-light)" onclick="nextKanjiInBlock()">Nächstes Kanji →</button>
                 </div>
@@ -17179,6 +17180,11 @@
         if (!wrapper) return;
         wrapper.innerHTML = '';
 
+        // Striche wieder anzeigen, falls sie versteckt waren
+        wrapper.style.display = 'flex';
+        const toggleBtn = document.getElementById('btn-toggle-animation');
+        if (toggleBtn) toggleBtn.innerText = 'Verstecken';
+
         const hex = kanji.charCodeAt(0).toString(16).padStart(5, '0');
         const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
 
@@ -17214,6 +17220,18 @@
     function repeatKanjiAnimation() {
         const item = state.kanji.currentBlock[state.kanji.currentIndex];
         if (item) loadAndAnimateKanji(item.kanji);
+    }
+
+    function toggleKanjiAnimation() {
+        const wrapper = document.getElementById('kanji-svg-wrapper');
+        const btn = document.getElementById('btn-toggle-animation');
+        if (wrapper.style.display === 'none') {
+            wrapper.style.display = 'flex';
+            btn.innerText = 'Verstecken';
+        } else {
+            wrapper.style.display = 'none';
+            btn.innerText = 'Anzeigen';
+        }
     }
 
     function toggleKanjiOverview() {
