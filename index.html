@@ -1330,12 +1330,12 @@
             const romajis = [...step.chars].sort(() => Math.random() - 0.5);
             area.innerHTML = `
                 <div class="typing-container">
-                    <p class="subtitle">Finde die Paare</p>
+                    <p class="subtitle" style="margin-bottom:20px;">Finde die Paare</p>
                     <div style="display: flex; gap: 20px; justify-content: center;">
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
                             ${kanas.map(k => `<button class="quiz-option" id="match-k-${k.c}" onclick="selectMatch('${k.c}', 'kana')">${k.c}</button>`).join('')}
                         </div>
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
                             ${romajis.map(r => `<button class="quiz-option" id="match-r-${r.r}" onclick="selectMatch('${r.r}', 'romaji')">${r.r}</button>`).join('')}
                         </div>
                     </div>
