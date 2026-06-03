@@ -1,30 +1,29 @@
 // kanji-logic.js
-// Stelle sicher, dass die Funktionen global verfügbar sind
+
+// Sicherstellen, dass das HTML die Funktionen findet
+window.showTab = showTab;
+window.repeatAnimation = repeatAnimation;
+window.nextKanji = nextKanji;
+
 function showTab(tabName) {
     const schreibenTab = document.getElementById('kanji-schreiben-tab');
     
     if (tabName === 'schreiben') {
-        schreibenTab.style.display = 'block'; // Zeigen
-        // Starte den Trainer erst, wenn der Tab geöffnet wird
-        if (!document.getElementById('kanji-svg')) {
+        schreibenTab.style.display = 'block';
+        // Trainer nur starten, wenn noch kein Kanji geladen wurde
+        if (document.getElementById('display-area').innerHTML.trim() === '') {
             showKanjiTrainer();
         }
     } else {
-        schreibenTab.style.display = 'none'; // Verstecken
+        schreibenTab.style.display = 'none';
     }
 }
-function showKanjiTrainer() {
-    // Statt das body zu nehmen, ziele auf den neuen Tab-Container
+
+async function showKanjiTrainer() {
+    // Ziel: display-area statt kanji-gallery
     const display = document.getElementById('display-area');
-    
-    // ... restlicher Code zum Rendern ...
+    // ... hier kommt deine Logik zum Rendern hin ...
 }
-window.showKanjiTrainer = showKanjiTrainer;
-window.nextKanji = nextKanji;
-window.repeatAnimation = repeatAnimation;
-window.renderKanji = renderKanji;
-let currentIndex = 0;
-// kanji-logic.js
 
 // kanji-logic.js
 

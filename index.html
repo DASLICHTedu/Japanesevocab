@@ -1,44 +1,21 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <div id="kanji-gallery"></div>
-
-<script>
-    // Wir warten, bis ALLES geladen ist (auch kanji-logic.js)
-    window.addEventListener('load', () => {
-        // Erst wenn das Skript bereit ist, rufen wir die Funktion auf
-        if (typeof window.showKanjiTrainer === 'function') {
-            window.showKanjiTrainer();
-        } else {
-            console.error("Fehler: showKanjiTrainer wurde in kanji-logic.js nicht gefunden!");
-        }
-    });
-</script>
-<!-- Dein Menü-Bereich -->
 <div id="tabs">
     <button onclick="showTab('schreiben')">Schreiben</button>
     <button onclick="showTab('quiz')">Quiz</button>
 </div>
 
-<!-- Der Trainer-Bereich, der nur bei "Schreiben" sichtbar sein soll -->
 <div id="kanji-schreiben-tab" style="display: none;">
-    <div id="display-area"></div>
-    <button onclick="repeatAnimation()">Wiederholen</button>
-    <button onclick="nextKanji()">Nächstes Kanji</button>
+    <div id="display-area">
+        </div>
+    <div style="margin-top: 10px;">
+        <button onclick="repeatAnimation()">Wiederholen</button>
+        <button onclick="nextKanji()">Nächstes Kanji</button>
+    </div>
 </div>
-    <script src="kanji-logic.js" defer></script>
 
-<body>
-    <div id="kanji-gallery"></div>
-    
-    <script>
-        // Warte, bis der Browser das DOM und die kanji-logic.js geladen hat
-        window.addEventListener('load', () => {
-            if (typeof window.showKanjiTrainer === 'function') {
-                window.showKanjiTrainer();
-            }
-        });
-    </script>
+<script src="kanji-logic.js" defer></script>
 </body>
     <!-- Für die Browser-Tabs (Favicon) -->
 <link rel="icon" href="Icon.png" type="image/png">
