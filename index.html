@@ -280,6 +280,8 @@
         .quiz-option { width: 100%; padding: 15px; background: white; border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 10px; text-align: left; cursor: pointer; transition: 0.2s; font-size: 16px; }
         .quiz-option:hover { background: #f8f9fc; }
         .quiz-option.correct { background: #10b981; color: white; border-color: #10b981; }
+        .quiz-option.active { border-color: var(--primary-dark); background: #f0f4ff; border-width: 2px; }
+        .quiz-option.wrong { background: #fee2e2; border-color: #ef4444; }
         .quiz-option.wrong { background: var(--accent-pink); color: white; border-color: var(--accent-pink); }
 
         .results-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0; }
@@ -1374,6 +1376,11 @@
             }
         }
     }
+                setTimeout(() => {
+                    kBtn.classList.remove('active', 'wrong');
+                    rBtn.classList.remove('active', 'wrong');
+                    matchSelection = { kana: null, romaji: null };
+                }, 500);
 
     function checkKanaAnswer(input, correct) {
         const feedback = document.getElementById('kana-feedback');
