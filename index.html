@@ -14,7 +14,20 @@
         <button onclick="nextKanji()">Nächstes Kanji</button>
     </div>
 </div>
+<div id="tabs">
+    <button onclick="showTab('schreiben')">Schreiben</button>
+    <button onclick="showTab('quiz')">Quiz</button>
+</div>
 
+<div id="kanji-schreiben-tab" style="display: none;">
+    <div class="kanji-canvas-container">
+        <div id="kanji-svg-wrapper"></div>
+        <canvas id="kanji-canvas" width="300" height="300"></canvas>
+    </div>
+    
+    <button onclick="repeatAnimation()">Wiederholen</button>
+    <button onclick="nextKanji()">Nächstes Kanji</button>
+</div>
 <script src="kanji-logic.js" defer></script>
 </body>
     <!-- Für die Browser-Tabs (Favicon) -->
@@ -64,10 +77,6 @@
     height: 300px;
     z-index: 2; /* Liegt über dem Ghost, unter dem Canvas */
     pointer-events: none; /* Klicks gehen durch das SVG zum Canvas */
-}
-
-/* Das SVG im Wrapper soll den Platz ausfüllen */
-#kanji-svg-wrapper svg {
     width: 100%;
     height: 100%;
 }

@@ -1,5 +1,43 @@
 // kanji-logic.js
 // kanji-logic.js
+// kanji-logic.js
+
+// 1. GLOBALE ZUWEISUNG (Wichtig für das HTML onclick!)
+window.showTab = showTab;
+window.nextKanji = nextKanji;
+window.repeatAnimation = repeatAnimation;
+
+let currentIndex = 0;
+const KANJI_PER_BLOCK = 5;
+
+// Die Funktion wird EINMAL beim Start aufgerufen
+async function showKanjiTrainer() {
+    const wrapper = document.getElementById('kanji-svg-wrapper');
+    if (!wrapper) return;
+    loadCurrentKanji();
+}
+
+async function loadCurrentKanji() {
+    const hex = myKanjiList[currentIndex]; // Dein Array
+    const wrapper = document.getElementById('kanji-svg-wrapper');
+    
+    // SVG rendern
+    const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+    const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(url);
+    
+    const response = await fetch(proxyUrl);
+    const svgText = await response.text();
+    wrapper.innerHTML = svgText;
+    
+    // Animation triggern
+    const paths = wrapper.querySelectorAll('path');
+    paths.forEach((path, index) => {
+        const length = path.getTotalLength();
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
+        path.style.animation = `draw 2s linear forwards ${index * 0.1}s`;
+    });
+}
 async function showKanjiTrainer() {
     const container = document.getElementById('kanji-schreiben-tab');
     
@@ -13,6 +51,15 @@ async function showKanjiTrainer() {
         <button onclick="nextKanji()">Nächstes Kanji</button>
     `;
     loadCurrentKanji();
+}
+async function renderKanji(hexCode, targetId) {
+    const wrapper = document.getElementById('kanji-svg-wrapper');
+    if (!wrapper) return;
+
+    // ... fetch Logik ...
+    
+    // Das SVG wird jetzt in den Wrapper gepackt
+    wrapper.innerHTML = `<svg ...>${svgText}</svg>`; 
 }
 // 1. Die Logik für die Blöcke
 const KANJI_PER_BLOCK = 5;
