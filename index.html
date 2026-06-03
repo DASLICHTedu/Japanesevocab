@@ -623,12 +623,20 @@
                     <div class="stroke-order-hint">Strichfolge</div>
                     <canvas id="kanji-canvas" width="300" height="300"></canvas>
                 </div>
+                <div id="kanji-feedback-card" class="path-feedback-card" style="margin-top:10px;">
+                    <div class="path-feedback-header">
+                        <span id="kanji-feedback-icon"></span>
+                        <span id="kanji-feedback-title"></span>
+                    </div>
+                    <p id="kanji-feedback-msg"></p>
+                </div>
                 <div id="kw-feedback" class="stroke-error"></div>
                 <div class="canvas-actions">
                     <button class="btn-main btn-small" onclick="clearKanjiCanvas()">Löschen</button>
                     <button class="btn-main btn-small" style="background: var(--text-light)" id="btn-toggle-animation" onclick="toggleKanjiAnimation()">Verstecken</button>
                     <button class="btn-main btn-small" style="background: var(--accent-pink)" onclick="repeatKanjiAnimation()">Wiederholen</button>
-                    <button class="btn-main btn-small" style="background: var(--primary-light)" onclick="nextKanjiInBlock()">Nächstes Kanji →</button>
+                    <button class="btn-main btn-small" style="background: #10b981" onclick="checkKanjiTrace()">Prüfen</button>
+                    <button class="btn-main btn-small hidden" id="btn-kanji-write-next" style="background: var(--primary-light)" onclick="nextKanjiInBlock()">Nächstes Kanji →</button>
                 </div>
                 <div style="font-size: 10px; color: var(--text-light); text-align: center; margin-top: 15px; opacity: 0.8;">
                     Kanji-Daten von <a href="https://kanjivg.tagaini.net" target="_blank" style="color: var(--text-light); text-decoration: underline;">KanjiVG</a> (CC BY-SA 3.0)
@@ -779,6 +787,12 @@
 </script>
 <script>
     // --- NEUE DATEN FÜR ALLTAG & PFAD ---
+    // Offscreen Canvas für die automatische Zeichenerkennung
+    const offscreenCanvas = document.createElement('canvas');
+    offscreenCanvas.width = 300;
+    offscreenCanvas.height = 300;
+    const offCtx = offscreenCanvas.getContext('2d');
+
     const kanaDataFull = {
         hiragana: [
             { id: 'h1', name: 'Vokale', chars: [
@@ -1273,6 +1287,7 @@
         
         const exercises = shuffled.flatMap(char => [
             { type: 'recognize', char: char.c, romaji: char.r },
+            { type: 'trace', char: char.c, romaji: char.r },
             { type: 'sound_match', char: char.c, romaji: char.r }
         ]).sort(() => Math.random() - 0.5).slice(0, 20);
 
@@ -1345,19 +1360,31 @@
         } else if (step.type === 'trace') {
             area.innerHTML = `
                 <div class="typing-container">
-                    <p class="subtitle">Zeichne das Zeichen nach</p>
+                    <h2 style="color: var(--accent-pink); font-size: 32px; margin-bottom: 10px;">${step.romaji}</h2>
+                    <p class="subtitle">Zeichne das entsprechende Zeichen</p>
                     <div class="kanji-canvas-container">
-                        <div id="kanji-ghost" style="color:#eee;">${step.char}</div>
-                        <div id="kanji-svg-wrapper"></div>
+                        <div id="kanji-ghost" style="color:#eee; display:none;">${step.char}</div>
+                        <div id="kanji-svg-wrapper" style="display:none;"></div>
                         <canvas id="kana-canvas" width="300" height="300" style="position:absolute; top:0; left:0; z-index:5;"></canvas>
                     </div>
-                    <button class="btn-speak" onclick="speak('${step.char}')">🔊 ${step.romaji}</button>
-                    <button class="btn-main" style="margin-top:20px;" onclick="checkKanaTrace()">Fertig</button>
+                    <div class="canvas-actions" style="margin-top: 15px;">
+                        <button class="btn-main btn-small" style="background: var(--primary-light); width: auto;" onclick="showKanaHint('${step.char}')">💡 Tipp</button>
+                        <button class="btn-main btn-small" style="background: var(--text-light); width: auto;" onclick="clearKanaCanvasOnly()">🗑️ Löschen</button>
+                    </div>
+                    <button class="btn-main" style="margin-top:30px;" onclick="checkKanaTrace()">Fertig</button>
                 </div>`;
             setTimeout(() => {
                 const canvas = document.getElementById('kana-canvas');
                 if(canvas) setupCanvasEvents(canvas);
-                loadAndAnimateKanji(step.char);
+
+                // Offscreen Vorlage für den Vergleich vorbereiten
+                offCtx.clearRect(0, 0, 300, 300);
+                // Wir nutzen dieselbe Schriftart wie im Ghost-Kanji
+                offCtx.font = "220px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+                offCtx.textAlign = "center";
+                offCtx.textBaseline = "middle";
+                offCtx.fillStyle = "black";
+                offCtx.fillText(step.char, 150, 150);
             }, 50);
         } else if (step.type === 'recognize' || step.type === 'sound_match' || step.type === 'reverse_recognize') {
             const options = [step.romaji];
@@ -1456,8 +1483,50 @@
     }
     
     function checkKanaTrace() {
+        const userCvs = document.getElementById('kana-canvas');
+        if (!userCvs) return;
+
+        const userCtx = userCvs.getContext('2d');
+        const userImgData = userCtx.getImageData(0, 0, 300, 300).data;
+        const targetImgData = offCtx.getImageData(0, 0, 300, 300).data;
+
+        let targetPixels = 0;
+        let matchedPixels = 0;
+        let userPixels = 0;
+
+        // Wir prüfen den Alpha-Kanal (alle 4 Bytes: R, G, B, A)
+        for (let i = 3; i < targetImgData.length; i += 4) {
+            const isTarget = targetImgData[i] > 0;
+            const isUser = userImgData[i] > 0;
+            if (isTarget) targetPixels++;
+            if (isUser) userPixels++;
+            if (isTarget && isUser) matchedPixels++;
+        }
+
+        const coverage = targetPixels > 0 ? matchedPixels / targetPixels : 0;
+        const accuracy = userPixels > 0 ? matchedPixels / userPixels : 0;
+
+        // Heuristik: Nutzer hat mind. 25% des Zeichens getroffen (da Linien dünner als Font)
+        const isCorrect = coverage > 0.25 && accuracy > 0.05;
+
+        const feedback = document.getElementById('kana-feedback');
+        feedback.className = 'path-feedback-card ' + (isCorrect ? 'correct' : 'wrong');
+        document.getElementById('kana-feedback-icon').innerText = isCorrect ? '✓' : '✕';
+        document.getElementById('kana-feedback-title').innerText = isCorrect ? 'Gut gemacht!' : 'Nicht ganz...';
+        document.getElementById('kana-feedback-msg').innerText = isCorrect ? 'Das Zeichen sieht richtig aus.' : 'Versuche die Form genauer zu treffen.';
+        
         document.getElementById('btn-kana-next').classList.remove('hidden');
-        nextKanaStep();
+    }
+
+    function showKanaHint(char) {
+        const ghost = document.getElementById('kanji-ghost');
+        if (ghost) ghost.style.display = 'block';
+        loadAndAnimateKanji(char);
+    }
+
+    function clearKanaCanvasOnly() {
+        const cvs = document.getElementById('kana-canvas');
+        if (cvs) cvs.getContext('2d').clearRect(0, 0, cvs.width, cvs.height);
     }
 
     function nextKanaStep() {
@@ -17764,10 +17833,62 @@
             document.getElementById('kanji-numbers-layer').innerHTML = '';
             clearKanjiCanvas();
             loadAndAnimateKanji(item.kanji);
+
+            // UI zurücksetzen
+            document.getElementById('kanji-feedback-card').className = 'path-feedback-card';
+            document.getElementById('btn-kanji-write-next').classList.add('hidden');
+
+            // Offscreen Vorlage vorbereiten
+            offCtx.clearRect(0, 0, 300, 300);
+            offCtx.font = "220px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+            offCtx.textAlign = "center";
+            offCtx.textBaseline = "middle";
+            offCtx.fillStyle = "black";
+            offCtx.fillText(item.kanji, 150, 150);
         } else if (state.kanji.subMode === 'quiz') {
             renderKanjiQuiz();
         } else if (state.kanji.subMode === 'combo') {
             renderKanjiComboList();
+        }
+    }
+
+    function checkKanjiTrace() {
+        const userCvs = document.getElementById('kanji-canvas');
+        if (!userCvs) return;
+
+        const userCtx = userCvs.getContext('2d');
+        const userImgData = userCtx.getImageData(0, 0, 300, 300).data;
+        const targetImgData = offCtx.getImageData(0, 0, 300, 300).data;
+
+        let targetPixels = 0;
+        let matchedPixels = 0;
+        let userPixels = 0;
+
+        for (let i = 3; i < targetImgData.length; i += 4) {
+            const isTarget = targetImgData[i] > 0;
+            const isUser = userImgData[i] > 0;
+            if (isTarget) targetPixels++;
+            if (isUser) userPixels++;
+            if (isTarget && isUser) matchedPixels++;
+        }
+
+        const coverage = targetPixels > 0 ? matchedPixels / targetPixels : 0;
+        const accuracy = userPixels > 0 ? matchedPixels / userPixels : 0;
+
+        // Kanjis sind komplexer als Kana, daher etwas geringere Schwellenwerte
+        const isCorrect = coverage > 0.15 && accuracy > 0.02;
+
+        const feedback = document.getElementById('kanji-feedback-card');
+        feedback.className = 'path-feedback-card ' + (isCorrect ? 'correct' : 'wrong');
+        document.getElementById('kanji-feedback-icon').innerText = isCorrect ? '✓' : '✕';
+        document.getElementById('kanji-feedback-title').innerText = isCorrect ? 'Gut gemacht!' : 'Nicht ganz...';
+        document.getElementById('kanji-feedback-msg').innerText = isCorrect ? 'Das Kanji sieht richtig aus.' : 'Versuche die Striche genauer zu treffen.';
+        
+        if (isCorrect) {
+            playSound('correct');
+            document.getElementById('btn-kanji-write-next').classList.remove('hidden');
+        } else {
+            playSound('wrong');
         }
     }
 
