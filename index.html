@@ -778,10 +778,7 @@
     // --- NEUE DATEN FÜR ALLTAG & PFAD ---
     const kanaDataFull = {
         hiragana: [
-            { id: 'h1', name: 'Vokale', chars: [
-                { c: 'あ', r: 'a' }, { c: 'い', r: 'i' }, { c: 'う', r: 'u' }, { c: 'え', r: 'e' }, { c: 'お', r: 'o' }
-            ]},
-            { id: 'h2', name: 'K-Reihe', chars: [
+             { id: 'h2', name: 'K-Reihe', chars: [
                 { c: 'か', r: 'ka' }, { c: 'き', r: 'ki' }, { c: 'く', r: 'ku' }, { c: 'け', r: 'ke' }, { c: 'こ', r: 'ko' }
             ]},
             { id: 'h3', name: 'S-Reihe', chars: [
@@ -789,6 +786,48 @@
             ]},
             { id: 'h4', name: 'T-Reihe', chars: [
                 { c: 'た', r: 'ta' }, { c: 'ち', r: 'chi' }, { c: 'つ', r: 'tsu' }, { c: 'て', r: 'te' }, { c: 'と', r: 'to' }
+            ]},
+            { id: 'h5', name: 'N-Reihe', chars: [
+                { c: 'な', r: 'na' }, { c: 'に', r: 'ni' }, { c: 'ぬ', r: 'nu' }, { c: 'ね', r: 'ne' }, { c: 'の', r: 'no' }
+            ]},
+            { id: 'h6', name: 'H-Reihe', chars: [
+                { c: 'は', r: 'ha' }, { c: 'ひ', r: 'hi' }, { c: 'ふ', r: 'fu' }, { c: 'へ', r: 'he' }, { c: 'ほ', r: 'ho' }
+            ]},
+            { id: 'h7', name: 'M-Reihe', chars: [
+                { c: 'ま', r: 'ma' }, { c: 'み', r: 'mi' }, { c: 'む', r: 'mu' }, { c: 'め', r: 'me' }, { c: 'も', r: 'mo' }
+            ]},
+            { id: 'h8', name: 'Y-Reihe', chars: [
+                { c: 'や', r: 'ya' }, { c: 'ゆ', r: 'yu' }, { c: 'よ', r: 'yo' }
+            ]},
+            { id: 'h9', name: 'R-Reihe', chars: [
+                { c: 'ら', r: 'ra' }, { c: 'り', r: 'ri' }, { c: 'る', r: 'ru' }, { c: 'れ', r: 're' }, { c: 'ろ', r: 'ro' }
+            ]},
+            { id: 'h10', name: 'W-Reihe & N', chars: [
+                { c: 'わ', r: 'wa' }, { c: 'を', r: 'wo' }, { c: 'ん', r: 'n' }
+            ]},
+            { id: 'h_dak1', name: 'G-Reihe (Dakuten)', chars: [
+                { c: 'が', r: 'ga' }, { c: 'ぎ', r: 'gi' }, { c: 'ぐ', r: 'gu' }, { c: 'げ', r: 'ge' }, { c: 'ご', r: 'go' }
+            ]},
+            { id: 'h_dak2', name: 'Z-Reihe (Dakuten)', chars: [
+                { c: 'ざ', r: 'じ', r: 'ji' }, { c: 'ず', r: 'zu' }, { c: 'ぜ', r: 'ze' }, { c: 'ぞ', r: 'zo' }
+            ]},
+            { id: 'h_dak3', name: 'D-Reihe (Dakuten)', chars: [
+                { c: 'だ', r: 'da' }, { c: 'ぢ', r: 'ji' }, { c: 'づ', r: 'zu' }, { c: 'で', r: 'de' }, { c: 'ど', r: 'do' }
+            ]},
+            { id: 'h_dak4', name: 'B-Reihe (Dakuten)', chars: [
+                { c: 'ば', r: 'bi' }, { c: 'ぶ', r: 'bu' }, { c: 'べ', r: 'be' }, { c: 'ぼ', r: 'bo' }
+            ]},
+            { id: 'h_dak5', name: 'P-Reihe (Handakuten)', chars: [
+                { c: 'ぱ', r: 'pi' }, { c: 'ぷ', r: 'pu' }, { c: 'ぺ', r: 'pe' }, { c: 'ぽ', r: 'po' }
+            ]},
+            { id: 'h_comb1', name: 'Kombinationen (K/S)', chars: [
+                { c: 'きゃ', r: 'kya' }, { c: 'きゅ', r: 'kyu' }, { c: 'きょ', r: 'kyo' },
+                { c: 'しゃ', r: 'sha' }, { c: 'しゅ', r: 'shu' }, { c: 'しょ', r: 'sho' }
+            ]},
+            { id: 'h_comb2', name: 'Kombinationen (C/N/H)', chars: [
+                { c: 'ちゃ', r: 'cha' }, { c: 'ちゅ', r: 'chu' }, { c: 'ちょ', r: 'cho' },
+                { c: 'にゃ', r: 'nya' }, { c: 'にゅ', r: 'nyu' }, { c: 'にょ', r: 'nyo' },
+                { c: 'ひゃ', r: 'hya' }, { c: 'ひゅ', r: 'hyu' }, { c: 'ひょ', r: 'hyo' }
             ]}
         ],
         katakana: [
@@ -796,7 +835,51 @@
                 { c: 'ア', r: 'a' }, { c: 'イ', r: 'i' }, { c: 'ウ', r: 'u' }, { c: 'エ', r: 'e' }, { c: 'オ', r: 'o' }
             ]},
             { id: 'k2', name: 'K-Reihe', chars: [
-                { c: 'カ', r: 'キ', r: 'ki' }, { c: 'ク', r: 'ku' }, { c: 'ケ', r: 'ke' }, { c: 'コ', r: 'ko' }
+                { c: 'カ', r: 'キ', r: 'ki' }, { c: 'ク', r: 'ku' }, { c: 'ケ', r: 'ke' }, { c: 'コ', r: 'ko' },
+                { c: 'カ', r: 'ka' }, { c: 'キ', r: 'ki' }, { c: 'ク', r: 'ku' }, { c: 'ケ', r: 'ke' }, { c: 'コ', r: 'ko' }
+            ]},
+            { id: 'k3', name: 'S-Reihe', chars: [
+                { c: 'サ', r: 'sa' }, { c: 'シ', r: 'shi' }, { c: 'ス', r: 'su' }, { c: 'セ', r: 'se' }, { c: 'ソ', r: 'so' }
+            ]},
+            { id: 'k4', name: 'T-Reihe', chars: [
+                { c: 'タ', r: 'ta' }, { c: 'チ', r: 'chi' }, { c: 'ツ', r: 'tsu' }, { c: 'テ', r: 'te' }, { c: 'ト', r: 'to' }
+            ]},
+            { id: 'k5', name: 'N-Reihe', chars: [
+                { c: 'ナ', r: 'na' }, { c: 'ニ', r: 'ni' }, { c: 'ヌ', r: 'nu' }, { c: 'ネ', r: 'ne' }, { c: 'ノ', r: 'no' }
+            ]},
+            { id: 'k6', name: 'H-Reihe', chars: [
+                { c: 'ハ', r: 'ha' }, { c: 'ヒ', r: 'hi' }, { c: 'フ', r: 'fu' }, { c: 'ヘ', r: 'he' }, { c: 'ホ', r: 'ho' }
+            ]},
+            { id: 'k7', name: 'M-Reihe', chars: [
+                { c: 'マ', r: 'ma' }, { c: 'ミ', r: 'mi' }, { c: 'ム', r: 'mu' }, { c: 'メ', r: 'me' }, { c: 'モ', r: 'mo' }
+            ]},
+            { id: 'k8', name: 'Y-Reihe', chars: [
+                { c: 'ヤ', r: 'ya' }, { c: 'ユ', r: 'yu' }, { c: 'ヨ', r: 'yo' }
+            ]},
+            { id: 'k9', name: 'R-Reihe', chars: [
+                { c: 'ラ', r: 'ra' }, { c: 'リ', r: 'ri' }, { c: 'ル', r: 'ru' }, { c: 'レ', r: 're' }, { c: 'ロ', r: 'ro' }
+            ]},
+            { id: 'k10', name: 'W-Reihe & N', chars: [
+                { c: 'ワ', r: 'wa' }, { c: 'ヲ', r: 'wo' }, { c: 'ン', r: 'n' }
+            ]},
+            { id: 'k_dak1', name: 'G-Reihe (Dakuten)', chars: [
+                { c: 'ガ', r: 'ga' }, { c: 'ギ', r: 'gi' }, { c: 'グ', r: 'gu' }, { c: 'ゲ', r: 'ge' }, { c: 'ゴ', r: 'go' }
+            ]},
+            { id: 'k_dak2', name: 'Z-Reihe (Dakuten)', chars: [
+                { c: 'ザ', r: 'ジ', r: 'ji' }, { c: 'ズ', r: 'zu' }, { c: 'ゼ', r: 'ze' }, { c: 'ゾ', r: 'zo' }
+            ]},
+            { id: 'k_dak3', name: 'D-Reihe (Dakuten)', chars: [
+                { c: 'ダ', r: 'ヂ', r: 'ji' }, { c: 'ヅ', r: 'zu' }, { c: 'デ', r: 'de' }, { c: 'ド', r: 'do' }
+            ]},
+            { id: 'k_dak4', name: 'B-Reihe (Dakuten)', chars: [
+                { c: 'バ', r: 'bi' }, { c: 'ブ', r: 'bu' }, { c: 'ベ', r: 'be' }, { c: 'ボ', r: 'bo' }
+            ]},
+            { id: 'k_dak5', name: 'P-Reihe (Handakuten)', chars: [
+                { c: 'パ', r: 'pi' }, { c: 'プ', r: 'pu' }, { c: 'ペ', r: 'pe' }, { c: 'ポ', r: 'po' }
+            ]},
+            { id: 'k_comb1', name: 'Kombinationen (K/S)', chars: [
+                { c: 'キャ', r: 'kya' }, { c: 'キュ', r: 'kyu' }, { c: 'キョ', r: 'kyo' },
+                { c: 'シャ', r: 'sha' }, { c: 'シュ', r: 'shu' }, { c: 'ショ', r: 'sho' }
             ]}
         ]
     };
