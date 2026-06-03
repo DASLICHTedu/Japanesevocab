@@ -19,7 +19,7 @@ async function loadCurrentKanji() {
     wrapper.innerHTML = ""; 
 
     const hex = myKanjiList[currentIndex];
-    const url = `https://corsproxy.io/?https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+    const url = `<https://corsproxy.io/?https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg>`;
     
     try {
         const response = await fetch(url);
@@ -42,8 +42,8 @@ async function loadCurrentKanji() {
     const wrapper = document.getElementById('kanji-svg-wrapper');
     
     // SVG rendern
-    const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
-    const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(url);
+    const url = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg>`;
+    const proxyUrl = `<https://corsproxy.io/>?` + encodeURIComponent(url);
     
     const response = await fetch(proxyUrl);
     const svgText = await response.text();
@@ -107,8 +107,8 @@ async function renderKanji(hexCode, targetId) {
     if (!container) return;
 
     // Fix: Wir validieren den Hex-Code (muss 4-5 Stellen haben)
-    const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
-    const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(url);
+    const url = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
+    const proxyUrl = `<https://corsproxy.io/>?` + encodeURIComponent(url);
     
     try {
         const response = await fetch(proxyUrl);
@@ -169,8 +169,8 @@ async function renderKanji(hexCode, targetId) {
     if (!container) return;
 
     // HIER DER PROXY-FIX gegen den CORS-Fehler
-    const githubUrl = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
-    const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(githubUrl);
+    const githubUrl = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
+    const proxyUrl = `<https://corsproxy.io/>?` + encodeURIComponent(githubUrl);
     
     try {
         const response = await fetch(proxyUrl);
@@ -198,7 +198,8 @@ async function loadCurrentKanji() {
 }
 
 function repeatAnimation() {
-    // Einfach neu laden, das triggert die CSS-Animation erneut
+    // Einfacher Trick: Element kurz leeren und neu rendern, 
+    // um den Animation-Trigger von renderKanji neu zu starten
     loadCurrentKanji();
 }
 
@@ -227,7 +228,7 @@ async function renderKanji(hexCode, targetId) {
     const container = document.getElementById(targetId);
     if (!container) return;
 
-    const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+    const url = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
     
     try {
         const response = await fetch(url);
@@ -293,7 +294,7 @@ async function loadAndAnimateKanji(kanjiHex, elementId) {
     if (!container) return;
 
     // URL zur offiziellen KanjiVG SVG-Datenbank
-    const svgUrl = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${kanjiHex}.svg`;
+    const svgUrl = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${kanjiHex}.svg>`;
 
     try {
         const response = await fetch(svgUrl);
@@ -332,7 +333,7 @@ async function renderKanji(hexCode, targetId) {
     const container = document.getElementById(targetId);
     if (!container) return;
 
-    const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+    const url = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
     
     try {
         const response = await fetch(url);
@@ -361,25 +362,54 @@ async function renderKanji(hexCode, targetId) {
 
 // kanji-logic.js
 
+let currentIndex = 0;
 const myKanjiList = [
     '04e00', '04e8c', '04e09', '056db', '04e94', '0516d', '04e03', '0516b', '04e5d', '05341', // 1-10
-    '0767e', '05343', '04e07', '05186', '05186', '0571f', '05c71', '05ddd', '07530', '05929', // 11-20
-    '05b66', '0751f', '05148', '0751f', '0540d', '05b57', '05b66', '06821', '065e5', '06708', // 21-30
-    '0706b', '06c34', '06728', '091d1', '0571f', '066dc', '0672c', '04eba', '05b50', '05973', // 31-40
-    '07537', '04eac', '05927', '05c0f', '0591a', '05c11', '09ad8', '05b89', '06bcd', '0884c', // 41-50
-    '98df', '98df', '98df', '99c5', '8d0a', '98df', '98df', '98df', '98df', '98df', // (Platzhalter-Struktur für die Fortsetzung)
-    '98e9', '98e2', '98e8', '99c5', '9a0e', '9a13', '9a19', '99c5', '9a30', '9a37', 
-    '9a3e', '9b28', '9b2a', '9b31', '9b3c', '9b41', '9b42', '9b45', '9b4d', '9b5a', 
-    '9b6f', '9b74', '9b77', '9b82', '9b8e', '9b91', '9b92', '9b93', '9b96', '9b97', 
-    '9b9f', '9ba8', '9bac', '9bb1', '9bb2', '9bb4', '9bb6', '9bb9', '9bbb', '9bc0', 
     '9bc6', '9bc7', '9bc9'
 ];
 
 // Hinweis: Manche Kanji (wie '05186' für Yen) kommen doppelt vor 
 // oder sind leicht unterschiedlich, das Skript filtert das automatisch.
+async function renderKanji(hexCode, targetId) {
+    const container = document.getElementById(targetId);
+    if (!container) return;
 
 // Die Funktion, die alle durchgeht:
+    const githubUrl = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
+    const proxyUrl = `<https://corsproxy.io/>?` + encodeURIComponent(githubUrl);
+    
+    try {
+        const response = await fetch(proxyUrl);
+        if (!response.ok) throw new Error("SVG not found");
+        let svgText = await response.text();
+        
+        // Bereinige Styles im SVG
+        svgText = svgText.replace(/style="[^"]*"/g, '');
+        container.innerHTML = `<div class="kanji-box">${svgText}</div>`;
+        
+        // Animation anwenden
+        const paths = container.querySelectorAll('path');
+        paths.forEach((path, index) => {
+            const length = path.getTotalLength();
+            path.style.fill = "none";
+            path.style.stroke = "black";
+            path.style.strokeWidth = "3";
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+            path.style.animation = `draw 2s linear forwards ${index * 0.1}s`;
+        });
+    } catch (e) {
+        console.error("Ladefehler:", e);
+    }
+}
 
+async function loadCurrentKanji() {
+    const hex = myKanjiList[currentIndex];
+    const wrapper = document.getElementById('kanji-svg-wrapper');
+    if (!wrapper) return;
+    wrapper.innerHTML = "";
+    await renderKanji(hex, 'kanji-svg-wrapper');
+}
 
     myKanjiList.forEach(hex => {
         // Erstelle den Container für jedes Kanji
@@ -391,8 +421,28 @@ const myKanjiList = [
         // Rufe die Ladefunktion für jedes auf
         renderKanji(hex, `kanji-${hex}`);
     });
+function nextKanji() {
+    currentIndex = (currentIndex + 1) % myKanjiList.length;
+    loadCurrentKanji();
+}
 
+function repeatAnimation() {
+    loadCurrentKanji();
+}
 
+function showTab(tabName) {
+    const schreibenTab = document.getElementById('kanji-schreiben-tab');
+    if (!schreibenTab) return;
+    
+    if (tabName === 'schreiben') {
+        schreibenTab.style.display = 'block';
+        if (document.getElementById('kanji-svg-wrapper').innerHTML.trim() === '') {
+            loadCurrentKanji();
+        }
+    } else {
+        schreibenTab.style.display = 'none';
+    }
+}
 
 
     myKanjiList.forEach(hex => {
@@ -404,3 +454,6 @@ const myKanjiList = [
         // Die Funktion, die wir vorher erstellt haben
         renderKanji(hex, `kanji-${hex}`);
     });
+window.showTab = showTab;
+window.nextKanji = nextKanji;
+window.repeatAnimation = repeatAnimation;
