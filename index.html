@@ -9,7 +9,7 @@
     <title>JLPT Study de</title>
     <link rel="manifest" href="manifest.json" />
     <style>
-.kanji-box {
+        .kanji-box {
     position: absolute;
     top: 50px; /* Anpassen, wo es liegen soll */
     left: 50px;
@@ -47,10 +47,33 @@
     width: 300px;
     height: 300px;
     z-index: 2; /* Liegt über dem Ghost, unter dem Canvas */
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Über dem Ghost (1), unter dem Canvas (5) */
     pointer-events: none; /* Klicks gehen durch das SVG zum Canvas */
     width: 100%;
     height: 100%;
+#kanji-svg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Über dem Ghost (1), unter dem Canvas (5) */
+    pointer-events: none; /* Klicks gehen durch das SVG zum Canvas */
 }
+
+/* Stil für die animierten Kanji-Pfade */
+.kanji-svg-path {
+    fill: none !important;
+    stroke: var(--primary-dark) !important;
+    stroke-width: 4 !important;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.3; /* Dezent als Guide im Hintergrund */
+    transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
         /* --- GRUNDDESIGN & FARBEN --- */
         :root {
             --bg-color: #fafafa;
@@ -65,26 +88,12 @@
             --border-color: #e5e5e5;
             --white: #ffffff;
         }
-        .kanji-canvas-container {
-    position: relative; /* WICHTIG: Damit die Kinder absolut sind */
-    width: 300px;
-    height: 300px;
-}
 
-#kanji-svg-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 300px;
-    height: 300px;
-    z-index: 2; /* Liegt über dem Canvas */
-    pointer-events: none; /* Klicks gehen durch das SVG direkt auf den Canvas */
-}
-
-#kanji-svg-wrapper svg {
-    width: 100%;
-    height: 100%;
-}
+    .kanji-canvas-container {
+        position: relative;
+        width: 300px;
+        height: 300px;
+    }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); -webkit-font-smoothing: antialiased; }
 
@@ -556,12 +565,14 @@
                 <div class="kanji-canvas-container">
                     <div id="kanji-numbers-layer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:4;"></div>
                     <div id="kanji-ghost"></div>
+                    <div id="kanji-svg-wrapper"></div>
                     <div class="stroke-order-hint">Strichfolge</div>
                     <canvas id="kanji-canvas" width="300" height="300"></canvas>
                 </div>
                 <div id="kw-feedback" class="stroke-error"></div>
                 <div class="canvas-actions">
                     <button class="btn-main btn-small" onclick="clearKanjiCanvas()">Löschen</button>
+                    <button class="btn-main btn-small" style="background: var(--accent-pink)" onclick="repeatKanjiAnimation()">Wiederholen</button>
                     <button class="btn-main btn-small" style="background: var(--primary-light)" onclick="nextKanjiInBlock()">Nächstes Kanji →</button>
                 </div>
             </div>
@@ -17167,6 +17178,48 @@
         document.getElementById('kanji-learning-area').classList.add('hidden');
     }
 
+    async function loadAndAnimateKanji(kanji) {
+        const wrapper = document.getElementById('kanji-svg-wrapper');
+        if (!wrapper) return;
+        wrapper.innerHTML = '';
+
+        const hex = kanji.charCodeAt(0).toString(16).padStart(5, '0');
+        const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) return;
+            let svgText = await response.text();
+            
+            // Stil-Tags entfernen, um Konflikte zu vermeiden
+            svgText = svgText.replace(/<style[^>]*>[\s\S]*?<\/style>/g, '');
+            wrapper.innerHTML = svgText;
+            
+            const svgElement = wrapper.querySelector('svg');
+            if(!svgElement) return;
+            svgElement.setAttribute('viewBox', '0 0 109 109');
+            
+            const paths = wrapper.querySelectorAll('path');
+            let currentDelay = 0;
+            paths.forEach((path) => {
+                path.classList.add('kanji-svg-path');
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length;
+                path.style.strokeDashoffset = length;
+                
+                setTimeout(() => {
+                    path.style.strokeDashoffset = '0';
+                }, currentDelay * 1000);
+                currentDelay += 0.6; // Zeitabstand zwischen den Strichen
+            });
+        } catch (e) { console.error("Fehler beim Laden der Kanji-Animation:", e); }
+    }
+
+    function repeatKanjiAnimation() {
+        const item = state.kanji.currentBlock[state.kanji.currentIndex];
+        if (item) loadAndAnimateKanji(item.kanji);
+    }
+
     function toggleKanjiOverview() {
         const area = document.getElementById('kanji-overview-area');
         if (!area.classList.toggle('hidden')) renderKanjiOverviewTable();
@@ -17228,6 +17281,7 @@
             document.getElementById('kw-feedback').innerText = '';
             document.getElementById('kanji-numbers-layer').innerHTML = '';
             clearKanjiCanvas();
+            loadAndAnimateKanji(item.kanji);
         } else if (state.kanji.subMode === 'quiz') {
             renderKanjiQuiz();
         } else if (state.kanji.subMode === 'combo') {
