@@ -1283,12 +1283,16 @@
     }
 
     function startKanaLesson(groupId) {
-        const group = kanaDataFull[currentKanaType].find(g => group.id === groupId || g.id === groupId);
+        const group = kanaDataFull[currentKanaType].find(g => g.id === groupId);
         currentKanaLesson = group;
         currentKanaStep = 0;
         
         // Übungen generieren (Duolingo Style: Intro -> Tracing -> Quiz)
         const exercises = [];
+
+        // Übersicht am Anfang einfügen
+        exercises.push({ type: 'overview', name: group.name, chars: group.chars });
+
         group.chars.forEach(char => {
             exercises.push({ type: 'intro', char: char.c, romaji: char.r });
             exercises.push({ type: 'trace', char: char.c, romaji: char.r });
@@ -1316,7 +1320,21 @@
         document.getElementById('btn-kana-next').classList.add('hidden');
         document.getElementById('kana-feedback').className = 'path-feedback-card';
 
-        if (step.type === 'intro') {
+        if (step.type === 'overview') {
+            area.innerHTML = `
+                <div class="typing-container">
+                    <h2 style="margin-bottom:20px;">${step.name} - Übersicht</h2>
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 30px;">
+                        ${step.chars.map(c => `
+                            <div style="background: var(--bg-color); padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); cursor: pointer;" onclick="speak('${c.c}')">
+                                <div style="font-size: 24px; font-weight: bold;">${c.c}</div>
+                                <div style="color: var(--accent-pink); font-weight: bold;">${c.r}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="btn-main" onclick="nextKanaStep()">Lektion starten</button>
+                </div>`;
+        } else if (step.type === 'intro') {
             area.innerHTML = `
                 <div class="typing-container">
                     <div class="kanji-big" style="font-size:120px;">${step.char}</div>
