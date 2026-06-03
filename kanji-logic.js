@@ -7,14 +7,34 @@ window.showTab = showTab;
 window.nextKanji = nextKanji;
 window.repeatAnimation = repeatAnimation;
 
-let currentIndex = 0;
-const KANJI_PER_BLOCK = 5;
-
-// Die Funktion wird EINMAL beim Start aufgerufen
-async function showKanjiTrainer() {
-    const wrapper = document.getElementById('kanji-svg-wrapper');
-    if (!wrapper) return;
+// kanji-logic.js
+window.nextKanji = () => {
+    currentIndex++;
     loadCurrentKanji();
+};
+
+async function loadCurrentKanji() {
+    const wrapper = document.getElementById('kanji-svg-wrapper');
+    // Wir leeren nur den Wrapper, nicht den ganzen Tab
+    wrapper.innerHTML = ""; 
+
+    const hex = myKanjiList[currentIndex];
+    const url = `https://corsproxy.io/?https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
+    
+    try {
+        const response = await fetch(url);
+        const svgText = await response.text();
+        wrapper.innerHTML = svgText;
+        
+        // Animation direkt auf die Pfade im Wrapper anwenden
+        const paths = wrapper.querySelectorAll('path');
+        paths.forEach((path, i) => {
+            const len = path.getTotalLength();
+            path.style.strokeDasharray = len;
+            path.style.strokeDashoffset = len;
+            path.style.animation = `draw 2s linear forwards ${i * 0.1}s`;
+        });
+    } catch(e) { console.error("404 oder CORS Fehler bei:", hex); }
 }
 
 async function loadCurrentKanji() {
