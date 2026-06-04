@@ -603,7 +603,7 @@
             </div>
         </div>
 
-        <div class="section-label">Wähle einen Übungsblock (5 Kanji)</div>
+        <div class="section-label">Wähle einen oder mehrere Blöcke (je 5 Kanji)</div>
         <div id="kanji-blocks-container" class="kana-grid"></div>
 
         <div id="kanji-learning-area" class="hidden">
@@ -16879,6 +16879,7 @@
             currentIndex: 0,
             subMode: 'write',
             strokesDrawn: 0,
+            selectedBlocks: [],
             quizState: 'write'
         },
         testSettings: {
@@ -17705,34 +17706,77 @@
     // --- KANJI TRAINER ---
     function renderKanjiBlocks() {
         const container = document.getElementById('kanji-blocks-container');
+        if (!container) return;
         const kanjis = kanjiData[state.level] || [];
         let html = '';
         for (let i = 0; i < Math.ceil(kanjis.length / 5); i++) {
-            html += `<div class="kanji-block-btn" onclick="startKanjiBlock(${i})">Block ${i + 1}</div>`;
+            const isActive = state.kanji.selectedBlocks.includes(i);
+            html += `<div class="kanji-block-btn ${isActive ? 'active' : ''}" onclick="toggleKanjiBlock(${i})">Block ${i + 1}</div>`;
         }
         container.innerHTML = html;
-        document.getElementById('kanji-learning-area').classList.add('hidden');
     }
 
+    function toggleKanjiBlock(idx) {
+        const pos = state.kanji.selectedBlocks.indexOf(idx);
+        if (pos > -1) {
+            state.kanji.selectedBlocks.splice(pos, 1);
+        } else {
+            state.kanji.selectedBlocks.push(idx);
+        }
+        renderKanjiBlocks();
+    }
+
+    function startSelectedKanjiTraining() {
+        if (state.kanji.selectedBlocks.length === 0) {
+            alert("Bitte wähle mindestens einen Block aus.");
+            return;
+        }
+
+        const allKanjis = kanjiData[state.level] || [];
+        let combinedKanjis = [];
+        
+        // Sortierte Auswahl der Blöcke
+        state.kanji.selectedBlocks.sort((a, b) => a - b).forEach(idx => {
+            const block = allKanjis.slice(idx * 5, (idx + 1) * 5);
+            combinedKanjis = combinedKanjis.concat(block);
+        });
+
+        state.kanji.currentBlock = combinedKanjis;
+        state.kanji.exercises = [];
+        state.kanji.currentIndex = 0;
+
+        // Flow erstellen
+        state.kanji.exercises.push({ type: 'overview', kanjis: combinedKanjis });
+        combinedKanjis.forEach(item => {
+            state.kanji.exercises.push({ type: 'intro', item: item });
+            state.kanji.exercises.push({ type: 'write', item: item });
+            state.kanji.exercises.push({ type: 'quiz', item: item });
+        });
+
+        document.getElementById('kanji-overview-area').classList.add('hidden');
+        document.getElementById('kanji-learning-area').classList.remove('hidden');
+        loadKanjiStep();
+    }
+
+    let kanjiAnimationTimeouts = [];
+
     async function loadAndAnimateKanji(kanji) {
+        // Alte Timeouts löschen, um OOM und Ghost-Zeichnungen zu verhindern
+        kanjiAnimationTimeouts.forEach(t => clearTimeout(t));
+        kanjiAnimationTimeouts = [];
+
         const wrapper = document.getElementById('kanji-svg-wrapper');
         if (!wrapper) return;
         wrapper.innerHTML = '';
-
-        // Striche wieder anzeigen, falls sie versteckt waren
         wrapper.style.display = 'flex';
-        const toggleBtn = document.getElementById('btn-toggle-animation');
-        if (toggleBtn) toggleBtn.innerText = 'Verstecken';
 
         const hex = kanji.charCodeAt(0).toString(16).padStart(5, '0');
         const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg`;
 
         try {
             const response = await fetch(url);
-            if (!response.ok) return;
+            if (!response.ok) throw new Error("SVG nicht gefunden");
             let svgText = await response.text();
-            
-            // Stil-Tags entfernen, um Konflikte zu vermeiden
             svgText = svgText.replace(/<style[^>]*>[\s\S]*?<\/style>/g, '');
             wrapper.innerHTML = svgText;
             
@@ -17748,10 +17792,11 @@
                 path.style.strokeDasharray = length;
                 path.style.strokeDashoffset = length;
                 
-                setTimeout(() => {
+                let t = setTimeout(() => {
                     path.style.strokeDashoffset = '0';
                 }, currentDelay * 1000);
-                currentDelay += 0.6; // Zeitabstand zwischen den Strichen
+                kanjiAnimationTimeouts.push(t);
+                currentDelay += 0.6;
             });
         } catch (e) { console.error("Fehler beim Laden der Kanji-Animation:", e); }
     }
@@ -17794,28 +17839,6 @@
                     <td>${k.de}</td>
                 </tr>`).join('') +
             `</tbody></table>`;
-    }
-
-    function startKanjiBlock(idx) {
-        const kanjis = kanjiData[state.level] || [];
-        const block = kanjis.slice(idx * 5, (idx + 1) * 5);
-        if (block.length === 0) return;
-        
-        state.kanji.currentBlock = block;
-        state.kanji.exercises = [];
-        state.kanji.currentIndex = 0;
-
-        state.kanji.exercises.push({ type: 'overview', kanjis: block });
-        block.forEach(item => {
-            state.kanji.exercises.push({ type: 'intro', item: item });
-            state.kanji.exercises.push({ type: 'write', item: item });
-            state.kanji.exercises.push({ type: 'quiz', item: item });
-        });
-
-        document.getElementById('kanji-overview-area').classList.add('hidden');
-        document.querySelectorAll('.kanji-block-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
-        document.getElementById('kanji-learning-area').classList.remove('hidden');
-        loadKanjiStep();
     }
 
     function loadKanjiStep() {
@@ -17897,7 +17920,7 @@
 
             // Offscreen Vorlage vorbereiten
             offCtx.clearRect(0, 0, 300, 300);
-            offCtx.font = "220px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+            offCtx.font = "bold 220px 'MS Mincho', 'Sawarabi Mincho', serif";
             offCtx.textAlign = "center";
             offCtx.textBaseline = "middle";
             offCtx.fillStyle = "black";
@@ -17932,8 +17955,8 @@
         const coverage = targetPixels > 0 ? matchedPixels / targetPixels : 0;
         const accuracy = userPixels > 0 ? matchedPixels / userPixels : 0;
 
-        // Kanjis sind komplexer als Kana, daher etwas geringere Schwellenwerte
-        const isCorrect = coverage > 0.15 && accuracy > 0.02;
+        // Tolerantere Schwellenwerte für Kanji
+        const isCorrect = coverage > 0.12 && accuracy > 0.015;
 
         const feedback = document.getElementById('kanji-feedback-card');
         feedback.className = 'path-feedback-card ' + (isCorrect ? 'correct' : 'wrong');
@@ -18148,15 +18171,6 @@
         const id = state.kanji.subMode === 'write' ? 'kanji-canvas' : 'kanji-canvas-quiz';
         const cvs = document.getElementById(id);
         if (cvs) cvs.getContext('2d').clearRect(0, 0, cvs.width, cvs.height);
-    }
-
-    function startRandomKanjiTraining() {
-        const kanjis = kanjiData[state.level] || [];
-        if (kanjis.length === 0) return alert("Keine Kanji für dieses Level vorhanden.");
-        const blockCount = Math.ceil(kanjis.length / 5);
-        const blockIdx = Math.floor(Math.random() * blockCount);
-        switchTab('kanji');
-        startKanjiBlock(blockIdx);
     }
 
     // --- VOLLTEST ---
