@@ -589,19 +589,15 @@
     <main id="view-kanji" class="hidden">
         <h1>Kanji Trainer <span class="badge" id="kanji-level-badge">N5</span></h1>
         <p class="subtitle">Konzentriere dich auf die Schriftzeichen.</p>
-        <div class="typing-container">
-            <h2 style="margin-bottom: 20px;">Lerne Kanjis</h2>
-            <p style="color: var(--text-light);">Kanjis lernen<span class="current-lvl">N5</span> </p>
-        
-        <div class="section-label">Wähle einen 5er Block</div>
 
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <button class="btn-main" style="flex: 1;" onclick="toggleKanjiOverview()">📖 Übersicht anzeigen</button>
+        <div class="section-label">Training & Übersicht</div>
+        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+            <button class="btn-main" style="background: var(--primary-light);" onclick="toggleKanjiOverview()">📖 Übersicht</button>
+            <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandomKanjiTraining()">✍️ Zufälliges Training</button>
         </div>
-
         <div id="kanji-overview-area" class="hidden">
             <div class="typing-container" style="padding: 20px; text-align: left;">
-                <h3>N5 Kanji Übersicht</h3>
+                <h3 id="kanji-overview-title">N5 Kanji Übersicht</h3>
                 <div id="kanji-overview-list" style="max-height: 400px; overflow-y: auto;"></div>
             </div>
         </div>
@@ -17784,6 +17780,8 @@
 
     function renderKanjiOverviewTable() {
         const list = kanjiData[state.level] || [];
+        const titleEl = document.getElementById('kanji-overview-title');
+        if (titleEl) titleEl.innerText = `${state.level} Kanji Übersicht`;
         document.getElementById('kanji-overview-list').innerHTML =
             `<table class="kanji-overview-table"><thead><tr><th>Kanji</th><th>Lesungen</th><th>Bedeutung</th></tr></thead><tbody>` +
             list.map(k => `
