@@ -378,6 +378,12 @@
             <button class="btn-main" style="background: var(--primary-light);" onclick="startRandom(true, true)">Global Mix (Alle)</button>
         </div>
         <button class="btn-main" style="background: var(--primary-dark); margin-top: 20px;" id="ui-daily-btn" onclick="startDailyChallenge()">Tägliche Herausforderung (10 Vokabeln)</button>
+
+        <div class="section-label">Kanji Training</div>
+        <div style="display: flex; gap: 15px; margin-bottom: 40px;">
+            <button class="btn-main" style="background: var(--primary-light);" onclick="switchTab('kanji'); if(document.getElementById('kanji-overview-area').classList.contains('hidden')) toggleKanjiOverview();">📖 Übersicht</button>
+            <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandomKanjiTraining()">✍️ Training starten</button>
+        </div>
     </main>
 
     <main id="view-alltag" class="hidden">
@@ -18079,6 +18085,15 @@
         const id = state.kanji.subMode === 'write' ? 'kanji-canvas' : 'kanji-canvas-quiz';
         const cvs = document.getElementById(id);
         if (cvs) cvs.getContext('2d').clearRect(0, 0, cvs.width, cvs.height);
+    }
+
+    function startRandomKanjiTraining() {
+        const kanjis = kanjiData[state.level] || [];
+        if (kanjis.length === 0) return alert("Keine Kanji für dieses Level vorhanden.");
+        const blockCount = Math.ceil(kanjis.length / 5);
+        const blockIdx = Math.floor(Math.random() * blockCount);
+        switchTab('kanji');
+        startKanjiBlock(blockIdx);
     }
 
     // --- VOLLTEST ---
