@@ -17950,7 +17950,7 @@
 
             // Offscreen Vorlage vorbereiten
             offCtx.clearRect(0, 0, 300, 300);
-            offCtx.font = "bold 220px 'MS Mincho', 'Sawarabi Mincho', serif";
+            offCtx.font = "220px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
             offCtx.textAlign = "center";
             offCtx.textBaseline = "middle";
             offCtx.fillStyle = "black";
@@ -17982,11 +17982,14 @@
             if (isTarget && isUser) matchedPixels++;
         }
 
+        // Fallback: Falls das Ziel-Kanji nicht gerendert werden konnte
+        if (targetPixels === 0) return nextKanjiStep();
+
         const coverage = targetPixels > 0 ? matchedPixels / targetPixels : 0;
         const accuracy = userPixels > 0 ? matchedPixels / userPixels : 0;
 
-        // Tolerantere Schwellenwerte für Kanji
-        const isCorrect = coverage > 0.12 && accuracy > 0.015;
+        // Etwas großzügigere Schwellenwerte für eine stabilere Erkennung
+        const isCorrect = coverage > 0.10 && accuracy > 0.01;
 
         const feedback = document.getElementById('kanji-feedback-card');
         feedback.className = 'path-feedback-card ' + (isCorrect ? 'correct' : 'wrong');
@@ -17996,14 +17999,10 @@
         
         if (isCorrect) {
             playSound('correct');
-            if (state.kanji.exercises) {
-                const nextBtn = document.getElementById('btn-kanji-write-next');
-                nextBtn.classList.remove('hidden');
-                nextBtn.innerText = "Richtig! Weiter →";
-                nextBtn.onclick = nextKanjiStep;
-            } else {
-                document.getElementById('btn-kanji-write-next').classList.remove('hidden');
-            }
+            const nextBtn = document.getElementById('btn-kanji-write-next');
+            nextBtn.classList.remove('hidden');
+            nextBtn.innerText = "Richtig! Weiter →";
+            nextBtn.onclick = nextKanjiStep;
         } else {
             playSound('wrong');
         }
