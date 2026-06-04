@@ -382,7 +382,7 @@
         <div class="section-label">Kanji Training</div>
         <div style="display: flex; gap: 15px; margin-bottom: 40px;">
             <button class="btn-main" style="background: var(--primary-light);" onclick="switchTab('kanji'); if(document.getElementById('kanji-overview-area').classList.contains('hidden')) toggleKanjiOverview();">📖 Übersicht</button>
-            <button class="btn-main" style="background: var(--accent-pink);" onclick="switchTab('kanji')">🚀 Kanji Lektionen</button>
+            <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandomKanjiTraining()">✍️ Training starten</button>
         </div>
     </main>
 
@@ -602,7 +602,7 @@
             </div>
         </div>
 
-        <div class="section-label">Wähle einen Übungsblock (10 Kanji)</div>
+        <div class="section-label">Wähle einen Übungsblock (5 Kanji)</div>
         <div id="kanji-blocks-container" class="kana-grid"></div>
 
         <div id="kanji-learning-area" class="hidden">
@@ -17807,39 +17807,6 @@
         updateKanjiView();
     }
 
-    function loadKanjiStep() {
-        const step = state.kanji.exercises[state.kanji.currentStep];
-        if (!step) {
-            const resStat = document.querySelector('#view-kanji-results .stat-val');
-            if (resStat) resStat.innerText = `${state.kanji.currentBlock.length}/${state.kanji.currentBlock.length}`;
-            return switchTab('kanji-results');
-        }
-
-        if (step.type === 'intro') {
-            setKanjiSubMode('write');
-            updateKanjiView(step.kanji);
-            const nextBtn = document.getElementById('btn-kanji-write-next');
-            nextBtn.classList.remove('hidden');
-            nextBtn.innerText = "Lerne dieses Kanji →";
-            nextBtn.onclick = nextKanjiStep;
-        } else if (step.type === 'trace') {
-            setKanjiSubMode('write');
-            updateKanjiView(step.kanji);
-            const nextBtn = document.getElementById('btn-kanji-write-next');
-            nextBtn.classList.add('hidden');
-            nextBtn.onclick = nextKanjiStep;
-        } else if (step.type === 'quiz') {
-            setKanjiSubMode('quiz');
-            state.kanji.quizState = 'choice';
-            updateKanjiView(step.kanji);
-        }
-    }
-
-    function nextKanjiStep() {
-        state.kanji.currentStep++;
-        loadKanjiStep();
-    }
-
     function setKanjiSubMode(mode) {
         state.kanji.subMode = mode;
         document.getElementById('kanji-mode-write').classList.toggle('active', mode === 'write');
@@ -17928,7 +17895,9 @@
                 nextBtn.classList.remove('hidden');
                 nextBtn.innerText = "Richtig! Weiter →";
                 nextBtn.onclick = nextKanjiStep;
-            } else document.getElementById('btn-kanji-write-next').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-kanji-write-next').classList.remove('hidden');
+            }
         } else {
             playSound('wrong');
         }
@@ -18131,7 +18100,7 @@
     function startRandomKanjiTraining() {
         const kanjis = kanjiData[state.level] || [];
         if (kanjis.length === 0) return alert("Keine Kanji für dieses Level vorhanden.");
-        const blockCount = Math.ceil(kanjis.length / 10);
+        const blockCount = Math.ceil(kanjis.length / 5);
         const blockIdx = Math.floor(Math.random() * blockCount);
         switchTab('kanji');
         startKanjiBlock(blockIdx);
