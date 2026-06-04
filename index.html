@@ -594,7 +594,7 @@
         <div class="section-label">Training & Übersicht</div>
         <div style="display: flex; gap: 15px; margin-bottom: 20px;">
             <button class="btn-main" style="background: var(--primary-light);" onclick="toggleKanjiOverview()">📖 Übersicht</button>
-            <button class="btn-main" style="background: var(--accent-pink);" onclick="startKanjiBlock(0)">✍️ Training starten</button>
+            <button class="btn-main" style="background: var(--accent-pink);" onclick="startSelectedKanjiTraining()">✍️ Training starten</button>
         </div>
         <div id="kanji-overview-area" class="hidden">
             <div class="typing-container" style="padding: 20px; text-align: left;">
@@ -17724,6 +17724,36 @@
             state.kanji.selectedBlocks.push(idx);
         }
         renderKanjiBlocks();
+    }
+
+    function startKanjiBlock(idx) {
+        state.kanji.selectedBlocks = [idx];
+        startSelectedKanjiTraining();
+    }
+
+    function startRandomKanjiTraining() {
+        const kanjis = kanjiData[state.level] || [];
+        if (kanjis.length === 0) return alert("Keine Kanji für dieses Level verfügbar.");
+        
+        // Zufällige 5 Kanji auswählen
+        const count = Math.min(5, kanjis.length);
+        const shuffled = [...kanjis].sort(() => Math.random() - 0.5).slice(0, count);
+        
+        state.kanji.currentBlock = shuffled;
+        state.kanji.exercises = [];
+        state.kanji.currentIndex = 0;
+
+        // Flow erstellen
+        state.kanji.exercises.push({ type: 'overview', kanjis: shuffled });
+        shuffled.forEach(item => {
+            state.kanji.exercises.push({ type: 'intro', item: item });
+            state.kanji.exercises.push({ type: 'write', item: item });
+            state.kanji.exercises.push({ type: 'quiz', item: item });
+        });
+
+        document.getElementById('kanji-overview-area').classList.add('hidden');
+        document.getElementById('kanji-learning-area').classList.remove('hidden');
+        loadKanjiStep();
     }
 
     function startSelectedKanjiTraining() {
