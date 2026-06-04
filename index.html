@@ -382,6 +382,7 @@
         <div class="section-label">Kanji Training</div>
         <div style="display: flex; gap: 15px; margin-bottom: 40px;">
             <button class="btn-main" style="background: var(--primary-light);" onclick="switchTab('kanji'); if(document.getElementById('kanji-overview-area').classList.contains('hidden')) toggleKanjiOverview();">📖 Übersicht</button>
+            <button class="btn-main" id="kanji-start-btn" style="background: var(--accent-pink);" onclick="startKanjiBlock(0)">🚀 Lektion 1 starten</button>
             <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandomKanjiTraining()">✍️ Training starten</button>
         </div>
     </main>
@@ -593,7 +594,7 @@
         <div class="section-label">Training & Übersicht</div>
         <div style="display: flex; gap: 15px; margin-bottom: 20px;">
             <button class="btn-main" style="background: var(--primary-light);" onclick="toggleKanjiOverview()">📖 Übersicht</button>
-            <button class="btn-main" id="kanji-start-btn" style="background: var(--accent-pink);" onclick="startKanjiBlock(0)">🚀 Lektion 1 starten</button>
+            <button class="btn-main" style="background: var(--accent-pink);" onclick="startKanjiBlock(0)">✍️ Training starten</button>
         </div>
         <div id="kanji-overview-area" class="hidden">
             <div class="typing-container" style="padding: 20px; text-align: left;">
@@ -606,12 +607,11 @@
         <div id="kanji-blocks-container" class="kana-grid"></div>
 
         <div id="kanji-learning-area" class="hidden">
-            <div class="toggle-group" style="margin-bottom: 20px;">
-                <button class="toggle-btn active" id="kanji-mode-write" onclick="setKanjiSubMode('write')">Schreiben</button>
-                <button class="toggle-btn" id="kanji-mode-quiz" onclick="setKanjiSubMode('quiz')">Quiz</button>
-                <button class="toggle-btn" id="kanji-mode-combo" onclick="setKanjiSubMode('combo')">Kombinationen</button>
-                <button class="toggle-btn" id="kanji-mode-radical" onclick="setKanjiSubMode('radical')">Radikale</button>
+            <div class="fc-header">
+                <span style="cursor:pointer;" onclick="switchTab('kanji')">← Zurück</span>
+                <span id="kanji-lesson-progress-text">1/15</span>
             </div>
+            <div class="progress-bar"><div class="progress-fill" id="kanji-lesson-progress-fill"></div></div>
 
             <div id="kanji-write-view" class="hidden">
                 <div class="kanji-info">
@@ -638,7 +638,7 @@
                     <button class="btn-main btn-small" style="background: var(--text-light)" id="btn-toggle-animation" onclick="toggleKanjiAnimation()">Verstecken</button>
                     <button class="btn-main btn-small" style="background: var(--accent-pink)" onclick="repeatKanjiAnimation()">Wiederholen</button>
                     <button class="btn-main btn-small" style="background: #10b981" onclick="checkKanjiTrace()">Prüfen</button>
-                    <button class="btn-main btn-small hidden" id="btn-kanji-write-next" style="background: var(--primary-light)" onclick="nextKanjiInBlock()">Nächstes Kanji →</button>
+                    <button class="btn-main btn-small hidden" id="btn-kanji-write-next" style="background: var(--primary-light)" onclick="nextKanjiStep()">Weiter →</button>
                 </div>
                 <div style="font-size: 10px; color: var(--text-light); text-align: center; margin-top: 15px; opacity: 0.8;">
                     Kanji-Daten von <a href="https://kanjivg.tagaini.net" target="_blank" style="color: var(--text-light); text-decoration: underline;">KanjiVG</a> (CC BY-SA 3.0)
@@ -17798,33 +17798,86 @@
 
     function startKanjiBlock(idx) {
         const kanjis = kanjiData[state.level] || [];
-        state.kanji.currentBlock = kanjis.slice(idx * 5, (idx + 1) * 5);
+        const block = kanjis.slice(idx * 5, (idx + 1) * 5);
+        if (block.length === 0) return;
+        
+        state.kanji.currentBlock = block;
+        state.kanji.exercises = [];
         state.kanji.currentIndex = 0;
-        state.kanji.quizState = 'write';
+
+        state.kanji.exercises.push({ type: 'overview', kanjis: block });
+        block.forEach(item => {
+            state.kanji.exercises.push({ type: 'intro', item: item });
+            state.kanji.exercises.push({ type: 'write', item: item });
+            state.kanji.exercises.push({ type: 'quiz', item: item });
+        });
+
         document.getElementById('kanji-overview-area').classList.add('hidden');
         document.querySelectorAll('.kanji-block-btn').forEach((btn, i) => btn.classList.toggle('active', i === idx));
         document.getElementById('kanji-learning-area').classList.remove('hidden');
-        updateKanjiView();
+        loadKanjiStep();
     }
 
-    function setKanjiSubMode(mode) {
-        state.kanji.subMode = mode;
-        document.getElementById('kanji-mode-write').classList.toggle('active', mode === 'write');
-        document.getElementById('kanji-mode-quiz').classList.toggle('active', mode === 'quiz');
-        document.getElementById('kanji-mode-combo').classList.toggle('active', mode === 'combo');
-        document.getElementById('kanji-mode-radical').classList.toggle('active', mode === 'radical');
-        document.getElementById('kanji-write-view').classList.toggle('hidden', mode !== 'write');
-        document.getElementById('kanji-quiz-view').classList.toggle('hidden', mode !== 'quiz');
-        document.getElementById('kanji-combo-view').classList.toggle('hidden', mode !== 'combo');
-        document.getElementById('kanji-radical-view').classList.toggle('hidden', mode !== 'radical');
+    function loadKanjiStep() {
+        const step = state.kanji.exercises[state.kanji.currentIndex];
+        const total = state.kanji.exercises.length;
+        const progressText = document.getElementById('kanji-lesson-progress-text');
+        const progressFill = document.getElementById('kanji-lesson-progress-fill');
         
-        if (mode === 'combo') setComboSubMode('list');
-        else if (mode === 'radical') loadRadical();
-        else updateKanjiView();
+        if (progressText) progressText.innerText = `${state.kanji.currentIndex + 1}/${total}`;
+        if (progressFill) progressFill.style.width = `${((state.kanji.currentIndex + 1) / total) * 100}%`;
+
+        document.getElementById('kanji-write-view').classList.add('hidden');
+        document.getElementById('kanji-quiz-view').classList.add('hidden');
+
+        if (step.type === 'overview') {
+            const quizView = document.getElementById('kanji-quiz-view');
+            quizView.classList.remove('hidden');
+            document.getElementById('kq-kanji').innerText = '📖';
+            document.getElementById('kq-question').innerText = 'Block Übersicht';
+            document.getElementById('kq-options').innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px;">
+                    ${step.kanjis.map(k => `<div class="kanji-block-btn" style="font-size:24px; padding:15px 0; height:auto;">${k.kanji}</div>`).join('')}
+                </div>
+                <button class="btn-main" onclick="nextKanjiStep()">Lektion starten</button>
+            `;
+            document.getElementById('kq-feedback').innerHTML = '';
+        } else if (step.type === 'intro') {
+            const quizView = document.getElementById('kanji-quiz-view');
+            quizView.classList.remove('hidden');
+            document.getElementById('kq-kanji').innerText = step.item.kanji;
+            document.getElementById('kq-question').innerHTML = `
+                <span class="kanji-reading-label">On: ${step.item.on || '-'}</span>
+                <span class="kanji-kana-large">Kun: ${step.item.kun || '-'}</span>
+                <div class="kanji-meaning">${step.item.de}</div>
+            `;
+            document.getElementById('kq-options').innerHTML = `
+                <button class="btn-speak" onclick="speak('${step.item.kanji}')">🔊 Hören</button>
+                <button class="btn-main" style="margin-top:20px;" onclick="nextKanjiStep()">Weiter</button>
+            `;
+            document.getElementById('kq-feedback').innerHTML = '';
+        } else if (step.type === 'write') {
+            state.kanji.subMode = 'write';
+            document.getElementById('kanji-write-view').classList.remove('hidden');
+            updateKanjiView(step.item);
+        } else if (step.type === 'quiz') {
+            state.kanji.subMode = 'quiz';
+            state.kanji.quizState = 'choice';
+            document.getElementById('kanji-quiz-view').classList.remove('hidden');
+            renderKanjiQuiz(step.item);
+        }
     }
 
-    function updateKanjiView(forcedItem = null) {
-        const item = forcedItem || state.kanji.currentBlock[state.kanji.currentIndex];
+    function nextKanjiStep() {
+        state.kanji.currentIndex++;
+        if (state.kanji.currentIndex < state.kanji.exercises.length) {
+            loadKanjiStep();
+        } else {
+            switchTab('kanji-results');
+        }
+    }
+
+    function updateKanjiView(item) {
         if (!item) return;
         if (state.kanji.subMode === 'write') {
             document.getElementById('kw-readings').innerHTML =
