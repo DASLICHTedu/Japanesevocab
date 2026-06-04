@@ -593,7 +593,7 @@
         <div class="section-label">Training & Übersicht</div>
         <div style="display: flex; gap: 15px; margin-bottom: 20px;">
             <button class="btn-main" style="background: var(--primary-light);" onclick="toggleKanjiOverview()">📖 Übersicht</button>
-            <button class="btn-main" style="background: var(--accent-pink);" onclick="startKanjiBlock(0)">🚀 Lektion 1 starten</button>
+            <button class="btn-main" id="kanji-start-btn" style="background: var(--accent-pink);" onclick="startKanjiBlock(0)">🚀 Lektion 1 starten</button>
         </div>
         <div id="kanji-overview-area" class="hidden">
             <div class="typing-container" style="padding: 20px; text-align: left;">
@@ -17823,8 +17823,8 @@
         else updateKanjiView();
     }
 
-    function updateKanjiView() {
-        const item = state.kanji.currentBlock[state.kanji.currentIndex];
+    function updateKanjiView(forcedItem = null) {
+        const item = forcedItem || state.kanji.currentBlock[state.kanji.currentIndex];
         if (!item) return;
         if (state.kanji.subMode === 'write') {
             document.getElementById('kw-readings').innerHTML =
@@ -17890,7 +17890,12 @@
         
         if (isCorrect) {
             playSound('correct');
-            document.getElementById('btn-kanji-write-next').classList.remove('hidden');
+            if (state.kanji.exercises) {
+                const nextBtn = document.getElementById('btn-kanji-write-next');
+                nextBtn.classList.remove('hidden');
+                nextBtn.innerText = "Richtig! Weiter →";
+                nextBtn.onclick = nextKanjiStep;
+            } else document.getElementById('btn-kanji-write-next').classList.remove('hidden');
         } else {
             playSound('wrong');
         }
@@ -18047,7 +18052,8 @@
             playSound('correct');
             btn.classList.add('correct');
             feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓</span>';
-            setTimeout(nextKanjiInBlock, 1500);
+            if (state.kanji.exercises) setTimeout(nextKanjiStep, 1500);
+            else setTimeout(nextKanjiInBlock, 1500);
         } else {
             playSound('wrong');
             btn.classList.add('wrong');
