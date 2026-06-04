@@ -602,8 +602,8 @@
             </div>
         </div>
 
-        <div class="section-label">Wähle einen Übungsblock (10 Kanji)</div>
-        <div id="kanji-blocks-container" class="kana-grid"></div>
+        <div class="section-label">Wähle einen Übungsblock (5 Kanji)</div>
+        <div id="kanji-blocks-container" class="kanji-grid"></div>
 
         <div id="kanji-learning-area" class="hidden">
             <div class="toggle-group" style="margin-bottom: 20px;">
@@ -18092,7 +18092,7 @@
     function startRandomKanjiTraining() {
         const kanjis = kanjiData[state.level] || [];
         if (kanjis.length === 0) return alert("Keine Kanji für dieses Level vorhanden.");
-        const blockCount = Math.ceil(kanjis.length / 10);
+        const blockCount = Math.ceil(kanjis.length / 5);
         const blockIdx = Math.floor(Math.random() * blockCount);
         switchTab('kanji');
         startKanjiBlock(blockIdx);
