@@ -1,432 +1,223 @@
 // kanji-logic.js
-// kanji-logic.js
-// kanji-logic.js
 
-// 1. GLOBALE ZUWEISUNG (Wichtig für das HTML onclick!)
-window.showTab = showTab;
-window.nextKanji = nextKanji;
-window.repeatAnimation = repeatAnimation;
-
-// kanji-logic.js
-window.nextKanji = () => {
-    currentIndex++;
-    loadCurrentKanji();
+// --- KANJI DATA BY LEVEL ---
+const KANJI_DATA = {
+    "N5": [
+        // Block 1 & 2 (Basis-Zahlen & Natur)
+        '04e00', '04e8c', '04e09', '056db', '04e94', '0516d', '04e03', '0516b', '04e5d', '05341',
+        // Block 3 & 4 (Zeit & Elemente)
+        '065e5', '06708', '0706b', '06c34', '06728', '091d1', '0571f', '05c71', '05ddd', '07530',
+        // Block 5 & 6 (Größen & Richtungen)
+        '05927', '04e2d', '05c0f', '04e0a', '04e0b', '05de6', '053f3', '04eba', '05165', '051fa'
+    ],
+    "N4": [
+        // Block 1 & 2 (Gesellschaft & Handeln)
+        '04f1a', '0540c', '04e8b', '081ea', '0793e', '0767a', '08005', '05730', '0696d', '065b9',
+        // Block 3 & 4 (Zustand & Orte)
+        '065b0', '05834', '054e1', '07acb', '0958b', '0624b', '0529b', '0554f', '04ee3', '0660e',
+        // Block 5 & 6 (Bewegung)
+        '052d5', '04eac', '076ee', '0901a', '08a00', '07406', '04f53', '07530', '04e3b', '0984c'
+    ],
+    "N3": [
+        // Block 1 & 2
+        '0653f', '08b70', '05bfe', '90e8', '5408', '5e02', '5185', '76f8', '5b9a', '56de',
+        '06848', '073fe', '06700', '5316', '6c11', '6cd5', '5168', '8eab', '901a', '7d22'
+    ],
+    "N2": [
+        // Block 1 & 2
+        '0515a', '05354', '07dcf', '0533a', '09818', '06539', '05e9c', '0969b', '0969c', '07d1a',
+        '07d42', '05224', '08af8', '05b88', '06a4b', '06295', '04e88', '067fb', '08056', '079c1'
+    ],
+    "N1": [
+        // Block 1 & 2
+        '04e59', '04e86', '053c8', '04e0e', '04e08', '051e1', '05203', '052fa', '05301', '05c6f',
+        '04e18', '04e1e', '0518d', '05211', '05238', '0524c', '052b9', '05310', '05374', '053ac'
+    ]
 };
 
-async function loadCurrentKanji() {
-    const wrapper = document.getElementById('kanji-svg-wrapper');
-    // Wir leeren nur den Wrapper, nicht den ganzen Tab
-    wrapper.innerHTML = ""; 
-
-    const hex = myKanjiList[currentIndex];
-    const url = `<https://corsproxy.io/?https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg>`;
-    
-    try {
-        const response = await fetch(url);
-        const svgText = await response.text();
-        wrapper.innerHTML = svgText;
-        
-        // Animation direkt auf die Pfade im Wrapper anwenden
-        const paths = wrapper.querySelectorAll('path');
-        paths.forEach((path, i) => {
-            const len = path.getTotalLength();
-            path.style.strokeDasharray = len;
-            path.style.strokeDashoffset = len;
-            path.style.animation = `draw 2s linear forwards ${i * 0.1}s`;
-        });
-    } catch(e) { console.error("404 oder CORS Fehler bei:", hex); }
-}
-
-async function loadCurrentKanji() {
-    const hex = myKanjiList[currentIndex]; // Dein Array
-    const wrapper = document.getElementById('kanji-svg-wrapper');
-    
-    // SVG rendern
-    const url = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hex}.svg>`;
-    const proxyUrl = `<https://corsproxy.io/>?` + encodeURIComponent(url);
-    
-    const response = await fetch(proxyUrl);
-    const svgText = await response.text();
-    wrapper.innerHTML = svgText;
-    
-    // Animation triggern
-    const paths = wrapper.querySelectorAll('path');
-    paths.forEach((path, index) => {
-        const length = path.getTotalLength();
-        path.style.strokeDasharray = length;
-        path.style.strokeDashoffset = length;
-        path.style.animation = `draw 2s linear forwards ${index * 0.1}s`;
-    });
-}
-async function showKanjiTrainer() {
-    const container = document.getElementById('kanji-schreiben-tab');
-    
-    // Wir setzen das HTML direkt in den gewünschten Canvas-Container
-    container.innerHTML = `
-        <div class="kanji-canvas-container" id="my-canvas-box">
-            <div id="kanji-svg-wrapper"></div>
-            <canvas id="kanji-canvas" width="300" height="300"></canvas>
-        </div>
-        <button onclick="repeatAnimation()">Wiederholen</button>
-        <button onclick="nextKanji()">Nächstes Kanji</button>
-    `;
-    loadCurrentKanji();
-}
-async function renderKanji(hexCode, targetId) {
-    const wrapper = document.getElementById('kanji-svg-wrapper');
-    if (!wrapper) return;
-
-    // ... fetch Logik ...
-    
-    // Das SVG wird jetzt in den Wrapper gepackt
-    wrapper.innerHTML = `<svg ...>${svgText}</svg>`; 
-}
-// 1. Die Logik für die Blöcke
 const KANJI_PER_BLOCK = 5;
-let currentBlock = 0; // Aktueller 5er-Block (0=1-5, 1=6-10...)
+const BLOCKS_PER_LESSON = 2; // Immer 2 Blöcke = 10 Kanji pro Lektion
+
+let currentLesson = 0;
+let currentIndexInLesson = 0;
+let hintActive = false;
+let lastLevel = null;
+
+// --- LESSON LOGIC ---
+
+function getKanjiForCurrentLesson() {
+    const levelList = KANJI_DATA[state.level] || KANJI_DATA["N5"];
+    const startIdx = currentLesson * (KANJI_PER_BLOCK * BLOCKS_PER_LESSON);
+    const endIdx = startIdx + (KANJI_PER_BLOCK * BLOCKS_PER_LESSON);
+    return levelList.slice(startIdx, endIdx);
+}
 
 async function loadCurrentKanji() {
-    // Berechne den Index innerhalb des Blocks
-    const startIndex = currentBlock * KANJI_PER_BLOCK;
-    const kanjiIndex = startIndex + (currentIndex % KANJI_PER_BLOCK);
-    const hex = myKanjiList[kanjiIndex];
+    // Check if level has changed since last time
+    if (lastLevel !== state.level) {
+        currentLesson = 0;
+        currentIndexInLesson = 0;
+        lastLevel = state.level;
+    }
+
+    const lessonKanji = getKanjiForCurrentLesson();
+    const hex = lessonKanji[currentIndexInLesson];
     
     if (!hex) {
-        console.error("Kein Kanji gefunden!");
+        alert("Lektion beendet!");
         return;
     }
 
     const display = document.getElementById('display-area');
-    display.innerHTML = `<h3>Kanji ${kanjiIndex + 1} / ${myKanjiList.length}</h3><div id="kanji-svg"></div>`;
-    
-    await renderKanji(hex, 'kanji-svg');
+    display.innerHTML = `
+        <h3>Lektion ${currentLesson + 1} - Kanji ${currentIndexInLesson + 1}/10</h3>
+        <div class="kanji-canvas-container" style="position:relative; width:300px; height:300px; margin:auto; border:1px solid #ddd;">
+            <div id="kanji-svg-wrapper" style="position:absolute; top:0; left:0; width:300px; height:300px; opacity: 0; pointer-events: none; transition: opacity 0.3s;"></div>
+            <canvas id="kanji-canvas" width="300" height="300" style="position:absolute; top:0; left:0; z-index:2; cursor:crosshair;"></canvas>
+        </div>
+    `;
+
+    hintActive = false; // Reset hint
+    await renderKanjiSVG(hex, 'kanji-svg-wrapper');
+    initCanvas();
 }
 
-async function renderKanji(hexCode, targetId) {
+async function renderKanjiSVG(hexCode, targetId) {
     const container = document.getElementById(targetId);
-    if (!container) return;
+    const url = `https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg`;
+    const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(url);
 
-    // Fix: Wir validieren den Hex-Code (muss 4-5 Stellen haben)
-    const url = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
-    const proxyUrl = `<https://corsproxy.io/>?` + encodeURIComponent(url);
-    
     try {
         const response = await fetch(proxyUrl);
-        if (response.status === 404) {
-            container.innerHTML = `<p>Kanji ${hexCode} nicht gefunden (404).</p>`;
+        let svgText = await response.text();
+        svgText = svgText.replace(/style="[^"]*"/g, ''); // Clean styles
+        container.innerHTML = svgText;
+
+        const paths = container.querySelectorAll('path');
+        paths.forEach((path, index) => {
+            const length = path.getTotalLength();
+            path.style.fill = "none";
+            path.style.stroke = "#ccc"; // Ghost color
+            path.style.strokeWidth = "8";
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+        });
+    } catch (e) {
+        console.error("Fehler beim Laden des SVGs", e);
+    }
+}
+
+function toggleHint() {
+    hintActive = !hintActive;
+    const wrapper = document.getElementById('kanji-svg-wrapper');
+    if (!wrapper) return;
+
+    wrapper.style.opacity = hintActive ? "1" : "0";
+
+    if (hintActive) {
+        const paths = wrapper.querySelectorAll('path');
+        paths.forEach((path, index) => {
+            const length = path.getTotalLength();
+            path.style.animation = `draw 2s linear forwards ${index * 0.2}s`;
+        });
+    } else {
+        // Reset animation state
+        const paths = wrapper.querySelectorAll('path');
+        paths.forEach(path => path.style.animation = 'none');
+    }
+}
+
+function nextKanji() {
+    const levelList = KANJI_DATA[state.level] || KANJI_DATA["N5"];
+    currentIndexInLesson++;
+    
+    // Wenn 10 Kanji durch sind oder das Ende der Liste erreicht ist
+    if (currentIndexInLesson >= (KANJI_PER_BLOCK * BLOCKS_PER_LESSON) || 
+        (currentLesson * 10 + currentIndexInLesson) >= levelList.length) {
+        
+        // Prüfen, ob es noch weitere Kanjis im aktuellen Level gibt
+        if ((currentLesson + 1) * 10 < levelList.length) {
+            currentIndexInLesson = 0;
+            currentLesson++;
+            alert("Lektion abgeschlossen! Hervorragend. Die nächste Lektion wird geladen.");
+        } else {
+            alert("Wahnsinn! Du hast alle Kanji Lektionen für das Level " + state.level + " erfolgreich absolviert.");
+            // Zurück zum Hauptmenü
+            currentIndexInLesson = 0;
+            currentLesson = 0;
+            switchTab('lernen');
             return;
         }
-        const svgText = await response.text();
-        container.innerHTML = `<div class="kanji-box">${svgText}</div>`;
-        // ... (dein restlicher Animations-Code)
-    } catch (e) {
-        console.error("Ladefehler:", e);
-    }
-}
-
-function nextKanji() {
-    currentIndex++;
-    // Wenn 5 Kanjis durch sind, Block erhöhen
-    if (currentIndex % KANJI_PER_BLOCK === 0) {
-        currentBlock++;
     }
     loadCurrentKanji();
 }
-// Sicherstellen, dass das HTML die Funktionen findet
-window.showTab = showTab;
-window.repeatAnimation = repeatAnimation;
-window.nextKanji = nextKanji;
 
-function showTab(tabName) {
-    const schreibenTab = document.getElementById('kanji-schreiben-tab');
-    
-    if (tabName === 'schreiben') {
-        schreibenTab.style.display = 'block';
-        // Trainer nur starten, wenn noch kein Kanji geladen wurde
-        if (document.getElementById('display-area').innerHTML.trim() === '') {
-            showKanjiTrainer();
-        }
-    } else {
-        schreibenTab.style.display = 'none';
+// --- CANVAS DRAWING LOGIC ---
+
+function initCanvas() {
+    const canvas = document.getElementById('kanji-canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    ctx.lineWidth = 6;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#333';
+
+    function startDrawing(e) {
+        drawing = true;
+        draw(e);
+    }
+
+    function stopDrawing() {
+        drawing = false;
+        ctx.beginPath();
+    }
+
+    function draw(e) {
+        if (!drawing) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches[0].clientX) - rect.left;
+        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        e.preventDefault();
+    }
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('touchstart', startDrawing);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDrawing);
+}
+
+function clearCanvas() {
+    const canvas = document.getElementById('kanji-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 }
 
-async function showKanjiTrainer() {
-    // Ziel: display-area statt kanji-gallery
-    const display = document.getElementById('display-area');
-    // ... hier kommt deine Logik zum Rendern hin ...
-}
+// --- UI SETUP ---
 
-// kanji-logic.js
-
-// Diese Zeilen machen die Funktionen für das HTML-onclick erreichbar
-window.showKanjiTrainer = showKanjiTrainer;
-window.nextKanji = nextKanji;
-window.repeatAnimation = repeatAnimation;
-
-async function renderKanji(hexCode, targetId) {
-    const container = document.getElementById(targetId);
-    if (!container) return;
-
-    // HIER DER PROXY-FIX gegen den CORS-Fehler
-    const githubUrl = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
-    const proxyUrl = `<https://corsproxy.io/>?` + encodeURIComponent(githubUrl);
-    
-    try {
-        const response = await fetch(proxyUrl);
-        const svgText = await response.text();
-        
-        container.innerHTML = `<div class="kanji-box">${svgText}</div>`;
-        
-        // ... (dein restlicher Code für die Pfad-Animation)
-    } catch (e) {
-        console.error("Fehler beim Laden:", e);
-    }
-}
-
-// ... dein Array ...
-
-async function loadCurrentKanji() {
-    const hex = myKanjiList[currentIndex];
-    const display = document.getElementById('display-area');
-    
-    // Wir setzen das HTML für das Kanji-Display neu
-    display.innerHTML = `<h3>Kanji ${currentIndex + 1} / ${myKanjiList.length}</h3><div id="kanji-svg"></div>`;
-    
-    // Rendern und dabei Animation neu starten
-    await renderKanji(hex, 'kanji-svg');
-}
-
-function repeatAnimation() {
-    // Einfacher Trick: Element kurz leeren und neu rendern, 
-    // um den Animation-Trigger von renderKanji neu zu starten
-    loadCurrentKanji();
-}
-
-function nextKanji() {
-    currentIndex = (currentIndex + 1) % myKanjiList.length;
-    loadCurrentKanji();
-}
-async function showKanjiTrainer() {
+function showKanjiTrainer() {
     const container = document.getElementById('kanji-gallery');
     if (!container) return;
 
-    // Interface für den Trainer aufbauen
     container.innerHTML = `
-        <div id="trainer-box" style="text-align:center; padding: 20px;">
-            <div id="display-area" style="min-height: 250px;"></div>
-            <div style="margin-top: 20px;">
-                <button onclick="repeatAnimation()">Wiederholen</button>
-                <button onclick="nextKanji()">Nächstes Kanji</button>
+        <div id="trainer-box" style="text-align:center; padding: 10px;">
+            <div id="display-area" style="min-height: 350px;"></div>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="toggleHint()" style="padding: 10px 20px;">Tipp (Anzeigen)</button>
+                <button onclick="clearCanvas()" style="padding: 10px 20px;">Löschen</button>
+                <button onclick="nextKanji()" style="padding: 10px 20px;">Nächstes Kanji</button>
             </div>
         </div>
     `;
-    loadCurrentKanji();
-}
-// kanji-logic.js
-async function renderKanji(hexCode, targetId) {
-    const container = document.getElementById(targetId);
-    if (!container) return;
-
-    const url = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
-    
-    try {
-        const response = await fetch(url);
-        let svgText = await response.text();
-        
-        // Entferne hart kodierte Styles, die uns blockieren könnten
-        svgText = svgText.replace(/style="[^"]*"/g, '');
-        
-        container.innerHTML = `<div class="kanji-box">${svgText}</div>`;
-        
-        // Erzwungene Stile für alle Pfade im SVG
-        const paths = container.querySelectorAll('path');
-        paths.forEach((path, index) => {
-            const length = path.getTotalLength();
-            path.style.fill = "none";
-            path.style.stroke = "black";
-            path.style.strokeWidth = "3";
-            path.style.strokeDasharray = length;
-            path.style.strokeDashoffset = length;
-            
-            // Animation starten
-            path.style.animation = `draw 2s linear forwards ${index * 0.1}s`;
-        });
-    } catch (e) {
-        console.error("Fehler beim Laden:", e);
-    }
-}
-// Globales Objekt für deine Funktionen
-window.KanjiApp = {
-    renderKanji: async function(hexCode, targetId) { 
-        /* dein Code hier */ 
-    },
-    init: function() {
-        console.log("Kanji-App gestartet");
-    }
-};
-async function loadCurrentKanji() {
-    const hex = myKanjiList[currentIndex];
-    const display = document.getElementById('display-area');
-    display.innerHTML = `<h3>Kanji ${currentIndex + 1} / ${myKanjiList.length}</h3><div id="kanji-svg"></div>`;
-    
-    // Die existierende Render-Funktion nutzen
-    await renderKanji(hex, 'kanji-svg');
-}
-
-function nextKanji() {
-    currentIndex = (currentIndex + 1) % myKanjiList.length;
-    loadCurrentKanji();
-}
-
-function repeatAnimation() {
-    // Einfacher Trick: Element kurz leeren und neu rendern, 
-    // um den Animation-Trigger von renderKanji neu zu starten
-    loadCurrentKanji();
-}
-/**
- * Lädt ein Kanji und animiert die Strichfolge
- * @param {string} kanjiHex - Der Hex-Code des Kanjis (z.B. '04e00' für 一)
- * @param {string} elementId - ID des Ziel-Containers im HTML
- */
-async function loadAndAnimateKanji(kanjiHex, elementId) {
-    const container = document.getElementById(elementId);
-    if (!container) return;
-
-    // URL zur offiziellen KanjiVG SVG-Datenbank
-    const svgUrl = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${kanjiHex}.svg>`;
-
-    try {
-        const response = await fetch(svgUrl);
-        const svgText = await response.text();
-
-        container.innerHTML = `
-            <div class="kanji-animation-wrapper">
-                <div class="svg-container">${svgText}</div>
-                <p style="font-size: 10px; color: #aaa; margin-top: 5px;">
-                    © 2009-2026 Ulrich Apel, CC BY-SA 3.0
-                </p>
-            </div>
-        `;
-
-        // Einfacher CSS-Trigger für die Animation
-        animatePaths(container);
-    } catch (err) {
-        container.innerHTML = `<p>Animation konnte nicht geladen werden.</p>`;
-    }
-}
-
-function animatePaths(container) {
-    const paths = container.querySelectorAll('path');
-    paths.forEach((path, index) => {
-        const length = path.getTotalLength();
-        path.style.strokeDasharray = length;
-        path.style.strokeDashoffset = length;
-        path.style.animation = `draw 2s forwards ${index * 0.5}s`;
-    });
-}
-/**
- * Lädt ein spezifisches Kanji anhand seines Hex-Codes.
- * Beispiel: Für '一' nutze '04e00'
- */
-async function renderKanji(hexCode, targetId) {
-    const container = document.getElementById(targetId);
-    if (!container) return;
-
-    const url = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
-    
-    try {
-        const response = await fetch(url);
-        let svgData = await response.text();
-        
-        // Entferne eventuelle harte CSS-Vorgaben aus dem SVG, 
-        // damit unsere Animation aus der index.html greifen kann
-        svgData = svgData.replace(/style="[^"]*"/g, '');
-        
-        container.innerHTML = `
-            <div class="kanji-box">
-                ${svgData}
-                <div class="kanji-copyright" style="font-size:10px; color:gray;">
-                    © KanjiVG
-                </div>
-            </div>
-        `;
-    } catch (e) {
-        console.error("Fehler:", e);
-    }
-}
-// kanji-logic.js
-
-
-// kanji-logic.js
-
-// kanji-logic.js
-
-let currentIndex = 0;
-const myKanjiList = [
-    '04e00', '04e8c', '04e09', '056db', '04e94', '0516d', '04e03', '0516b', '04e5d', '05341', // 1-10
-    '9bc6', '9bc7', '9bc9'
-];
-
-// Hinweis: Manche Kanji (wie '05186' für Yen) kommen doppelt vor 
-// oder sind leicht unterschiedlich, das Skript filtert das automatisch.
-async function renderKanji(hexCode, targetId) {
-    const container = document.getElementById(targetId);
-    if (!container) return;
-
-// Die Funktion, die alle durchgeht:
-    const githubUrl = `<https://raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/${hexCode}.svg>`;
-    const proxyUrl = `<https://corsproxy.io/>?` + encodeURIComponent(githubUrl);
-    
-    try {
-        const response = await fetch(proxyUrl);
-        if (!response.ok) throw new Error("SVG not found");
-        let svgText = await response.text();
-        
-        // Bereinige Styles im SVG
-        svgText = svgText.replace(/style="[^"]*"/g, '');
-        container.innerHTML = `<div class="kanji-box">${svgText}</div>`;
-        
-        // Animation anwenden
-        const paths = container.querySelectorAll('path');
-        paths.forEach((path, index) => {
-            const length = path.getTotalLength();
-            path.style.fill = "none";
-            path.style.stroke = "black";
-            path.style.strokeWidth = "3";
-            path.style.strokeDasharray = length;
-            path.style.strokeDashoffset = length;
-            path.style.animation = `draw 2s linear forwards ${index * 0.1}s`;
-        });
-    } catch (e) {
-        console.error("Ladefehler:", e);
-    }
-}
-
-async function loadCurrentKanji() {
-    const hex = myKanjiList[currentIndex];
-    const wrapper = document.getElementById('kanji-svg-wrapper');
-    if (!wrapper) return;
-    wrapper.innerHTML = "";
-    await renderKanji(hex, 'kanji-svg-wrapper');
-}
-
-    myKanjiList.forEach(hex => {
-        // Erstelle den Container für jedes Kanji
-        const div = document.createElement('div');
-        div.id = `kanji-${hex}`;
-        div.className = 'kanji-item';
-        container.appendChild(div);
-        
-        // Rufe die Ladefunktion für jedes auf
-        renderKanji(hex, `kanji-${hex}`);
-    });
-function nextKanji() {
-    currentIndex = (currentIndex + 1) % myKanjiList.length;
-    loadCurrentKanji();
-}
-
-function repeatAnimation() {
     loadCurrentKanji();
 }
 
@@ -436,24 +227,15 @@ function showTab(tabName) {
     
     if (tabName === 'schreiben') {
         schreibenTab.style.display = 'block';
-        if (document.getElementById('kanji-svg-wrapper').innerHTML.trim() === '') {
-            loadCurrentKanji();
-        }
+        showKanjiTrainer();
     } else {
         schreibenTab.style.display = 'none';
     }
 }
 
-
-    myKanjiList.forEach(hex => {
-        const div = document.createElement('div');
-        div.id = `kanji-${hex}`;
-        div.className = 'kanji-item';
-        container.appendChild(div);
-        
-        // Die Funktion, die wir vorher erstellt haben
-        renderKanji(hex, `kanji-${hex}`);
-    });
+// Globale Exponierung für HTML onclick
 window.showTab = showTab;
 window.nextKanji = nextKanji;
-window.repeatAnimation = repeatAnimation;
+window.toggleHint = toggleHint;
+window.clearCanvas = clearCanvas;
+window.showKanjiTrainer = showKanjiTrainer;
