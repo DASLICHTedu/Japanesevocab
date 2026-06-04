@@ -43,7 +43,12 @@ let currentIndexInLesson = 0;
 let hintActive = false;
 let lastLevel = null;
 
+// Fortschritt aus Speicher laden
+let kanjiMastery = JSON.parse(localStorage.getItem('kanjiMasteryProgress') || '{}');
+
 // --- LESSON LOGIC ---
+
+window.startKanjiLesson = startKanjiLesson; // Exponieren für HTML
 
 function getKanjiForCurrentLesson() {
     const levelList = KANJI_DATA[state.level] || KANJI_DATA["N5"];
@@ -68,12 +73,21 @@ async function loadCurrentKanji() {
         return;
     }
 
-    const display = document.getElementById('display-area');
+    // Wir nutzen das Container-System aus der index.html
+    const display = document.getElementById('kanji-write-view');
+    display.classList.remove('hidden');
+    document.getElementById('kanji-blocks-container').classList.add('hidden');
+
     display.innerHTML = `
-        <h3>Lektion ${currentLesson + 1} - Kanji ${currentIndexInLesson + 1}/10</h3>
-        <div class="kanji-canvas-container" style="position:relative; width:300px; height:300px; margin:auto; border:1px solid #ddd;">
-            <div id="kanji-svg-wrapper" style="position:absolute; top:0; left:0; width:300px; height:300px; opacity: 0; pointer-events: none; transition: opacity 0.3s;"></div>
-            <canvas id="kanji-canvas" width="300" height="300" style="position:absolute; top:0; left:0; z-index:2; cursor:crosshair;"></canvas>
+        <h3 style="text-align:center; margin-bottom:10px;">Lektion ${currentLesson + 1} - Kanji ${currentIndexInLesson + 1}/10</h3>
+        <div class="kanji-canvas-container" style="position:relative; width:300px; height:300px; margin:20px auto; border:2px solid var(--primary-dark); border-radius:12px; background:white;">
+            <div id="kanji-svg-wrapper" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity: 0; pointer-events: none; transition: opacity 0.3s; display:flex; align-items:center; justify-content:center;"></div>
+            <canvas id="kanji-canvas" width="300" height="300" style="position:absolute; top:0; left:0; z-index:5; cursor:crosshair;"></canvas>
+        </div>
+        <div class="canvas-actions" style="display:flex; gap:10px; justify-content:center; margin-top:15px;">
+            <button class="btn-main btn-small" style="background:var(--primary-light)" onclick="toggleHint()">Tipp</button>
+            <button class="btn-main btn-small" style="background:var(--text-light)" onclick="clearCanvas()">Löschen</button>
+            <button class="btn-main btn-small" style="background:#10b981" onclick="nextKanji()">Fertig / Nächstes</button>
         </div>
     `;
 
@@ -129,7 +143,16 @@ function toggleHint() {
 
 function nextKanji() {
     const levelList = KANJI_DATA[state.level] || KANJI_DATA["N5"];
+    const lessonKanji = getKanjiForCurrentLesson();
+    const currentHex = lessonKanji[currentIndexInLesson];
+
+    // Fortschritt speichern (Mastery erhöhen)
+    kanjiMastery[currentHex] = (kanjiMastery[currentHex] || 0) + 1;
+    localStorage.setItem('kanjiMasteryProgress', JSON.stringify(kanjiMastery));
+
     currentIndexInLesson++;
+    
+    const levelList = KANJI_DATA[state.level] || KANJI_DATA["N5"];
     
     // Wenn 10 Kanji durch sind oder das Ende der Liste erreicht ist
     if (currentIndexInLesson >= (KANJI_PER_BLOCK * BLOCKS_PER_LESSON) || 
@@ -145,7 +168,7 @@ function nextKanji() {
             // Zurück zum Hauptmenü
             currentIndexInLesson = 0;
             currentLesson = 0;
-            switchTab('lernen');
+            renderKanjiBlocks(); // Übersicht aktualisieren
             return;
         }
     }
@@ -204,32 +227,62 @@ function clearCanvas() {
 
 // --- UI SETUP ---
 
-function showKanjiTrainer() {
-    const container = document.getElementById('kanji-gallery');
+function renderKanjiBlocks() {
+    const container = document.getElementById('kanji-blocks-container');
     if (!container) return;
 
-    container.innerHTML = `
-        <div id="trainer-box" style="text-align:center; padding: 10px;">
-            <div id="display-area" style="min-height: 350px;"></div>
-            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <button onclick="toggleHint()" style="padding: 10px 20px;">Tipp (Anzeigen)</button>
-                <button onclick="clearCanvas()" style="padding: 10px 20px;">Löschen</button>
-                <button onclick="nextKanji()" style="padding: 10px 20px;">Nächstes Kanji</button>
+    const levelList = KANJI_DATA[state.level] || KANJI_DATA["N5"];
+    const numLessons = Math.ceil(levelList.length / 10);
+    
+    let html = '';
+    for (let i = 0; i < numLessons; i++) {
+        const start = i * 10;
+        const lessonKanjis = levelList.slice(start, start + 10);
+        
+        // Fortschrittsberechnung für die Ampel
+        let totalMastery = 0;
+        lessonKanjis.forEach(hex => {
+            totalMastery += Math.min(kanjiMastery[hex] || 0, 3); // Max 3 Punkte pro Kanji
+        });
+        const avg = totalMastery / (lessonKanjis.length * 3); // 0 bis 1
+
+        let color = '#ff4d4d'; // Rot (Neu)
+        if (avg >= 0.8) color = '#58cc02'; // Grün (Perfekt)
+        else if (avg > 0.1) color = '#ffa500'; // Gelb/Orange (In Arbeit)
+
+        html += `
+            <div class="option-card" style="border-left: 10px solid ${color}; display: flex; justify-content: space-between; align-items: center;" onclick="startKanjiLesson(${i})">
+                <div>
+                    <h3 style="margin:0;">Lektion ${i + 1}</h3>
+                    <p style="margin:0; font-size:12px;">${lessonKanjis.length} Schriftzeichen</p>
+                </div>
+                <div style="font-weight: bold; color: ${color};">${Math.round(avg * 100)}%</div>
             </div>
-        </div>
-    `;
+        `;
+    }
+    
+    container.innerHTML = html;
+    container.classList.remove('hidden');
+    document.getElementById('kanji-write-view').classList.add('hidden');
+    document.getElementById('kanji-learning-area').classList.add('hidden');
+}
+
+function startKanjiLesson(index) {
+    currentLesson = index;
+    currentIndexInLesson = 0;
     loadCurrentKanji();
 }
 
 function showTab(tabName) {
     const schreibenTab = document.getElementById('kanji-schreiben-tab');
-    if (!schreibenTab) return;
+    const kanjiView = document.getElementById('view-kanji');
     
-    if (tabName === 'schreiben') {
-        schreibenTab.style.display = 'block';
-        showKanjiTrainer();
+    if (tabName === 'kanji') {
+        kanjiView.classList.remove('hidden');
+        renderKanjiBlocks();
     } else {
-        schreibenTab.style.display = 'none';
+        // Andere Tabs logik (falls nötig)
+        // kanjiView.classList.add('hidden'); 
     }
 }
 
@@ -238,4 +291,4 @@ window.showTab = showTab;
 window.nextKanji = nextKanji;
 window.toggleHint = toggleHint;
 window.clearCanvas = clearCanvas;
-window.showKanjiTrainer = showKanjiTrainer;
+window.renderKanjiBlocks = renderKanjiBlocks;
