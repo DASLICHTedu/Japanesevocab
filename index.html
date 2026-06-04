@@ -17807,6 +17807,39 @@
         updateKanjiView();
     }
 
+    function loadKanjiStep() {
+        const step = state.kanji.exercises[state.kanji.currentStep];
+        if (!step) {
+            const resStat = document.querySelector('#view-kanji-results .stat-val');
+            if (resStat) resStat.innerText = `${state.kanji.currentBlock.length}/${state.kanji.currentBlock.length}`;
+            return switchTab('kanji-results');
+        }
+
+        if (step.type === 'intro') {
+            setKanjiSubMode('write');
+            updateKanjiView(step.kanji);
+            const nextBtn = document.getElementById('btn-kanji-write-next');
+            nextBtn.classList.remove('hidden');
+            nextBtn.innerText = "Lerne dieses Kanji →";
+            nextBtn.onclick = nextKanjiStep;
+        } else if (step.type === 'trace') {
+            setKanjiSubMode('write');
+            updateKanjiView(step.kanji);
+            const nextBtn = document.getElementById('btn-kanji-write-next');
+            nextBtn.classList.add('hidden');
+            nextBtn.onclick = nextKanjiStep;
+        } else if (step.type === 'quiz') {
+            setKanjiSubMode('quiz');
+            state.kanji.quizState = 'choice';
+            updateKanjiView(step.kanji);
+        }
+    }
+
+    function nextKanjiStep() {
+        state.kanji.currentStep++;
+        loadKanjiStep();
+    }
+
     function setKanjiSubMode(mode) {
         state.kanji.subMode = mode;
         document.getElementById('kanji-mode-write').classList.toggle('active', mode === 'write');
