@@ -593,9 +593,10 @@
 
         <div class="section-label">Training & Übersicht</div>
         <div style="display: flex; gap: 15px; margin-bottom: 20px;">
-            <button class="btn-main" style="background: var(--primary-light);" onclick="toggleKanjiOverview()">📖 Übersicht</button>
-            <button class="btn-main" style="background: var(--accent-pink);" onclick="startSelectedKanjiTraining()">✍️ Training starten</button>
-            <button class="btn-main" style="background: #6b46c1;" onclick="startRadicalTraining()">🌱 Radikale üben</button>
+            <button class="btn-main" style="background: var(--primary-light);" onclick="toggleKanjiOverview()"> Übersicht</button>
+            <button class="btn-main" style="background: var(--accent-pink);" onclick="startSelectedKanjiTraining()"> Training starten</button>
+            <button class="btn-main" style="background: #6b46c1;" onclick="startRadicalTraining()"> Radikale üben</button>
+            <button class="btn-main" style="background: #2b6cb0;" onclick="startKanjiWritingOnly()"> Schreibübung</button>
         </div>
         <div id="kanji-overview-area" class="hidden">
             <div class="typing-container" style="padding: 20px; text-align: left;">
@@ -17789,6 +17790,33 @@
             state.kanji.exercises.push({ type: 'intro', item: item });
             state.kanji.exercises.push({ type: 'write', item: item });
             state.kanji.exercises.push({ type: 'quiz', item: item });
+        });
+
+        document.getElementById('kanji-overview-area').classList.add('hidden');
+        document.getElementById('kanji-learning-area').classList.remove('hidden');
+        loadKanjiStep();
+    }
+
+    function startKanjiWritingOnly() {
+        if (state.kanji.selectedBlocks.length === 0) {
+            alert("Bitte wähle mindestens einen Block aus.");
+            return;
+        }
+
+        const allKanjis = kanjiData[state.level] || [];
+        let combinedKanjis = [];
+        state.kanji.selectedBlocks.sort((a, b) => a - b).forEach(idx => {
+            const block = allKanjis.slice(idx * 5, (idx + 1) * 5);
+            combinedKanjis = combinedKanjis.concat(block);
+        });
+
+        state.kanji.currentBlock = combinedKanjis;
+        state.kanji.exercises = [];
+        state.kanji.currentIndex = 0;
+
+        // Reiner Schreib-Modus: Fügt für jedes gewählte Kanji nur den 'write' Schritt hinzu
+        combinedKanjis.forEach(item => {
+            state.kanji.exercises.push({ type: 'write', item: item });
         });
 
         document.getElementById('kanji-overview-area').classList.add('hidden');
