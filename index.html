@@ -1378,7 +1378,11 @@
                 </div>`;
             setTimeout(() => {
                 const canvas = document.getElementById('kana-canvas');
-                if(canvas) setupCanvasEvents(canvas);
+                // OOM Schutz: Sicherstellen, dass Event-Listener nicht mehrfach angehängt werden
+                if(canvas && !canvas.dataset.init) { 
+                    setupCanvasEvents(canvas); 
+                    canvas.dataset.init = "true"; 
+                }
 
                 // Offscreen Vorlage für den Vergleich vorbereiten
                 offCtx.clearRect(0, 0, 300, 300);
@@ -17769,7 +17773,11 @@
         
         state.kanji.currentBlock = shuffled.map(r => ({
             kanji: r.char,
-            de: r.de,
+            de: `
+                ${r.de}
+                ${r.versions ? '<br><small style="color:var(--text-light)">Variante: ' + r.versions + '</small>' : ''}
+                ${r.examples ? '<br><small style="color:var(--accent-pink)">Beispiele: ' + r.examples + '</small>' : ''}
+            `,
             on: r.name,
             kun: ""
         }));
@@ -17968,7 +17976,7 @@
             document.getElementById('kw-readings').innerHTML =
                 `<span class="kanji-reading-label">On: ${item.on || '-'}</span>
                  <span class="kanji-kana-large">Kun: ${item.kun || '-'}</span>`;
-            document.getElementById('kw-meaning').innerText = item.de;
+            document.getElementById('kw-meaning').innerHTML = item.de;
             document.getElementById('kanji-ghost').innerText = item.kanji;
             state.kanji.strokesDrawn = 0;
             document.getElementById('kw-feedback').innerText = '';
@@ -18130,7 +18138,11 @@
     function loadRadical() {
         if (state.kanji.radicalIndex === undefined) state.kanji.radicalIndex = 0;
         const item = kanjiRadicalData[state.kanji.radicalIndex];
-        document.getElementById('kr-meaning').innerText = item.de;
+        document.getElementById('kr-meaning').innerHTML = `
+            ${item.de}
+            ${item.versions ? '<br><small>Variante: ' + item.versions + '</small>' : ''}
+            ${item.examples ? '<br><small style="color:var(--accent-pink)">Beispiele: ' + item.examples + '</small>' : ''}
+        `;
         document.getElementById('kr-name').innerText = item.name;
         document.getElementById('kanji-ghost-radical').innerText = item.char;
         clearRadicalCanvas();
@@ -18312,17 +18324,31 @@
 
     // --- GRAMMATIK ---
     const kanjiRadicalData = [
-        { char: "人", name: "hito", de: "Mensch" },
-        { char: "女", name: "onna", de: "Frau" },
-        { char: "子", name: "ko", de: "Kind" },
-        { char: "日", name: "hi", de: "Sonne / Tag" },
-        { char: "月", name: "tsuki", de: "Mond / Monat" },
-        { char: "木", name: "ki", de: "Baum" },
-        { char: "水", name: "mizu", de: "Wasser" },
-        { char: "火", name: "hi", de: "Feuer" },
-        { char: "土", name: "tsuchi", de: "Erde" },
-        { char: "口", name: "kuchi", de: "Mund" },
-        { char: "手", name: "te", de: "Hand" }
+        { char: "人", name: "hito", de: "Mensch", versions: "亻 (Nin-ben)", examples: "休, 体, 信" },
+        { char: "女", name: "onna", de: "Frau", versions: "", examples: "好, 姉, 始" },
+        { char: "子", name: "ko", de: "Kind", versions: "", examples: "学, 字, 孝" },
+        { char: "日", name: "hi", de: "Sonne / Tag", versions: "", examples: "明, 時, 晴" },
+        { char: "月", name: "tsuki", de: "Mond / Fleisch", versions: "⺼ (Niku-zuki)", examples: "有, 服, 脳" },
+        { char: "木", name: "ki", de: "Baum", versions: "", examples: "林, 森, 校" },
+        { char: "水", name: "mizu", de: "Wasser", versions: "氵 (Sanzui)", examples: "海, 泳, 漢" },
+        { char: "火", name: "hi", de: "Feuer", versions: "灬 (Rekka)", examples: "然, 熱, 照" },
+        { char: "土", name: "tsuchi", de: "Erde", versions: "", examples: "地, 場, 城" },
+        { char: "口", name: "kuchi", de: "Mund", versions: "", examples: "言, 語, 右" },
+        { char: "手", name: "te", de: "Hand", versions: "扌 (Te-hen)", examples: "持, 指, 打" },
+        { char: "心", name: "kokoro", de: "Herz", versions: "忄 (Risshin-ben)", examples: "情, 忙, 怖" },
+        { char: "言", name: "koto", de: "Sprache", versions: "訁 (Gon-ben)", examples: "話, 読, 語" },
+        { char: "糸", name: "ito", de: "Faden", versions: "糹 (Ito-hen)", examples: "終, 結, 続" },
+        { char: "足", name: "ashi", de: "Fuß", versions: "⻊ (Ashi-hen)", examples: "路, 踏, 躍" },
+        { char: "刀", name: "katana", de: "Schwert", versions: "刂 (Ritto)", examples: "切, 別, 判" },
+        { char: "彳", name: "gyounin-ben", de: "Schritt / Gehen", versions: "", examples: "行, 役, 待" },
+        { char: "示", name: "shimesu", de: "Altar / Zeigen", versions: "礻 (Shime-hen)", examples: "神, 祭, 社" },
+        { char: "衣", name: "koromo", de: "Kleidung", versions: "衤 (Koromo-hen)", examples: "初, 被, 装" },
+        { char: "辶", name: "shinnyuu", de: "Weg / Vorankommen", versions: "", examples: "道, 送, 近" },
+        { char: "宀", name: "u-kammuri", de: "Dach", versions: "", examples: "家, 安, 室" },
+        { char: "艹", name: "kusa-kammuri", de: "Gras / Pflanze", versions: "", examples: "花, 茶, 薬" },
+        { char: "門", name: "mon", de: "Tor / Tür", versions: "", examples: "間, 問, 開" },
+        { char: "貝", name: "kai", de: "Muschel / Geld", versions: "", examples: "买, 質, 貸" },
+        { char: "阝", name: "zato", de: "Hügel / Dorf", versions: "阜 (links), 邑 (rechts)", examples: "院, 降, 都" }
     ];
 
     function renderGrammarList() {
