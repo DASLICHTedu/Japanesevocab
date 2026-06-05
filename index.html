@@ -1392,6 +1392,8 @@
                 offCtx.textAlign = "center";
                 offCtx.textBaseline = "middle";
                 offCtx.fillStyle = "black";
+                offCtx.lineWidth = 20; // Breitere Trefferzone für Kana
+                offCtx.strokeText(step.char, 150, 150);
                 offCtx.fillText(step.char, 150, 150);
             }, 50);
         } else if (step.type === 'recognize' || step.type === 'sound_match' || step.type === 'reverse_recognize') {
@@ -1515,7 +1517,7 @@
         const accuracy = userPixels > 0 ? matchedPixels / userPixels : 0;
 
         // Heuristik: Nutzer hat mind. 25% des Zeichens getroffen (da Linien dünner als Font)
-        const isCorrect = coverage > 0.25 && accuracy > 0.05;
+        const isCorrect = coverage > 0.15 && accuracy > 0.02;
 
         const feedback = document.getElementById('kana-feedback');
         feedback.className = 'path-feedback-card ' + (isCorrect ? 'correct' : 'wrong');
@@ -18022,6 +18024,8 @@
             offCtx.textAlign = "center";
             offCtx.textBaseline = "middle";
             offCtx.fillStyle = "black";
+            offCtx.lineWidth = 25; // Noch großzügigere Trefferzone für komplexe Kanji
+            offCtx.strokeText(item.kanji, 150, 150);
             offCtx.fillText(item.kanji, 150, 150);
         } else if (state.kanji.subMode === 'quiz') {
             renderKanjiQuiz();
@@ -18057,7 +18061,7 @@
         const accuracy = userPixels > 0 ? matchedPixels / userPixels : 0;
 
         // Etwas großzügigere Schwellenwerte für eine stabilere Erkennung
-        const isCorrect = coverage > 0.10 && accuracy > 0.01;
+        const isCorrect = coverage > 0.07 && accuracy > 0.005;
 
         const feedback = document.getElementById('kanji-feedback-card');
         feedback.className = 'path-feedback-card ' + (isCorrect ? 'correct' : 'wrong');
