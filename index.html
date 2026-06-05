@@ -595,6 +595,7 @@
         <div style="display: flex; gap: 15px; margin-bottom: 20px;">
             <button class="btn-main" style="background: var(--primary-light);" onclick="toggleKanjiOverview()">📖 Übersicht</button>
             <button class="btn-main" style="background: var(--accent-pink);" onclick="startSelectedKanjiTraining()">✍️ Training starten</button>
+            <button class="btn-main" style="background: #6b46c1;" onclick="startRadicalTraining()">🌱 Radikale üben</button>
         </div>
         <div id="kanji-overview-area" class="hidden">
             <div class="typing-container" style="padding: 20px; text-align: left;">
@@ -17261,6 +17262,12 @@
         if (tabId === 'lesen') renderReadingList();
         if (tabId === 'grammatik') renderGrammarList();
         if (tabId === 'kanji') renderKanjiBlocks();
+
+        // OOM Schutz: Laufende Animationen stoppen, wenn man den Tab wechselt
+        if (tabId !== 'kanji') {
+            kanjiAnimationTimeouts.forEach(t => clearTimeout(t));
+            kanjiAnimationTimeouts = [];
+        }
     }
 
     function changeLevel(dir) {
@@ -17756,6 +17763,31 @@
         loadKanjiStep();
     }
 
+    function startRadicalTraining() {
+        // Startet ein Training mit den Basis-Radikalen (Grundbausteine)
+        const shuffled = [...kanjiRadicalData].sort(() => Math.random() - 0.5).slice(0, 5);
+        
+        state.kanji.currentBlock = shuffled.map(r => ({
+            kanji: r.char,
+            de: r.de,
+            on: r.name,
+            kun: ""
+        }));
+        state.kanji.exercises = [];
+        state.kanji.currentIndex = 0;
+
+        state.kanji.exercises.push({ type: 'overview', kanjis: state.kanji.currentBlock });
+        state.kanji.currentBlock.forEach(item => {
+            state.kanji.exercises.push({ type: 'intro', item: item });
+            state.kanji.exercises.push({ type: 'write', item: item });
+            state.kanji.exercises.push({ type: 'quiz', item: item });
+        });
+
+        document.getElementById('kanji-overview-area').classList.add('hidden');
+        document.getElementById('kanji-learning-area').classList.remove('hidden');
+        loadKanjiStep();
+    }
+
     function startSelectedKanjiTraining() {
         if (state.kanji.selectedBlocks.length === 0) {
             alert("Bitte wähle mindestens einen Block aus.");
@@ -18130,7 +18162,11 @@
                 <button class="btn-main" onclick="finishWritingQuiz()">Fertig gezeichnet</button>`;
             setTimeout(() => {
                 const qc = document.getElementById('kanji-canvas-quiz');
-                if (qc) setupCanvasEvents(qc);
+                // OOM Schutz: Sicherstellen, dass Event-Listener nicht mehrfach angehängt werden
+                if (qc && !qc.dataset.init) { 
+                    setupCanvasEvents(qc); 
+                    qc.dataset.init = "true"; 
+                }
             }, 100);
         } else {
             document.getElementById('kq-question').innerText = "Was bedeutet dieses Kanji?";
