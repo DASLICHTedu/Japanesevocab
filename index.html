@@ -16915,6 +16915,10 @@
         }
         const levelUpStreakDisplay = document.getElementById('streak-count-display');
         if (levelUpStreakDisplay) {
+            const colors = getStreakColors(state.streak.count);
+            streakDisplay.style.backgroundColor = colors.bg;
+            streakDisplay.style.color = colors.text;
+            streakDisplay.style.borderColor = colors.border;
             levelUpStreakDisplay.innerText = state.streak.count;
         }
     }
@@ -16942,6 +16946,10 @@
     function showStreakNotification() {
         const notificationDiv = document.getElementById('streak-notification');
         if (notificationDiv) {
+            const colors = getStreakColors(state.streak.count);
+            notificationDiv.style.backgroundColor = colors.bg;
+            notificationDiv.style.color = colors.text;
+            notificationDiv.style.borderColor = colors.border; // Apply border color to notification as well
             notificationDiv.innerHTML = `🔥 Streak ${state.streak.count > 1 ? '+1!' : 'gestartet!'} (${state.streak.count} Tage)`;
             notificationDiv.style.display = 'block';
             setTimeout(() => {
@@ -17346,6 +17354,7 @@
         if (kanjiBadge) kanjiBadge.innerText = state.level;
         if (grammatikBadge) grammatikBadge.innerText = state.level;
 
+        updateStreakDisplay(); // Update streak display on level change
         updateStats();
         renderList();
     }
@@ -17644,6 +17653,7 @@
             retryBtn.classList.remove('hidden');
             retryBtn.innerText = `Nur Fehler wiederholen (${state.sessionMistakes.length})`;
         }
+        markDayAsPracticed(); // Mark day as practiced when a session is finished
     }
 
     // --- ABFRAGE (Tippen) ---
@@ -17706,6 +17716,7 @@
                 if (state.currentIndex >= state.currentQueue.length) finishSession();
                 else loadTyping();
             }, 1000);
+            markDayAsPracticed(); // Mark day as practiced when a typing session is finished
         } else {
             playSound('wrong');
             feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? word[state.lang] : word.kana}</span>`;
@@ -18136,6 +18147,7 @@
         if (state.kanji.currentIndex < state.kanji.currentBlock.length) {
             state.kanji.quizState = 'write';
             updateKanjiView();
+            markDayAsPracticed(); // Mark day as practiced when a Kanji block is finished
         } else {
             const resStat = document.querySelector('#view-kanji-results .stat-val');
             if (resStat) {
