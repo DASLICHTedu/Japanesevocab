@@ -318,12 +318,11 @@
 <div class="container">
     <header>
         <div style="display: flex; flex-direction: column; align-items: flex-start;">
-            <div class="level-switch">
+            <div class="level-switch" style="margin-bottom: 5px;">
                 <span onclick="changeLevel(-1)" style="padding: 5px 10px; cursor: pointer;">&lt;</span>
                 <span id="ui-level-label">漢 JLPT</span> <span id="current-level-display">N5</span>
                 <span onclick="changeLevel(1)" style="padding: 5px 10px; cursor: pointer;">&gt;</span>
             </div>
-            <div id="streak-display" class="streak-badge" style="margin-top: 5px; padding: 5px 10px; background: #fff3e0; color: #ff9800; border: 1px solid var(--border-color); border-radius: 15px; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; width: fit-content; font-size: 14px; cursor: pointer;" onclick="switchTab('stats')">🔥 <span id="streak-count">0</span></div>
         </div>
         <div class="language-switch" onclick="toggleLanguage()" style="cursor:pointer; font-weight:bold; color:var(--accent-pink); padding: 5px 15px; background: white; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
             <span id="current-lang-display">DE</span>
@@ -467,6 +466,20 @@
             <button class="btn-main" onclick="switchTab('pfad')">Zum Pfad →</button>
         </div>
     </main>
+
+    <main id="view-stats" class="hidden">
+        <div class="fc-header">
+            <span style="cursor:pointer;" onclick="switchTab('lernen')">← Zurück zum Menü</span>
+            <h1 id="ui-stats-title" style="margin: 0; font-size: 20px;">Deine Aktivität</h1>
+            <p id="ui-stats-subtitle" class="subtitle" style="margin:0;">Behalte deine Lern-Serie im Blick.</p>
+        </div>
+        <div id="streak-display" class="streak-badge" style="margin-top: 20px; padding: 10px 20px; background: #fff3e0; color: #ff9800; border: 1px solid var(--border-color); border-radius: 15px; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; width: fit-content; font-size: 14px; cursor: pointer;">🔥 <span id="streak-count">0</span></div>
+        <div id="calendar-container" style="margin-top: 30px;"></div>
+        <div id="streak-notification" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--primary-dark); color:white; padding:10px 20px; border-radius:25px; z-index:1000; box-shadow:0 4px 10px rgba(0,0,0,0.2);">
+            🔥 Streak +1! (X Tage)
+        </div>
+    </main>
+
 
     <main id="view-liste" class="hidden">
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
@@ -1619,6 +1632,8 @@
         document.getElementById('ui-path-title').innerText = t.pathTitle;
         document.getElementById('ui-path-subtitle').innerText = t.pathSubtitle;
         document.getElementById('tab-stats').innerText = t.tabStats;
+        document.getElementById('ui-stats-title').innerText = t.statsTitle;
+        document.getElementById('ui-stats-subtitle').innerText = t.statsSubtitle;
         document.getElementById('ui-stats-title').innerText = t.statsTitle;
         document.getElementById('ui-stats-subtitle').innerText = t.statsSubtitle;
         document.getElementById('search-input').placeholder = t.searchPlaceholder;

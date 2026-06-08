@@ -175,7 +175,7 @@ function nextKanji() {
     }
     loadCurrentKanji();
 }
-
+// OOM Schutz: Sicherstellen, dass Event-Listener nicht mehrfach angehängt werden
 // --- CANVAS DRAWING LOGIC ---
 
 function initCanvas() {
