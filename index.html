@@ -317,11 +317,13 @@
 
 <div class="container">
     <header>
-        <div class="level-switch">
-            <span onclick="changeLevel(-1)" style="padding: 5px 10px; cursor: pointer;">&lt;</span>
-            <span id="ui-level-label">漢 JLPT</span> <span id="current-level-display">N5</span>
-            <div id="streak-display" class="streak-badge" style="margin-left: 10px; padding: 5px 10px; background: #fff3e0; color: #ff9800; border: 1px solid #ffb74d; border-radius: 15px; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">🔥 <span id="streak-count">0</span></div>
-            <span onclick="changeLevel(1)" style="padding: 5px 10px; cursor: pointer;">&gt;</span>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <div class="level-switch">
+                <span onclick="changeLevel(-1)" style="padding: 5px 10px; cursor: pointer;">&lt;</span>
+                <span id="ui-level-label">漢 JLPT</span> <span id="current-level-display">N5</span>
+                <span onclick="changeLevel(1)" style="padding: 5px 10px; cursor: pointer;">&gt;</span>
+            </div>
+            <div id="streak-display" class="streak-badge" style="margin-top: 5px; padding: 5px 10px; background: #fff3e0; color: #ff9800; border: 1px solid #ffb74d; border-radius: 15px; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; width: fit-content; font-size: 14px;">🔥 <span id="streak-count">0</span></div>
         </div>
         <div class="language-switch" onclick="toggleLanguage()" style="cursor:pointer; font-weight:bold; color:var(--accent-pink); padding: 5px 15px; background: white; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
             <span id="current-lang-display">DE</span>
@@ -16875,8 +16877,6 @@
         lang: 'de',
         level: 'N5',
         mode: 'karteikarten',
-        mode: 'karteikarten',
-        direction: 'jp-de',
         direction: 'jp-de',
         filterType: 'Alle',
         currentQueue: [],
@@ -16908,7 +16908,6 @@
     };
 
     // --- NAVIGATION & UI ---
-    function switchTab(tabId) {
     function updateStreakDisplay() {
         const streakDisplay = document.getElementById('streak-display');
         if (streakDisplay) {
@@ -16952,7 +16951,9 @@
     }
 
     function switchTab(tabId) {
-        document.querySelectorAll('main').forEach(el => el.classList.add('hidden'));
+        const mains = document.querySelectorAll('main');
+        if (mains) mains.forEach(el => el.classList.add('hidden'));
+        
         document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
 
         const targetView = document.getElementById(`view-${tabId}`);
@@ -18486,7 +18487,6 @@
         if (state.isFlipped && e.code === 'ArrowRight') nextCard(true);
         if (state.isFlipped && e.code === 'ArrowLeft') nextCard(false);
     });
-    }
     // --- START ---
     init();
 
