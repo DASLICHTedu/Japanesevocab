@@ -381,13 +381,6 @@
             <button class="btn-main" style="background: var(--primary-light);" onclick="startRandom(true, true)">Global Mix (Alle)</button>
         </div>
         <button class="btn-main" style="background: var(--primary-dark); margin-top: 20px;" id="ui-daily-btn" onclick="startDailyChallenge()">Tägliche Herausforderung (10 Vokabeln)</button>
-
-        <div class="section-label">Kanji Training</div>
-        <div style="display: flex; gap: 15px; margin-bottom: 40px;">
-            <button class="btn-main" style="background: var(--primary-light);" onclick="switchTab('kanji'); if(document.getElementById('kanji-overview-area').classList.contains('hidden')) toggleKanjiOverview();">📖 Übersicht</button>
-            <button class="btn-main" id="kanji-start-btn" style="background: var(--accent-pink);" onclick="startKanjiBlock(0)">🚀 Lektion 1 starten</button>
-            <button class="btn-main" style="background: var(--accent-pink);" onclick="startRandomKanjiTraining()">✍️ Training starten</button>
-        </div>
     </main>
 
     <main id="view-alltag" class="hidden">
@@ -611,6 +604,7 @@
         <div class="section-label">Training & Übersicht</div>
         <div style="display: flex; gap: 15px; margin-bottom: 20px;">
             <button class="btn-main" style="background: var(--primary-light);" onclick="toggleKanjiOverview()"> Übersicht</button>
+            <button class="btn-main" id="kanji-start-btn" style="background: var(--accent-pink);" onclick="startKanjiBlock(0)">🚀 Lektion 1 starten</button>
             <button class="btn-main" style="background: var(--accent-pink);" onclick="startSelectedKanjiTraining()"> Training starten</button>
             <button class="btn-main" style="background: #6b46c1;" onclick="startRadicalTraining()"> Radikale üben</button>
             <button class="btn-main" style="background: #2b6cb0;" onclick="startKanjiWritingOnly()"> Schreibübung</button>
