@@ -320,6 +320,7 @@
         <div class="level-switch">
             <span onclick="changeLevel(-1)" style="padding: 5px 10px; cursor: pointer;">&lt;</span>
             <span id="ui-level-label">漢 JLPT</span> <span id="current-level-display">N5</span>
+            <div id="streak-display" class="streak-badge" style="margin-left: 10px; padding: 5px 10px; background: #fff3e0; color: #ff9800; border: 1px solid #ffb74d; border-radius: 15px; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">🔥 <span id="streak-count">0</span></div>
             <span onclick="changeLevel(1)" style="padding: 5px 10px; cursor: pointer;">&gt;</span>
         </div>
         <div class="language-switch" onclick="toggleLanguage()" style="cursor:pointer; font-weight:bold; color:var(--accent-pink); padding: 5px 15px; background: white; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
@@ -16874,6 +16875,8 @@
         lang: 'de',
         level: 'N5',
         mode: 'karteikarten',
+        mode: 'karteikarten',
+        direction: 'jp-de',
         direction: 'jp-de',
         filterType: 'Alle',
         currentQueue: [],
@@ -16894,6 +16897,10 @@
             direction: 'jp-de',
             count: 20
         },
+        streak: {
+            count: parseInt(localStorage.getItem('streakCount') || '0'),
+            lastPracticeDate: localStorage.getItem('lastPracticeDate') || null
+        },
         dailyChallenge: {
             words: [],
             lastReset: 0
@@ -16901,6 +16908,49 @@
     };
 
     // --- NAVIGATION & UI ---
+    function switchTab(tabId) {
+    function updateStreakDisplay() {
+        const streakDisplay = document.getElementById('streak-display');
+        if (streakDisplay) {
+            streakDisplay.innerHTML = `🔥 <span id="streak-count">${state.streak.count}</span>`;
+        }
+        const levelUpStreakDisplay = document.getElementById('streak-count-display');
+        if (levelUpStreakDisplay) {
+            levelUpStreakDisplay.innerText = state.streak.count;
+        }
+    }
+
+    function markDayAsPracticed() {
+        const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = yesterday.toISOString().slice(0, 10);
+
+        if (state.streak.lastPracticeDate === today) {
+            return; // Already marked as practiced today
+        } else if (state.streak.lastPracticeDate === yesterdayStr) {
+            state.streak.count++;
+        } else {
+            state.streak.count = 1;
+        }
+        state.streak.lastPracticeDate = today;
+        localStorage.setItem('streakCount', state.streak.count);
+        localStorage.setItem('lastPracticeDate', state.streak.lastPracticeDate);
+        updateStreakDisplay();
+        showStreakNotification();
+    }
+
+    function showStreakNotification() {
+        const notificationDiv = document.getElementById('streak-notification');
+        if (notificationDiv) {
+            notificationDiv.innerHTML = `🔥 Streak ${state.streak.count > 1 ? '+1!' : 'gestartet!'} (${state.streak.count} Tage)`;
+            notificationDiv.style.display = 'block';
+            setTimeout(() => {
+                notificationDiv.style.display = 'none';
+            }, 3000); // Disappear after 3 seconds
+        }
+    }
+
     function switchTab(tabId) {
         document.querySelectorAll('main').forEach(el => el.classList.add('hidden'));
         document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
@@ -18436,7 +18486,7 @@
         if (state.isFlipped && e.code === 'ArrowRight') nextCard(true);
         if (state.isFlipped && e.code === 'ArrowLeft') nextCard(false);
     });
-
+    }
     // --- START ---
     init();
 

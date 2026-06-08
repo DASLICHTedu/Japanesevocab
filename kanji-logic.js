@@ -150,6 +150,7 @@ function nextKanji() {
     kanjiMastery[currentHex] = (kanjiMastery[currentHex] || 0) + 1;
     localStorage.setItem('kanjiMasteryProgress', JSON.stringify(kanjiMastery));
 
+    markDayAsPracticed(); // Mark day as practiced when a Kanji lesson is finished
     currentIndexInLesson++;
     
     const levelList = KANJI_DATA[state.level] || KANJI_DATA["N5"];
