@@ -17652,6 +17652,15 @@
 
     // --- KARTEIKARTEN ---
     function loadFlashcard() {
+        // Animation kurzzeitig deaktivieren, damit man die Rückseite der neuen Karte nicht sieht
+        const fcInner = document.querySelector('.fc-inner');
+        if (fcInner) fcInner.style.transition = 'none';
+        document.getElementById('flashcard').classList.remove('flipped');
+        state.isFlipped = false;
+        if (fcInner) void fcInner.offsetHeight; // Reflow erzwingen
+        if (fcInner) fcInner.style.transition = ''; // Animation für den nächsten Klick wieder aktivieren
+        document.getElementById('fc-actions').classList.remove('visible');
+
         const word = state.currentQueue[state.currentIndex];
         const isJpToDe = state.direction === 'jp-de';
         const t = uiTranslations[state.lang];
@@ -17680,10 +17689,6 @@
             document.getElementById('fc-word-back').innerText = word[state.lang];
             document.getElementById('fc-trans-back').innerText = word.kanji ? `${word.kanji} (${word.kana})` : word.kana;
         }
-
-        state.isFlipped = false;
-        document.getElementById('flashcard').classList.remove('flipped');
-        document.getElementById('fc-actions').classList.remove('visible');
     }
 
     function flipCard() {
