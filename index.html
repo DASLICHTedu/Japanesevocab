@@ -244,13 +244,56 @@
         .hide-furigana rt { visibility: hidden; }
 
         /* --- STATISTIKEN & ERFOLGE STYLES --- */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 20px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; }
         .achievement-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
         .achievement-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; opacity: 0.55; filter: grayscale(1); transition: 0.2s; }
         .achievement-card.unlocked { opacity: 1; filter: none; border-color: #10b981; background: #f0fdf4; }
         .achievement-icon { font-size: 32px; }
         .achievement-info h4 { font-size: 15px; color: var(--primary-dark); margin-bottom: 4px; }
         .achievement-info p { font-size: 12px; color: var(--text-light); }
+
+        /* --- NEUE LERN-FEATURES STYLES (XP, SRS, MATCH, KANA) --- */
+        .daily-goal-banner { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%); color: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(39, 42, 72, 0.12); }
+        .daily-goal-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+        .xp-badge { background: rgba(255,255,255,0.18); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+        .daily-goal-bar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; }
+        .daily-goal-fill { height: 100%; background: #10b981; width: 0%; transition: width 0.4s ease; }
+
+        .smart-review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 12px; margin-bottom: 20px; }
+        .smart-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 14px; padding: 16px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 6px; }
+        .smart-card:hover { transform: translateY(-3px); border-color: var(--primary-dark); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
+        .smart-card.srs-due { border-color: #6b46c1; background: #faf8ff; }
+        .smart-card.mistakes { border-color: var(--accent-pink); background: #fff8fa; }
+        .smart-card.favorites { border-color: #f59e0b; background: #fffdf5; }
+        .smart-card-title { font-weight: 700; font-size: 15px; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; }
+        .smart-card-sub { font-size: 12px; color: var(--text-light); }
+        .smart-count-pill { font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 12px; background: var(--primary-dark); color: white; }
+
+        .block-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .block-card.completed-block { border-color: #10b981; background: #f0fdf4; }
+        .block-progress-mini { font-size: 11px; color: var(--text-light); font-weight: 600; }
+
+        .icon-btn { background: #f0f2f8; border: none; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; transition: 0.2s; }
+        .icon-btn:hover { background: var(--accent-pink-light); transform: scale(1.08); }
+        .star-btn { background: transparent; border: none; font-size: 20px; cursor: pointer; color: #d1d5db; transition: 0.2s; padding: 4px; }
+        .star-btn.active { color: #f59e0b; transform: scale(1.1); }
+        .srs-pill { font-size: 10px; padding: 2px 7px; border-radius: 8px; background: #ede9fe; color: #6d28d9; font-weight: 700; }
+
+        /* --- MATCH GAME STYLES --- */
+        .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+        .match-col { display: flex; flex-direction: column; gap: 10px; }
+        .match-tile { background: var(--white); border: 2px solid var(--border-color); border-radius: 12px; padding: 16px 12px; text-align: center; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s; min-height: 60px; display: flex; align-items: center; justify-content: center; user-select: none; }
+        .match-tile:hover { border-color: var(--primary-light); }
+        .match-tile.selected { border-color: var(--primary-dark); background: var(--badge-blue-bg); color: var(--badge-blue-text); transform: scale(1.02); }
+        .match-tile.matched { background: #d1fae5; border-color: #10b981; color: #065f46; opacity: 0.45; pointer-events: none; transform: scale(0.97); }
+        .match-tile.wrong { background: var(--accent-pink-light); border-color: var(--accent-pink); animation: shake 0.4s; }
+
+        /* --- KANA TRAINER STYLES --- */
+        .kana-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 15px; }
+        .kana-cell { background: var(--white); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 6px; text-align: center; cursor: pointer; transition: 0.15s; }
+        .kana-cell:hover { border-color: var(--accent-pink); background: var(--accent-pink-light); transform: translateY(-2px); }
+        .kana-char { font-size: 24px; font-weight: 700; color: var(--primary-dark); }
+        .kana-romaji { font-size: 11px; color: var(--text-light); font-weight: 600; }
     </style>
     <!-- NEUE STYLES FÜR DAS TEST CENTER -->
     <style>
@@ -428,18 +471,42 @@
     
     <div class="container">
     <main id="view-lernen" class="">
+        <div class="daily-goal-banner">
+            <div class="daily-goal-top">
+                <div>
+                    <div style="font-size: 18px; font-weight: 800;" id="xp-level-display">⭐ Level 1 · 0 XP</div>
+                    <div style="font-size: 12px; opacity: 0.85; margin-top: 2px;">Tagesziel: <span id="daily-progress-text">0 / 20</span> Vokabeln gelernt</div>
+                </div>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <span class="xp-badge" id="home-streak-badge">🔥 0 Tage</span>
+                    <button class="xp-badge" style="border: 1px solid rgba(255,255,255,0.4); cursor: pointer; color: white;" onclick="switchTab('kana')">あア Kana-Trainer</button>
+                </div>
+            </div>
+            <div class="daily-goal-bar">
+                <div class="daily-goal-fill" id="daily-goal-fill"></div>
+            </div>
+        </div>
+
         <h1 id="ui-learn-title">Vokabeln lernen</h1>
-        <p class="subtitle"><span id="vocab-count">0</span> <span id="ui-vocab-count-label">Vokabeln</span> · <span id="learned-count">0</span> <span id="ui-learned-label">gelernt</span></p>
+        <p class="subtitle"><span id="vocab-count">0</span> <span id="ui-vocab-count-label">Vokabeln</span> · <span id="learned-count">0</span> <span id="ui-learned-label">gelernt</span> · <span id="fav-count-display">0</span> ⭐</p>
 
         <div class="section-label" id="ui-mode-label">Lernmodus</div>
         <div class="card-grid">
             <div class="option-card active" id="mode-karteikarten" onclick="setMode('karteikarten', this)">
-                <h3 id="ui-mode-flash">Karteikarten</h3>
-                <p id="ui-mode-flash-desc">Karte umdrehen & bewerten</p>
+                <h3 id="ui-mode-flash">🗂️ Karteikarten</h3>
+                <p id="ui-mode-flash-desc">3D-Karte umdrehen, Audio & SRS</p>
             </div>
             <div class="option-card" id="mode-abfragen" onclick="setMode('abfragen', this)">
-                <h3 id="ui-mode-quiz">Abfragen</h3>
-                <p id="ui-mode-quiz-desc">Übersetzung eintippen</p>
+                <h3 id="ui-mode-quiz">⌨️ Abfragen (Tippen)</h3>
+                <p id="ui-mode-quiz-desc">Eintippen mit Live-Kana & Tipps</p>
+            </div>
+            <div class="option-card" id="mode-multiple" onclick="setMode('multiple', this)">
+                <h3 id="ui-mode-mc">🎯 Multiple Choice</h3>
+                <p id="ui-mode-mc-desc">4 Optionen & Hörverständnis</p>
+            </div>
+            <div class="option-card" id="mode-match" onclick="setMode('match', this)">
+                <h3 id="ui-mode-match">🧩 Speed-Match</h3>
+                <p id="ui-mode-match-desc">Paare auf Zeit zuordnen</p>
             </div>
         </div>
 
@@ -449,9 +516,34 @@
             <button class="toggle-btn" id="dir-de-jp" onclick="setDirection('de-jp')">Deutsch → JP</button>
         </div>
 
-        <button class="btn-main" style="margin-top: 30px;" id="ui-start-btn" onclick="startLearning(-1)">Lernen starten</button>
+        <button class="btn-main" style="margin-top: 25px;" id="ui-start-btn" onclick="startLearning(-1)">Lernen starten</button>
 
-        <div class="section-label" style="margin-top:40px;" id="ui-block-label">Wähle einen Block (je 20 Vokabeln)</div>
+        <div class="section-label">Smart-Training & Wiederholung (SRS)</div>
+        <div class="smart-review-grid">
+            <div class="smart-card srs-due" onclick="startSRSReview()">
+                <div class="smart-card-title">
+                    <span>🧠 Smart Review</span>
+                    <span class="smart-count-pill" id="srs-due-count" style="background:#6b46c1;">0</span>
+                </div>
+                <div class="smart-card-sub">Fällige Vokabeln nach Spaced Repetition wiederholen</div>
+            </div>
+            <div class="smart-card mistakes" onclick="startProblemWords()">
+                <div class="smart-card-title">
+                    <span>⚠️ Problemwörter</span>
+                    <span class="smart-count-pill" id="problem-words-count" style="background:var(--accent-pink);">0</span>
+                </div>
+                <div class="smart-card-sub">Schwierige & zuletzt verfehlte Vokabeln gezielt üben</div>
+            </div>
+            <div class="smart-card favorites" onclick="startFavoritesLearning()">
+                <div class="smart-card-title">
+                    <span>⭐ Favoriten</span>
+                    <span class="smart-count-pill" id="favorites-card-count" style="background:#f59e0b;">0</span>
+                </div>
+                <div class="smart-card-sub">Deine markierten Lieblings- & Fokuswörter üben</div>
+            </div>
+        </div>
+
+        <div class="section-label" style="margin-top:30px;" id="ui-block-label">Wähle einen Block (je 20 Vokabeln)</div>
         <div id="blocks-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;"></div>
 
         <div id="path-blocks-section" class="hidden">
@@ -546,9 +638,9 @@
     </main>
 
     <main id="view-liste" class="hidden">
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <input type="text" class="search-bar" id="search-input" placeholder="Suchen..." onkeyup="renderList()" style="flex: 1; margin-bottom: 0;">
-            <select id="type-filter" onchange="state.filterType = this.value; renderList();" style="padding: 0 15px; border-radius: 12px; border: 1px solid var(--border-color); background: white; font-size: 14px;">
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            <input type="text" class="search-bar" id="search-input" placeholder="Suchen (Kanji, Kana, Deutsch)..." onkeyup="renderList()" style="flex: 2; min-width: 180px; margin-bottom: 0;">
+            <select id="type-filter" onchange="state.filterType = this.value; renderList();" style="padding: 12px 15px; border-radius: 12px; border: 1px solid var(--border-color); background: white; font-size: 14px;">
                 <option value="Alle">Alle Typen</option>
                 <option value="Verb">Verben</option>
                 <option value="Adjektiv">Adjektive</option>
@@ -558,6 +650,13 @@
                 <option value="Fragewort">Fragewörter</option>
                 <option value="Zahl">Zahlen</option>
                 <option value="Adverb">Adverbien</option>
+            </select>
+            <select id="status-filter" onchange="state.filterStatus = this.value; renderList();" style="padding: 12px 15px; border-radius: 12px; border: 1px solid var(--border-color); background: white; font-size: 14px;">
+                <option value="Alle">Alle Status</option>
+                <option value="ungelernt">○ Ungelernt</option>
+                <option value="gelernt">✓ Gelernt</option>
+                <option value="favoriten">⭐ Favoriten</option>
+                <option value="srs">🧠 SRS Fällig</option>
             </select>
         </div>
         <div class="section-label" style="display:flex; justify-content:space-between;">
@@ -808,17 +907,63 @@
     <!-- NEUE ANSICHT: STATISTIKEN -->
     <main id="view-stats" class="hidden">
         <h1>Deine Statistiken</h1>
-        <p class="subtitle">Verfolge deinen Lernfortschritt und bleib motiviert.</p>
+        <p class="subtitle">Verfolge deinen Lernfortschritt, dein SRS-Gedächtnis und deine Erfolge.</p>
 
         <div class="stats-grid">
-            <div class="result-stat"><span class="stat-val" id="stats-streak">0</span><span class="stat-label">Tage Streak</span></div>
-            <div class="result-stat"><span class="stat-val" id="stats-vocab">0</span><span class="stat-label">Vokabeln gelernt</span></div>
-            <div class="result-stat"><span class="stat-val" id="stats-kanji">0</span><span class="stat-label">Kanji gelernt</span></div>
+            <div class="result-stat"><span class="stat-val" id="stats-streak">0</span><span class="stat-label">🔥 Tage Streak</span></div>
+            <div class="result-stat"><span class="stat-val" id="stats-xp">0</span><span class="stat-label">⭐ Gesamt-XP</span></div>
+            <div class="result-stat"><span class="stat-val" id="stats-vocab">0</span><span class="stat-label">📚 Vokabeln gelernt</span></div>
+            <div class="result-stat"><span class="stat-val" id="stats-kanji">0</span><span class="stat-label">漢 Kanji gelernt</span></div>
         </div>
+
+        <div class="section-label" style="margin-top: 35px;">Fortschritt nach JLPT-Level</div>
+        <div id="stats-level-progress" style="background: var(--white); padding: 20px; border-radius: 14px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 14px;"></div>
+
+        <div class="section-label" style="margin-top: 35px;">SRS Gedächtnis-Stufen (Leitner-Boxen)</div>
+        <div id="stats-srs-breakdown" class="stats-grid" style="margin-top: 10px;"></div>
 
         <div class="section-label" style="margin-top: 40px;">Erfolge</div>
         <div id="achievements-container" class="achievement-list">
             <!-- Erfolge werden hier per JS geladen -->
+        </div>
+    </main>
+
+    <!-- NEUE ANSICHT: SPEED-MATCH SPIEL -->
+    <main id="view-match" class="hidden">
+        <div class="fc-header">
+            <span style="cursor:pointer;" onclick="stopMatchGame(); switchTab('lernen')">← Menü</span>
+            <span style="font-weight:700; color:var(--primary-dark);">🧩 Speed-Match · Runde <span id="match-round-num">1</span></span>
+            <span style="font-weight:700; color:var(--accent-pink);">⏱ <span id="match-timer">0.0</span>s · 🔥 <span id="match-combo">0</span>x</span>
+        </div>
+        <p class="subtitle" style="text-align:center; margin-bottom:10px;">Finde die zusammenpassenden Paare aus Japanisch und Bedeutung!</p>
+        <div class="match-grid">
+            <div class="match-col" id="match-col-left"></div>
+            <div class="match-col" id="match-col-right"></div>
+        </div>
+    </main>
+
+    <!-- NEUE ANSICHT: KANA TRAINER -->
+    <main id="view-kana" class="hidden">
+        <div class="fc-header">
+            <span style="cursor:pointer;" onclick="switchTab('lernen')">← Zurück zum Lernen</span>
+            <span style="font-weight:bold; color:var(--primary-dark);">あア Kana-Trainer</span>
+        </div>
+        <h1>Hiragana & Katakana</h1>
+        <p class="subtitle">Tippe auf ein Zeichen für die Aussprache oder starte das Kana-Schnellquiz.</p>
+        <div class="toggle-group" style="margin-bottom: 20px;">
+            <button class="toggle-btn active" id="kana-tab-hiragana" onclick="switchKanaView('hiragana')">あ Hiragana</button>
+            <button class="toggle-btn" id="kana-tab-katakana" onclick="switchKanaView('katakana')">ア Katakana</button>
+            <button class="toggle-btn" id="kana-tab-quiz" onclick="switchKanaView('quiz')">🎯 Kana-Quiz</button>
+        </div>
+        <div id="kana-table-area" class="kana-grid"></div>
+        <div id="kana-quiz-area" class="hidden">
+            <div class="typing-container">
+                <span class="badge" id="kana-quiz-badge">Hiragana & Katakana</span>
+                <div class="fc-word" id="kana-quiz-char" style="font-size: 72px; margin: 20px 0; color: var(--primary-dark);">あ</div>
+                <p style="color:var(--text-light); margin-bottom: 15px;">Wie lautet die Lesung (Romaji)?</p>
+                <div id="kana-quiz-options" class="path-option-grid"></div>
+                <div id="kana-quiz-feedback" class="typing-feedback"></div>
+            </div>
         </div>
     </main>
 
@@ -829,8 +974,12 @@
             <span style="color: var(--accent-pink); font-weight:bold;"><span id="fc-learned-count">0</span> ✔</span>
         </div>
         
-        <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light); margin-bottom:5px;">
-            <span>Karte <span id="fc-current-num">1</span>/<span id="fc-total-num">20</span></span>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-light); margin-bottom:5px;">
+            <span>Karte <span id="fc-current-num">1</span>/<span id="fc-total-num">20</span> · <span id="fc-srs-badge" class="srs-pill">Box 1</span></span>
+            <div style="display:flex; gap:8px; align-items:center;">
+                <button class="icon-btn" onclick="speakCurrentWord(event)" title="Aussprache anhören">🔊</button>
+                <button class="star-btn" id="fc-fav-btn" onclick="toggleCurrentWordFavorite(event)" title="Als Favorit markieren">★</button>
+            </div>
         </div>
         <div class="progress-bar">
             <div class="progress-fill" id="fc-progress"></div>
@@ -842,7 +991,7 @@
                     <span class="badge" id="fc-type-front" style="position:absolute; top:20px; left:20px;">Verben</span>
                     <div class="fc-reading" id="fc-reading-front"></div>
                     <div class="fc-word" id="fc-word-front">ある</div>
-                    <div class="fc-hint">← KLICKEN ZUM UMDREHEN →</div>
+                    <div class="fc-hint">← KLICKEN ODER LEERTASTE ZUM UMDREHEN →</div>
                 </div>
                 <div class="fc-back">
                     <span class="badge" id="fc-type-back" style="position:absolute; top:20px; left:20px; background:rgba(255,255,255,0.2); color:white;">Verben</span>
@@ -862,17 +1011,31 @@
     <main id="view-typing" class="hidden">
         <div class="fc-header">
             <span style="cursor:pointer;" onclick="switchTab('lernen')">← Menü</span>
-            <span>Abfrage-Modus</span>
+            <span id="typing-mode-header-label">Abfrage-Modus</span>
             <span><span id="type-current-num">1</span>/<span id="type-total-num">20</span></span>
         </div>
         
         <div class="typing-container">
-            <span class="badge" id="type-badge">Verben</span>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="badge" id="type-badge">Verben</span>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <button class="icon-btn" onclick="speakCurrentWord(event)" title="Aussprache anhören">🔊</button>
+                    <button class="icon-btn" id="btn-typing-hint" onclick="showTypingHint()" title="Tipp anzeigen">💡</button>
+                    <button class="star-btn" id="type-fav-btn" onclick="toggleCurrentWordFavorite(event)" title="Favorit">★</button>
+                </div>
+            </div>
             <div class="fc-word" id="type-word" style="margin-top:20px; color:var(--primary-dark);">ある</div>
-            <p id="type-hint" style="color:var(--text-light); font-size:14px; margin-bottom:20px;">Übersetze auf Deutsch</p>
+            <p id="type-hint" style="color:var(--text-light); font-size:14px; margin-bottom:15px;">Übersetze auf Deutsch</p>
             
             <div id="type-input-area">
                 <input type="text" class="typing-input" id="typing-input" placeholder="Tippe hier..." onkeypress="checkTyping(event)" oninput="applyRomajiToKana(this)">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; font-size:12px; color:var(--text-light);">
+                    <label style="cursor:pointer; display:flex; align-items:center; gap:5px;">
+                        <input type="checkbox" id="live-kana-toggle" checked onchange="state.liveKana = this.checked">
+                        Live Romaji → Kana (bei DE→JP)
+                    </label>
+                    <span id="typing-hint-display" style="color:var(--accent-pink); font-weight:600;"></span>
+                </div>
             </div>
 
             <div id="type-choice-area" class="hidden" style="display: grid; gap: 10px; margin-top: 20px;">
@@ -6249,20 +6412,30 @@
         }
     }
 
-    function saveUserStats() { // Speichert den aktuellen Zustand der gelernten Vokabeln & Kanji
+    function saveUserStats() { // Speichert den aktuellen Zustand der gelernten Vokabeln, SRS, Favoriten & Kanji
         const stats = {
             learnedVocab: {},
             learnedKanji: {},
-            learnedGrammar: {}
+            learnedGrammar: {},
+            vocabMeta: {}
         };
 
-        // Gelernte Vokabeln speichern
         for (const level in vocabData) {
             stats.learnedVocab[level] = (vocabData[level] || [])
                 .filter(v => v.learned)
-                .map(v => v.kana); // Nur Kana speichern, um Platz zu sparen
+                .map(v => v.kana);
+            stats.vocabMeta[level] = {};
+            (vocabData[level] || []).forEach(v => {
+                if (v.srsBox || v.favorite || v.mistakeCount || v.nextReview) {
+                    stats.vocabMeta[level][v.kana] = {
+                        b: v.srsBox || 0,
+                        f: v.favorite ? 1 : 0,
+                        m: v.mistakeCount || 0,
+                        r: v.nextReview || 0
+                    };
+                }
+            });
         }
-        // Gelernte Kanji speichern
         for (const level in kanjiData) {
             stats.learnedKanji[level] = (kanjiData[level] || [])
                 .filter(k => k.learned)
@@ -6272,11 +6445,10 @@
         localStorage.setItem('userStats', JSON.stringify(stats));
     }
 
-    function loadUserStats() { // Lädt den gespeicherten Zustand der gelernten Vokabeln & Kanji
-        const stats = JSON.parse(localStorage.getItem('userStats'));
+    function loadUserStats() { // Lädt den gespeicherten Zustand der gelernten Vokabeln, SRS, Favoriten & Kanji
+        const stats = JSON.parse(localStorage.getItem('userStats') || 'null');
         if (!stats) return;
 
-        // Gelernte Vokabeln wiederherstellen
         if (stats.learnedVocab) {
             for (const level in stats.learnedVocab) { 
                 if (vocabData[level]) {
@@ -6284,12 +6456,28 @@
                     vocabData[level].forEach(v => {
                         if (learnedSet.has(v.kana)) {
                             v.learned = true;
+                            if (!v.srsBox) v.srsBox = 1;
                         }
                     });
                 }
             }
         }
-        // Gelernte Kanji wiederherstellen
+        if (stats.vocabMeta) {
+            for (const level in stats.vocabMeta) {
+                if (vocabData[level]) {
+                    const metaMap = stats.vocabMeta[level];
+                    vocabData[level].forEach(v => {
+                        const m = metaMap[v.kana];
+                        if (m) {
+                            v.srsBox = m.b || 0;
+                            v.favorite = !!m.f;
+                            v.mistakeCount = m.m || 0;
+                            v.nextReview = m.r || 0;
+                        }
+                    });
+                }
+            }
+        }
         if (stats.learnedKanji) {
             for (const level in stats.learnedKanji) {
                 if (kanjiData[level]) {
@@ -6304,26 +6492,126 @@
         }
     }
 
+    // --- SRS, XP & TAGESZIEL LOGIK ---
+    const SRS_INTERVALS_MS = [0, 3600 * 1000, 24 * 3600 * 1000, 3 * 24 * 3600 * 1000, 7 * 24 * 3600 * 1000, 21 * 24 * 3600 * 1000];
+
+    function updateWordSRS(word, isCorrect) {
+        if (!word) return;
+        const now = Date.now();
+        if (isCorrect) {
+            word.learned = true;
+            word.srsBox = Math.min(5, (word.srsBox || 0) + 1);
+            word.nextReview = now + SRS_INTERVALS_MS[word.srsBox];
+            if (word.mistakeCount > 0) word.mistakeCount = Math.max(0, word.mistakeCount - 1);
+            addXP(10);
+            incrementDailyProgress();
+        } else {
+            word.srsBox = 1;
+            word.nextReview = now + 10 * 60 * 1000; // In 10 Min wieder fällig
+            word.mistakeCount = (word.mistakeCount || 0) + 1;
+            addXP(2);
+        }
+    }
+
+    function addXP(amount) {
+        const currentXP = parseInt(localStorage.getItem('userXP') || '0', 10) + amount;
+        localStorage.setItem('userXP', String(currentXP));
+        updateDailyGoalUI();
+    }
+
+    function incrementDailyProgress() {
+        const today = new Date().toISOString().slice(0, 10);
+        const savedDate = localStorage.getItem('dailyGoalDate');
+        let count = parseInt(localStorage.getItem('dailyGoalCount') || '0', 10);
+        if (savedDate !== today) {
+            count = 0;
+            localStorage.setItem('dailyGoalDate', today);
+        }
+        count++;
+        localStorage.setItem('dailyGoalCount', String(count));
+        updateStreak();
+        updateDailyGoalUI();
+    }
+
+    function updateDailyGoalUI() {
+        const xp = parseInt(localStorage.getItem('userXP') || '0', 10);
+        const playerLvl = Math.floor(xp / 100) + 1;
+        const today = new Date().toISOString().slice(0, 10);
+        const savedDate = localStorage.getItem('dailyGoalDate');
+        const dailyCount = savedDate === today ? parseInt(localStorage.getItem('dailyGoalCount') || '0', 10) : 0;
+        const streak = parseInt(localStorage.getItem('streakCount') || '0', 10);
+
+        const xpEl = document.getElementById('xp-level-display');
+        const progTextEl = document.getElementById('daily-progress-text');
+        const fillEl = document.getElementById('daily-goal-fill');
+        const streakBadgeEl = document.getElementById('home-streak-badge');
+
+        if (xpEl) xpEl.innerText = `⭐ Level ${playerLvl} · ${xp} XP`;
+        if (progTextEl) progTextEl.innerText = `${dailyCount} / 20`;
+        if (fillEl) fillEl.style.width = `${Math.min(100, (dailyCount / 20) * 100)}%`;
+        if (streakBadgeEl) streakBadgeEl.innerText = `🔥 ${streak} ${streak === 1 ? 'Tag' : 'Tage'}`;
+    }
+
     function renderStats() {
         const streak = parseInt(localStorage.getItem('streakCount') || '0', 10);
+        const xp = parseInt(localStorage.getItem('userXP') || '0', 10);
         let totalLearnedVocab = 0;
         let totalLearnedKanji = 0;
         const learnedByLevel = {};
+        const srsCounts = [0, 0, 0, 0, 0, 0];
 
         ['N5', 'N4', 'N3', 'N2', 'N1'].forEach(lvl => {
-            const vCount = (window.vocabData[lvl] || []).filter(v => v.learned).length;
+            const list = window.vocabData[lvl] || [];
+            const vCount = list.filter(v => v.learned).length;
             const kCount = (kanjiData[lvl] || []).filter(k => k.learned).length;
             totalLearnedVocab += vCount;
             totalLearnedKanji += kCount;
             learnedByLevel[lvl] = vCount;
+            list.forEach(v => {
+                const box = Math.min(5, Math.max(0, v.srsBox || (v.learned ? 1 : 0)));
+                srsCounts[box]++;
+            });
         });
 
         const streakEl = document.getElementById('stats-streak');
+        const xpStatEl = document.getElementById('stats-xp');
         const vocabEl = document.getElementById('stats-vocab');
         const kanjiEl = document.getElementById('stats-kanji');
         if (streakEl) streakEl.innerText = streak;
+        if (xpStatEl) xpStatEl.innerText = xp;
         if (vocabEl) vocabEl.innerText = totalLearnedVocab;
         if (kanjiEl) kanjiEl.innerText = totalLearnedKanji;
+
+        const lvlProgContainer = document.getElementById('stats-level-progress');
+        if (lvlProgContainer) {
+            lvlProgContainer.innerHTML = ['N5', 'N4', 'N3', 'N2', 'N1'].map(lvl => {
+                const total = (window.vocabData[lvl] || []).length || 1;
+                const learned = learnedByLevel[lvl] || 0;
+                const pct = Math.round((learned / total) * 100);
+                return `
+                    <div>
+                        <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600; margin-bottom:4px;">
+                            <span>JLPT ${lvl}</span>
+                            <span style="color:var(--text-light);">${learned} / ${total} (${pct}%)</span>
+                        </div>
+                        <div class="progress-bar" style="margin-bottom:0; height:8px;">
+                            <div class="progress-fill" style="width:${pct}%; background:var(--accent-pink);"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        const srsContainer = document.getElementById('stats-srs-breakdown');
+        if (srsContainer) {
+            const boxLabels = ['Neu', 'Box 1 (1h)', 'Box 2 (1d)', 'Box 3 (3d)', 'Box 4 (7d)', 'Box 5 (Meister)'];
+            srsContainer.innerHTML = [1, 2, 3, 4, 5].map(b => `
+                <div class="result-stat" style="padding:14px;">
+                    <span class="stat-val" style="font-size:24px; color:var(--primary-dark);">${srsCounts[b]}</span>
+                    <span class="stat-label">${boxLabels[b]}</span>
+                </div>
+            `).join('');
+        }
 
         const container = document.getElementById('achievements-container');
         if (!container) return;
@@ -6379,7 +6667,7 @@
         if (targetView) targetView.classList.remove('hidden');
 
         const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
-        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson', 'path-results', 'exam-session', 'exam-results', 'exam-review'].includes(tabId)) {
+        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson', 'path-results', 'exam-session', 'exam-results', 'exam-review', 'match', 'kana'].includes(tabId)) {
             tabBtn.classList.add('active');
         }
 
@@ -6393,6 +6681,7 @@
         if (tabId === 'grammatik') renderGrammarList();
         if (tabId === 'kanji') renderKanjiBlocks();
         if (tabId === 'stats') renderStats();
+        if (tabId === 'kana') switchKanaView('hiragana');
     }
     window.switchTab = switchTab;
 
@@ -6544,28 +6833,111 @@
     // --- STATISTIKEN AKTUALISIEREN ---
     function updateStats() {
         const words = window.vocabData[state.level] || [];
-        const learned = words.filter(w => w.learned).length;
+        const learned = words.filter(w => vLearned(w)).length;
+        const now = Date.now();
+        const srsDue = words.filter(w => w.learned && (!w.nextReview || w.nextReview <= now)).length;
+        const problemWords = words.filter(w => (w.mistakeCount && w.mistakeCount > 0) || w.srsBox === 1).length;
+        const favWords = words.filter(w => w.favorite).length;
+
         document.getElementById('vocab-count').innerText = words.length; 
         document.getElementById('learned-count').innerText = learned;
+        const favDisplay = document.getElementById('fav-count-display');
+        if (favDisplay) favDisplay.innerText = favWords;
+        const srsEl = document.getElementById('srs-due-count');
+        if (srsEl) srsEl.innerText = srsDue;
+        const probEl = document.getElementById('problem-words-count');
+        if (probEl) probEl.innerText = problemWords;
+        const favCardEl = document.getElementById('favorites-card-count');
+        if (favCardEl) favCardEl.innerText = favWords;
+
+        updateDailyGoalUI();
         renderBlocks();
         renderPathVocabBlocks();
     }
+
+    function vLearned(w) { return !!(w && w.learned); }
     
     // --- BLÖCKE RENDERN ---
     function renderBlocks() {
         const container = document.getElementById('blocks-container');
-        if (!container) return; // Sicherstellen, dass der Container existiert
+        if (!container) return;
         const words = window.vocabData[state.level] || [];
-        const t = uiTranslations[state.lang] || uiTranslations.de;
         const blockSize = 20;
         let html = '';
         for (let i = 0; i < Math.ceil(words.length / blockSize); i++) {
+            const slice = words.slice(i * blockSize, (i + 1) * blockSize);
+            const learnedInSlice = slice.filter(w => w.learned).length;
+            const isComplete = learnedInSlice === slice.length && slice.length > 0;
             const start = i * blockSize + 1;
             const end = Math.min((i + 1) * blockSize, words.length); 
-            html += `<div class="block-card" onclick="startLearning(${i})">${state.level} – ${state.lang === 'de' ? 'Block' : 'Block'} ${i + 1} (${start}–${end})</div>`;
+            html += `
+                <div class="block-card ${isComplete ? 'completed-block' : ''}" onclick="startLearning(${i})">
+                    <div>${state.level} – Block ${i + 1} (${start}–${end})</div>
+                    <div class="block-progress-mini">${learnedInSlice}/${slice.length} gelernt ${isComplete ? '✓' : ''}</div>
+                </div>`;
         }
         container.innerHTML = html;
     }
+
+    // --- SMART REVIEW, PROBLEMWÖRTER & FAVORITEN ---
+    function startSRSReview() {
+        const now = Date.now();
+        const words = (window.vocabData[state.level] || []).filter(w => w.learned && (!w.nextReview || w.nextReview <= now));
+        if (words.length === 0) {
+            const fallback = (window.vocabData[state.level] || []).filter(w => !w.learned).slice(0, 15);
+            if (fallback.length === 0) return alert("Alle Vokabeln dieses Levels sind aktuell wiederholt!");
+            startLearning(-1, fallback);
+            return;
+        }
+        startLearning(-1, words.slice(0, 25));
+    }
+    window.startSRSReview = startSRSReview;
+
+    function startProblemWords() {
+        const words = (window.vocabData[state.level] || []).filter(w => (w.mistakeCount && w.mistakeCount > 0) || w.srsBox === 1);
+        if (words.length === 0) return alert("Super! Du hast aktuell keine Problemwörter in diesem Level.");
+        startLearning(-1, words.slice(0, 25));
+    }
+    window.startProblemWords = startProblemWords;
+
+    function startFavoritesLearning() {
+        const words = (window.vocabData[state.level] || []).filter(w => w.favorite);
+        if (words.length === 0) return alert("Markiere zuerst Wörter mit dem ★ Stern in der Liste oder beim Lernen als Favoriten!");
+        startLearning(-1, words);
+    }
+    window.startFavoritesLearning = startFavoritesLearning;
+
+    function toggleWordFavorite(level, index, event) {
+        if (event) event.stopPropagation();
+        const word = (window.vocabData[level] || [])[index];
+        if (!word) return;
+        word.favorite = !word.favorite;
+        saveUserStats();
+        renderList();
+        updateStats();
+    }
+    window.toggleWordFavorite = toggleWordFavorite;
+
+    function toggleCurrentWordFavorite(event) {
+        if (event) event.stopPropagation();
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return;
+        word.favorite = !word.favorite;
+        saveUserStats();
+        const fcFav = document.getElementById('fc-fav-btn');
+        const typeFav = document.getElementById('type-fav-btn');
+        if (fcFav) fcFav.classList.toggle('active', !!word.favorite);
+        if (typeFav) typeFav.classList.toggle('active', !!word.favorite);
+    }
+    window.toggleCurrentWordFavorite = toggleCurrentWordFavorite;
+
+    function speakCurrentWord(event) {
+        if (event) event.stopPropagation();
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return;
+        speak(word.kana || word.kanji || word.word);
+    }
+    window.speakCurrentWord = speakCurrentWord;
 
     // --- BADGE KLASSEN ---
     function getBadgeClass(type) {
@@ -6577,7 +6949,9 @@
     // --- LISTEN ANSICHT ---
     function renderList() {
         const query = document.getElementById('search-input').value.toLowerCase();
-        const filter = state.filterType; 
+        const filter = state.filterType;
+        const statusFilter = state.filterStatus || 'Alle';
+        const now = Date.now();
         const container = document.getElementById('list-container');
         if (!window.vocabData || !window.vocabData[state.level]) { container.innerHTML = '<p>Vokabeln werden geladen...</p>'; return; }
         const words = window.vocabData[state.level];
@@ -6586,10 +6960,14 @@
         words.forEach((word, index) => {
             if (word.learned) learned++;
             if (filter !== 'Alle' && !word.type.includes(filter)) return;
+            if (statusFilter === 'gelernt' && !word.learned) return;
+            if (statusFilter === 'ungelernt' && word.learned) return;
+            if (statusFilter === 'favoriten' && !word.favorite) return;
+            if (statusFilter === 'srs' && !(word.learned && (!word.nextReview || word.nextReview <= now))) return;
             if (query && !`${word.kana} ${word.kanji} ${word.de} ${word.en}`.toLowerCase().includes(query)) return;
 
             const firstChar = word.kana.charAt(0);
-            if (firstChar !== lastChar && !query) {
+            if (firstChar !== lastChar && !query && statusFilter === 'Alle') {
                 lastChar = firstChar;
                 html += `<div class="section-label" style="background:var(--accent-pink-light);color:var(--accent-pink);padding:5px 15px;border-radius:20px;margin-top:25px;display:inline-block;">${lastChar}</div>`;
             }
@@ -6597,19 +6975,23 @@
             count++;
             const displayJp = word.kanji ? `${word.kanji} <span>${word.kana}</span>` : word.kana;
             const check = word.learned ? '<span class="status-check">✓</span>' : '';
+            const srsBadge = word.srsBox ? `<span class="srs-pill">Box ${word.srsBox}</span>` : '';
+            const escapedSpeak = (word.kana || word.kanji).replace(/'/g, "\\'");
             html += `
                 <div class="list-item">
                     <div class="list-num">${index + 1}</div>
+                    <button class="icon-btn" onclick="speak('${escapedSpeak}')" title="Anhören">🔊</button>
                     <div class="list-content">
-                        <div class="list-jp">${displayJp}</div>
+                        <div class="list-jp">${displayJp} ${srsBadge}</div>
                         <div class="list-de">${word[state.lang]}</div>
                     </div>
                     <div class="badge ${getBadgeClass(word.type)}">${word.type}</div>
+                    <button class="star-btn ${word.favorite ? 'active' : ''}" onclick="toggleWordFavorite('${state.level}', ${index}, event)" title="Favorit">★</button>
                     ${check}
                 </div>`;
         });
 
-        container.innerHTML = html;
+        container.innerHTML = html || '<p style="text-align:center; padding:30px; color:var(--text-light);">Keine passenden Vokabeln gefunden.</p>';
         document.getElementById('list-total').innerText = count;
         document.getElementById('list-learned').innerText = learned;
     }
@@ -6638,6 +7020,11 @@
         if (state.mode === 'karteikarten') {
             switchTab('flashcards');
             loadFlashcard();
+        } else if (state.mode === 'match') {
+            startMatchGame(state.currentQueue);
+        } else if (state.mode === 'multiple') {
+            switchTab('typing');
+            loadMultipleChoice();
         } else {
             switchTab('typing');
             loadTyping();
@@ -6689,6 +7076,10 @@
         document.getElementById('fc-type-back').innerText = word.type;
         document.getElementById('fc-type-front').className = `badge ${getBadgeClass(word.type)}`;
         document.getElementById('fc-type-back').className = `badge ${getBadgeClass(word.type)}`;
+        const srsBadgeEl = document.getElementById('fc-srs-badge');
+        if (srsBadgeEl) srsBadgeEl.innerText = `Box ${word.srsBox || 1}`;
+        const fcFavBtn = document.getElementById('fc-fav-btn');
+        if (fcFavBtn) fcFavBtn.classList.toggle('active', !!word.favorite);
         
         document.querySelector('.fc-hint').innerText = t.hintFlip;
         document.querySelector('.btn-nochmal').innerText = t.btnAgain;
@@ -6720,17 +7111,19 @@
     }
 
     function nextCard(knewIt) {
+        const currentWord = state.currentQueue[state.currentIndex];
         if (knewIt) {
             playSound('correct');
-            state.currentQueue[state.currentIndex].learned = true;
+            updateWordSRS(currentWord, true);
             state.sessionCorrectCount++;
             const counter = document.getElementById('fc-learned-count');
             if (counter) counter.innerText = parseInt(counter.innerText) + 1;
             saveUserStats();
         } else {
             playSound('wrong');
-            const currentWord = state.currentQueue[state.currentIndex];
+            updateWordSRS(currentWord, false);
             if (!state.sessionMistakes.includes(currentWord)) state.sessionMistakes.push(currentWord);
+            saveUserStats();
         }
         state.currentIndex++;
         if (state.currentIndex >= state.currentQueue.length) finishSession();
@@ -6760,9 +7153,17 @@
         const isJpToDe = state.direction === 'jp-de'; 
         const t = uiTranslations[state.lang];
 
+        const headerLabel = document.getElementById('typing-mode-header-label');
+        if (headerLabel) headerLabel.innerText = 'Abfrage-Modus';
         document.getElementById('type-current-num').innerText = state.currentIndex + 1;
         document.getElementById('type-total-num').innerText = state.currentQueue.length;
-        document.getElementById('type-badge').innerText = word.type;
+        document.getElementById('type-badge').innerText = word.type || 'Vokabel';
+        const typeFavBtn = document.getElementById('type-fav-btn');
+        if (typeFavBtn) typeFavBtn.classList.toggle('active', !!word.favorite);
+        const hintDisplay = document.getElementById('typing-hint-display');
+        if (hintDisplay) hintDisplay.innerText = '';
+        const hintBtn = document.getElementById('btn-typing-hint');
+        if (hintBtn) hintBtn.classList.remove('hidden');
 
         const inputArea = document.getElementById('type-input-area');
         const choiceArea = document.getElementById('type-choice-area');
@@ -6780,11 +7181,103 @@
             document.getElementById('type-word').innerText = word.kanji || word.kana;
             document.getElementById('type-hint').innerText = t.typingHint;
         } else {
-            document.getElementById('type-word').innerText = word[state.lang];
+            document.getElementById('type-word').innerText = word[state.lang] || word.de;
             document.getElementById('type-hint').innerText = t.typingHintJp;
         }
         input.focus();
     }
+
+    function showTypingHint() {
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return;
+        const isJpToDe = state.direction === 'jp-de';
+        const target = isJpToDe ? (word[state.lang] || word.de || '') : (word.kana || '');
+        const hintDisplay = document.getElementById('typing-hint-display');
+        if (hintDisplay && target) {
+            const firstPart = target.slice(0, Math.min(2, target.length));
+            hintDisplay.innerText = `💡 Tipp: "${firstPart}..." (${target.length} Zeichen${word.kanji && isJpToDe ? `, Kana: ${word.kana}` : ''})`;
+        }
+    }
+    window.showTypingHint = showTypingHint;
+
+    function loadMultipleChoice() {
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return finishSession();
+        const isJpToDe = state.direction === 'jp-de';
+        const t = uiTranslations[state.lang] || uiTranslations.de;
+
+        const headerLabel = document.getElementById('typing-mode-header-label');
+        if (headerLabel) headerLabel.innerText = '🎯 Multiple Choice';
+        document.getElementById('type-current-num').innerText = state.currentIndex + 1;
+        document.getElementById('type-total-num').innerText = state.currentQueue.length;
+        document.getElementById('type-badge').innerText = word.type || 'Vokabel';
+        const typeFavBtn = document.getElementById('type-fav-btn');
+        if (typeFavBtn) typeFavBtn.classList.toggle('active', !!word.favorite);
+        const hintBtn = document.getElementById('btn-typing-hint');
+        if (hintBtn) hintBtn.classList.add('hidden');
+
+        document.getElementById('type-input-area').classList.add('hidden');
+        const choiceArea = document.getElementById('type-choice-area');
+        choiceArea.classList.remove('hidden');
+        document.getElementById('typing-feedback').innerHTML = '';
+        document.getElementById('btn-next-typing').classList.add('hidden');
+        document.getElementById('btn-next-typing').innerText = t.nextVocab;
+
+        if (isJpToDe) {
+            document.getElementById('type-word').innerText = word.kanji || word.kana;
+            document.getElementById('type-hint').innerText = word.kanji ? `Lesung: ${word.kana}` : 'Wähle die richtige Bedeutung';
+        } else {
+            document.getElementById('type-word').innerText = word[state.lang] || word.de;
+            document.getElementById('type-hint').innerText = 'Wähle das passende japanische Wort';
+        }
+
+        const pool = (window.vocabData[state.level] || state.currentQueue).filter(w => w !== word);
+        const getLabel = (w) => isJpToDe ? (w[state.lang] || w.de) : (w.kanji ? `${w.kanji} (${w.kana})` : w.kana);
+        const correctLabel = getLabel(word);
+        const options = [correctLabel];
+        const shuffledPool = [...pool].sort(() => Math.random() - 0.5);
+        for (const cand of shuffledPool) {
+            if (options.length >= 4) break;
+            const lbl = getLabel(cand);
+            if (lbl && !options.includes(lbl)) options.push(lbl);
+        }
+        options.sort(() => Math.random() - 0.5);
+
+        choiceArea.innerHTML = options.map(opt => {
+            const escOpt = String(opt).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            const escCorr = String(correctLabel).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            return `<button class="quiz-option" onclick="checkMultipleChoiceAnswer('${escOpt}', '${escCorr}', this)">${opt}</button>`;
+        }).join('');
+    }
+
+    function checkMultipleChoiceAnswer(selected, correct, btn) {
+        const word = state.currentQueue[state.currentIndex];
+        const feedback = document.getElementById('typing-feedback');
+        document.querySelectorAll('#type-choice-area .quiz-option').forEach(b => b.disabled = true);
+
+        if (selected === correct) {
+            playSound('correct');
+            if (btn) btn.classList.add('correct');
+            feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓ (+10 XP)</span>';
+            updateWordSRS(word, true);
+            if (!state.sessionMistakes.includes(word)) state.sessionCorrectCount++;
+            saveUserStats();
+            setTimeout(() => {
+                state.currentIndex++;
+                if (state.currentIndex >= state.currentQueue.length) finishSession();
+                else loadMultipleChoice();
+            }, 750);
+        } else {
+            playSound('wrong');
+            if (btn) btn.classList.add('wrong');
+            feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig: ${correct}</span>`;
+            updateWordSRS(word, false);
+            if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
+            saveUserStats();
+            document.getElementById('btn-next-typing').classList.remove('hidden');
+        }
+    }
+    window.checkMultipleChoiceAnswer = checkMultipleChoiceAnswer;
 
     function isRomajiMatch(input, kana) {
         if (!input || !kana) return false;
@@ -6863,20 +7356,21 @@
 
         if (isCorrect) {
             playSound('correct');
-            feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓</span>';
-            word.learned = true;
+            feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓ (+10 XP)</span>';
+            updateWordSRS(word, true);
             if (!state.sessionMistakes.includes(word)) state.sessionCorrectCount++;
-            updateStreak();
             saveUserStats();
             setTimeout(() => {
                 state.currentIndex++;
                 if (state.currentIndex >= state.currentQueue.length) finishSession();
                 else loadTyping();
-            }, 1000);
+            }, 900);
         } else {
             playSound('wrong');
-            feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? (word[state.lang] || word.de) : word.kana}</span>`;
+            feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? (word[state.lang] || word.de) : (word.kanji ? `${word.kanji} (${word.kana})` : word.kana)}</span>`;
+            updateWordSRS(word, false);
             if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
+            saveUserStats();
             document.getElementById('btn-next-typing').classList.remove('hidden');
         }
     }
@@ -6885,6 +7379,7 @@
         state.currentIndex++;
         if (state.currentIndex >= state.currentQueue.length) finishSession();
         else if (state.mode === 'fulltest') loadFullTestItem();
+        else if (state.mode === 'multiple') loadMultipleChoice();
         else loadTyping();
     }
 
@@ -7375,11 +7870,254 @@
         if (targetBtn) targetBtn.classList.add('active');
     }
 
+    const ROMAJI_TO_HIRAGANA = {
+        'kya':'きゃ','kyu':'きゅ','kyo':'きょ','sha':'しゃ','shu':'しゅ','sho':'しょ',
+        'cha':'ちゃ','chu':'ちゅ','cho':'ちょ','nya':'にゃ','nyu':'にゅ','nyo':'にょ',
+        'hya':'ひゃ','hyu':'ひゅ','hyo':'ひょ','mya':'みゃ','myu':'みゅ','myo':'みょ',
+        'rya':'りゃ','ryu':'りゅ','ryo':'りょ','gya':'ぎゃ','gyu':'ぎゅ','gyo':'ぎょ',
+        'ja':'じゃ','ju':'じゅ','jo':'じょ','bya':'びゃ','byu':'びゅ','byo':'びょ',
+        'pya':'ぴゃ','pyu':'ぴゅ','pyo':'ぴょ','tsu':'つ','shi':'し','chi':'ち','fu':'ふ',
+        'ka':'か','ki':'き','ku':'く','ke':'け','ko':'こ',
+        'sa':'さ','su':'す','se':'せ','so':'そ',
+        'ta':'た','te':'て','to':'to' === 'to' ? 'と' : 'と',
+        'na':'な','ni':'に','nu':'ぬ','ne':'ね','no':'の',
+        'ha':'は','hi':'ひ','he':'へ','ho':'ほ',
+        'ma':'ま','mi':'み','mu':'む','me':'め','mo':'も',
+        'ya':'や','yu':'ゆ','yo':'よ',
+        'ra':'ら','ri':'り','ru':'る','re':'れ','ro':'ろ',
+        'wa':'わ','wo':'を','nn':'ん',
+        'ga':'が','gi':'ぎ','gu':'ぐ','ge':'げ','go':'ご',
+        'za':'ざ','ji':'じ','zu':'ず','ze':'ぜ','zo':'ぞ',
+        'da':'だ','de':'で','do':'ど',
+        'ba':'ば','bi':'び','bu':'ぶ','be':'べ','bo':'ぼ',
+        'pa':'ぱ','pi':'ぴ','pu':'ぷ','pe':'ぺ','po':'ぽ',
+        'a':'あ','i':'い','u':'う','e':'え','o':'お'
+    };
+
     function applyRomajiToKana(inputEl) {
-        // Optional live helper; romaji matching is also evaluated directly on submit via isRomajiMatch
         if (!inputEl) return;
+        const liveToggle = document.getElementById('live-kana-toggle');
+        const isLiveEnabled = liveToggle ? liveToggle.checked : true;
+        if (!isLiveEnabled || state.direction !== 'de-jp' || state.mode === 'fulltest') return;
+
+        let val = inputEl.value;
+        // Doppelte Konsonanten (außer n) -> っ
+        val = val.replace(/([kstnhmyrwgzdbp])\1/gi, (m, c) => 'っ' + c);
+        // Sortiere Schlüssel nach Länge absteigend (3 -> 2 -> 1)
+        const keys = Object.keys(ROMAJI_TO_HIRAGANA).sort((a, b) => b.length - a.length);
+        for (const rom of keys) {
+            const regex = new RegExp(rom, 'gi');
+            val = val.replace(regex, ROMAJI_TO_HIRAGANA[rom]);
+        }
+        if (val !== inputEl.value) {
+            inputEl.value = val;
+        }
     }
     window.applyRomajiToKana = applyRomajiToKana;
+
+    // --- SPEED-MATCH SPIEL (PAARE ZUORDNEN) ---
+    let matchGameState = {
+        pool: [],
+        round: 1,
+        combo: 0,
+        selectedLeft: null,
+        selectedRight: null,
+        matchedCount: 0,
+        pairCount: 6,
+        startTime: 0,
+        timerInterval: null
+    };
+
+    function startMatchGame(words) {
+        stopMatchGame();
+        matchGameState.pool = [...words].sort(() => Math.random() - 0.5);
+        matchGameState.round = 1;
+        matchGameState.combo = 0;
+        matchGameState.startTime = Date.now();
+        switchTab('match');
+        const timerEl = document.getElementById('match-timer');
+        matchGameState.timerInterval = setInterval(() => {
+            const elapsed = ((Date.now() - matchGameState.startTime) / 1000).toFixed(1);
+            if (timerEl) timerEl.innerText = elapsed;
+        }, 100);
+        renderMatchRound();
+    }
+    window.startMatchGame = startMatchGame;
+
+    function stopMatchGame() {
+        if (matchGameState.timerInterval) {
+            clearInterval(matchGameState.timerInterval);
+            matchGameState.timerInterval = null;
+        }
+    }
+    window.stopMatchGame = stopMatchGame;
+
+    function renderMatchRound() {
+        const startIdx = (matchGameState.round - 1) * 6;
+        let slice = matchGameState.pool.slice(startIdx, startIdx + 6);
+        if (slice.length === 0) {
+            stopMatchGame();
+            finishSession();
+            return;
+        }
+        matchGameState.pairCount = slice.length;
+        matchGameState.matchedCount = 0;
+        matchGameState.selectedLeft = null;
+        matchGameState.selectedRight = null;
+
+        document.getElementById('match-round-num').innerText = matchGameState.round;
+        document.getElementById('match-combo').innerText = matchGameState.combo;
+
+        const leftItems = slice.map((w, i) => ({ id: i, text: w.kanji ? `${w.kanji} (${w.kana})` : w.kana, word: w })).sort(() => Math.random() - 0.5);
+        const rightItems = slice.map((w, i) => ({ id: i, text: w[state.lang] || w.de, word: w })).sort(() => Math.random() - 0.5);
+
+        document.getElementById('match-col-left').innerHTML = leftItems.map(item =>
+            `<div class="match-tile" data-pair-id="${item.id}" onclick="selectMatchTile('left', ${item.id}, this)">${item.text}</div>`
+        ).join('');
+        document.getElementById('match-col-right').innerHTML = rightItems.map(item =>
+            `<div class="match-tile" data-pair-id="${item.id}" onclick="selectMatchTile('right', ${item.id}, this)">${item.text}</div>`
+        ).join('');
+    }
+
+    function selectMatchTile(side, pairId, el) {
+        if (el.classList.contains('matched')) return;
+        const colId = side === 'left' ? 'match-col-left' : 'match-col-right';
+        document.querySelectorAll(`#${colId} .match-tile`).forEach(t => t.classList.remove('selected'));
+        el.classList.add('selected');
+
+        if (side === 'left') matchGameState.selectedLeft = { pairId, el };
+        else matchGameState.selectedRight = { pairId, el };
+
+        if (matchGameState.selectedLeft && matchGameState.selectedRight) {
+            const left = matchGameState.selectedLeft;
+            const right = matchGameState.selectedRight;
+            matchGameState.selectedLeft = null;
+            matchGameState.selectedRight = null;
+
+            const wordObj = matchGameState.pool[(matchGameState.round - 1) * 6 + left.pairId];
+            if (left.pairId === right.pairId) {
+                playSound('correct');
+                left.el.classList.remove('selected');
+                right.el.classList.remove('selected');
+                left.el.classList.add('matched');
+                right.el.classList.add('matched');
+                matchGameState.combo++;
+                matchGameState.matchedCount++;
+                document.getElementById('match-combo').innerText = matchGameState.combo;
+                if (wordObj) {
+                    updateWordSRS(wordObj, true);
+                    state.sessionCorrectCount++;
+                }
+                if (matchGameState.matchedCount >= matchGameState.pairCount) {
+                    saveUserStats();
+                    setTimeout(() => {
+                        if (matchGameState.round * 6 < Math.min(18, matchGameState.pool.length)) {
+                            matchGameState.round++;
+                            renderMatchRound();
+                        } else {
+                            stopMatchGame();
+                            state.currentQueue = matchGameState.pool.slice(0, matchGameState.round * 6);
+                            finishSession();
+                        }
+                    }, 450);
+                }
+            } else {
+                playSound('wrong');
+                matchGameState.combo = 0;
+                document.getElementById('match-combo').innerText = '0';
+                left.el.classList.add('wrong');
+                right.el.classList.add('wrong');
+                if (wordObj && !state.sessionMistakes.includes(wordObj)) {
+                    state.sessionMistakes.push(wordObj);
+                }
+                setTimeout(() => {
+                    left.el.classList.remove('selected', 'wrong');
+                    right.el.classList.remove('selected', 'wrong');
+                }, 400);
+            }
+        }
+    }
+    window.selectMatchTile = selectMatchTile;
+
+    // --- KANA TRAINER (HIRAGANA & KATAKANA) ---
+    const KANA_DATA = [
+        { h: 'あ', k: 'ア', r: 'a' }, { h: 'い', k: 'イ', r: 'i' }, { h: 'う', k: 'ウ', r: 'u' }, { h: 'え', k: 'エ', r: 'e' }, { h: 'お', k: 'オ', r: 'o' },
+        { h: 'か', k: 'カ', r: 'ka' }, { h: 'き', k: 'キ', r: 'ki' }, { h: 'く', k: 'ク', r: 'ku' }, { h: 'け', k: 'ケ', r: 'ke' }, { h: 'こ', k: 'コ', r: 'ko' },
+        { h: 'さ', k: 'サ', r: 'sa' }, { h: 'し', k: 'シ', r: 'shi' }, { h: 'す', k: 'ス', r: 'su' }, { h: 'せ', k: 'セ', r: 'se' }, { h: 'そ', k: 'ソ', r: 'so' },
+        { h: 'た', k: 'タ', r: 'ta' }, { h: 'ち', k: 'チ', r: 'chi' }, { h: 'つ', k: 'ツ', r: 'tsu' }, { h: 'て', k: 'テ', r: 'te' }, { h: 'と', k: 'ト', r: 'to' },
+        { h: 'な', k: 'ナ', r: 'na' }, { h: 'に', k: 'ニ', r: 'ni' }, { h: 'ぬ', k: 'ヌ', r: 'nu' }, { h: 'ね', k: 'ネ', r: 'ne' }, { h: 'の', k: 'ノ', r: 'no' },
+        { h: 'は', k: 'ハ', r: 'ha' }, { h: 'ひ', k: 'ヒ', r: 'hi' }, { h: 'ふ', k: 'フ', r: 'fu' }, { h: 'へ', k: 'ヘ', r: 'he' }, { h: 'ほ', k: 'ホ', r: 'ho' },
+        { h: 'ま', k: 'マ', r: 'ma' }, { h: 'み', k: 'ミ', r: 'mi' }, { h: 'む', k: 'ム', r: 'mu' }, { h: 'め', k: 'メ', r: 'me' }, { h: 'も', k: 'モ', r: 'mo' },
+        { h: 'や', k: 'ヤ', r: 'ya' }, { h: 'ゆ', k: 'ユ', r: 'yu' }, { h: 'よ', k: 'ヨ', r: 'yo' },
+        { h: 'ら', k: 'ラ', r: 'ra' }, { h: 'り', k: 'リ', r: 'ri' }, { h: 'る', k: 'ル', r: 'ru' }, { h: 'れ', k: 'レ', r: 're' }, { h: 'ろ', k: 'ロ', r: 'ro' },
+        { h: 'わ', k: 'ワ', r: 'wa' }, { h: 'を', k: 'ヲ', r: 'wo' }, { h: 'ん', k: 'ン', r: 'n' }
+    ];
+
+    function switchKanaView(mode) {
+        document.getElementById('kana-tab-hiragana').classList.toggle('active', mode === 'hiragana');
+        document.getElementById('kana-tab-katakana').classList.toggle('active', mode === 'katakana');
+        document.getElementById('kana-tab-quiz').classList.toggle('active', mode === 'quiz');
+
+        const tableArea = document.getElementById('kana-table-area');
+        const quizArea = document.getElementById('kana-quiz-area');
+
+        if (mode === 'quiz') {
+            tableArea.classList.add('hidden');
+            quizArea.classList.remove('hidden');
+            loadKanaQuizQuestion();
+        } else {
+            quizArea.classList.add('hidden');
+            tableArea.classList.remove('hidden');
+            tableArea.innerHTML = KANA_DATA.map(item => {
+                const ch = mode === 'hiragana' ? item.h : item.k;
+                return `
+                    <div class="kana-cell" onclick="speak('${ch}')">
+                        <div class="kana-char">${ch}</div>
+                        <div class="kana-romaji">${item.r}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+    }
+    window.switchKanaView = switchKanaView;
+
+    function loadKanaQuizQuestion() {
+        const item = KANA_DATA[Math.floor(Math.random() * KANA_DATA.length)];
+        const useKatakana = Math.random() > 0.5;
+        const char = useKatakana ? item.k : item.h;
+        document.getElementById('kana-quiz-badge').innerText = useKatakana ? 'Katakana' : 'Hiragana';
+        document.getElementById('kana-quiz-char').innerText = char;
+        document.getElementById('kana-quiz-feedback').innerHTML = '';
+
+        const options = [item.r];
+        while (options.length < 4) {
+            const rand = KANA_DATA[Math.floor(Math.random() * KANA_DATA.length)].r;
+            if (!options.includes(rand)) options.push(rand);
+        }
+        options.sort(() => Math.random() - 0.5);
+
+        document.getElementById('kana-quiz-options').innerHTML = options.map(opt =>
+            `<button class="quiz-option" onclick="checkKanaQuizAnswer('${opt}', '${item.r}', '${char}', this)">${opt}</button>`
+        ).join('');
+    }
+
+    function checkKanaQuizAnswer(selected, correct, char, btn) {
+        const fb = document.getElementById('kana-quiz-feedback');
+        if (selected === correct) {
+            playSound('correct');
+            if (btn) btn.classList.add('correct');
+            speak(char);
+            addXP(5);
+            fb.innerHTML = '<span class="feedback-correct">Richtig! ✓ (+5 XP)</span>';
+            setTimeout(loadKanaQuizQuestion, 700);
+        } else {
+            playSound('wrong');
+            if (btn) btn.classList.add('wrong');
+            fb.innerHTML = `<span class="feedback-wrong">Falsch! "${char}" wird "${correct}" gelesen.</span>`;
+            setTimeout(loadKanaQuizQuestion, 1400);
+        }
+    }
+    window.checkKanaQuizAnswer = checkKanaQuizAnswer;
 
     function setDirection(dir) {
         state.direction = dir;
