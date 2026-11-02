@@ -294,6 +294,22 @@
         .kana-cell:hover { border-color: var(--accent-pink); background: var(--accent-pink-light); transform: translateY(-2px); }
         .kana-char { font-size: 24px; font-weight: 700; color: var(--primary-dark); }
         .kana-romaji { font-size: 11px; color: var(--text-light); font-weight: 600; }
+
+        /* --- SCHREIB-TRAINING & BLOCK MODUS STYLES --- */
+        .block-mode-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; justify-content: center; width: 100%; }
+        .block-mode-pill { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-color); background: #f8f9fc; color: var(--text-main); cursor: pointer; transition: 0.15s; }
+        .block-mode-pill:hover { background: var(--primary-dark); color: white; border-color: var(--primary-dark); }
+        .block-mode-pill.write-pill { background: var(--accent-pink-light); color: var(--accent-pink); border-color: rgba(223, 68, 120, 0.25); }
+        .block-mode-pill.write-pill:hover { background: var(--accent-pink); color: white; border-color: var(--accent-pink); }
+        .target-lang-banner { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-top: 12px; margin-bottom: 6px; background: var(--badge-blue-bg); color: var(--badge-blue-text); }
+        .target-lang-banner.lang-jp { background: var(--accent-pink-light); color: var(--accent-pink); }
+        .typing-input-row { display: flex; gap: 10px; margin-top: 15px; align-items: stretch; }
+        .typing-input-row .typing-input { margin-top: 0; flex: 1; }
+        .btn-check-answer { background: var(--primary-dark); color: white; border: none; padding: 0 22px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+        .btn-check-answer:hover { background: var(--primary-light); }
+        .kana-helper-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 12px; }
+        .kana-chip { background: #f0f2f8; border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 11px; font-size: 16px; font-weight: 700; color: var(--primary-dark); cursor: pointer; transition: 0.15s; user-select: none; }
+        .kana-chip:hover { background: var(--accent-pink-light); border-color: var(--accent-pink); color: var(--accent-pink); transform: translateY(-1px); }
     </style>
     <!-- NEUE STYLES FÜR DAS TEST CENTER -->
     <style>
@@ -496,9 +512,9 @@
                 <h3 id="ui-mode-flash">🗂️ Karteikarten</h3>
                 <p id="ui-mode-flash-desc">3D-Karte umdrehen, Audio & SRS</p>
             </div>
-            <div class="option-card" id="mode-abfragen" onclick="setMode('abfragen', this)">
-                <h3 id="ui-mode-quiz">⌨️ Abfragen (Tippen)</h3>
-                <p id="ui-mode-quiz-desc">Eintippen mit Live-Kana & Tipps</p>
+            <div class="option-card" id="mode-schreiben" onclick="setMode('schreiben', this)">
+                <h3 id="ui-mode-write">✍️ Schreib-Training</h3>
+                <p id="ui-mode-write-desc">Antwort in der jeweiligen Sprache schreiben</p>
             </div>
             <div class="option-card" id="mode-multiple" onclick="setMode('multiple', this)">
                 <h3 id="ui-mode-mc">🎯 Multiple Choice</h3>
@@ -510,10 +526,11 @@
             </div>
         </div>
 
-        <div class="section-label" id="ui-dir-label">Richtung</div>
+        <div class="section-label" id="ui-dir-label">Richtung / Zielsprache</div>
         <div class="toggle-group">
             <button class="toggle-btn active" id="dir-jp-de" onclick="setDirection('jp-de')">JP → Deutsch</button>
             <button class="toggle-btn" id="dir-de-jp" onclick="setDirection('de-jp')">Deutsch → JP</button>
+            <button class="toggle-btn" id="dir-mix" onclick="setDirection('mix')">🔀 Beide Sprachen</button>
         </div>
 
         <button class="btn-main" style="margin-top: 25px;" id="ui-start-btn" onclick="startLearning(-1)">Lernen starten</button>
@@ -935,6 +952,12 @@
             <span style="font-weight:700; color:var(--primary-dark);">🧩 Speed-Match · Runde <span id="match-round-num">1</span></span>
             <span style="font-weight:700; color:var(--accent-pink);">⏱ <span id="match-timer">0.0</span>s · 🔥 <span id="match-combo">0</span>x</span>
         </div>
+        <div class="toggle-group" style="margin-bottom: 18px;">
+            <button class="toggle-btn" onclick="switchActiveBlockMode('karteikarten')">🗂️ Karten</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('schreiben')">✍️ Schreiben</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('multiple')">🎯 Multiple Choice</button>
+            <button class="toggle-btn active" onclick="switchActiveBlockMode('match')">🧩 Match</button>
+        </div>
         <p class="subtitle" style="text-align:center; margin-bottom:10px;">Finde die zusammenpassenden Paare aus Japanisch und Bedeutung!</p>
         <div class="match-grid">
             <div class="match-col" id="match-col-left"></div>
@@ -972,6 +995,13 @@
             <span style="cursor:pointer;" onclick="switchTab('lernen')">← Menü</span>
             <span style="background: #f0f0f0; padding: 2px 8px; border-radius: 10px;" id="fc-direction-display">JP→DE</span>
             <span style="color: var(--accent-pink); font-weight:bold;"><span id="fc-learned-count">0</span> ✔</span>
+        </div>
+
+        <div class="toggle-group" style="margin-bottom: 16px;">
+            <button class="toggle-btn active" onclick="switchActiveBlockMode('karteikarten')">🗂️ Karten</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('schreiben')">✍️ Schreiben</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('multiple')">🎯 Multiple Choice</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('match')">🧩 Match</button>
         </div>
         
         <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-light); margin-bottom:5px;">
@@ -1011,8 +1041,25 @@
     <main id="view-typing" class="hidden">
         <div class="fc-header">
             <span style="cursor:pointer;" onclick="switchTab('lernen')">← Menü</span>
-            <span id="typing-mode-header-label">Abfrage-Modus</span>
+            <span id="typing-mode-header-label" style="font-weight:700; color:var(--primary-dark);">✍️ Schreib-Training</span>
             <span><span id="type-current-num">1</span>/<span id="type-total-num">20</span></span>
+        </div>
+
+        <div id="typing-block-mode-bar" class="toggle-group" style="margin-bottom: 12px;">
+            <button class="toggle-btn" id="bm-btn-fc" onclick="switchActiveBlockMode('karteikarten')">🗂️ Karten</button>
+            <button class="toggle-btn active" id="bm-btn-write" onclick="switchActiveBlockMode('schreiben')">✍️ Schreiben</button>
+            <button class="toggle-btn" id="bm-btn-mc" onclick="switchActiveBlockMode('multiple')">🎯 Multiple Choice</button>
+            <button class="toggle-btn" id="bm-btn-match" onclick="switchActiveBlockMode('match')">🧩 Match</button>
+        </div>
+
+        <div id="typing-dir-switch-bar" class="toggle-group" style="margin-bottom: 14px; background:#eaeef6;">
+            <button class="toggle-btn active" id="inline-dir-jp-de" style="padding:8px; font-size:12px;" onclick="setDirectionInline('jp-de')">🇯🇵 JP → 🇩🇪 Deutsch schreiben</button>
+            <button class="toggle-btn" id="inline-dir-de-jp" style="padding:8px; font-size:12px;" onclick="setDirectionInline('de-jp')">🇩🇪 DE → 🇯🇵 Japanisch schreiben</button>
+            <button class="toggle-btn" id="inline-dir-mix" style="padding:8px; font-size:12px;" onclick="setDirectionInline('mix')">🔀 Beide Sprachen</button>
+        </div>
+
+        <div class="progress-bar" style="margin-bottom: 20px;">
+            <div class="progress-fill" id="type-progress" style="width: 5%;"></div>
         </div>
         
         <div class="typing-container">
@@ -1020,19 +1067,27 @@
                 <span class="badge" id="type-badge">Verben</span>
                 <div style="display:flex; gap:8px; align-items:center;">
                     <button class="icon-btn" onclick="speakCurrentWord(event)" title="Aussprache anhören">🔊</button>
-                    <button class="icon-btn" id="btn-typing-hint" onclick="showTypingHint()" title="Tipp anzeigen">💡</button>
+                    <button class="icon-btn" id="btn-typing-hint" onclick="showTypingHint()" title="Buchstaben-Tipp anzeigen">💡</button>
                     <button class="star-btn" id="type-fav-btn" onclick="toggleCurrentWordFavorite(event)" title="Favorit">★</button>
                 </div>
             </div>
-            <div class="fc-word" id="type-word" style="margin-top:20px; color:var(--primary-dark);">ある</div>
-            <p id="type-hint" style="color:var(--text-light); font-size:14px; margin-bottom:15px;">Übersetze auf Deutsch</p>
+            <div class="fc-reading" id="type-reading" style="margin-top:14px; margin-bottom:0; font-size:20px; min-height:24px; cursor:pointer;" onclick="this.style.opacity = this.style.opacity === '0.15' ? '1' : '0.15'" title="Klicken zum Ein-/Ausblenden der Lesung"></div>
+            <div class="fc-word" id="type-word" style="margin-top:4px; color:var(--primary-dark);">ある</div>
+            <div>
+                <span id="type-target-lang-badge" class="target-lang-banner">✍️ Schreibe auf Deutsch</span>
+            </div>
+            <p id="type-hint" style="color:var(--text-light); font-size:13px; margin-bottom:10px;">Übersetze das Wort in die gesuchte Sprache</p>
             
             <div id="type-input-area">
-                <input type="text" class="typing-input" id="typing-input" placeholder="Tippe hier..." onkeypress="checkTyping(event)" oninput="applyRomajiToKana(this)">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; font-size:12px; color:var(--text-light);">
-                    <label style="cursor:pointer; display:flex; align-items:center; gap:5px;">
+                <div class="typing-input-row">
+                    <input type="text" class="typing-input" id="typing-input" placeholder="Antwort hier schreiben..." autocomplete="off" onkeydown="checkTyping(event)" oninput="applyRomajiToKana(this)">
+                    <button class="btn-check-answer" id="btn-submit-typing" onclick="submitTypingAnswer()">Prüfen ✓</button>
+                </div>
+                <div id="type-kana-helper" class="kana-helper-chips hidden"></div>
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top:12px; font-size:12px; color:var(--text-light);">
+                    <label id="live-kana-label" style="cursor:pointer; display:flex; align-items:center; gap:5px;">
                         <input type="checkbox" id="live-kana-toggle" checked onchange="state.liveKana = this.checked">
-                        Live Romaji → Kana (bei DE→JP)
+                        Live Romaji → Kana (bei Japanisch-Eingabe)
                     </label>
                     <span id="typing-hint-display" style="color:var(--accent-pink); font-weight:600;"></span>
                 </div>
@@ -1410,11 +1465,17 @@
             vocabCountLabel: "Vokabeln",
             learnedLabel: "gelernt",
             modeLabel: "Lernmodus",
-            modeFlash: "Karteikarten",
-            modeFlashDesc: "Karte umdrehen & bewerten",
-            modeQuiz: "Abfragen",
-            modeQuizDesc: "Übersetzung eintippen",
-            dirLabel: "Richtung",
+            modeFlash: "🗂️ Karteikarten",
+            modeFlashDesc: "3D-Karte umdrehen, Audio & SRS",
+            modeWrite: "✍️ Schreib-Training",
+            modeWriteDesc: "Antwort in der jeweiligen Sprache schreiben",
+            modeQuiz: "✍️ Schreib-Training",
+            modeQuizDesc: "Antwort in der jeweiligen Sprache schreiben",
+            modeMc: "🎯 Multiple Choice",
+            modeMcDesc: "4 Optionen & Hörverständnis",
+            modeMatch: "🧩 Speed-Match",
+            modeMatchDesc: "Paare auf Zeit zuordnen",
+            dirLabel: "Richtung / Zielsprache",
             startBtn: "Lernen starten",
             blockLabel: "Wähle einen Block (je 20 Vokabeln)",
             pathBlocksLabel: "Vokabeln aus dem Pfad",
@@ -1428,8 +1489,8 @@
             hintFlip: "← KLICKEN ZUM UMDREHEN →",
             btnAgain: "✕ Nochmal",
             btnKnow: "✓ Gewusst",
-            typingHint: "Übersetze auf Deutsch",
-            typingHintJp: "Tippe das japanische Wort (Kana)",
+            typingHint: "Schreibe die Bedeutung auf Deutsch",
+            typingHintJp: "Schreibe das Wort auf Japanisch (Kana, Kanji oder Romaji)",
             nextVocab: "Nächste Vokabel →"
         },
         en: {
@@ -1448,11 +1509,17 @@
             vocabCountLabel: "Vocabulary",
             learnedLabel: "learned",
             modeLabel: "Learning Mode",
-            modeFlash: "Flashcards",
-            modeFlashDesc: "Flip card & rate",
-            modeQuiz: "Quiz",
-            modeQuizDesc: "Type the translation",
-            dirLabel: "Direction",
+            modeFlash: "🗂️ Flashcards",
+            modeFlashDesc: "Flip 3D card, audio & SRS",
+            modeWrite: "✍️ Writing Training",
+            modeWriteDesc: "Write the answer in the respective language",
+            modeQuiz: "✍️ Writing Training",
+            modeQuizDesc: "Write the answer in the respective language",
+            modeMc: "🎯 Multiple Choice",
+            modeMcDesc: "4 options & audio",
+            modeMatch: "🧩 Speed-Match",
+            modeMatchDesc: "Match pairs against the clock",
+            dirLabel: "Direction / Target Language",
             startBtn: "Start Learning",
             blockLabel: "Select a block (20 words each)",
             pathBlocksLabel: "Vocabulary from Path",
@@ -1466,8 +1533,8 @@
             hintFlip: "← CLICK TO FLIP →",
             btnAgain: "✕ Again",
             btnKnow: "✓ Got it",
-            typingHint: "Translate to English",
-            typingHintJp: "Type the Japanese word (Kana)",
+            typingHint: "Write the meaning in English",
+            typingHintJp: "Write the word in Japanese (Kana, Kanji or Romaji)",
             nextVocab: "Next word →"
         }
     };
@@ -1477,7 +1544,7 @@
         document.getElementById('current-lang-display').innerText = state.lang.toUpperCase();
         updateUILanguage();
         // Aktuellen View auffrischen
-        const activeTab = document.querySelector('.tab.active').getAttribute('onclick').match(/'([^']+)'/)[1];
+        const activeTab = document.querySelector('.tab.active')?.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || 'lernen';
         switchTab(activeTab);
 
         // Vokabel-Blöcke neu rendern
@@ -1508,36 +1575,50 @@
 
     function updateUILanguage() {
         const t = uiTranslations[state.lang];
-        document.getElementById('ui-level-label').innerText = t.levelLabel;
-        document.getElementById('tab-lernen').innerText = t.tabLernen;
-        document.getElementById('tab-liste').innerText = t.tabListe;
-        document.getElementById('tab-lesen').innerText = t.tabLesen;
-        document.getElementById('tab-kanji').innerText = t.tabKanji;
-        document.getElementById('tab-grammatik').innerText = t.tabGrammatik;
-        document.getElementById('tab-alltag').innerText = t.tabAlltag;
-        document.getElementById('tab-pfad').innerText = t.tabPfad;
-        document.getElementById('tab-test').innerText = t.tabTest;
-        document.getElementById('tab-stats').innerText = t.tabStats;
-        document.getElementById('tab-test-center').innerText = t.tabTestCenter;
-        document.getElementById('ui-learn-title').innerText = t.learnTitle;
-        document.getElementById('ui-vocab-count-label').innerText = t.vocabCountLabel;
-        document.getElementById('ui-learned-label').innerText = t.learnedLabel;
-        document.getElementById('ui-mode-label').innerText = t.modeLabel;
-        document.getElementById('ui-mode-flash').innerText = t.modeFlash;
-        document.getElementById('ui-mode-flash-desc').innerText = t.modeFlashDesc;
-        document.getElementById('ui-mode-quiz').innerText = t.modeQuiz;
-        document.getElementById('ui-mode-quiz-desc').innerText = t.modeQuizDesc;
-        document.getElementById('ui-dir-label').innerText = t.dirLabel;
-        document.getElementById('ui-start-btn').innerText = t.startBtn;
-        document.getElementById('ui-block-label').innerText = t.blockLabel;
-        document.getElementById('ui-path-blocks-label').innerText = t.pathBlocksLabel;
-        document.getElementById('ui-special-label').innerText = t.specialLabel;
-        document.getElementById('ui-daily-btn').innerText = t.dailyBtn;
-        document.getElementById('ui-alltag-title').innerText = t.alltagTitle;
-        document.getElementById('ui-alltag-subtitle').innerText = t.alltagSubtitle;
-        document.getElementById('ui-path-title').innerText = t.pathTitle;
-        document.getElementById('ui-path-subtitle').innerText = t.pathSubtitle;
-        document.getElementById('search-input').placeholder = t.searchPlaceholder;
+        const setTxt = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.innerText = val; };
+        setTxt('ui-level-label', t.levelLabel);
+        setTxt('tab-lernen', t.tabLernen);
+        setTxt('tab-liste', t.tabListe);
+        setTxt('tab-lesen', t.tabLesen);
+        setTxt('tab-kanji', t.tabKanji);
+        setTxt('tab-grammatik', t.tabGrammatik);
+        setTxt('tab-alltag', t.tabAlltag);
+        setTxt('tab-pfad', t.tabPfad);
+        setTxt('tab-test', t.tabTest);
+        setTxt('tab-stats', t.tabStats);
+        setTxt('tab-test-center', t.tabTestCenter);
+        setTxt('ui-learn-title', t.learnTitle);
+        setTxt('ui-vocab-count-label', t.vocabCountLabel);
+        setTxt('ui-learned-label', t.learnedLabel);
+        setTxt('ui-mode-label', t.modeLabel);
+        setTxt('ui-mode-flash', t.modeFlash);
+        setTxt('ui-mode-flash-desc', t.modeFlashDesc);
+        setTxt('ui-mode-write', t.modeWrite);
+        setTxt('ui-mode-write-desc', t.modeWriteDesc);
+        setTxt('ui-mode-quiz', t.modeQuiz);
+        setTxt('ui-mode-quiz-desc', t.modeQuizDesc);
+        setTxt('ui-mode-mc', t.modeMc);
+        setTxt('ui-mode-mc-desc', t.modeMcDesc);
+        setTxt('ui-mode-match', t.modeMatch);
+        setTxt('ui-mode-match-desc', t.modeMatchDesc);
+        setTxt('ui-dir-label', t.dirLabel);
+        setTxt('dir-jp-de', state.lang === 'en' ? 'JP → English' : 'JP → Deutsch');
+        setTxt('dir-de-jp', state.lang === 'en' ? 'English → JP' : 'Deutsch → JP');
+        setTxt('dir-mix', state.lang === 'en' ? '🔀 Both Languages' : '🔀 Beide Sprachen');
+        setTxt('inline-dir-jp-de', state.lang === 'en' ? '🇯🇵 JP → 🇬🇧 Write English' : '🇯🇵 JP → 🇩🇪 Deutsch schreiben');
+        setTxt('inline-dir-de-jp', state.lang === 'en' ? '🇬🇧 EN → 🇯🇵 Write Japanese' : '🇩🇪 DE → 🇯🇵 Japanisch schreiben');
+        setTxt('inline-dir-mix', state.lang === 'en' ? '🔀 Both Languages' : '🔀 Beide Sprachen');
+        setTxt('ui-start-btn', t.startBtn);
+        setTxt('ui-block-label', t.blockLabel);
+        setTxt('ui-path-blocks-label', t.pathBlocksLabel);
+        setTxt('ui-special-label', t.specialLabel);
+        setTxt('ui-daily-btn', t.dailyBtn);
+        setTxt('ui-alltag-title', t.alltagTitle);
+        setTxt('ui-alltag-subtitle', t.alltagSubtitle);
+        setTxt('ui-path-title', t.pathTitle);
+        setTxt('ui-path-subtitle', t.pathSubtitle);
+        const searchEl = document.getElementById('search-input');
+        if (searchEl) searchEl.placeholder = t.searchPlaceholder;
     }
 
     // --- NEUE JLPT PRÜFUNGS-LOGIK ---
@@ -6872,12 +6953,35 @@
             const end = Math.min((i + 1) * blockSize, words.length); 
             html += `
                 <div class="block-card ${isComplete ? 'completed-block' : ''}" onclick="startLearning(${i})">
-                    <div>${state.level} – Block ${i + 1} (${start}–${end})</div>
+                    <div style="font-weight:700;">${state.level} – Block ${i + 1} (${start}–${end})</div>
                     <div class="block-progress-mini">${learnedInSlice}/${slice.length} gelernt ${isComplete ? '✓' : ''}</div>
+                    <div class="block-mode-actions">
+                        <button type="button" class="block-mode-pill" onclick="startBlockWithMode(${i}, 'karteikarten', event)" title="Als Karteikarten lernen">🗂️ Karten</button>
+                        <button type="button" class="block-mode-pill write-pill" onclick="startBlockWithMode(${i}, 'schreiben', event)" title="Schreib-Training starten">✍️ Schreiben</button>
+                        <button type="button" class="block-mode-pill" onclick="startBlockWithMode(${i}, 'multiple', event)" title="Multiple Choice starten">🎯 Quiz</button>
+                        <button type="button" class="block-mode-pill" onclick="startBlockWithMode(${i}, 'match', event)" title="Speed-Match starten">🧩 Match</button>
+                    </div>
                 </div>`;
         }
         container.innerHTML = html;
     }
+
+    function startBlockWithMode(blockIdx, mode, event) {
+        if (event) event.stopPropagation();
+        setMode(mode);
+        startLearning(blockIdx);
+    }
+    window.startBlockWithMode = startBlockWithMode;
+
+    function switchActiveBlockMode(mode) {
+        stopMatchGame();
+        setMode(mode);
+        const sourceWords = (state.lastUsedSource && state.lastUsedSource.length > 0)
+            ? state.lastUsedSource
+            : (window.vocabData[state.level] || []).slice(0, 20);
+        startLearning(-1, sourceWords);
+    }
+    window.switchActiveBlockMode = switchActiveBlockMode;
 
     // --- SMART REVIEW, PROBLEMWÖRTER & FAVORITEN ---
     function startSRSReview() {
@@ -7005,6 +7109,14 @@
         }
         if (!words || words.length === 0) return alert("Keine Vokabeln vorhanden.");
 
+        if (blockIdx >= 0) {
+            state.currentBlockTitle = `${state.level} · Block ${blockIdx + 1}`;
+        } else if (!customWords) {
+            state.currentBlockTitle = `${state.level} · Alle Vokabeln`;
+        } else if (!state.currentBlockTitle) {
+            state.currentBlockTitle = `${state.level} · Vokabelblock`;
+        }
+
         state.lastUsedSource = words;
         state.sessionMistakes = [];
         state.sessionCorrectCount = 0;
@@ -7014,7 +7126,7 @@
         if (fcCounter) fcCounter.innerText = '0';
 
         if (state.mode === 'fulltest') {
-            state.mode = document.getElementById('mode-abfragen')?.classList.contains('active') ? 'abfragen' : 'karteikarten';
+            state.mode = (document.getElementById('mode-schreiben')?.classList.contains('active') || document.getElementById('mode-abfragen')?.classList.contains('active')) ? 'schreiben' : 'karteikarten';
         }
 
         if (state.mode === 'karteikarten') {
@@ -7059,16 +7171,27 @@
         const count = Math.min(state.testSettings.count, pool.length); 
         const selection = [...pool].sort(() => Math.random() - 0.5).slice(0, count);
         state.direction = state.testSettings.direction;
-        state.mode = 'abfragen';
+        state.mode = 'schreiben';
         startLearning(-1, selection);
+    }
+
+    function resolveActiveDirection() {
+        if (state.direction === 'mix') {
+            return Math.random() < 0.5 ? 'jp-de' : 'de-jp';
+        }
+        return state.direction || 'jp-de';
     }
 
     function loadFlashcard() {
         const word = state.currentQueue[state.currentIndex];
-        const isJpToDe = state.direction === 'jp-de';
+        const activeDir = resolveActiveDirection();
+        const isJpToDe = activeDir === 'jp-de';
         const t = uiTranslations[state.lang] || uiTranslations.de;
 
-        document.getElementById('fc-direction-display').innerText = isJpToDe ? "JP → DE" : "DE → JP";
+        const targetLangCode = state.lang === 'en' ? 'EN' : 'DE';
+        document.getElementById('fc-direction-display').innerText = state.direction === 'mix'
+            ? `🔀 ${isJpToDe ? `JP → ${targetLangCode}` : `${targetLangCode} → JP`}`
+            : (isJpToDe ? `JP → ${targetLangCode}` : `${targetLangCode} → JP`);
         document.getElementById('fc-current-num').innerText = state.currentIndex + 1;
         document.getElementById('fc-total-num').innerText = state.currentQueue.length;
         document.getElementById('fc-progress').style.width = `${(state.currentIndex / state.currentQueue.length) * 100}%`;
@@ -7089,11 +7212,11 @@
             document.getElementById('fc-word-front').innerText = word.kanji || word.kana;
             document.getElementById('fc-reading-front').innerText = word.kanji ? word.kana : '';
             document.getElementById('fc-word-back').innerText = word.kanji || word.kana;
-            document.getElementById('fc-trans-back').innerText = word[state.lang];
+            document.getElementById('fc-trans-back').innerText = word[state.lang] || word.de;
         } else {
-            document.getElementById('fc-word-front').innerText = word[state.lang];
+            document.getElementById('fc-word-front').innerText = word[state.lang] || word.de;
             document.getElementById('fc-reading-front').innerText = '';
-            document.getElementById('fc-word-back').innerText = word[state.lang];
+            document.getElementById('fc-word-back').innerText = word[state.lang] || word.de;
             document.getElementById('fc-trans-back').innerText = word.kanji ? `${word.kanji} (${word.kana})` : word.kana;
         }
 
@@ -7148,15 +7271,75 @@
         }
     }
 
+    function renderKanaHelperChips(word) {
+        const helperEl = document.getElementById('type-kana-helper');
+        if (!helperEl) return;
+        const targetKana = (word && word.kana) ? String(word.kana).trim() : '';
+        if (!targetKana) {
+            helperEl.classList.add('hidden');
+            return;
+        }
+        helperEl.classList.remove('hidden');
+        const chars = Array.from(targetKana);
+        const distractors = ['あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', 'こ', 'さ', 'し', 'す', 'た', 'て', 'と', 'な', 'に', 'の', 'は', 'ま', 'み', 'る', 'ん', 'っ', 'ー'];
+        const pool = [...chars];
+        while (pool.length < Math.min(chars.length + 4, 12)) {
+            const d = distractors[Math.floor(Math.random() * distractors.length)];
+            if (!pool.includes(d)) pool.push(d);
+        }
+        pool.sort(() => Math.random() - 0.5);
+        helperEl.innerHTML = pool.map(ch => {
+            const esc = ch.replace(/'/g, "\\'");
+            return `<button type="button" class="kana-chip" onclick="appendKanaChip('${esc}')">${ch}</button>`;
+        }).concat([`<button type="button" class="kana-chip" style="background:#fee2e2; color:#b91c1c;" onclick="backspaceKanaChip()" title="Letztes Zeichen löschen">⌫</button>`]).join('');
+    }
+
+    function appendKanaChip(ch) {
+        const input = document.getElementById('typing-input');
+        if (!input || input.disabled) return;
+        input.value += ch;
+        input.focus();
+    }
+    window.appendKanaChip = appendKanaChip;
+
+    function backspaceKanaChip() {
+        const input = document.getElementById('typing-input');
+        if (!input || input.disabled) return;
+        const arr = Array.from(input.value);
+        arr.pop();
+        input.value = arr.join('');
+        input.focus();
+    }
+    window.backspaceKanaChip = backspaceKanaChip;
+
     function loadTyping() {
         const word = state.currentQueue[state.currentIndex];
-        const isJpToDe = state.direction === 'jp-de'; 
-        const t = uiTranslations[state.lang];
+        if (!word) return finishSession();
+        state.currentWordDirection = resolveActiveDirection();
+        const isJpToDe = state.currentWordDirection === 'jp-de';
+        const t = uiTranslations[state.lang] || uiTranslations.de;
+        state.hintRevealCount = 0;
+        state.awaitingRetype = false;
+
+        const blockBar = document.getElementById('typing-block-mode-bar');
+        if (blockBar) blockBar.classList.remove('hidden');
+        const dirBar = document.getElementById('typing-dir-switch-bar');
+        if (dirBar) dirBar.classList.remove('hidden');
+        document.getElementById('bm-btn-write')?.classList.add('active');
+        document.getElementById('bm-btn-mc')?.classList.remove('active');
 
         const headerLabel = document.getElementById('typing-mode-header-label');
-        if (headerLabel) headerLabel.innerText = 'Abfrage-Modus';
+        if (headerLabel) {
+            headerLabel.innerText = state.currentBlockTitle
+                ? `✍️ Schreib-Training · ${state.currentBlockTitle}`
+                : '✍️ Schreib-Training';
+        }
         document.getElementById('type-current-num').innerText = state.currentIndex + 1;
         document.getElementById('type-total-num').innerText = state.currentQueue.length;
+        const progressEl = document.getElementById('type-progress');
+        if (progressEl) {
+            progressEl.style.width = `${(state.currentIndex / Math.max(1, state.currentQueue.length)) * 100}%`;
+        }
         document.getElementById('type-badge').innerText = word.type || 'Vokabel';
         const typeFavBtn = document.getElementById('type-fav-btn');
         if (typeFavBtn) typeFavBtn.classList.toggle('active', !!word.favorite);
@@ -7173,16 +7356,53 @@
         const input = document.getElementById('typing-input');
         input.value = '';
         input.disabled = false;
+        const submitBtn = document.getElementById('btn-submit-typing');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerText = state.lang === 'en' ? 'Check ✓' : 'Prüfen ✓';
+        }
         document.getElementById('typing-feedback').innerHTML = '';
         document.getElementById('btn-next-typing').classList.add('hidden');
         document.getElementById('btn-next-typing').innerText = t.nextVocab;
 
+        const readingEl = document.getElementById('type-reading');
+        const targetBadge = document.getElementById('type-target-lang-badge');
+        const liveKanaLabel = document.getElementById('live-kana-label');
+        const kanaHelper = document.getElementById('type-kana-helper');
+
         if (isJpToDe) {
             document.getElementById('type-word').innerText = word.kanji || word.kana;
+            if (readingEl) {
+                readingEl.innerText = (word.kanji && word.kanji !== word.kana) ? word.kana : '';
+                readingEl.style.opacity = '1';
+            }
+            if (targetBadge) {
+                targetBadge.className = 'target-lang-banner';
+                targetBadge.innerText = state.lang === 'en'
+                    ? '🇬🇧 Write answer in English'
+                    : '🇩🇪 Antwort auf Deutsch schreiben';
+            }
             document.getElementById('type-hint').innerText = t.typingHint;
+            input.placeholder = state.lang === 'en'
+                ? 'Type the English meaning...'
+                : 'Deutsche Bedeutung hier schreiben...';
+            if (liveKanaLabel) liveKanaLabel.style.visibility = 'hidden';
+            if (kanaHelper) kanaHelper.classList.add('hidden');
         } else {
             document.getElementById('type-word').innerText = word[state.lang] || word.de;
+            if (readingEl) readingEl.innerText = '';
+            if (targetBadge) {
+                targetBadge.className = 'target-lang-banner lang-jp';
+                targetBadge.innerText = state.lang === 'en'
+                    ? '🇯🇵 Write answer in Japanese (Kana / Kanji / Romaji)'
+                    : '🇯🇵 Antwort auf Japanisch schreiben (Kana / Kanji / Romaji)';
+            }
             document.getElementById('type-hint').innerText = t.typingHintJp;
+            input.placeholder = state.lang === 'en'
+                ? 'Write in Japanese (Kana, Kanji or Romaji)...'
+                : 'Auf Japanisch schreiben (z. B. Kana, Kanji oder Romaji)...';
+            if (liveKanaLabel) liveKanaLabel.style.visibility = 'visible';
+            renderKanaHelperChips(word);
         }
         input.focus();
     }
@@ -7190,12 +7410,17 @@
     function showTypingHint() {
         const word = state.currentQueue[state.currentIndex];
         if (!word) return;
-        const isJpToDe = state.direction === 'jp-de';
-        const target = isJpToDe ? (word[state.lang] || word.de || '') : (word.kana || '');
+        const isJpToDe = (state.currentWordDirection || state.direction) === 'jp-de';
+        const rawTarget = isJpToDe
+            ? ((word[state.lang] || word.de || '').split(/[\/,;]/)[0].replace(/\(.*?\)/g, '').trim())
+            : (word.kana || word.kanji || '');
         const hintDisplay = document.getElementById('typing-hint-display');
-        if (hintDisplay && target) {
-            const firstPart = target.slice(0, Math.min(2, target.length));
-            hintDisplay.innerText = `💡 Tipp: "${firstPart}..." (${target.length} Zeichen${word.kanji && isJpToDe ? `, Kana: ${word.kana}` : ''})`;
+        if (hintDisplay && rawTarget) {
+            state.hintRevealCount = Math.min(rawTarget.length, (state.hintRevealCount || 0) + 1);
+            const revealed = rawTarget.slice(0, state.hintRevealCount);
+            const remaining = Math.max(0, rawTarget.length - state.hintRevealCount);
+            const dots = '·'.repeat(remaining);
+            hintDisplay.innerText = `💡 Tipp: "${revealed}${dots}" (${rawTarget.length} Zeichen${!isJpToDe && word.kanji && word.kanji !== word.kana ? ` · Kanji: ${word.kanji}` : ''})`;
         }
     }
     window.showTypingHint = showTypingHint;
@@ -7203,18 +7428,33 @@
     function loadMultipleChoice() {
         const word = state.currentQueue[state.currentIndex];
         if (!word) return finishSession();
-        const isJpToDe = state.direction === 'jp-de';
+        state.currentWordDirection = resolveActiveDirection();
+        const isJpToDe = state.currentWordDirection === 'jp-de';
         const t = uiTranslations[state.lang] || uiTranslations.de;
+
+        const blockBar = document.getElementById('typing-block-mode-bar');
+        if (blockBar) blockBar.classList.remove('hidden');
+        const dirBar = document.getElementById('typing-dir-switch-bar');
+        if (dirBar) dirBar.classList.remove('hidden');
+        document.getElementById('bm-btn-write')?.classList.remove('active');
+        document.getElementById('bm-btn-mc')?.classList.add('active');
 
         const headerLabel = document.getElementById('typing-mode-header-label');
         if (headerLabel) headerLabel.innerText = '🎯 Multiple Choice';
         document.getElementById('type-current-num').innerText = state.currentIndex + 1;
         document.getElementById('type-total-num').innerText = state.currentQueue.length;
+        const progressEl = document.getElementById('type-progress');
+        if (progressEl) {
+            progressEl.style.width = `${(state.currentIndex / Math.max(1, state.currentQueue.length)) * 100}%`;
+        }
         document.getElementById('type-badge').innerText = word.type || 'Vokabel';
         const typeFavBtn = document.getElementById('type-fav-btn');
         if (typeFavBtn) typeFavBtn.classList.toggle('active', !!word.favorite);
         const hintBtn = document.getElementById('btn-typing-hint');
         if (hintBtn) hintBtn.classList.add('hidden');
+        const readingEl = document.getElementById('type-reading');
+        if (readingEl) readingEl.innerText = '';
+        const targetBadge = document.getElementById('type-target-lang-badge');
 
         document.getElementById('type-input-area').classList.add('hidden');
         const choiceArea = document.getElementById('type-choice-area');
@@ -7226,9 +7466,17 @@
         if (isJpToDe) {
             document.getElementById('type-word').innerText = word.kanji || word.kana;
             document.getElementById('type-hint').innerText = word.kanji ? `Lesung: ${word.kana}` : 'Wähle die richtige Bedeutung';
+            if (targetBadge) {
+                targetBadge.className = 'target-lang-banner';
+                targetBadge.innerText = state.lang === 'en' ? '🎯 Choose English meaning' : '🎯 Richtige Bedeutung wählen';
+            }
         } else {
             document.getElementById('type-word').innerText = word[state.lang] || word.de;
             document.getElementById('type-hint').innerText = 'Wähle das passende japanische Wort';
+            if (targetBadge) {
+                targetBadge.className = 'target-lang-banner lang-jp';
+                targetBadge.innerText = state.lang === 'en' ? '🎯 Choose Japanese word' : '🎯 Passendes japanisches Wort wählen';
+            }
         }
 
         const pool = (window.vocabData[state.level] || state.currentQueue).filter(w => w !== word);
@@ -7279,16 +7527,24 @@
     }
     window.checkMultipleChoiceAnswer = checkMultipleChoiceAnswer;
 
+    function kataToHira(str) {
+        if (!str) return '';
+        return String(str).replace(/[\u30a1-\u30f6]/g, ch =>
+            String.fromCharCode(ch.charCodeAt(0) - 0x60)
+        );
+    }
+
     function isRomajiMatch(input, kana) {
         if (!input || !kana) return false;
+        const normalizedKana = kataToHira(kana);
         const romajiMap = {
             'あ':'a','い':'i','う':'u','え':'e','お':'o',
             'か':'ka','き':'ki','く':'ku','け':'ke','こ':'ko',
             'さ':'sa','し':'shi','す':'su','せ':'se','そ':'so',
             'た':'ta','ち':'chi','つ':'tsu','て':'te','と':'to',
-            'な':'na','に':'ni','ぬ':'nu','ne':'ne','の':'no',
+            'な':'na','に':'ni','ぬ':'nu','ね':'ne','の':'no',
             'は':'ha','ひ':'hi','ふ':'fu','へ':'he','ほ':'ho',
-            'ま':'ma','み':'mi','む':'mu','め':'me','も':'mo',
+            'ま':'ma','み':'mi','む':'mu','め':'me','mo':'mo',
             'や':'ya','ゆ':'yu','よ':'yo',
             'ら':'ra','り':'ri','る':'ru','れ':'re','ろ':'ro',
             'わ':'wa','を':'wo','ん':'n',
@@ -7311,52 +7567,121 @@
         };
         let converted = '';
         let i = 0;
-        while (i < kana.length) {
-            if (i + 1 < kana.length && romajiMap[kana.substring(i, i + 2)]) {
-                converted += romajiMap[kana.substring(i, i + 2)];
+        while (i < normalizedKana.length) {
+            if (i + 1 < normalizedKana.length && romajiMap[normalizedKana.substring(i, i + 2)]) {
+                converted += romajiMap[normalizedKana.substring(i, i + 2)];
                 i += 2;
-            } else if (romajiMap[kana[i]]) {
-                converted += romajiMap[kana[i]];
+            } else if (romajiMap[normalizedKana[i]]) {
+                converted += romajiMap[normalizedKana[i]];
                 i++;
-            } else if (kana[i] === 'っ' || kana[i] === 'ッ') {
-                if (i + 1 < kana.length) {
-                    const nextRomaji = romajiMap[kana[i + 1]] || '';
+            } else if (normalizedKana[i] === 'っ' || normalizedKana[i] === 'ッ') {
+                if (i + 1 < normalizedKana.length) {
+                    const nextRomaji = romajiMap[normalizedKana[i + 1]] || '';
                     if (nextRomaji) converted += nextRomaji[0];
                 }
                 i++;
-            } else if (kana[i] === 'ー') {
+            } else if (normalizedKana[i] === 'ー') {
                 i++;
             } else {
-                converted += kana[i];
+                converted += normalizedKana[i];
                 i++;
             }
         }
-        return input.toLowerCase().trim() === converted.toLowerCase().trim();
+        const cleanInput = input.toLowerCase().replace(/[\s\-]/g, '').trim();
+        const cleanConv = converted.toLowerCase().replace(/[\s\-]/g, '').trim();
+        return cleanInput === cleanConv;
+    }
+
+    function evaluateTypingAnswer(word, rawAnswer, isJpToDe) {
+        const answer = (rawAnswer || '').trim();
+        if (!answer) return false;
+        const lowerAns = answer.toLowerCase();
+
+        if (isJpToDe) {
+            const rawTarget = (word[state.lang] || word.de || '').toLowerCase();
+            const parts = rawTarget.split(/[\/,;]/).map(s => s.trim()).filter(Boolean);
+            const strippedParts = parts.map(s => s.replace(/\(.*?\)/g, '').trim()).filter(Boolean);
+            const allValid = new Set([rawTarget.trim(), rawTarget.replace(/\(.*?\)/g, '').trim(), ...parts, ...strippedParts]);
+            for (const valid of allValid) {
+                if (!valid) continue;
+                if (valid === lowerAns) return true;
+                // Erlaube ohne führendes "sich " bei Verben (z.B. "öffnen" für "sich öffnen")
+                if (valid.startsWith('sich ') && valid.slice(5).trim() === lowerAns) return true;
+                if (valid.startsWith('to ') && valid.slice(3).trim() === lowerAns) return true;
+            }
+            return false;
+        } else {
+            const hiraAns = kataToHira(lowerAns);
+            const hiraKana = kataToHira((word.kana || '').toLowerCase().trim());
+            const kanjiClean = (word.kanji || '').toLowerCase().trim();
+            return (
+                lowerAns === (word.kana || '').toLowerCase().trim() ||
+                (kanjiClean && lowerAns === kanjiClean) ||
+                (hiraKana && hiraAns === hiraKana) ||
+                (word.romaji && lowerAns === word.romaji.toLowerCase().trim()) ||
+                isRomajiMatch(lowerAns, word.kana)
+            );
+        }
     }
 
     function checkTyping(event) {
         if (event.key !== 'Enter') return;
+        event.preventDefault();
+        if (state.mode === 'fulltest') {
+            checkFullTestAnswer(document.getElementById('typing-input').value);
+            return;
+        }
+        const input = document.getElementById('typing-input');
+        const nextBtn = document.getElementById('btn-next-typing');
+        if (nextBtn && !nextBtn.classList.contains('hidden') && (!input || !input.value.trim())) {
+            skipToNext();
+            return;
+        }
+        submitTypingAnswer();
+    }
+
+    function submitTypingAnswer() {
         if (state.mode === 'fulltest') {
             checkFullTestAnswer(document.getElementById('typing-input').value);
             return;
         }
         const word = state.currentQueue[state.currentIndex];
-        const answer = document.getElementById('typing-input').value.toLowerCase().trim();
-        const isJpToDe = state.direction === 'jp-de';
-        const feedback = document.getElementById('typing-feedback');
+        if (!word) return;
+        const input = document.getElementById('typing-input');
+        const answer = input ? input.value.trim() : '';
+        if (!answer) {
+            if (input) input.focus();
+            return;
+        }
 
-        let isCorrect = false;
-        if (isJpToDe) {
-            const correctAnswers = (word[state.lang] || word.de || '').toLowerCase().split(/[\/,]/).map(s => s.trim());
-            isCorrect = correctAnswers.some(ans => ans === answer || (ans.includes(answer) && answer.length > 2));
-        } else {
-            // Akzeptiere Kana, Kanji oder Romaji
-            isCorrect = (answer === word.kana || answer === word.kanji || (word.romaji && answer === word.romaji.toLowerCase().trim()) || isRomajiMatch(answer, word.kana));
+        const isJpToDe = (state.currentWordDirection || state.direction) === 'jp-de';
+        const feedback = document.getElementById('typing-feedback');
+        const isCorrect = evaluateTypingAnswer(word, answer, isJpToDe);
+
+        // Falls der Nutzer nach einem Fehler die richtige Lösung zum Üben nachtippt:
+        if (state.awaitingRetype) {
+            if (isCorrect) {
+                playSound('correct');
+                feedback.innerHTML = '<span class="feedback-correct">✓ Super nachgeschrieben! Weiter geht\'s...</span>';
+                input.disabled = true;
+                setTimeout(() => {
+                    skipToNext();
+                }, 650);
+            } else {
+                playSound('wrong');
+            }
+            return;
         }
 
         if (isCorrect) {
             playSound('correct');
-            feedback.innerHTML = '<span class="feedback-correct">Richtig! ✓ (+10 XP)</span>';
+            const correctDisplay = isJpToDe
+                ? (word[state.lang] || word.de)
+                : (word.kanji && word.kanji !== word.kana ? `${word.kanji} (${word.kana})` : word.kana);
+            feedback.innerHTML = `<span class="feedback-correct">Richtig! ✓ ${correctDisplay} (+10 XP)</span>`;
+            if (input) input.disabled = true;
+            const submitBtn = document.getElementById('btn-submit-typing');
+            if (submitBtn) submitBtn.disabled = true;
             updateWordSRS(word, true);
             if (!state.sessionMistakes.includes(word)) state.sessionCorrectCount++;
             saveUserStats();
@@ -7364,16 +7689,26 @@
                 state.currentIndex++;
                 if (state.currentIndex >= state.currentQueue.length) finishSession();
                 else loadTyping();
-            }, 900);
+            }, 850);
         } else {
             playSound('wrong');
-            feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig wäre: ${isJpToDe ? (word[state.lang] || word.de) : (word.kanji ? `${word.kanji} (${word.kana})` : word.kana)}</span>`;
+            const rightSolution = isJpToDe
+                ? (word[state.lang] || word.de)
+                : (word.kanji && word.kanji !== word.kana ? `${word.kanji} (${word.kana})` : word.kana);
+            feedback.innerHTML = `<span class="feedback-wrong">Falsch! Richtig ist: <strong>${rightSolution}</strong></span><div style="font-size:12px; color:var(--text-light); margin-top:4px;">✍️ Tipp: Schreibe die richtige Antwort direkt nochmal ab oder klicke auf Weiter.</div>`;
             updateWordSRS(word, false);
             if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
             saveUserStats();
+            state.awaitingRetype = true;
+            if (input) {
+                input.value = '';
+                input.placeholder = `Zum Einprägen abschreiben: ${rightSolution}`;
+                input.focus();
+            }
             document.getElementById('btn-next-typing').classList.remove('hidden');
         }
     }
+    window.submitTypingAnswer = submitTypingAnswer;
 
     function skipToNext() {
         state.currentIndex++;
@@ -7735,10 +8070,21 @@
     function loadFullTestItem() {
         const it = state.currentQueue[state.currentIndex];
         if (!it) return finishSession();
+        document.getElementById('typing-block-mode-bar')?.classList.add('hidden');
+        document.getElementById('typing-dir-switch-bar')?.classList.add('hidden');
+        document.getElementById('type-kana-helper')?.classList.add('hidden');
+        const headerLabel = document.getElementById('typing-mode-header-label');
+        if (headerLabel) headerLabel.innerText = 'JLPT Volltest';
+        const readingEl = document.getElementById('type-reading');
+        if (readingEl) readingEl.innerText = '';
         document.getElementById('type-word').innerText = it.word;
         document.getElementById('type-badge').innerText = it.cat;
         document.getElementById('type-current-num').innerText = state.currentIndex + 1;
         document.getElementById('type-total-num').innerText = state.currentQueue.length;
+        const progressEl = document.getElementById('type-progress');
+        if (progressEl) {
+            progressEl.style.width = `${(state.currentIndex / Math.max(1, state.currentQueue.length)) * 100}%`;
+        }
         document.getElementById('typing-feedback').innerHTML = '';
         document.getElementById('btn-next-typing').classList.add('hidden');
 
@@ -7864,9 +8210,10 @@
 
     // --- MODI & EINSTELLUNGEN ---
     function setMode(mode, btn) {
-        state.mode = mode;
+        const normalizedMode = mode === 'abfragen' ? 'schreiben' : mode;
+        state.mode = normalizedMode;
         document.querySelectorAll('#view-lernen .card-grid .option-card').forEach(b => b.classList.remove('active'));
-        const targetBtn = btn || document.getElementById(`mode-${mode}`);
+        const targetBtn = btn || document.getElementById(`mode-${normalizedMode}`) || document.getElementById(`mode-${mode}`);
         if (targetBtn) targetBtn.classList.add('active');
     }
 
@@ -7884,10 +8231,10 @@
         'ha':'は','hi':'ひ','he':'へ','ho':'ほ',
         'ma':'ま','mi':'み','mu':'む','me':'め','mo':'も',
         'ya':'や','yu':'ゆ','yo':'よ',
-        'ra':'ら','ri':'り','ru':'る','re':'れ','ro':'ろ',
+        'ra':'ら','ri':'り','ru':'る','re':'れ','ro':'ro',
         'wa':'わ','wo':'を','nn':'ん',
         'ga':'が','gi':'ぎ','gu':'ぐ','ge':'げ','go':'ご',
-        'za':'ざ','ji':'じ','zu':'ず','ze':'ぜ','zo':'ぞ',
+        'za':'za' === 'za' ? 'ざ' : 'ざ','ji':'じ','zu':'ず','ze':'ぜ','zo':'ぞ',
         'da':'だ','de':'で','do':'ど',
         'ba':'ば','bi':'び','bu':'ぶ','be':'べ','bo':'ぼ',
         'pa':'ぱ','pi':'ぴ','pu':'ぷ','pe':'ぺ','po':'ぽ',
@@ -7898,7 +8245,8 @@
         if (!inputEl) return;
         const liveToggle = document.getElementById('live-kana-toggle');
         const isLiveEnabled = liveToggle ? liveToggle.checked : true;
-        if (!isLiveEnabled || state.direction !== 'de-jp' || state.mode === 'fulltest') return;
+        const activeDir = state.currentWordDirection || state.direction;
+        if (!isLiveEnabled || activeDir !== 'de-jp' || state.mode === 'fulltest') return;
 
         let val = inputEl.value;
         // Doppelte Konsonanten (außer n) -> っ
@@ -8121,9 +8469,22 @@
 
     function setDirection(dir) {
         state.direction = dir;
-        document.getElementById('dir-jp-de').classList.toggle('active', dir === 'jp-de');
-        document.getElementById('dir-de-jp').classList.toggle('active', dir === 'de-jp');
+        document.getElementById('dir-jp-de')?.classList.toggle('active', dir === 'jp-de');
+        document.getElementById('dir-de-jp')?.classList.toggle('active', dir === 'de-jp');
+        document.getElementById('dir-mix')?.classList.toggle('active', dir === 'mix');
+        document.getElementById('inline-dir-jp-de')?.classList.toggle('active', dir === 'jp-de');
+        document.getElementById('inline-dir-de-jp')?.classList.toggle('active', dir === 'de-jp');
+        document.getElementById('inline-dir-mix')?.classList.toggle('active', dir === 'mix');
     }
+
+    function setDirectionInline(dir) {
+        setDirection(dir);
+        if (!document.getElementById('view-typing')?.classList.contains('hidden')) {
+            if (state.mode === 'multiple') loadMultipleChoice();
+            else if (state.mode !== 'fulltest') loadTyping();
+        }
+    }
+    window.setDirectionInline = setDirectionInline;
 
     // --- TÄGLICHE HERAUSFORDERUNG ---
     function generateDailyWords() {
