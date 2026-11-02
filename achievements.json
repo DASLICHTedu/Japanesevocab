@@ -1,0 +1,11 @@
+{
+  "general": [
+    { "id": "first-test", "title": "Erster Test", "description": "Schließe deine erste Prüfung ab.", "icon": "🥇" },
+    { "id": "streak-7", "title": "7-Tage-Streak", "description": "Lerne 7 Tage hintereinander.", "icon": "🔥" },
+    { "id": "streak-30", "title": "30-Tage-Streak", "description": "Lerne 30 Tage hintereinander.", "icon": "🚀" }
+  ],
+  "vocab": [
+    { "id": "vocab-100", "title": "Wortschatz-Anfänger", "description": "Lerne 100 Vokabeln.", "icon": "📖" },
+    { "id": "vocab-500", "title": "Wortschatz-Kenner", "description": "Lerne 500 Vokabeln.", "icon": "📚" }
+  ]
+}

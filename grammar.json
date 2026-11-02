@@ -1,0 +1,2445 @@
+{
+  "N5": [
+    {
+      "title": "Grundlegender Satzbau (SOV)",
+      "summary": "Lerne die grundlegende Wortstellung im Japanischen: Subjekt - Objekt - Verb.",
+      "explanation": {
+        "introduction": "Im Gegensatz zum Deutschen (Subjekt-Verb-Objekt) folgt das Japanische fast immer der Struktur Subjekt-Objekt-Verb (SOV). Das Verb steht immer am Ende des Satzes.",
+        "sections": [
+          {
+            "title": "Die SOV-Struktur",
+            "content": "Ein einfacher Satz wird wie folgt aufgebaut:",
+            "points": [
+              "<strong>Subjekt + Partikel は/が + Objekt + Partikel を + Verb.</strong>"
+            ],
+            "examples": [
+              { "jp": "私 は パン を 食べます。", "de": "Ich esse Brot." },
+              { "jp": "猫 が 魚 を 見ています。", "de": "Die Katze schaut den Fisch an." }
+            ]
+          },
+          {
+            "title": "Erweiterungen",
+            "content": "Andere Satzteile wie Zeit, Ort oder Mittel stehen vor dem Objekt, aber die SOV-Grundstruktur bleibt erhalten.",
+            "examples": [
+              { "jp": "私 は 昨日 スーパーで パン を 買いました。", "de": "Ich habe gestern im Supermarkt Brot gekauft." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "sentence-ordering",
+          "instruction": "Bringe die Wörter in die richtige Reihenfolge.",
+          "questions": [
+            { "parts": ["私 は", "飲みます", "コーヒー を"], "answer": "私 は コーヒー を 飲みます", "explanation": "Subjekt (私 は) - Objekt (コーヒー を) - Verb (飲みます)." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Verbgruppen (u-Verben & ru-Verben)",
+      "summary": "Lerne die zwei Hauptverbgruppen und ihre grundlegenden Unterschiede, die für die Konjugation entscheidend sind.",
+      "explanation": {
+        "introduction": "Japanische Verben werden in drei Gruppen eingeteilt. Die Zugehörigkeit zu einer Gruppe bestimmt, wie das Verb konjugiert wird. Die wichtigsten Gruppen sind Gruppe 1 (u-Verben) und Gruppe 2 (ru-Verben).",
+        "sections": [
+          {
+            "title": "Gruppe 2: ru-Verben (一段動詞)",
+            "content": "Diese Verben sind am einfachsten zu erkennen. Ihre Wörterbuchform endet fast immer auf <strong>-iru</strong> oder <strong>-eru</strong>.",
+            "examples": [
+              { "jp": "食べる (taberu)", "de": "essen" },
+              { "jp": "見る (miru)", "de": "sehen" },
+              { "jp": "寝る (neru)", "de": "schlafen" }
+            ]
+          },
+          {
+            "title": "Gruppe 1: u-Verben (五段動詞)",
+            "content": "Dies ist die größte Gruppe. Sie umfasst alle Verben, deren Wörterbuchform <strong>nicht</strong> auf -iru oder -eru endet. Ihre Endung ist ein 'u'-Laut (u, ku, su, tsu, nu, bu, mu, ru).",
+            "examples": [
+              { "jp": "飲む (nomu)", "de": "trinken" },
+              { "jp": "書く (kaku)", "de": "schreiben" },
+              { "jp": "話す (hanasu)", "de": "sprechen" }
+            ]
+          },
+          {
+            "title": "Ausnahmen: 'Falsche' ru-Verben",
+            "content": "Einige Verben enden auf -iru oder -eru, gehören aber trotzdem zur Gruppe 1 (u-Verben). Man muss sie auswendig lernen.",
+            "examples": [
+              { "jp": "帰る (kaeru)", "de": "zurückkehren (u-Verb)" },
+              { "jp": "入る (hairu)", "de": "hineingehen (u-Verb)" },
+              { "jp": "知る (shiru)", "de": "wissen (u-Verb)" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "classification",
+          "instruction": "Bestimme die Verbgruppe (u-Verb oder ru-Verb).",
+          "questions": [
+            { "verb": "食べる (taberu)", "answer": "ru-Verb", "explanation": "Endet auf -eru." },
+            { "verb": "飲む (nomu)", "answer": "u-Verb", "explanation": "Endet auf -mu." },
+            { "verb": "帰る (kaeru)", "answer": "u-Verb", "explanation": "Ist eine Ausnahme, obwohl es auf -eru endet." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Unregelmäßige Verben: する & 来る",
+      "summary": "Die zwei wichtigsten unregelmäßigen Verben und ihre Besonderheiten.",
+      "explanation": {
+        "introduction": "Neben den u- und ru-Verben gibt es nur zwei unregelmäßige Verben (Gruppe 3), die man auswendig lernen muss: <strong>する (suru - tun)</strong> und <strong>来る (kuru - kommen)</strong>. Sie sind extrem häufig.",
+        "sections": [
+          {
+            "title": "する (suru)",
+            "content": "Wird oft an Nomen angehängt, um eine Handlung auszudrücken (z.B. 勉強する - lernen).",
+            "points": [
+              "ます-Form: します (shimasu)",
+              "て-Form: して (shite)",
+              "ない-Form: しない (shinai)"
+            ]
+          },
+          {
+            "title": "来る (kuru)",
+            "content": "Bedeutet 'kommen'. Die Lesung ändert sich je nach Konjugation.",
+            "points": [
+              "ます-Form: きます (kimasu)",
+              "て-Form: きて (kite)",
+              "ない-Form: こない (konai)"
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Konjugiere die Verben.",
+          "questions": [
+            { "verb": "する (masu-Form)", "answer": "します", "explanation": "Unregelmäßige Konjugation." },
+            { "verb": "来る (nai-Form)", "answer": "こない", "explanation": "Unregelmäßige Konjugation mit Lesungsänderung." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die masu-Form (ます形)",
+      "summary": "Die höfliche Verbform für den alltäglichen Gebrauch, die am Satzende steht.",
+      "explanation": {
+        "introduction": "Die masu-Form ist die Standard-Höflichkeitsform von Verben. Sie wird in den meisten alltäglichen Gesprächen verwendet, es sei denn, man spricht mit sehr engen Freunden oder Familie.",
+        "sections": [
+          {
+            "title": "Bildung der masu-Form",
+            "content": "Die Konjugation hängt von der Verbgruppe ab:",
+            "points": [
+              "<strong>Gruppe 2 (ru-Verben):</strong> Ersetze das letzte る durch ます. (z.B. 食べる → 食べます)",
+              "<strong>Gruppe 1 (u-Verben):</strong> Ändere den letzten 'u'-Laut in einen 'i'-Laut und füge ます an. (z.B. 飲む → 飲みます, 書く → 書きます)",
+              "<strong>Gruppe 3 (unregelmäßige Verben):</strong> する → します, 来る → きます"
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die masu-Form der folgenden Verben.",
+          "questions": [
+            { "verb": "見る (miru)", "answer": "みます", "explanation": "Gruppe 2: る wird zu ます." },
+            { "verb": "買う (kau)", "answer": "かいます", "explanation": "Gruppe 1: う wird zu います." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Nomensätze mit です (desu)",
+      "summary": "Lerne, einfache Sätze wie 'A ist B' mit der Kopula です zu bilden.",
+      "explanation": {
+        "introduction": "Um eine Aussage über ein Nomen zu treffen (z.B. 'Ich bin Student'), verwendet man die Kopula です (desu) am Satzende. です entspricht in etwa dem deutschen 'ist' oder 'sind' und macht den Satz höflich.",
+        "sections": [
+          {
+            "title": "Grundform: A は B です",
+            "content": "Die grundlegendste Satzstruktur im Japanischen.",
+            "examples": [
+              { "jp": "私 は 学生 です。", "de": "Ich bin Student." },
+              { "jp": "これ は 本 です。", "de": "Das ist ein Buch." }
+            ]
+          },
+          {
+            "title": "Verneinung: ではありません / じゃありません",
+            "content": "Um einen Nomensatz zu verneinen, ersetzt man です durch ではありません (dewa arimasen) oder die etwas informellere Variante じゃありません (ja arimasen).",
+            "examples": [
+              { "jp": "私 は 先生 ではありません。", "de": "Ich bin kein Lehrer." },
+              { "jp": "これ は 猫 じゃありません。", "de": "Das ist keine Katze." }
+            ]
+          },
+          {
+            "title": "Fragen mit か (ka)",
+            "content": "Eine Frage wird gebildet, indem man einfach die Partikel か (ka) an das Ende eines Aussagesatzes hängt.",
+            "examples": [
+              { "jp": "田中さん は 日本人 ですか。", "de": "Ist Herr Tanaka Japaner?" },
+              { "jp": "はい、日本人です。", "de": "Ja, er ist Japaner." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "あれは学校（　　）。(positiv, höflich)", "answer": "です", "explanation": "Einfacher Nomensatz mit です." },
+            { "sentence": "私は医者（　　）。(negativ, höflich)", "answer": "ではありません", "explanation": "Verneinung eines Nomensatzes." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Satzbau mit Adjektiven (い & な)",
+      "summary": "Lerne, wie man Sätze mit den beiden Adjektivtypen bildet und verneint.",
+      "explanation": {
+        "introduction": "Im Japanischen gibt es zwei Arten von Adjektiven: い-Adjektive und な-Adjektive. Sie werden unterschiedlich konjugiert und mit Nomen verbunden.",
+        "sections": [
+          {
+            "title": "い-Adjektive",
+            "content": "Enden immer auf い (z.B. 高い - takai). Sie können direkt vor einem Nomen stehen oder am Satzende mit です.",
+            "points": [
+              "<strong>Verbindung mit Nomen:</strong> い-Adjektiv + Nomen (z.B. 高い山 - ein hoher Berg)",
+              "<strong>Satzende (positiv):</strong> ～は + い-Adjektiv + です (z.B. この本は面白いです - Dieses Buch ist interessant.)",
+              "<strong>Satzende (negativ):</strong> Das い wird zu くない + です (z.B. この本は面白くないです - Dieses Buch ist nicht interessant.)"
+            ]
+          },
+          {
+            "title": "な-Adjektive",
+            "content": "Enden nicht auf い (z.B. 静か - shizuka). Sie benötigen ein な, um sich mit einem Nomen zu verbinden.",
+            "points": [
+              "<strong>Verbindung mit Nomen:</strong> な-Adjektiv + な + Nomen (z.B. 静かな町 - eine ruhige Stadt)",
+              "<strong>Satzende (positiv):</strong> ～は + な-Adjektiv + です (z.B. この町は静かです - Diese Stadt ist ruhig.)",
+              "<strong>Satzende (negativ):</strong> な-Adjektiv + ではありません / じゃありません (z.B. この町は静かではありません - Diese Stadt ist nicht ruhig.)"
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "これは（　　）本です。(interessant)", "answer": "おもしろい", "explanation": "い-Adjektiv direkt vor dem Nomen." },
+            { "sentence": "あそこは（　　）な場所です。(berühmt)", "answer": "ゆうめい", "explanation": "な-Adjektiv braucht な vor dem Nomen." },
+            { "sentence": "この映画は（　　）です。(nicht gut)", "answer": "よくない", "explanation": "Verneinung von いい ist よくない." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Existenzverben: ある & いる",
+      "summary": "Lerne den Unterschied zwischen ある (unbelebt) und いる (belebt), um Existenz auszudrücken.",
+      "explanation": {
+        "introduction": "Im Deutschen gibt es 'sein' oder 'haben'. Im Japanischen wird unterschieden, ob etwas Lebendiges oder Lebloses existiert.",
+        "sections": [
+          {
+            "title": "ある (aru) - für Unbelebtes",
+            "content": "Wird für Dinge, Pflanzen und abstrakte Konzepte verwendet.",
+            "examples": [
+              { "jp": "机の上に本があります。", "de": "Auf dem Schreibtisch ist ein Buch." },
+              { "jp": "時間がありますか。", "de": "Haben Sie Zeit?" }
+            ]
+          },
+          {
+            "title": "いる (iru) - für Belebtes",
+            "content": "Wird für Menschen und Tiere verwendet.",
+            "examples": [
+              { "jp": "公園に子供がいます。", "de": "Im Park sind Kinder." },
+              { "jp": "猫がいます。", "de": "Da ist eine Katze." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Fülle die Lücke mit あります oder います.",
+          "questions": [
+            { "sentence": "あそこに犬が（　　）。", "answer": "います", "explanation": "Hund (犬) ist ein Lebewesen." },
+            { "sentence": "冷蔵庫に牛乳が（　　）。", "answer": "あります", "explanation": "Milch (牛乳) ist ein lebloses Objekt." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Partikel: は, を, で, と, へ",
+      "summary": "Eine Übersicht über die wichtigsten Partikel und ihre grundlegenden Funktionen.",
+      "explanation": {
+        "introduction": "Partikel sind kleine Wörter, die die Funktion eines Wortes im Satz bestimmen. Sie sind essenziell für das Verständnis.",
+        "sections": [
+          { "title": "は (wa) - Themenpartikel", "content": "Markiert das Thema des Satzes. <em>Beispiel:</em> <strong>私<u>は</u>学生です。</strong> (Ich bin Student.)" },
+          { "title": "を (o) - Objektpartikel", "content": "Markiert das direkte Objekt einer Handlung. <em>Beispiel:</em> <strong>パン<u>を</u>食べます。</strong> (Ich esse Brot.)" },
+          { "title": "で (de) - Ortspartikel (Handlung)", "content": "Markiert den Ort, an dem eine Handlung stattfindet. <em>Beispiel:</em> <strong>図書館<u>で</u>勉強します。</strong> (Ich lerne in der Bibliothek.)" },
+          { "title": "と (to) - Verbindungspartikel", "content": "Bedeutet 'und' (für eine vollständige Liste von Nomen) oder 'mit'. <em>Beispiel:</em> <strong>友達<u>と</u>行きます。</strong> (Ich gehe mit einem Freund.)" },
+          { "title": "へ (e) - Richtungspartikel", "content": "Zeigt die Richtung einer Bewegung an. Sehr ähnlich zu に, aber betont die Richtung mehr als das Ziel. <em>Beispiel:</em> <strong>日本<u>へ</u>行きます。</strong> (Ich gehe nach Japan.)" }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Setze die richtige Partikel ein.",
+          "questions": [
+            { "sentence": "私（　）本を読みます。", "answer": "は", "explanation": "は markiert das Thema 'ich'." },
+            { "sentence": "レストラン（　）食べます。", "answer": "で", "explanation": "で markiert den Ort der Handlung 'essen'." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die te-Form (て形)",
+      "summary": "Lerne, wie man Verben in die te-Form konjugiert, um Handlungen zu verbinden oder Bitten auszudrücken.",
+      "explanation": {
+        "introduction": "Die te-Form ist eine der wichtigsten und vielseitigsten Verbformen im Japanischen. Sie wird verwendet, um Sätze zu verbinden (und dann...), Handlungen aufzuzählen, Bitten zu formulieren und vieles mehr.",
+        "sections": [
+          {
+            "title": "Bildung der te-Form",
+            "content": "Die Konjugation hängt von der Verbgruppe ab:",
+            "points": [
+              "<strong>Gruppe 1 (u-Verben):</strong> Die Endung ändert sich je nach dem letzten Laut der ます-Form-Basis.<ul><li>-i, -chi, -ri → -tte (z.B. かいます → かって)</li><li>-mi, -ni, -bi → -nde (z.B. よみます → よんで)</li><li>-ki → -ite (z.B. かきます → かいて)</li><li>-gi → -ide (z.B. いそぎます → いそいで)</li><li>-shi → -shite (z.B. はなします → はなして)</li><li>Ausnahme: いきます → いって</li></ul>",
+              "<strong>Gruppe 2 (ru-Verben):</strong> Ersetze ます durch て. (z.B. たべます → たべて)",
+              "<strong>Gruppe 3 (unregelmäßige Verben):</strong> します → して, きます → きて"
+            ]
+          },
+          {
+            "title": "Anwendung: Sätze verbinden",
+            "content": "Die te-Form wird verwendet, um Handlungen in chronologischer Reihenfolge aufzuzählen oder um Gründe und Konsequenzen zu verbinden. Dies gilt für Verben und Adjektive.",
+            "points": [
+              "<strong>Verben:</strong> 朝起きて、顔を洗います。(Ich stehe auf und wasche dann mein Gesicht.)",
+              "<strong>い-Adjektive:</strong> このカバンは安くて、丈夫です。(Diese Tasche ist billig und robust.) - Das い wird zu くて.",
+              "<strong>な-Adjektive/Nomen:</strong> 彼は日本人で、学生です。(Er ist Japaner und Student.) - です wird zu で."
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Konjugiere die folgenden Verben in die te-Form.",
+          "questions": [
+            { "verb": "飲む (nomu)", "answer": "のんで", "explanation": "Gruppe 1, endet auf -mu, wird zu -nde." },
+            { "verb": "見る (miru)", "answer": "みて", "explanation": "Gruppe 2, -ru wird durch -te ersetzt." },
+            { "verb": "書く (kaku)", "answer": "かいて", "explanation": "Gruppe 1, endet auf -ku, wird zu -ite." },
+            { "verb": "する (suru)", "answer": "して", "explanation": "Gruppe 3, unregelmäßig." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die nai-Form (ない形)",
+      "summary": "Die Verneinungsform für den informellen Sprachgebrauch. Sie ist die Basis für viele weitere Grammatikmuster.",
+      "explanation": {
+        "introduction": "Die nai-Form ist die informelle Verneinung eines Verbs, äquivalent zu ～ません. Sie wird auch als 'A-Stamm' bezeichnet, da die Endung oft zu einem 'a'-Laut wird.",
+        "sections": [
+          {
+            "title": "Bildung der nai-Form",
+            "content": "Die Konjugation hängt wieder von der Verbgruppe ab:",
+            "points": [
+              "<strong>Gruppe 1 (u-Verben):</strong> Ändere den letzten 'u'-Laut der Wörterbuchform in einen 'a'-Laut und füge ない an. (z.B. かく → かかない, のむ → のまない). Ausnahme: Verben, die auf う enden, werden zu わ (z.B. かう → かわない).",
+              "<strong>Gruppe 2 (ru-Verben):</strong> Ersetze das letzte る durch ない. (z.B. たべる → たべない, みる → みない)",
+              "<strong>Gruppe 3 (unregelmäßige Verben):</strong> します → しない, きます → こない (Aussprache beachten!)"
+            ]
+          },
+          {
+            "title": "Anwendung",
+            "content": "Die nai-Form wird im informellen Gespräch anstelle von ～ません verwendet.",
+            "examples": [
+              { "jp": "今日は学校へ行かない。", "de": "Heute gehe ich nicht zur Schule." },
+              { "jp": "私は肉を食べない。", "de": "Ich esse kein Fleisch." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die nai-Form der folgenden Verben.",
+          "questions": [
+            { "verb": "話す (hanasu)", "answer": "はなさない", "explanation": "Gruppe 1, -su wird zu -sanai." },
+            { "verb": "起きる (okiru)", "answer": "おきない", "explanation": "Gruppe 2, -ru wird zu -nai." },
+            { "verb": "来る (kuru)", "answer": "こない", "explanation": "Gruppe 3, unregelmäßig." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die ta-Form (た形)",
+      "summary": "Die informelle Vergangenheitsform, die ～ました ersetzt.",
+      "explanation": {
+        "introduction": "Die ta-Form ist die informelle Vergangenheitsform. Die Konjugationsregeln sind fast identisch mit denen der te-Form.",
+        "sections": [
+          {
+            "title": "Bildung der ta-Form",
+            "content": "Ersetze einfach das て/で am Ende der te-Form durch た/だ.",
+            "points": [
+              "te-Form endet auf -ite → ta-Form endet auf -ita (かいて → かいた)",
+              "te-Form endet auf -ide → ta-Form endet auf -ida (いそいで → いそいだ)",
+              "te-Form endet auf -tte → ta-Form endet auf -tta (かって → かった)",
+              "te-Form endet auf -nde → ta-Form endet auf -nda (よんで → よんだ)"
+            ]
+          },
+          {
+            "title": "Anwendung",
+            "content": "Die ta-Form wird im informellen Gespräch anstelle von ～ました verwendet.",
+            "examples": [
+              { "jp": "昨日、映画を見た。", "de": "Gestern habe ich einen Film gesehen." },
+              { "jp": "友達が日本に来た。", "de": "Ein Freund ist nach Japan gekommen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die ta-Form der folgenden Verben.",
+          "questions": [
+            { "verb": "食べる (taberu)", "answer": "たべた", "explanation": "te-Form ist たべて, also たべた." },
+            { "verb": "死ぬ (shinu)", "answer": "しんだ", "explanation": "te-Form ist しんで, also しんだ." },
+            { "verb": "行く (iku)", "answer": "いった", "explanation": "te-Form ist いって, also いった." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Verlauf & Zustand (〜ている)",
+      "summary": "Drückt eine andauernde Handlung (Verlaufsform) oder einen resultierenden Zustand aus.",
+      "explanation": {
+        "introduction": "Die Form Verb (te-Form) + いる drückt im Japanischen zwei Hauptkonzepte aus: eine andauernde Handlung (wie das englische '-ing') oder einen Zustand, der aus einer vergangenen Handlung resultiert.",
+        "sections": [
+          {
+            "title": "1. Andauernde Handlung (Verlaufsform)",
+            "content": "Beschreibt eine Handlung, die gerade jetzt stattfindet.",
+            "examples": [
+              { "jp": "雨が降っています。", "de": "Es regnet (gerade)." },
+              { "jp": "今、本を読んでいます。", "de": "Ich lese gerade ein Buch." },
+              { "jp": "田中さんは電話で話しています。", "de": "Herr Tanaka telefoniert gerade." }
+            ]
+          },
+          {
+            "title": "2. Resultierender Zustand",
+            "content": "Beschreibt einen Zustand, der das Ergebnis einer abgeschlossenen Handlung ist. Dies gilt für viele punktuelle Verben (z.B. heiraten, anziehen, wissen).",
+            "examples": [
+              { "jp": "私は結婚しています。", "de": "Ich bin verheiratet. (Zustand nach der Handlung des Heiratens)" },
+              { "jp": "窓が開いています。", "de": "Das Fenster ist offen. (Zustand nachdem es jemand geöffnet hat)" },
+              { "jp": "山田さんの電話番号を知っていますか。", "de": "Kennen Sie die Telefonnummer von Herrn Yamada? (Zustand des Wissens)" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Fülle die Lücke mit der korrekten Form von 〜ている.",
+          "questions": [
+            { "sentence": "彼は今、音楽を（　　）。(kiku)", "answer": "きいています", "explanation": "Andauernde Handlung: Er hört gerade Musik." },
+            { "sentence": "私は東京に（　　）。(sumu)", "answer": "すんでいます", "explanation": "Zustand: Ich wohne in Tokio." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ください vs. お願いします",
+      "summary": "Zwei Arten, um eine Bitte auszudrücken. 'kudasai' ist für konkrete Handlungen, 'o-negai shimasu' für Objekte oder abstrakte Bitten.",
+      "explanation": {
+        "introduction": "Beide bedeuten 'bitte', werden aber in unterschiedlichen Situationen verwendet.",
+        "sections": [
+          {
+            "title": "〜てください (te kudasai)",
+            "content": "Wird verwendet, um jemanden höflich aufzufordern, eine <strong>konkrete Handlung</strong> auszuführen. Es wird an die te-Form eines Verbs angehängt.",
+            "examples": [
+              { "jp": "これを読んでください。", "de": "Bitte lesen Sie das." },
+              { "jp": "ここに名前を書いてください。", "de": "Bitte schreiben Sie Ihren Namen hierhin." }
+            ]
+          },
+          {
+            "title": "〜をお願いします (o-negai shimasu)",
+            "content": "Wird verwendet, um höflich um ein <strong>Objekt</strong> oder eine <strong>abstrakte Sache</strong> (wie eine Erklärung oder Hilfe) zu bitten. Es folgt auf ein Nomen.",
+            "examples": [
+              { "jp": "水をお願いします。", "de": "Wasser, bitte." },
+              { "jp": "メニューをお願いします。", "de": "Die Speisekarte, bitte." },
+              { "jp": "説明をお願いします。", "de": "Eine Erklärung, bitte." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Fülle die Lücke mit 'kudasai' oder 'o-negai shimasu'.",
+          "questions": [
+            { "sentence": "コーヒーを（　　）。", "answer": "おねがいします", "explanation": "Es wird um ein Objekt (Kaffee) gebeten." },
+            { "sentence": "ちょっと待って（　　）。", "answer": "ください", "explanation": "Es wird um eine Handlung (warten) gebeten." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Personalpronomen (人称代名詞)",
+      "summary": "Lerne die wichtigsten Wörter für 'ich', 'du', 'er/sie/es' und 'wir'.",
+      "explanation": {
+        "introduction": "Im Japanischen werden Personalpronomen seltener verwendet als im Deutschen, da das Subjekt oft aus dem Kontext klar ist. Dennoch ist es wichtig, sie zu kennen.",
+        "sections": [
+          {
+            "title": "1. Person (Ich, Wir)",
+            "points": [
+              "<strong>私 (watashi):</strong> Standard, höflich. Kann von allen Geschlechtern verwendet werden.",
+              "<strong>僕 (boku):</strong> Informell, hauptsächlich von Männern verwendet. Klingt bescheiden.",
+              "<strong>俺 (ore):</strong> Sehr informell und maskulin. Nur unter Freunden oder Familie verwenden.",
+              "<strong>私たち (watashi-tachi):</strong> Wir (Standard, höflich)."
+            ]
+          },
+          {
+            "title": "2. Person (Du)",
+            "content": "Die direkte Anrede mit 'du' ist oft unhöflich. Man verwendet stattdessen den Namen der Person mit -san.",
+            "points": [
+              "<strong>あなた (anata):</strong> Standard 'du'. Wird oft von Frauen zu ihrem Ehemann gesagt, kann aber auch distanziert klingen. Vorsicht bei der Verwendung!",
+              "<strong>君 (kimi):</strong> Informell, von Vorgesetzten zu Untergebenen oder unter Freunden.",
+              "<strong>お前 (omae):</strong> Sehr informell und rau. Nur unter sehr engen Freunden oder wenn man jemanden herabsetzen will."
+            ]
+          },
+          {
+            "title": "3. Person (Er, Sie, Es)",
+            "points": [
+              "<strong>彼 (kare):</strong> Er / fester Freund.",
+              "<strong>彼女 (kanojo):</strong> Sie / feste Freundin.",
+              "<strong>あの人 (ano hito) / あの方 (ano kata):</strong> Jene Person (höflich). Oft besser als kare/kanojo.",
+              "<strong>彼ら (karera):</strong> Sie (Plural)."
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Welches Pronomen passt am besten?",
+          "questions": [
+            { "sentence": "（　　）は学生です。(Ich, höflich)", "answer": "わたし", "explanation": "わたし ist die Standardform für 'ich'." },
+            { "sentence": "（　　）は私の友達です。(Sie/feste Freundin)", "answer": "かのじょ", "explanation": "かのじょ bedeutet 'sie' oder 'feste Freundin'." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Demonstrativpronomen (これ・それ・あれ)",
+      "summary": "Lerne die 'ko-so-a-do' Wörter für Dinge: dies, das, jenes.",
+      "explanation": {
+        "introduction": "Diese Wörter werden verwendet, um auf Dinge zu zeigen. Ihre Verwendung hängt von der Position des Sprechers und des Zuhörers ab.",
+        "sections": [
+          {
+            "title": "Die Regeln",
+            "points": [
+              "<strong>これ (kore):</strong> 'dies hier' – Etwas in der Nähe des Sprechers.",
+              "<strong>それ (sore):</strong> 'das da' – Etwas in der Nähe des Zuhörers.",
+              "<strong>あれ (are):</strong> 'jenes dort' – Etwas, das von beiden, Sprecher und Zuhörer, weit entfernt ist."
+            ]
+          },
+          {
+            "title": "Zugehörige Adjektive (この・その・あの)",
+            "content": "Wenn man ein Nomen direkt beschreiben will, verwendet man die zugehörigen Adjektive:",
+            "points": [
+              "<strong>この + Nomen:</strong> dieses Nomen (z.B. この本 - dieses Buch)",
+              "<strong>その + Nomen:</strong> jenes Nomen (beim Hörer) (z.B. そのペン - jener Stift)",
+              "<strong>あの + Nomen:</strong> jenes Nomen (dort drüben) (z.B. あのビル - jenes Gebäude)"
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Fülle die Lücke mit これ, それ oder あれ.",
+          "questions": [
+            { "sentence": "（　　）は私のペンです。(Der Stift ist bei mir)", "answer": "これ", "explanation": "Das Objekt ist in der Nähe des Sprechers." },
+            { "sentence": "（　　）は富士山ですか。(Der Berg ist weit weg)", "answer": "あれ", "explanation": "Das Objekt ist von beiden weit entfernt." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Fragewörter (疑問詞)",
+      "summary": "Die grundlegenden Fragewörter wie 'was', 'wo', 'wer' und 'wann'.",
+      "explanation": {
+        "introduction": "Fragewörter (auch W-Fragen genannt) sind essentiell, um Informationen zu erfragen. Im Japanischen stehen sie oft an der Stelle im Satz, an der die Antwort stehen würde, und der Satz endet mit か.",
+        "sections": [
+          {
+            "title": "Wichtige Fragewörter",
+            "points": [
+              "<strong>何 (nani / nan):</strong> Was? (z.B. これは何ですか。 - Was ist das?)",
+              "<strong>どこ (doko):</strong> Wo? (z.B. トイレはどこですか。 - Wo ist die Toilette?)",
+              "<strong>誰 (dare):</strong> Wer? (z.B. あの人は誰ですか。 - Wer ist diese Person?)",
+              "<strong>いつ (itsu):</strong> Wann? (z.B. 誕生日はいつですか。 - Wann ist dein Geburtstag?)",
+              "<strong>どれ (dore):</strong> Welches? (von drei oder mehr) (z.B. あなたの傘はどれですか。 - Welcher ist Ihr Schirm?)",
+              "<strong>どうして (doushite) / なぜ (naze):</strong> Warum? (z.B. どうして日本語を勉強しますか。 - Warum lernen Sie Japanisch?)"
+            ]
+          },
+          {
+            "title": "Fragewörter mit Nomen",
+            "content": "Ähnlich wie bei これ/この gibt es auch hier Formen, die direkt vor einem Nomen stehen:",
+            "points": [
+              "<strong>どの + Nomen:</strong> Welches Nomen? (z.B. どのバスに乗りますか。 - In welchen Bus steigen Sie ein?)"
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Setze das passende Fragewort ein.",
+          "questions": [
+            { "sentence": "お名前は（　　）ですか。", "answer": "なん", "explanation": "名前 (Name) wird mit なん (was) erfragt." },
+            { "sentence": "（　　）へ行きますか。", "answer": "どこ", "explanation": "へ ist eine Richtungspartikel, also wird nach einem Ort (どこ) gefragt." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Partikel も (mo) - 'auch'",
+      "summary": "Lerne, wie man mit も ausdrückt, dass etwas ebenfalls zutrifft.",
+      "explanation": {
+        "introduction": "Die Partikel も (mo) ersetzt は (wa) oder が (ga), um 'auch' oder 'ebenfalls' auszudrücken. Sie zeigt an, dass die Aussage auch für das markierte Wort gilt, genau wie für etwas zuvor Genanntes.",
+        "sections": [
+          {
+            "title": "Verwendung von も",
+            "content": "Wenn in einem Satz A gilt, und für B das Gleiche gilt, ersetzt man die Partikel von B durch も.",
+            "examples": [
+              { "jp": "A: 私は学生です。 (Ich bin Student.)\nB: 私も学生です。 (Ich bin auch Student.)", "de": "" },
+              { "jp": "A: これは本です。 (Das ist ein Buch.)\nB: それも本です。 (Das ist auch ein Buch.)", "de": "" }
+            ]
+          },
+          {
+            "title": "Verneinung mit も",
+            "content": "In einem verneinten Satz bedeutet も 'auch nicht' oder 'keiner von beiden'.",
+            "examples": [
+              { "jp": "A: 私は行きません。 (Ich gehe nicht.)\nB: 私も行きません。 (Ich gehe auch nicht.)", "de": "" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Setze die richtige Partikel ein (は oder も).",
+          "questions": [
+            { "sentence": "田中さんは日本人です。山田さん（　　）日本人です。", "answer": "も", "explanation": "Da die Aussage für Yamada-san ebenfalls gilt, wird も verwendet." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Vergangenheit von い-Adjektiven",
+      "summary": "Lerne, wie man い-Adjektive in die Vergangenheit setzt (z.B. 'war interessant').",
+      "explanation": {
+        "introduction": "Um auszudrücken, dass etwas in der Vergangenheit eine bestimmte Eigenschaft hatte, wird die Endung von い-Adjektiven geändert.",
+        "sections": [
+          {
+            "title": "Bildung der Vergangenheitsform (～かった)",
+            "content": "Die Endung い wird durch かった (katta) ersetzt.",
+            "examples": [
+              { "jp": "面白い (omoshiroi) → 面白かった (omoshirokatta)", "de": "interessant → war interessant" },
+              { "jp": "高い (takai) → 高かった (takakatta)", "de": "teuer → war teuer" }
+            ]
+          },
+          {
+            "title": "Satzbeispiele",
+            "content": "In einem höflichen Satz wird です an die かった-Form angehängt.",
+            "examples": [
+              { "jp": "昨日の映画は面白かったです。", "de": "Der Film gestern war interessant." },
+              { "jp": "パーティーは楽しかったです。", "de": "Die Party hat Spaß gemacht." }
+            ]
+          },
+          {
+            "title": "Verneinte Vergangenheit (～くなかった)",
+            "content": "Für die verneinte Vergangenheit wird die Endung い zu くなかった (kunakatta) geändert.",
+            "examples": [
+              { "jp": "その本は高くなかったです。", "de": "Das Buch war nicht teuer." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die Vergangenheitsform.",
+          "questions": [
+            { "verb": "おいしい", "answer": "おいしかった", "explanation": "い wird zu かった." },
+            { "verb": "さむい (negativ)", "answer": "さむくなかった", "explanation": "い wird zu くなかった." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Vergangenheit von な-Adjektiven",
+      "summary": "Lerne, wie man な-Adjektive in die Vergangenheit setzt (z.B. 'war ruhig').",
+      "explanation": {
+        "introduction": "Die Vergangenheitsform von な-Adjektiven wird ähnlich wie bei Nomen gebildet, indem man die Kopula です in die Vergangenheit setzt.",
+        "sections": [
+          {
+            "title": "Bildung der Vergangenheitsform (～でした)",
+            "content": "An das Adjektiv wird でした (deshita) angehängt.",
+            "examples": [
+              { "jp": "静か (shizuka) → 静かでした (shizuka deshita)", "de": "ruhig → war ruhig" },
+              { "jp": "元気 (genki) → 元気でした (genki deshita)", "de": "gesund → war gesund" }
+            ]
+          },
+          {
+            "title": "Satzbeispiele",
+            "content": "Das Adjektiv selbst bleibt unverändert.",
+            "examples": [
+              { "jp": "昨日の公園は静かでした。", "de": "Der Park war gestern ruhig." },
+              { "jp": "彼は昨日、元気でした。", "de": "Er war gestern gesund/munter." }
+            ]
+          },
+          {
+            "title": "Verneinte Vergangenheit (～ではありませんでした)",
+            "content": "Für die verneinte Vergangenheit wird ではありませんでした (dewa arimasen deshita) oder じゃありませんでした (ja arimasen deshita) verwendet.",
+            "examples": [
+              { "jp": "テストは簡単ではありませんでした。", "de": "Der Test war nicht einfach." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die Vergangenheitsform.",
+          "questions": [
+            { "verb": "きれい", "answer": "きれいでした", "explanation": "An das な-Adjektiv wird でした angehängt." },
+            { "verb": "しんせつ (negativ)", "answer": "しんせつではありませんでした", "explanation": "An das な-Adjektiv wird ではありませんでした angehängt." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Vergangenheit der Kopula (でした)",
+      "summary": "Lerne die Vergangenheitsform von です (desu), um auszudrücken, dass etwas 'war'.",
+      "explanation": {
+        "introduction": "Um auszudrücken, dass ein Zustand in der Vergangenheit galt (z.B. 'Ich war Student'), wird die Vergangenheitsform von です (desu) verwendet, nämlich でした (deshita).",
+        "sections": [
+          {
+            "title": "Grundform: A は B でした",
+            "content": "Diese Struktur wird für Nomen und な-Adjektive verwendet.",
+            "examples": [
+              { "jp": "去年、私は学生でした。", "de": "Letztes Jahr war ich Student." },
+              { "jp": "昨日は雨でした。", "de": "Gestern war Regen." }
+            ]
+          },
+          {
+            "title": "Verneinte Vergangenheit: ではありませんでした",
+            "content": "Die verneinte Vergangenheitsform ist ではありませんでした (dewa arimasen deshita) oder informeller じゃありませんでした (ja arimasen deshita).",
+            "examples": [
+              { "jp": "彼は医者ではありませんでした。", "de": "Er war kein Arzt." },
+              { "jp": "昨日は晴れではありませんでした。", "de": "Gestern war es nicht sonnig." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz in der Vergangenheit.",
+          "questions": [
+            { "sentence": "きのうは日曜日（　　）。", "answer": "でした", "explanation": "Vergangenheitsform von です." },
+            { "sentence": "それは私の本（　　）。(negativ)", "answer": "ではありませんでした", "explanation": "Verneinte Vergangenheitsform." }
+          ]
+        }
+      ]
+    }
+  ],
+  "N4": [
+    {
+      "title": "Die ba-Form (～ば) - Konditional",
+      "summary": "Drückt eine Bedingung aus, ähnlich wie 'falls' oder 'wenn'.",
+      "explanation": {
+        "introduction": "Die ～ば (ba) Form ist eine wichtige Konditionalform. Sie wird oft für hypothetische Situationen oder allgemeine Wahrheiten verwendet. 'Wenn A, dann B'.",
+        "sections": [
+          {
+            "title": "Bildung der ba-Form",
+            "content": "Die Konjugation hängt von der Wortart ab:",
+            "points": [
+              "<strong>u-Verben (Gruppe 1):</strong> Der letzte 'u'-Laut wird zu einem 'e'-Laut und ば wird angehängt. (z.B. 書く (kaku) → 書けば (kakeba))",
+              "<strong>ru-Verben (Gruppe 2):</strong> Das letzte る wird durch れば ersetzt. (z.B. 食べる (taberu) → 食べれば (tabereba))",
+              "<strong>Unregelmäßige Verben:</strong> する → すれば, 来る → くれば",
+              "<strong>い-Adjektive:</strong> Das letzte い wird durch ければ ersetzt. (z.B. 安い (yasui) → 安ければ (yasukereba))",
+              "<strong>な-Adjektive & Nomen:</strong> Es wird なら(ば) angehängt. (z.B. 静か → 静かなら, 学生 → 学生なら)"
+            ],
+            "examples": [
+              { "jp": "春になれば、桜が咲きます。", "de": "Wenn es Frühling wird, blühen die Kirschblüten." },
+              { "jp": "安ければ、買います。", "de": "Wenn es billig ist, kaufe ich es." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die ba-Form.",
+          "questions": [
+            { "verb": "飲む (nomu)", "answer": "のめば", "explanation": "u-Verb: -mu wird zu -meba." },
+            { "verb": "見る (miru)", "answer": "みれば", "explanation": "ru-Verb: -ru wird zu -reba." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die Volitivform (意向形)",
+      "summary": "Drückt eine Absicht oder einen Vorschlag aus: 'Lass uns...' oder 'Ich will...'.",
+      "explanation": {
+        "introduction": "Die Volitivform (意向形, ikōkei) ist die informelle Version von ～ましょう (Lass uns...). Sie kann auch die eigene Absicht ausdrücken, oft in Verbindung mit と思う (denken).",
+        "sections": [
+          {
+            "title": "Bildung der Volitivform",
+            "content": "Die Konjugation ist je nach Verbgruppe unterschiedlich:",
+            "points": [
+              "<strong>u-Verben (Gruppe 1):</strong> Der letzte 'u'-Laut wird zu einem 'o'-Laut und う wird angehängt. (z.B. 飲む (nomu) → 飲もう (nomō))",
+              "<strong>ru-Verben (Gruppe 2):</strong> Das letzte る wird durch よう ersetzt. (z.B. 食べる (taberu) → 食べよう (tabeyō))",
+              "<strong>Unregelmäßige Verben:</strong> する → しよう, 来る → こよう"
+            ],
+            "examples": [
+              { "jp": "映画を見よう。", "de": "Lass uns einen Film sehen." },
+              { "jp": "日本へ行こうと思っています。", "de": "Ich denke darüber nach, nach Japan zu gehen (Ich plane/will nach Japan gehen)." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die Volitivform.",
+          "questions": [
+            { "verb": "書く (kaku)", "answer": "かこう", "explanation": "u-Verb: -ku wird zu -kou." },
+            { "verb": "寝る (neru)", "answer": "ねよう", "explanation": "ru-Verb: -ru wird zu -you." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die Kausativ-Form (使役形)",
+      "summary": "Drückt aus, dass man jemanden etwas tun 'lässt' oder 'macht'.",
+      "explanation": {
+        "introduction": "Die Kausativ-Form (使役形, shiekikei) wird verwendet, um auszudrücken, dass der Sprecher eine andere Person zu einer Handlung veranlasst.",
+        "sections": [
+          {
+            "title": "Bildung der Kausativ-Form",
+            "content": "Die Konjugation hängt von der Verbgruppe ab:",
+            "points": [
+              "<strong>u-Verben (Gruppe 1):</strong> Der letzte 'u'-Laut wird zu einem 'a'-Laut und せる wird angehängt. (z.B. 書く (kaku) → 書かせる (kakaseru))",
+              "<strong>ru-Verben (Gruppe 2):</strong> Das letzte る wird durch させる ersetzt. (z.B. 食べる (taberu) → 食べさせる (tabesaseru))",
+              "<strong>Unregelmäßige Verben:</strong> する → させる, 来る → こさせる"
+            ],
+            "examples": [
+              { "jp": "母は子供に野菜を食べさせます。", "de": "Die Mutter lässt das Kind Gemüse essen." },
+              { "jp": "先生は学生に宿題をたくさんさせました。", "de": "Der Lehrer hat die Schüler viele Hausaufgaben machen lassen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die Kausativ-Form.",
+          "questions": [
+            { "verb": "飲む (nomu)", "answer": "のませる", "explanation": "u-Verb: -mu wird zu -maseru." },
+            { "verb": "見る (miru)", "answer": "みさせる", "explanation": "ru-Verb: -ru wird zu -saseru." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die Befehlsform (命令形)",
+      "summary": "Eine sehr direkte Form, um Befehle zu erteilen. Wird hauptsächlich im Militär, bei Notfällen oder von Männern in sehr informellen Situationen verwendet.",
+      "explanation": {
+        "introduction": "Die Befehlsform (命令形, meireikei) ist eine sehr starke und direkte Art, einen Befehl zu erteilen. Im Alltag wird sie selten verwendet, da sie unhöflich klingen kann. Stattdessen nutzt man ～なさい oder ～てください.",
+        "sections": [
+          {
+            "title": "Bildung der Befehlsform",
+            "content": "Die Konjugation ist je nach Verbgruppe unterschiedlich:",
+            "points": [
+              "<strong>u-Verben (Gruppe 1):</strong> Der letzte 'u'-Laut wird zu einem 'e'-Laut. (z.B. 書く (kaku) → 書け (kake))",
+              "<strong>ru-Verben (Gruppe 2):</strong> Das letzte る wird durch ろ oder よ ersetzt. (z.B. 食べる (taberu) → 食べろ (tabero))",
+              "<strong>Unregelmäßige Verben:</strong> する → しろ / せよ, 来る → こい"
+            ],
+            "examples": [
+              { "jp": "早く走れ！", "de": "Lauf schneller!" },
+              { "jp": "静かにしろ！", "de": "Sei leise!" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die Befehlsform.",
+          "questions": [
+            { "verb": "読む (yomu)", "answer": "よめ", "explanation": "u-Verb: -mu wird zu -me." },
+            { "verb": "見る (miru)", "answer": "みろ", "explanation": "ru-Verb: -ru wird zu -ro." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Etwas ausprobieren mit ～てみる",
+      "summary": "Drückt aus, dass man eine Handlung versuchsweise ausführt, um zu sehen, wie es ist.",
+      "explanation": {
+        "introduction": "Die Konstruktion Verb (te-Form) + みる (miru) bedeutet wörtlich 'tun und sehen'. Sie wird verwendet, um auszudrücken, dass man etwas ausprobiert.",
+        "sections": [
+          {
+            "title": "Anwendung",
+            "content": "Das Verb, das die Handlung beschreibt, steht in der te-Form, gefolgt von みる, das dann wie ein normales ru-Verb konjugiert wird.",
+            "examples": [
+              { "jp": "このケーキを食べてみます。", "de": "Ich probiere mal diesen Kuchen." },
+              { "jp": "新しい靴を履いてみました。", "de": "Ich habe die neuen Schuhe anprobiert." },
+              { "jp": "先生に聞いてみたらどうですか。", "de": "Wie wäre es, wenn du mal den Lehrer fragst?" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz mit der korrekten Form von ～てみる.",
+          "questions": [
+            { "sentence": "その本を（　　）。(yomu)", "answer": "よんでみます", "explanation": "yomu → yonde + mimasu." },
+            { "sentence": "日本へ（　　）たいです。(iku)", "answer": "いってみたい", "explanation": "iku → itte + mitai (möchte ausprobieren zu gehen)." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Absicht ausdrücken mit ～つもり",
+      "summary": "Wird verwendet, um eine feste Absicht oder einen Plan auszudrücken.",
+      "explanation": {
+        "introduction": "～つもりです (tsumori desu) wird an die Wörterbuchform eines Verbs angehängt und drückt eine stärkere Absicht aus als die Volitivform + と思う.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (Wörterbuchform) + つもりです。",
+            "examples": [
+              { "jp": "来年、日本へ行くつもりです。", "de": "Ich habe vor, nächstes Jahr nach Japan zu gehen." },
+              { "jp": "明日は勉強するつもりです。", "de": "Ich beabsichtige, morgen zu lernen." }
+            ]
+          },
+          {
+            "title": "Verneinte Absicht",
+            "content": "Um auszudrücken, dass man nicht die Absicht hat, etwas zu tun, gibt es zwei Möglichkeiten:",
+            "points": [
+              "<strong>Verb (Wörterbuchform) + つもりはありません。</strong> (z.B. 行くつもりはありません - Ich habe nicht vor zu gehen.)",
+              "<strong>Verb (nai-Form) + つもりです。</strong> (z.B. 行かないつもりです - Ich habe vor, nicht zu gehen.)"
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Drücke die Absicht aus.",
+          "questions": [
+            { "sentence": "この本を（　　）です。(yomu)", "answer": "よむつもり", "explanation": "Wörterbuchform + つもり." },
+            { "sentence": "今日はテレビを（　　）です。(miru, negativ)", "answer": "みないつもり", "explanation": "nai-Form + つもり." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Erklärung/Nachdruck mit ～んです",
+      "summary": "Fügt einer Aussage eine erklärende oder betonende Nuance hinzu.",
+      "explanation": {
+        "introduction": "Die Endung ～んです (n desu) oder formeller ～のです (no desu) wird verwendet, um eine Erklärung zu geben, eine Frage zu stellen, bei der man eine Erklärung erwartet, oder um eine Aussage zu betonen. Es schafft eine Verbindung zwischen dem Sprecher, dem Zuhörer und dem Kontext.",
+        "sections": [
+          {
+            "title": "Anwendung",
+            "content": "Es wird an die informelle Form von Verben, Adjektiven und Nomen angehängt.",
+            "points": [
+              "<strong>Verben:</strong> Wörterbuchform/nai-Form/ta-Form + んです (z.B. 行くんです, 行かないんです, 行ったんです)",
+              "<strong>い-Adjektive:</strong> Direkt anhängen (z.B. 寒いんです)",
+              "<strong>な-Adjektive & Nomen:</strong> な wird angehängt (z.B. 静かなんです, 学生なんです)"
+            ]
+          },
+          {
+            "title": "Beispiele für den Gebrauch",
+            "examples": [
+              { "jp": "A: どうして遅れたんですか。 (Warum bist du zu spät?)\nB: 電車が遅れたんです。 (Weil der Zug Verspätung hatte.)", "de": "Erklärung geben/erfragen." },
+              { "jp": "頭が痛いんです。", "de": "Ich habe Kopfschmerzen. (Betonung, impliziert eine Bitte um Verständnis/Hilfe)" },
+              { "jp": "A: どこへ行くんですか。 (Wo gehst du denn hin?)\nB: ちょっと買い物に行くんです。 (Ich gehe nur kurz einkaufen.)", "de": "Neugierige Frage und erklärende Antwort." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Füge die passende Form von ～んです hinzu.",
+          "questions": [
+            { "sentence": "どうしたんですか。気分が（　　）んです。(warui)", "answer": "わるい", "explanation": "Erklärung für den Zustand: 'Weil ich mich schlecht fühle'." },
+            { "sentence": "彼は学生（　　）です。", "answer": "なん", "explanation": "Bei Nomen wird な angehängt, was zu なん wird." }
+          ]
+        }
+      ]
+    }
+    ,
+    {
+      "title": "Zustand nach Handlung: ～てある",
+      "summary": "Beschreibt einen Zustand, der absichtlich herbeigeführt wurde.",
+      "explanation": {
+        "introduction": "Während ～ている einen andauernden Zustand beschreibt, betont ～てある, dass dieser Zustand das Ergebnis einer absichtlichen, zielgerichteten Handlung ist. Es wird nur mit transitiven Verben verwendet.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Die Struktur ist: Verb (te-Form) + ある. Das Objekt der Handlung wird oft mit der Partikel が markiert.",
+            "points": [
+              "<strong>Unterschied zu ている:</strong> 窓が開いている (Das Fenster ist offen - Zustand). vs. 窓が開けてある (Das Fenster wurde geöffnet - Zustand aufgrund einer Handlung, z.B. zum Lüften).",
+              "Es impliziert, dass jemand die Handlung für einen bestimmten Zweck ausgeführt hat."
+            ],
+            "examples": [
+              { "jp": "机の上に本が置いてあります。", "de": "Auf dem Schreibtisch ist ein Buch hingelegt (worden)." },
+              { "jp": "エアコンがつけてあります。", "de": "Die Klimaanlage ist eingeschaltet (worden)." },
+              { "jp": "旅行の前に、ホテルの予約がしてあります。", "de": "Vor der Reise ist die Hotelreservierung gemacht (worden)." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz mit der korrekten Form von ～てある.",
+          "questions": [
+            { "sentence": "壁にポスターが（　　）。(haru)", "answer": "はってあります", "explanation": "haru (kleben) → はって + あります." },
+            { "sentence": "パーティーのために、料理が（　　）。(tsukuru)", "answer": "つくってあります", "explanation": "tsukuru (machen) → つくって + あります." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Veränderung: ～くなる / ～になる",
+      "summary": "Drückt aus, dass etwas zu einem bestimmten Zustand 'wird'.",
+      "explanation": {
+        "introduction": "Diese Grammatik wird verwendet, um eine Veränderung des Zustands oder der Eigenschaft von etwas oder jemandem zu beschreiben.",
+        "sections": [
+          {
+            "title": "Bildung mit い-Adjektiven",
+            "content": "Das letzte い des Adjektivs wird durch く ersetzt und なる (werden) angehängt.",
+            "points": [
+              "Struktur: い-Adjektiv (Stamm) + くなる",
+              "Beispiel: 寒い (samui) → 寒くなる (samukunaru) - kalt werden"
+            ],
+            "examples": [
+              { "jp": "だんだん暑くなりますね。", "de": "Es wird allmählich heiß, nicht wahr?" }
+            ]
+          },
+          {
+            "title": "Bildung mit な-Adjektiven und Nomen",
+            "content": "An das Adjektiv oder Nomen wird に angehängt, gefolgt von なる.",
+            "points": [
+              "Struktur: な-Adjektiv/Nomen + になる",
+              "Beispiel (な-Adj.): 静か (shizuka) → 静かになる (shizuka ni naru) - ruhig werden",
+              "Beispiel (Nomen): 医者 (isha) → 医者になる (isha ni naru) - Arzt werden"
+            ],
+            "examples": [
+              { "jp": "部屋がきれいになりました。", "de": "Das Zimmer ist sauber geworden." },
+              { "jp": "私は来年２０歳になります。", "de": "Ich werde nächstes Jahr 20 Jahre alt." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die 'werden'-Form.",
+          "questions": [
+            { "verb": "高い (takai)", "answer": "たかくなる", "explanation": "い-Adjektiv: -i wird zu -ku naru." },
+            { "verb": "元気 (genki)", "answer": "げんきになる", "explanation": "な-Adjektiv: + ni naru." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die Potenzialform (～(ら)れる)",
+      "summary": "Drückt die Fähigkeit oder Möglichkeit aus, etwas zu tun ('können').",
+      "explanation": {
+        "introduction": "Die Potenzialform ist eine wichtige Konjugation, um auszudrücken, dass jemand die Fähigkeit hat oder es eine Möglichkeit gibt, eine Handlung auszuführen.",
+        "sections": [
+          {
+            "title": "Bildung der Potenzialform",
+            "content": "Die Konjugation ist je nach Verbgruppe unterschiedlich:",
+            "points": [
+              "<strong>ru-Verben (Gruppe 2):</strong> Das letzte る wird durch られる ersetzt. (z.B. 食べる → 食べられる - essen können)",
+              "<strong>u-Verben (Gruppe 1):</strong> Der letzte 'u'-Laut wird zu einem 'e'-Laut und る wird angehängt. (z.B. 飲む → 飲める - trinken können)",
+              "<strong>Unregelmäßige Verben:</strong> する → できる, 来る → こられる"
+            ],
+            "examples": [
+              { "jp": "私は日本語が話せます。", "de": "Ich kann Japanisch sprechen." },
+              { "jp": "納豆は食べられますか。", "de": "Kannst du Natto essen?" },
+              { "jp": "明日は何時に来られますか。", "de": "Um wie viel Uhr kannst du morgen kommen?" }
+            ]
+          },
+          {
+            "title": "Partikel-Änderung",
+            "content": "Bei der Potenzialform wird die Objektpartikel を oft durch が ersetzt, um die Fähigkeit zu betonen.",
+            "examples": [
+              { "jp": "ピアノを弾きます。→ ピアノが弾けます。", "de": "Ich spiele Klavier. → Ich kann Klavier spielen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die Potenzialform (Wörterbuchform).",
+          "questions": [
+            { "verb": "書く (kaku)", "answer": "かける", "explanation": "u-Verb: -ku wird zu -keru." },
+            { "verb": "見る (miru)", "answer": "みられる", "explanation": "ru-Verb: -ru wird zu -rareru." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Zitieren: ～と言っていました",
+      "summary": "Berichtet, was eine andere Person gesagt hat (indirekte Rede).",
+      "explanation": {
+        "introduction": "Diese Struktur wird verwendet, um die Aussage einer anderen Person wiederzugeben. Es ist die Vergangenheitsform von と言っています (sagt, dass...).",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Die Aussage, die zitiert wird, steht in der informellen Form (Wörterbuchform, nai-Form, ta-Form etc.), gefolgt von と言っていました (to itte imashita).",
+            "examples": [
+              { "jp": "田中さんは「明日、パーティーに行きます」と言いました。", "de": "Herr Tanaka sagte: 'Ich gehe morgen zur Party'." },
+              { "jp": "田中さんは明日、パーティーに行くと言っていました。", "de": "Herr Tanaka sagte, dass er morgen zur Party geht." },
+              { "jp": "母は、今日は暑いと言っていました。", "de": "Meine Mutter sagte, dass es heute heiß ist." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Wandle die direkte in indirekte Rede um.",
+          "questions": [
+            { "sentence": "先生は「宿題は難しいです」と言いました。→ 先生は宿題は（　　）と言っていました。", "answer": "むずかしい", "explanation": "Die höfliche Form 難しいです wird zur informellen Form 難しい." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Bedingungsform: ～たら",
+      "summary": "Eine sehr gebräuchliche Bedingungsform für 'wenn' oder 'falls'.",
+      "explanation": {
+        "introduction": "Die tara-Form ist eine vielseitige Konditionalform. Sie wird gebildet, indem man die informelle Vergangenheitsform (ta-Form) eines Verbs nimmt und ら anhängt.",
+        "sections": [
+          {
+            "title": "Bildung und Anwendung",
+            "content": "Verb (ta-Form) + ら. Sie kann für hypothetische Situationen, aber auch für Handlungen verwendet werden, die nach einer anderen stattfinden ('nachdem').",
+            "examples": [
+              { "jp": "日本へ行ったら、お寿司を食べたいです。", "de": "Wenn ich nach Japan gehe, möchte ich Sushi essen." },
+              { "jp": "時間があったら、電話してください。", "de": "Wenn du Zeit hast, ruf bitte an." },
+              { "jp": "家に帰ったら、宿題をします。", "de": "Nachdem ich nach Hause gekommen bin, mache ich Hausaufgaben." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die tara-Form.",
+          "questions": [
+            { "verb": "飲む (nomu)", "answer": "のんだら", "explanation": "ta-Form ist のんだ, also + ら." },
+            { "verb": "食べる (taberu)", "answer": "たべたら", "explanation": "ta-Form ist たべた, also + ら." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Scheinen/Aussehen: ～そうです",
+      "summary": "Drückt aus, dass etwas so aussieht oder sich so anfühlt.",
+      "explanation": {
+        "introduction": "Diese Grammatik wird verwendet, um einen visuellen Eindruck oder eine unmittelbare Vorahnung zu beschreiben. Es bedeutet 'sieht aus wie...' oder 'scheint... zu sein'.",
+        "sections": [
+          {
+            "title": "Bildung",
+            "content": "Die Bildung hängt von der Wortart ab:",
+            "points": [
+              "<strong>い-Adjektive:</strong> Das letzte い wird weggelassen. (z.B. おいしい → おいしそうです - Es sieht lecker aus.)",
+              "<strong>な-Adjektive:</strong> Direkt anhängen. (z.B. 元気 → 元気そうです - Er/Sie sieht gesund/munter aus.)",
+              "<strong>Verben:</strong> An die ます-Form-Basis (ohne ます) anhängen. (z.B. 降ります → 降りそうです - Es sieht so aus, als würde es gleich regnen.)",
+              "<strong>Ausnahme:</strong> いい → よさそうです (yosasou desu)."
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die 'sieht aus wie'-Form.",
+          "questions": [
+            { "verb": "雨が降る (ame ga furu)", "answer": "あめがふりそうです", "explanation": "Verb-Stamm (furimasu) + そうです." },
+            { "verb": "このケーキはおいしい", "answer": "このケーキはおいしそうです", "explanation": "い-Adjektiv ohne い + そうです." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Die Passiv-Form (～(ら)れる)",
+      "summary": "Drückt aus, dass eine Handlung an jemandem oder etwas ausgeführt wird.",
+      "explanation": {
+        "introduction": "Die Passivform wird verwendet, wenn das Subjekt des Satzes die Handlung nicht ausführt, sondern 'erleidet' oder empfängt.",
+        "sections": [
+          {
+            "title": "Bildung der Passivform",
+            "content": "Die Konjugation ist je nach Verbgruppe unterschiedlich:",
+            "points": [
+              "<strong>ru-Verben (Gruppe 2):</strong> Das letzte る wird durch られる ersetzt. (z.B. 食べる → 食べられる - gegessen werden)",
+              "<strong>u-Verben (Gruppe 1):</strong> Der letzte 'u'-Laut wird zu einem 'a'-Laut und れる wird angehängt. (z.B. 読む → 読まれる - gelesen werden)",
+              "<strong>Unregelmäßige Verben:</strong> する → される, 来る → こられる"
+            ],
+            "examples": [
+              { "jp": "私は先生に褒められました。", "de": "Ich wurde vom Lehrer gelobt." },
+              { "jp": "この本は多くの人に読まれています。", "de": "Dieses Buch wird von vielen Leuten gelesen." },
+              { "jp": "弟にケーキを食べられました。", "de": "Mein Kuchen wurde von meinem kleinen Bruder gegessen. (Leidepassiv)" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die Passivform (Wörterbuchform).",
+          "questions": [
+            { "verb": "書く (kaku)", "answer": "かかれる", "explanation": "u-Verb: -ku wird zu -kareru." },
+            { "verb": "見る (miru)", "answer": "みられる", "explanation": "ru-Verb: -ru wird zu -rareru." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Bitten mit ～てください",
+      "summary": "Eine höfliche Art, jemanden zu bitten, etwas zu tun.",
+      "explanation": {
+        "introduction": "Diese Form ist eine der grundlegendsten und wichtigsten Arten, eine höfliche Bitte oder Anweisung auszudrücken. Sie wird an die te-Form eines Verbs angehängt.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Verb (te-Form) + ください",
+            "examples": [
+              { "jp": "ちょっと待ってください。", "de": "Bitte warten Sie einen Moment." },
+              { "jp": "ここに名前を書いてください。", "de": "Bitte schreiben Sie Ihren Namen hierhin." },
+              { "jp": "ゆっくり話してください。", "de": "Bitte sprechen Sie langsam." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Formuliere eine höfliche Bitte.",
+          "questions": [
+            { "sentence": "ドアを（　　）ください。(shimeru)", "answer": "しめて", "explanation": "shimeru (schließen) → しめて." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Wünsche ausdrücken mit ～たい",
+      "summary": "Drückt den eigenen Wunsch aus, etwas zu tun ('Ich möchte...').",
+      "explanation": {
+        "introduction": "Die tai-Form wird verwendet, um den eigenen Wunsch oder Willen auszudrücken. Sie wird an den Stamm der masu-Form eines Verbs angehängt.",
+        "sections": [
+          {
+            "title": "Bildung und Anwendung",
+            "content": "Verb (masu-Stamm) + たいです. Die tai-Form wird wie ein い-Adjektiv konjugiert.",
+            "points": [
+              "<strong>Positiv:</strong> 食べます → 食べたいです (Ich möchte essen).",
+              "<strong>Negativ:</strong> 食べたい → 食べたくないです (Ich möchte nicht essen).",
+              "<strong>Vergangenheit:</strong> 食べたい → 食べたかったです (Ich wollte essen)."
+            ],
+            "examples": [
+              { "jp": "日本へ行きたいです。", "de": "Ich möchte nach Japan gehen." },
+              { "jp": "今日は何もしたくないです。", "de": "Heute möchte ich nichts tun." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Drücke den Wunsch aus.",
+          "questions": [
+            { "verb": "飲む (nomu)", "answer": "のみたい", "explanation": "nomimasu → nomi + tai." },
+            { "verb": "見る (miru, negativ)", "answer": "みたくない", "explanation": "mitai → mitakunai." }
+          ]
+        }
+      ]
+    },
+  {
+      "title": "Gleichzeitigkeit mit 〜ながら",
+      "summary": "Drückt aus, dass zwei Handlungen gleichzeitig von derselben Person ausgeführt werden.",
+      "explanation": {
+        "introduction": "Die 〜ながら (nagara) Form wird verwendet, um auszudrücken, dass das Subjekt zwei Handlungen gleichzeitig ausführt. Die Hauptaktion steht am Ende des Satzes, während die Nebenaktion mit ながら markiert wird.",
+        "sections": [
+          {
+            "title": "Bildung und Anwendung",
+            "content": "Die Struktur ist: Verb (ます-Stamm) + ながら, [Hauptaktion].",
+            "points": [
+              "Die Handlung, die mit ながら markiert ist, ist die Nebenhandlung.",
+              "Die Hauptaktion, die am Ende des Satzes steht, bestimmt die Zeitform des gesamten Satzes."
+            ],
+            "examples": [
+              { "jp": "音楽を聞きながら、勉強します。", "de": "Ich lerne, während ich Musik höre." },
+              { "jp": "歩きながら、話しましょう。", "de": "Lass uns reden, während wir gehen." },
+              { "jp": "テレビを見ながら、ご飯を食べました。", "de": "Ich habe gegessen, während ich ferngesehen habe." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz mit der ながら-Form.",
+          "questions": [
+            { "sentence": "コーヒーを（　　）ながら、新聞を読みます。(nomu)", "answer": "のみ", "explanation": "Der ます-Stamm von 飲む (nomu) ist 飲み (nomi)." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Fähigkeit mit ～ことができる",
+      "summary": "Eine weitere Möglichkeit, 'können' auszudrücken, oft formeller als die Potenzialform.",
+      "explanation": {
+        "introduction": "Die Konstruktion Verb (Wörterbuchform) + ことができる (koto ga dekiru) ist eine alternative Methode, um Fähigkeit oder Möglichkeit auszudrücken. Sie ist oft etwas formeller als die reine Potenzialform eines Verbs.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Man hängt einfach ことができる an die Wörterbuchform des Verbs an. できる wird dann konjugiert.",
+            "points": [
+              "<strong>Struktur:</strong> Verb (Wörterbuchform) + ことができます。",
+              "Es nominalisiert das Verb mit こと (koto) und sagt dann, dass diese 'Sache' (こと) 'machbar' (できる) ist."
+            ],
+            "examples": [
+              { "jp": "私はピアノを弾くことができます。", "de": "Ich kann Klavier spielen." },
+              { "jp": "ここで写真を撮ることはできません。", "de": "Man kann hier keine Fotos machen." },
+              { "jp": "明日、来ることができますか。", "de": "Können Sie morgen kommen?" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Formuliere die Fähigkeit mit ～ことができる.",
+          "questions": [
+            { "sentence": "彼は漢字を（　　）ことができます。(yomu)", "answer": "よむ", "explanation": "Die Wörterbuchform von 読む (yomu) wird verwendet." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Übermaß mit 〜すぎる",
+      "summary": "Drückt aus, dass etwas 'zu viel' oder 'zu sehr' ist.",
+      "explanation": {
+        "introduction": "Die 〜すぎる (sugiru) Grammatik wird verwendet, um ein Übermaß auszudrücken. Es kann an Verben und Adjektive angehängt werden und hat oft eine negative Konnotation.",
+        "sections": [
+          {
+            "title": "Bildung",
+            "content": "Die Bildung ist einfach:",
+            "points": [
+              "<strong>Verben:</strong> An den ます-Stamm anhängen. (z.B. 食べます → 食べすぎる - zu viel essen)",
+              "<strong>い-Adjektive:</strong> Das letzte い weglassen. (z.B. 高い → 高すぎる - zu teuer)",
+              "<strong>な-Adjektive:</strong> Direkt anhängen. (z.B. 静か → 静かすぎる - zu ruhig)"
+            ],
+            "examples": [
+              { "jp": "昨日の夜、お酒を飲みすぎました。", "de": "Gestern Abend habe ich zu viel Alkohol getrunken." },
+              { "jp": "この問題は難しすぎます。", "de": "Diese Aufgabe ist zu schwierig." },
+              { "jp": "この部屋は静かすぎて、少し怖いです。", "de": "Dieses Zimmer ist zu ruhig, es ist ein bisschen unheimlich." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "conjugation",
+          "instruction": "Bilde die 〜すぎる Form.",
+          "questions": [
+            { "verb": "話す (hanasu)", "answer": "はなしすぎる", "explanation": "ます-Stamm (hanashimasu) + sugiru." },
+            { "verb": "大きい (ookii)", "answer": "おおきすぎる", "explanation": "い-Adjektiv ohne い + sugiru." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ratschlag mit 〜たほうがいい",
+      "summary": "Gibt einen starken Ratschlag oder eine Empfehlung ('es wäre besser, wenn...').",
+      "explanation": {
+        "introduction": "Diese Struktur wird verwendet, um jemandem einen Ratschlag zu geben. Sie ist ziemlich direkt und kann je nach Kontext fast wie eine Warnung klingen.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Die Struktur hängt davon ab, ob man einen positiven oder negativen Ratschlag gibt.",
+            "points": [
+              "<strong>Positiver Ratschlag:</strong> Verb (ta-Form) + ほうがいいです。 ('Es ist besser, X zu tun.')",
+              "<strong>Negativer Ratschlag:</strong> Verb (nai-Form) + ほうがいいです。 ('Es ist besser, X nicht zu tun.')"
+            ],
+            "examples": [
+              { "jp": "薬を飲んだほうがいいですよ。", "de": "Du solltest besser deine Medizin nehmen." },
+              { "jp": "今日は暑いから、外へ行かないほうがいいです。", "de": "Weil es heute heiß ist, solltest du besser nicht nach draußen gehen." },
+              { "jp": "もっと野菜を食べたほうがいい。", "de": "Du solltest besser mehr Gemüse essen. (informell)" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Gib einen Ratschlag mit 〜ほうがいい.",
+          "questions": [
+            { "sentence": "疲れているから、早く（　　）ほうがいいですよ。(neru)", "answer": "ねた", "explanation": "Positiver Ratschlag verwendet die ta-Form von 寝る (neru)." },
+            { "sentence": "危ないから、そこへは（　　）ほうがいいです。(iku)", "answer": "いかない", "explanation": "Negativer Ratschlag verwendet die nai-Form von 行く (iku)." }
+          ]
+        }
+      ]
+    }
+  ],
+"N3": [
+    {
+      "title": "Während/Solange: ～間に / ～間",
+      "summary": "Drückt aus, dass etwas während eines Zeitraums oder einer Handlung geschieht.",
+      "explanation": {
+        "introduction": "間に (aida ni) und 間 (aida) werden verwendet, um einen Zeitraum zu beschreiben, in dem etwas passiert. Es gibt einen feinen Unterschied zwischen den beiden.",
+        "sections": [
+          {
+            "title": "～間に (aida ni) - Ein punktuelles Ereignis",
+            "content": "Wird verwendet, wenn eine kurze, einmalige Handlung innerhalb eines längeren Zeitraums stattfindet.",
+            "examples": [
+              { "jp": "母が昼寝をしている間に、買い物に行きました。", "de": "Während meine Mutter Mittagsschlaf hielt, ging ich einkaufen." },
+              { "jp": "日本にいる間に、一度富士山に登りたい。", "de": "Solange ich in Japan bin, möchte ich einmal den Fuji besteigen." }
+            ]
+          },
+          {
+            "title": "～間 (aida) - Ein andauernder Zustand",
+            "content": "Wird verwendet, wenn zwei Handlungen oder Zustände über den gesamten Zeitraum parallel stattfinden.",
+            "examples": [
+              { "jp": "夏休みの間、ずっと祖母の家にいました。", "de": "Während der Sommerferien war ich die ganze Zeit bei meiner Großmutter." },
+              { "jp": "私が勉強している間、弟はゲームをしていた。", "de": "Während ich lernte, spielte mein kleiner Bruder Videospiele." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Fülle die Lücke mit 間に oder 間.",
+          "questions": [
+            { "sentence": "私が寝ている（　　）、雪が降った。", "answer": "間に", "explanation": "Das Schneien ist ein punktuelles Ereignis, das während des Schlafens begann." },
+            { "sentence": "子供がテレビを見ている（　　）、私は夕食の準備をした。", "answer": "間", "explanation": "Die Vorbereitung des Abendessens dauerte an, während das Kind fernsah." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Hörensagen: ～ということだ / ～とのことだ",
+      "summary": "Gibt Informationen wieder, die man gehört oder gelesen hat ('es heißt, dass...').",
+      "explanation": {
+        "introduction": "Diese Form wird verwendet, um Informationen aus zweiter Hand weiterzugeben. ～とのことだ ist etwas formeller und wird oft in schriftlichen Mitteilungen verwendet.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Wird an die informelle Form von Verben, Adjektiven und Nomen angehängt. Bei Nomen und な-Adjektiven wird oft だ oder である vor ～ということだ gesetzt.",
+            "examples": [
+              { "jp": "天気予報によると、明日は雨が降るということです。", "de": "Laut Wettervorhersage heißt es, dass es morgen regnen wird." },
+              { "jp": "田中さんからのメールでは、彼は元気だとのことです。", "de": "Laut der E-Mail von Herrn Tanaka heißt es, dass es ihm gut geht." },
+              { "jp": "この店は人気だということです。", "de": "Es heißt, dass dieser Laden beliebt ist." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Formuliere den Satz mit ～ということだ.",
+          "questions": [
+            { "sentence": "ニュースで「新しい駅ができる」と言っていました。→ 新しい駅が（　　）。", "answer": "できるということです", "explanation": "Die gehörte Information wird mit ということです wiedergegeben." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Vielleicht: ～かもしれない",
+      "summary": "Drückt eine Möglichkeit oder Vermutung aus ('vielleicht', 'es könnte sein, dass...').",
+      "explanation": {
+        "introduction": "～かもしれない (ka mo shirenai) wird verwendet, um eine Möglichkeit auszudrücken, bei der sich der Sprecher nicht sicher ist. Es ist weniger wahrscheinlich als ～でしょう.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Wird an die informelle Form von Verben, Adjektiven und Nomen angehängt. Bei Nomen und な-Adjektiven wird das だ oft weggelassen.",
+            "examples": [
+              { "jp": "明日は雨が降るかもしれません。", "de": "Morgen könnte es vielleicht regnen." },
+              { "jp": "彼はもう家に帰ったかもしれない。", "de": "Er ist vielleicht schon nach Hause gegangen." },
+              { "jp": "この問題は少し難しいかもしれません。", "de": "Diese Aufgabe ist vielleicht ein bisschen schwierig." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Drücke die Möglichkeit aus.",
+          "questions": [
+            { "sentence": "田中さんはパーティーに（　　）かもしれません。(kuru)", "answer": "くる", "explanation": "Die Wörterbuchform wird vor かもしれない verwendet." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Genau wie/Als ob: ～ように",
+      "summary": "Wird für Vergleiche ('so wie...'), Beispiele ('wie zum Beispiel...') oder Bitten ('so, dass...') verwendet.",
+      "explanation": {
+        "introduction": "ように (yō ni) ist eine sehr vielseitige Grammatik mit mehreren Bedeutungen, die sich meist um einen Vergleich oder ein Ziel drehen.",
+        "sections": [
+          {
+            "title": "1. Vergleich ('als ob', 'genau wie')",
+            "content": "Vergleicht eine Situation mit einer anderen. Oft mit まるで (marude - 'geradezu') verwendet.",
+            "examples": [
+              { "jp": "彼はまるで子供のように笑った。", "de": "Er lachte genau wie ein Kind." }
+            ]
+          },
+          {
+            "title": "2. Ziel/Bitte ('so, dass...')",
+            "content": "Drückt ein Ziel oder eine Bitte aus, damit ein bestimmter Zustand erreicht wird.",
+            "examples": [
+              { "jp": "忘れないように、メモしてください。", "de": "Bitte machen Sie eine Notiz, damit Sie es nicht vergessen." },
+              { "jp": "日本語が話せるようになりたいです。", "de": "Ich möchte so werden, dass ich Japanisch sprechen kann (Ich möchte Japanisch sprechen können)." }
+            ]
+          },
+          {
+            "title": "3. Beispiel ('wie zum Beispiel...')",
+            "content": "Wird verwendet, um ein Beispiel zu geben.",
+            "examples": [
+              { "jp": "ここに書いてあるように、明日は休みです。", "de": "Wie hier geschrieben steht, ist morgen frei." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "みんなに聞こえる（　　）、もっと大きな声で話してください。", "answer": "ように", "explanation": "Drückt das Ziel aus, dass alle es hören können." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Anstatt: ～代わりに",
+      "summary": "Drückt einen Ersatz oder eine Kompensation aus ('anstatt', 'im Gegenzug für').",
+      "explanation": {
+        "introduction": "代わりに (kawari ni) wird verwendet, um auszudrücken, dass etwas anstelle von etwas anderem getan wird oder als Gegenleistung für etwas dient.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Kann an Nomen (mit の), Verben (Wörterbuchform) und Adjektive angehängt werden.",
+            "examples": [
+              { "jp": "部長の代わりに、私が会議に出席します。", "de": "Anstelle des Abteilungsleiters werde ich an der Konferenz teilnehmen." },
+              { "jp": "映画を見に行く代わりに、家でDVDを見よう。", "de": "Anstatt ins Kino zu gehen, lass uns zu Hause eine DVD schauen." },
+              { "jp": "このアパートは駅から遠い代わりに、家賃が安い。", "de": "Diese Wohnung ist zwar weit vom Bahnhof entfernt, dafür ist die Miete aber günstig." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "車で行く（　　）、電車で行きました。", "answer": "代わりに", "explanation": "Drückt aus, dass die Bahn als Ersatz für das Auto genommen wurde." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Über/Bezüglich: ～について",
+      "summary": "Markiert das Thema, über das gesprochen, geschrieben oder nachgedacht wird.",
+      "explanation": {
+        "introduction": "～について (ni tsuite) ist eine gebräuchliche Art, 'über' oder 'bezüglich' auszudrücken. Es folgt immer auf ein Nomen.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Nomen + について. Wenn es ein Nomen modifiziert, wird es zu Nomen + についての + Nomen.",
+            "examples": [
+              { "jp": "日本の文化について勉強しています。", "de": "Ich lerne über die japanische Kultur." },
+              { "jp": "この問題について、どう思いますか。", "de": "Was denken Sie über dieses Problem?" },
+              { "jp": "これは日本の歴史についての本です。", "de": "Das ist ein Buch über die japanische Geschichte." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "その事故（　　）詳しく教えてください。", "answer": "について", "explanation": "Markiert 'der Unfall' als Thema der Bitte." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Passend für/Gerichtet an: ～向け",
+      "summary": "Zeigt an, dass etwas speziell für eine bestimmte Zielgruppe oder einen Zweck gemacht ist.",
+      "explanation": {
+        "introduction": "～向け (muke) wird an ein Nomen angehängt, um die Zielgruppe oder den Bestimmungszweck zu kennzeichnen.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Nomen + 向け. Es kann als Teil eines Nomens (z.B. 子供向けの本) oder als Prädikat (z.B. この本は子供向けだ) verwendet werden.",
+            "examples": [
+              { "jp": "これは子供向けに書かれた本です。", "de": "Das ist ein Buch, das für Kinder geschrieben wurde." },
+              { "jp": "この製品は海外向けです。", "de": "Dieses Produkt ist für den ausländischen Markt bestimmt." },
+              { "jp": "初心者向けのコースがありますか。", "de": "Gibt es einen Kurs für Anfänger?" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "このアニメは大人（　　）です。", "answer": "むけ", "explanation": "Zeigt an, dass der Anime für Erwachsene gemacht ist." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Es ist beschlossen, dass...: ～ことになっている",
+      "summary": "Drückt eine Regel, einen Plan oder eine gesellschaftliche Konvention aus, die bereits festgelegt wurde.",
+      "explanation": {
+        "introduction": "～ことになっている (koto ni natte iru) wird verwendet, um über Regeln, Pläne oder soziale Normen zu sprechen, die von jemand anderem oder einer Gruppe festgelegt wurden und an die man sich halten muss.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Die Struktur ist: Verb (Wörterbuchform / nai-Form) + ことになっている.",
+            "points": [
+              "Es betont, dass die Regel oder der Plan nicht die eigene Entscheidung ist.",
+              "Es wird oft für Schulregeln, Gesetze, Firmenrichtlinien oder feste Termine verwendet."
+            ],
+            "examples": [
+              { "jp": "この学校では、制服を着ることになっています。", "de": "An dieser Schule ist es Vorschrift, eine Uniform zu tragen." },
+              { "jp": "明日、ここで会議が行われることになっています。", "de": "Es ist festgelegt, dass morgen hier eine Konferenz stattfinden wird." },
+              { "jp": "図書館では大きい声で話さないことになっています。", "de": "In der Bibliothek ist es Regel, nicht laut zu sprechen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "日本では、車は左側を（　　）ことになっています。(hashiru)", "answer": "はしる", "explanation": "Drückt eine Verkehrsregel aus. Verwendet die Wörterbuchform." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Obwohl: ～のに",
+      "summary": "Drückt einen unerwarteten oder enttäuschenden Kontrast aus ('obwohl', 'trotz der Tatsache, dass').",
+      "explanation": {
+        "introduction": "のに (no ni) wird verwendet, um einen Kontrast zwischen zwei Sätzen auszudrücken. Es hat oft eine Nuance von Überraschung, Enttäuschung oder Kritik, ähnlich wie 'obwohl' im Deutschen, aber mit mehr Gefühl.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Wird an die informelle Form von Verben und い-Adjektiven angehängt. Bei な-Adjektiven und Nomen wird な vor のに gesetzt.",
+            "points": [
+              "Verb (Wörterbuchform) + のに",
+              "い-Adjektiv + のに",
+              "な-Adjektiv + なのに",
+              "Nomen + なのに"
+            ],
+            "examples": [
+              { "jp": "約束したのに、彼は来なかった。", "de": "Obwohl wir es versprochen hatten, kam er nicht. (Enttäuschung)" },
+              { "jp": "今日は日曜日なのに、仕事をしなければなりません。", "de": "Obwohl heute Sonntag ist, muss ich arbeiten. (Frustration)" },
+              { "jp": "彼は学生なのに、とても高い車に乗っている。", "de": "Obwohl er Student ist, fährt er ein sehr teures Auto. (Überraschung)" }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "薬を飲んだ（　　）、まだ頭が痛いです。", "answer": "のに", "explanation": "Drückt den unerwarteten Kontrast aus, dass die Kopfschmerzen trotz der Medizin anhalten." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Nur/Nichts als: ～ばかり",
+      "summary": "Drückt aus, dass jemand nur eine Sache tut oder dass nur eine Sache existiert ('nichts als...', 'ständig...').",
+      "explanation": {
+        "introduction": "～ばかり (bakari) betont, dass eine Handlung oder ein Zustand exzessiv oder ausschließlich stattfindet. Es kann eine negative Nuance haben, die Kritik oder Beschwerde impliziert.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Kann an verschiedene Wortarten angehängt werden:",
+            "points": [
+              "Verb (te-Form) + ばかりいる: Drückt aus, dass jemand ständig etwas tut.",
+              "Nomen + ばかり: Drückt aus, dass es 'nichts als' dieses Nomen gibt."
+            ],
+            "examples": [
+              { "jp": "弟は毎日ゲームをしてばかりいる。", "de": "Mein kleiner Bruder tut nichts als ständig Videospiele zu spielen." },
+              { "jp": "彼は言い訳ばかりしている。", "de": "Er macht nichts als Ausreden." },
+              { "jp": "この店のお客さんは女性ばかりですね。", "de": "Die Kunden in diesem Laden sind ja nur Frauen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "テレビを見て（　　）いないで、宿題をしなさい。", "answer": "ばかり", "explanation": "Kritisiert das ständige Fernsehen." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Erfahrung: 〜たことがある",
+      "summary": "Drückt aus, dass man die Erfahrung gemacht hat, etwas getan zu haben ('schon einmal...').",
+      "explanation": {
+        "introduction": "Diese sehr gebräuchliche Struktur wird verwendet, um über vergangene Erfahrungen zu sprechen. Sie wird mit der Vergangenheitsform (ta-Form) eines Verbs gebildet.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (ta-Form) + ことがある / ことがあります。",
+            "points": [
+              "<strong>Positiv:</strong> あります (höflich) / ある (informell)",
+              "<strong>Negativ:</strong> ありません (höflich) / ない (informell)",
+              "<strong>Frage:</strong> ありますか (höflich) / ある？ (informell)"
+            ],
+            "examples": [
+              { "jp": "私は富士山に登ったことがあります。", "de": "Ich habe schon einmal den Fuji bestiegen." },
+              { "jp": "寿司を食べたことがありますか。", "de": "Haben Sie schon einmal Sushi gegessen?" },
+              { "jp": "いいえ、一度もありません。", "de": "Nein, noch kein einziges Mal." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Formuliere den Satz, um eine Erfahrung auszudrücken.",
+          "questions": [
+            { "sentence": "日本へ（　　）ことがあります。(iku)", "answer": "いった", "explanation": "Die ta-Form von 行く (iku) ist 行った (itta)." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Vermutung: 〜はずだ",
+      "summary": "Drückt eine starke Vermutung oder logische Schlussfolgerung aus ('es muss so sein, dass...').",
+      "explanation": {
+        "introduction": "はずだ (hazu da) wird verwendet, wenn der Sprecher aufgrund von Beweisen oder Logik stark davon überzeugt ist, dass etwas der Fall ist. Es ist stärker als ～でしょう oder ～かもしれない.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Wird an die informelle Form von Verben und い-Adjektiven angehängt. Bei な-Adjektiven wird な und bei Nomen wird の vor はずだ gesetzt.",
+            "examples": [
+              { "jp": "彼は今日、来るはずです。", "de": "Er sollte heute kommen (ich bin mir fast sicher)." },
+              { "jp": "鍵はポケットの中にあるはずだ。", "de": "Der Schlüssel muss in der Tasche sein." },
+              { "jp": "彼は日本人のはずだから、日本語が上手なはずだ。", "de": "Er sollte Japaner sein, also muss sein Japanisch gut sein." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Drücke eine starke Vermutung aus.",
+          "questions": [
+            { "sentence": "飛行機は１０時に着く（　　）です。", "answer": "はず", "explanation": "Drückt die logische Erwartung aus, dass das Flugzeug planmäßig ankommt." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Aussehen/Schein: 〜みたいだ",
+      "summary": "Drückt aus, dass etwas so aussieht, sich so anfühlt oder so ist wie etwas anderes ('sieht aus wie...', 'ist wie...').",
+      "explanation": {
+        "introduction": "みたいだ (mitai da) ist eine umgangssprachliche Art, einen Vergleich anzustellen oder eine Vermutung auf Basis von Sinneswahrnehmungen zu äußern. Es ist weniger formell als ～ようだ.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Wird direkt an die informelle Form von Verben und Adjektiven oder an Nomen angehängt.",
+            "points": [
+              "<strong>Vergleich:</strong> Nomen + みたいだ (z.B. 子供みたいだ - wie ein Kind sein)",
+              "<strong>Vermutung:</strong> Verb/Adjektiv + みたいだ (z.B. 雨が降ったみたいだ - Es sieht so aus, als hätte es geregnet)"
+            ],
+            "examples": [
+              { "jp": "あの雲は犬みたいな形をしている。", "de": "Diese Wolke hat eine Form wie ein Hund." },
+              { "jp": "彼は疲れているみたいだ。顔色が悪い。", "de": "Er scheint müde zu sein. Seine Gesichtsfarbe ist schlecht." },
+              { "jp": "外は寒いみたいだから、コートを着ていきなさい。", "de": "Draußen scheint es kalt zu sein, also zieh einen Mantel an." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "誰もいない（　　）だ。静かすぎる。", "answer": "みたい", "explanation": "Drückt eine Vermutung basierend auf der Stille aus." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Entscheidung: 〜ことにする",
+      "summary": "Drückt eine persönliche Entscheidung oder einen festen Entschluss aus ('ich habe beschlossen, zu...').",
+      "explanation": {
+        "introduction": "Während ～ことになっている eine Regel oder einen von anderen festgelegten Plan beschreibt, drückt ～ことにする eine aktive, persönliche Entscheidung des Sprechers aus.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Die Struktur ist: Verb (Wörterbuchform / nai-Form) + ことにする。",
+            "points": [
+              "<strong>Positive Entscheidung:</strong> Verb (Wörterbuchform) + ことにする (z.B. 日本へ行くことにする - Ich entscheide mich, nach Japan zu gehen.)",
+              "<strong>Negative Entscheidung:</strong> Verb (nai-Form) + ことにする (z.B. もうお酒を飲まないことにする - Ich entscheide mich, keinen Alkohol mehr zu trinken.)"
+            ],
+            "examples": [
+              { "jp": "明日から毎日ジョギングすることにしました。", "de": "Ich habe beschlossen, ab morgen jeden Tag zu joggen." },
+              { "jp": "健康のために、タバコをやめることにした。", "de": "Für meine Gesundheit habe ich beschlossen, mit dem Rauchen aufzuhören." },
+              { "jp": "今日の会議は、参加しないことにします。", "de": "Ich habe beschlossen, an der heutigen Konferenz nicht teilzunehmen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Drücke deine Entscheidung aus.",
+          "questions": [
+            { "sentence": "来年、新しい車を（　　）ことにしました。(kau)", "answer": "かう", "explanation": "Verwendet die Wörterbuchform, um eine positive Entscheidung auszudrücken." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Grund/Zweck: 〜ために",
+      "summary": "Drückt einen Zweck, ein Ziel oder einen Grund aus ('um zu...', 'für...', 'wegen...').",
+      "explanation": {
+        "introduction": "ために (tame ni) ist eine vielseitige Grammatik, die einen Grund oder ein Ziel für eine Handlung angibt.",
+        "sections": [
+          {
+            "title": "1. Zweck/Ziel ('um zu...', 'für...')",
+            "content": "Beschreibt das Ziel, für das eine Handlung ausgeführt wird. Die Struktur ist: Nomen + の + ために oder Verb (Wörterbuchform) + ために.",
+            "examples": [
+              { "jp": "健康のために、毎日運動しています。", "de": "Für die Gesundheit treibe ich jeden Tag Sport." },
+              { "jp": "家を買うために、貯金しています。", "de": "Um ein Haus zu kaufen, spare ich Geld." }
+            ]
+          },
+          {
+            "title": "2. Grund/Ursache ('wegen...')",
+            "content": "Beschreibt den Grund oder die Ursache für ein (oft negatives) Ergebnis. Die Struktur ist: Nomen + の + ために oder Verb/Adjektiv (informelle Vergangenheitsform) + ために.",
+            "examples": [
+              { "jp": "事故のために、電車が遅れました。", "de": "Wegen des Unfalls hatte der Zug Verspätung." },
+              { "jp": "大雪が降ったために、飛行機がキャンセルになった。", "de": "Weil es stark geschneit hat, wurde der Flug gestrichen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "日本語を勉強する（　　）、日本に来ました。", "answer": "ために", "explanation": "Drückt den Zweck des Kommens nach Japan aus." }
+          ]
+        }
+      ]
+    }
+  ],
+"N2": [
+    {
+      "title": "Trotz / Ungeachtet: ～にもかかわらず",
+      "summary": "Drückt aus, dass etwas Unerwartetes oder im Gegensatz zu einer bestimmten Tatsache geschieht.",
+      "explanation": {
+        "introduction": "Ähnlich wie 'trotz' oder 'ungeachtet der Tatsache, dass...'. Es drückt oft Überraschung über ein Ergebnis aus, das nicht der Erwartung entspricht. Es ist formeller als のに.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Wird an die informelle Form von Verben und Adjektiven oder an Nomen angehängt. Bei Nomen und な-Adjektiven wird oft である hinzugefügt.",
+            "examples": [
+              { "jp": "悪天候にもかかわらず、試合は行われた。", "de": "Trotz des schlechten Wetters fand das Spiel statt." },
+              { "jp": "努力したにもかかわらず、試験に落ちてしまった。", "de": "Obwohl ich mich angestrengt habe, bin ich durch die Prüfung gefallen." },
+              { "jp": "彼は病気であるにもかかわらず、仕事を休まなかった。", "de": "Obwohl er krank war, fehlte er nicht bei der Arbeit." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "何度も注意した（　　）、彼は同じ間違いを繰り返した。", "answer": "にもかかわらず", "explanation": "Drückt den unerwarteten Kontrast aus, dass er den Fehler trotz der Warnungen wiederholt hat." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Sobald / Direkt nach: ～次第",
+      "summary": "Drückt aus, dass etwas unmittelbar nach einer anderen Handlung geschieht.",
+      "explanation": {
+        "introduction": "Wird verwendet, um eine unmittelbare Folge auszudrücken. Es ist eine formelle Ausdrucksweise, die oft in geschäftlichen oder offiziellen Kontexten verwendet wird.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (ます-Stamm) + 次第 (shidai).",
+            "examples": [
+              { "jp": "会議が終わり次第、ご連絡いたします。", "de": "Sobald die Konferenz endet, werde ich Sie kontaktieren." },
+              { "jp": "資料が届き次第、すぐに確認します。", "de": "Sobald die Unterlagen ankommen, werde ich sie sofort überprüfen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "部屋の準備ができ（　　）、ご案内します。", "answer": "しだい", "explanation": "Der ます-Stamm von できます ist でき. Daran wird しだい angehängt." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Nicht nur ... sondern auch: ～ばかりか",
+      "summary": "Betont, dass zusätzlich zu einer Sache noch eine weitere, oft unerwartete oder extremere Sache hinzukommt.",
+      "explanation": {
+        "introduction": "～ばかりか (bakari ka) wird verwendet, um eine Liste zu erweitern und das zweite Element als noch bemerkenswerter darzustellen. Es bedeutet 'nicht nur A, sondern sogar B'.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Wird an die informelle Form von Verben und Adjektiven angehängt. Bei Nomen und な-Adjektiven wird である oder な angehängt.",
+            "examples": [
+              { "jp": "彼は漢字が読めるばかりか、書くこともできる。", "de": "Er kann nicht nur Kanji lesen, sondern sie sogar auch schreiben." },
+              { "jp": "このレストランは美味しいばかりか、値段も安い。", "de": "Dieses Restaurant ist nicht nur lecker, sondern auch noch günstig." },
+              { "jp": "彼は学生であるばかりか、会社の社長でもある。", "de": "Er ist nicht nur Student, sondern sogar auch Firmenchef." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "彼女は英語（　　）、フランス語も話せる。", "answer": "ばかりか", "explanation": "Betont, dass sie zusätzlich zu Englisch noch eine weitere Sprache spricht." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Je mehr ... desto: ～ば～ほど",
+      "summary": "Drückt eine proportionale Beziehung aus: 'Je mehr A, desto mehr B'.",
+      "explanation": {
+        "introduction": "Diese Struktur wird verwendet, um zu zeigen, dass eine Veränderung in A eine proportionale Veränderung in B bewirkt.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (ba-Form) + Verb (Wörterbuchform) + ほど. Bei Adjektiven: い-Adjektiv (ければ) + い-Adjektiv (Wörterbuchform) + ほど. な-Adjektiv (なら) + な-Adjektiv (な) + ほど.",
+            "examples": [
+              { "jp": "日本語は、勉強すれば勉強するほど面白くなる。", "de": "Je mehr man Japanisch lernt, desto interessanter wird es." },
+              { "jp": "荷物は、軽ければ軽いほどいい。", "de": "Was das Gepäck angeht, je leichter, desto besser." },
+              { "jp": "操作が簡単なら簡単なほど、よく売れる。", "de": "Je einfacher die Bedienung ist, desto besser verkauft es sich." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "この曲は（　　）ば聞くほど好きになる。(kiku)", "answer": "きけ", "explanation": "Die ba-Form von 聞く ist 聞けば." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Grund / Ausgelöst durch: ～につき",
+      "summary": "Eine formelle Art, einen Grund anzugeben, oft auf Schildern oder in Ankündigungen.",
+      "explanation": {
+        "introduction": "～につき (ni tsuki) ist eine formelle Wendung, die 'wegen', 'aufgrund von' oder 'pro' bedeutet. Sie wird hauptsächlich im Schriftverkehr und auf öffentlichen Aushängen verwendet.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen + につき",
+            "examples": [
+              { "jp": "本日は祝日につき、休業いたします。", "de": "Wegen des heutigen Feiertags haben wir geschlossen." },
+              { "jp": "工事中につき、ご注意ください。", "de": "Wegen Bauarbeiten, bitte seien Sie vorsichtig." },
+              { "jp": "手数料は一件につき千円です。", "de": "Die Gebühr beträgt 1000 Yen pro Fall." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "雨天（　　）、試合は中止となります。", "answer": "につき", "explanation": "Gibt den formellen Grund (Regenwetter) für die Absage an." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Aus Sicht von: ～からいうと / ～からすれば",
+      "summary": "Drückt eine Meinung oder ein Urteil aus einer bestimmten Perspektive aus.",
+      "explanation": {
+        "introduction": "Diese Wendungen werden verwendet, um einen Standpunkt oder eine Perspektive zu kennzeichnen, von der aus ein Urteil gefällt wird.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen + からいうと / からすれば / からいえば",
+            "examples": [
+              { "jp": "品質からいうと、A社の製品が一番いい。", "de": "Aus Sicht der Qualität ist das Produkt von Firma A das beste." },
+              { "jp": "私の立場からすれば、その提案には賛成できません。", "de": "Von meinem Standpunkt aus kann ich diesem Vorschlag nicht zustimmen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "親（　　）、子供には健康でいてほしいと願うものだ。", "answer": "からすれば", "explanation": "Drückt die Perspektive der Eltern aus." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Natürliche Folge: ～ものだ",
+      "summary": "Drückt eine allgemeine Wahrheit, eine soziale Norm oder eine natürliche Folge aus ('es ist nun mal so, dass...').",
+      "explanation": {
+        "introduction": "～ものだ (mono da) wird verwendet, um über Dinge zu sprechen, die als selbstverständlich oder natürlich angesehen werden. Es kann auch Nostalgie oder starke Emotionen ausdrücken.",
+        "sections": [
+          {
+            "title": "1. Allgemeine Wahrheit / Soziale Norm",
+            "content": "Beschreibt, was allgemein als normal oder richtig gilt.",
+            "examples": [
+              { "jp": "年を取れば、体力が落ちるものだ。", "de": "Wenn man älter wird, lässt die körperliche Kraft nun mal nach." },
+              { "jp": "人の悪口は言うものではない。", "de": "Schlechte Dinge über andere Leute sollte man nicht sagen." }
+            ]
+          },
+          {
+            "title": "2. Nostalgie (～たものだ)",
+            "content": "Wird mit der ta-Form verwendet, um sich an etwas in der Vergangenheit zu erinnern.",
+            "examples": [
+              { "jp": "子供のころ、よくこの川で遊んだものだ。", "de": "Als ich ein Kind war, habe ich oft in diesem Fluss gespielt." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "約束は守る（　　）だ。", "answer": "もの", "explanation": "Drückt eine soziale Norm aus." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Keine andere Wahl als: ～ざるを得ない",
+      "summary": "Drückt aus, dass man etwas tun muss, obwohl man es nicht will.",
+      "explanation": {
+        "introduction": "Diese sehr formelle Grammatik bedeutet 'man kann nicht umhin, zu...' oder 'es gibt keine andere Wahl, als...'. Sie drückt eine widerwillige Notwendigkeit aus.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (nai-Stamm) + ざるを得ない. Ausnahme: する → せざるを得ない.",
+            "examples": [
+              { "jp": "上司の命令なので、行かざるを得ない。", "de": "Da es ein Befehl vom Chef ist, habe ich keine andere Wahl, als zu gehen." },
+              { "jp": "これだけ証拠があれば、事実を認めざるを得ないだろう。", "de": "Bei so vielen Beweisen wird man wohl keine andere Wahl haben, als die Tatsachen anzuerkennen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "台風のため、旅行は中止（　　）を得なかった。", "answer": "せざる", "explanation": "Die Form für する ist せざる." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Gerade dann / Nur unter dieser Bedingung: ～に限って",
+      "summary": "Betont, dass etwas nur in einem speziellen Fall oder ausgerechnet dann passiert.",
+      "explanation": {
+        "introduction": "～に限って (ni kagitte) hat zwei Hauptbedeutungen: 1. Etwas Positives gilt nur für eine bestimmte Gruppe/Zeit. 2. Etwas Negatives passiert ausgerechnet zu einem ungünstigen Zeitpunkt.",
+        "sections": [
+          {
+            "title": "1. Nur in diesem Fall (positiv)",
+            "content": "Nomen + に限って. Betont eine Ausnahme.",
+            "examples": [
+              { "jp": "このレストランは、雨の日に限って、ドリンクが無料になる。", "de": "Nur an Regentagen sind in diesem Restaurant die Getränke kostenlos." }
+            ]
+          },
+          {
+            "title": "2. Ausgerechnet dann (negativ)",
+            "content": "Nomen + に限って. Drückt Frustration über schlechtes Timing aus.",
+            "examples": [
+              { "jp": "急いでいる時に限って、電車が遅れる。", "de": "Ausgerechnet wenn ich es eilig habe, hat der Zug Verspätung." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "傘を持っていない日に（　　）、雨が降る。", "answer": "かぎって", "explanation": "Drückt Frustration über das schlechte Timing aus." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Kaum dass / Im selben Moment: ～か～ないかのうちに",
+      "summary": "Drückt aus, dass eine zweite Handlung fast gleichzeitig mit dem Ende der ersten Handlung geschieht.",
+      "explanation": {
+        "introduction": "Diese Struktur betont die Unmittelbarkeit zwischen zwei Ereignissen. Es ist, als ob die zweite Handlung beginnt, bevor die erste vollständig abgeschlossen ist.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (Wörterbuchform) + か + Verb (nai-Form) + かのうちに.",
+            "examples": [
+              { "jp": "彼はベッドに横になるかならないかのうちに、眠ってしまった。", "de": "Kaum hatte er sich ins Bett gelegt, schlief er auch schon ein." },
+              { "jp": "授業が終わるか終わらないかのうちに、彼は教室を飛び出した。", "de": "Kaum war der Unterricht zu Ende, stürmte er aus dem Klassenzimmer." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "ドアを開けるか（　　）うちに、猫が飛び込んできた。", "answer": "あけないかの", "explanation": "Die Struktur ist Verb + か + Verb(nai) + かのうちに." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Anlässlich / Bei Gelegenheit: ～に際して",
+      "summary": "Eine formelle Art, 'anlässlich' oder 'bei' einem besonderen Ereignis auszudrücken.",
+      "explanation": {
+        "introduction": "～に際して (ni saishite) wird verwendet, um den Zeitpunkt eines wichtigen, oft formellen oder einmaligen Ereignisses zu markieren. Es ist formeller als ～とき.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen + に際して / Verb (Wörterbuchform) + に際して",
+            "examples": [
+              { "jp": "開会に際して、一言ご挨拶申し上げます。", "de": "Anlässlich der Eröffnung möchte ich einige Worte zur Begrüßung sagen." },
+              { "jp": "お申し込みに際しては、写真が必要となります。", "de": "Bei der Anmeldung wird ein Foto benötigt." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "留学（　　）、保証人が必要だ。", "answer": "にさいして", "explanation": "Markiert das formelle Ereignis 'Auslandsstudium'." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Begleiterscheinung: ～につれて",
+      "summary": "Drückt aus, dass sich mit der Veränderung von A auch B allmählich verändert.",
+      "explanation": {
+        "introduction": "～につれて (ni tsurete) beschreibt eine natürliche, allmähliche Veränderung, die parallel zu einer anderen Veränderung stattfindet. Ähnlich wie 'im Zuge von...' oder 'mit zunehmendem...'.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen + につれて / Verb (Wörterbuchform) + につれて",
+            "examples": [
+              { "jp": "町の発展につれて、自然が少なくなった。", "de": "Im Zuge der Stadtentwicklung wurde die Natur weniger." },
+              { "jp": "年を取るにつれて、昔のことが懐かしくなる。", "de": "Mit zunehmendem Alter wird man nostalgisch bezüglich der alten Zeiten." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "試験が近づく（　　）、だんだん心配になってきた。", "answer": "につれて", "explanation": "Beschreibt die parallele Zunahme von Sorge mit dem Näherrücken der Prüfung." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Betreffend / Um ... herum: ～をめぐって",
+      "summary": "Markiert das zentrale Thema eines Streits, einer Diskussion oder eines Gerüchts.",
+      "explanation": {
+        "introduction": "～をめぐって (wo megutte) bedeutet wörtlich 'um ... herum' und wird verwendet, um das zentrale Thema zu kennzeichnen, um das sich eine Auseinandersetzung oder Diskussion dreht.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen + をめぐって / をめぐる + Nomen",
+            "examples": [
+              { "jp": "その土地の所有をめぐって、兄弟が争っている。", "de": "Die Geschwister streiten sich um den Besitz dieses Grundstücks." },
+              { "jp": "新しい法律をめぐって、多くの意見が出された。", "de": "Bezüglich des neuen Gesetzes wurden viele Meinungen geäußert." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "遺産（　　）、家族の中で対立が起きた。", "answer": "をめぐって", "explanation": "Markiert 'das Erbe' als zentrales Thema des Konflikts." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tendenz zu: ～がち",
+      "summary": "Drückt eine negative Tendenz oder Neigung aus ('neigt dazu, ... zu sein/tun').",
+      "explanation": {
+        "introduction": "～がち (gachi) wird an Verben oder Nomen angehängt, um eine oft unerwünschte Neigung oder Häufigkeit zu beschreiben.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (ます-Stamm) + がち / Nomen + がち",
+            "examples": [
+              { "jp": "私は子供のころ、病気がちだった。", "de": "Als ich ein Kind war, neigte ich dazu, oft krank zu sein." },
+              { "jp": "彼は約束の時間を忘れがちだ。", "de": "Er neigt dazu, die Zeit von Verabredungen zu vergessen." },
+              { "jp": "年を取ると、忘れっぽくなりがちだ。", "de": "Wenn man älter wird, neigt man dazu, vergesslich zu werden." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "彼は最近、仕事を休み（　　）だ。", "answer": "がち", "explanation": "Drückt die negative Tendenz aus, oft bei der Arbeit zu fehlen." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Gleichzeitig / Nebenbei: ～かたわら",
+      "summary": "Drückt aus, dass jemand neben seiner Haupttätigkeit noch eine andere, längerfristige Tätigkeit ausübt.",
+      "explanation": {
+        "introduction": "～かたわら (katawara) wird verwendet, um zwei Tätigkeiten zu beschreiben, die eine Person über einen längeren Zeitraum parallel ausübt. Es unterscheidet sich von ながら, das sich auf kurzzeitige, gleichzeitige Handlungen bezieht.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen + の + かたわら / Verb (Wörterbuchform) + かたわら",
+            "examples": [
+              { "jp": "彼は大学で勉強するかたわら、小説を書いている。", "de": "Neben seinem Studium an der Universität schreibt er Romane." },
+              { "jp": "母は主婦の仕事のかたわら、日本語を教えている。", "de": "Meine Mutter unterrichtet Japanisch neben ihrer Arbeit als Hausfrau." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "彼は会社に勤める（　　）、夜は大学院で学んでいる。", "answer": "かたわら", "explanation": "Beschreibt zwei längerfristige, parallele Tätigkeiten (Arbeiten und Studieren)." }
+          ]
+        }
+      ]
+    }
+  ],
+"N1": [
+    {
+      "title": "Extremer Zustand: ～極まりない",
+      "summary": "Drückt einen extremen Grad oder Zustand aus ('äußerst', 'extrem', 'unbeschreiblich'). Eine sehr formelle, oft schriftliche Ausdrucksweise.",
+      "explanation": {
+        "introduction": "～極まりない (kiwamarinai) wird verwendet, um das höchste Maß einer Eigenschaft zu betonen. Es wird oft für negative Bewertungen verwendet und ist stärker und formeller als とても oder 非常に.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Wird an den Stamm von な-Adjektiven oder an Nomen angehängt.",
+            "points": [
+              "な-Adjektiv (ohne な) + 極まりない",
+              "Nomen + 極まりない"
+            ],
+            "examples": [
+              { "jp": "彼の態度は失礼極まりない。", "de": "Seine Haltung ist äußerst unhöflich." },
+              { "jp": "このような危険極まりない行為は許されない。", "de": "Eine derart extrem gefährliche Handlung ist unverzeihlich." },
+              { "jp": "要求を断られたのは、残念極まりない。", "de": "Dass die Forderung abgelehnt wurde, ist äußerst bedauerlich." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "彼の発言は無責任（　　）。", "answer": "きわまりない", "explanation": "Betont den extremen Grad der Verantwortungslosigkeit." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Unerwartete Wendung: ～（か）と思いきや",
+      "summary": "Drückt aus, dass etwas Unerwartetes geschah, direkt nachdem man etwas erwartet hatte ('gerade als ich dachte..., da...').",
+      "explanation": {
+        "introduction": "Diese Struktur wird verwendet, um Überraschung über ein Ergebnis auszudrücken, das der unmittelbaren Erwartung widerspricht. Es folgt auf die informelle Form eines Verbs oder Adjektivs.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Verb/Adjektiv (informelle Form, oft Vergangenheitsform た) + かと思いきや...",
+            "examples": [
+              { "jp": "試験に合格したかと思いきや、夢だった。", "de": "Gerade als ich dachte, ich hätte die Prüfung bestanden, war es nur ein Traum." },
+              { "jp": "雨がやんだかと思いきや、また激しく降り出した。", "de": "Gerade als ich dachte, der Regen hätte aufgehört, fing er wieder an, heftig zu regnen." },
+              { "jp": "これで仕事が終わりかと思いきや、新しいタスクが追加された。", "de": "Gerade als ich dachte, die Arbeit sei erledigt, wurde eine neue Aufgabe hinzugefügt." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "やっと静かになった（　　）、隣の部屋から大きな音がした。", "answer": "かとおもいきや", "explanation": "Drückt die Überraschung aus, dass es doch nicht ruhig wurde." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Sobald... (passiert das Gegenteil): ～そばから",
+      "summary": "Drückt aus, dass eine Handlung unmittelbar nach einer anderen stattfindet, oft mit einem wiederholten, frustrierenden Ergebnis.",
+      "explanation": {
+        "introduction": "～そばから (soba kara) wird verwendet, um eine unmittelbare und oft wiederholte Abfolge von Handlungen zu beschreiben, bei der die zweite Handlung die erste zunichtemacht oder ihr widerspricht. Es hat eine negative, resignierte Nuance.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (Wörterbuchform / ta-Form) + そばから",
+            "examples": [
+              { "jp": "子供は片付けるそばから散らかしていく。", "de": "Sobald man mit dem Kind aufräumt, macht es schon wieder unordnung." },
+              { "jp": "新しい言葉を覚えるそばから忘れてしまう。", "de": "Sobald ich neue Wörter lerne, vergesse ich sie schon wieder." },
+              { "jp": "メモしたそばから、どこに置いたか分からなくなる。", "de": "Sobald ich eine Notiz mache, weiß ich schon nicht mehr, wo ich sie hingelegt habe." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "彼は聞いた（　　）忘れるので、何度も同じ説明をしなければならない。", "answer": "そばから", "explanation": "Beschreibt die frustrierende Wiederholung des Vergessens direkt nach dem Hören." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Nichts als... / Voller...: ～ずくめ",
+      "summary": "Betont, dass etwas ausschließlich oder vollständig aus einer Sache besteht.",
+      "explanation": {
+        "introduction": "～ずくめ (zukume) wird an Nomen (oft Farben oder positive/negative Dinge) angehängt, um 'nichts als', 'voller' oder 'durch und durch' auszudrücken.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Nomen + ずくめ",
+            "examples": [
+              { "jp": "今日は朝からいいことずくめだ。", "de": "Heute war von morgens an ein Tag voller guter Dinge." },
+              { "jp": "彼の服装は黒ずくめだった。", "de": "Seine Kleidung war nichts als schwarz (von Kopf bis Fuß schwarz)." },
+              { "jp": "最近、規則ずくめの生活で疲れる。", "de": "In letzter Zeit bin ich müde vom Leben voller Regeln." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "試験に落ち、財布をなくし、今日は悪いこと（　　）の一日だった。", "answer": "ずくめ", "explanation": "Betont, dass der Tag ausschließlich aus schlechten Dingen bestand." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Bei der Gelegenheit: ～がてら",
+      "summary": "Drückt aus, dass man eine Handlung bei Gelegenheit einer anderen Haupthandlung miterledigt.",
+      "explanation": {
+        "introduction": "～がてら (gatera) wird verwendet, um zwei Handlungen zu verbinden, wobei die zweite Handlung nebenbei oder bei Gelegenheit der ersten ausgeführt wird. Es ist eine etwas formellere und literarischere Ausdrucksweise.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (ます-Stamm) + がてら / Nomen + がてら",
+            "examples": [
+              { "jp": "夕涼みがてら、近所を散歩しましょう。", "de": "Lass uns bei der Gelegenheit der Abendkühle in der Nachbarschaft spazieren gehen." },
+              { "jp": "京都への出張がてら、古い友人に会ってきた。", "de": "Bei Gelegenheit meiner Geschäftsreise nach Kyoto habe ich einen alten Freund getroffen." },
+              { "jp": "運動がてら、駅まで歩くことにした。", "de": "Um mich auch gleich zu bewegen, habe ich beschlossen, zum Bahnhof zu laufen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "散歩（　　）、郵便局に寄ってきます。", "answer": "がてら", "explanation": "Drückt aus, dass man bei Gelegenheit des Spaziergangs auch zur Post geht." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Abhängig von...: ～いかん",
+      "summary": "Eine formelle Art, 'abhängig von...' oder 'je nach...' auszudrücken. Bestimmt das Ergebnis.",
+      "explanation": {
+        "introduction": "～いかん (ikan) wird verwendet, um zu sagen, dass das Ergebnis von dem abhängt, was durch das vorangehende Nomen beschrieben wird. Es wird oft in formellen oder geschäftlichen Kontexten verwendet.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Nomen + いかん / いかんによっては / いかんだ",
+            "points": [
+              "<strong>Nomen + いかんでは/によっては:</strong> 'Abhängig von...'",
+              "<strong>Nomen + いかんだ:</strong> 'Es hängt von... ab.'",
+              "<strong>Nomen + の + いかんにかかわらず:</strong> 'Unabhängig von...'"
+            ],
+            "examples": [
+              { "jp": "試験の結果いかんによっては、卒業できないかもしれない。", "de": "Abhängig vom Prüfungsergebnis kann es sein, dass ich den Abschluss nicht schaffe." },
+              { "jp": "明日の会議に出席できるかどうかは、体調いかんだ。", "de": "Ob ich an der morgigen Konferenz teilnehmen kann, hängt von meinem Gesundheitszustand ab." },
+              { "jp": "理由のいかんにかかわらず、遅刻は認められません。", "de": "Unabhängig vom Grund wird eine Verspätung nicht akzeptiert." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "検査の結果（　　）では、手術が必要になるかもしれません。", "answer": "いかん", "explanation": "Drückt aus, dass die Notwendigkeit der OP vom Ergebnis abhängt." }
+          ]
+        }
+      ]
+    }
+  ]
+}

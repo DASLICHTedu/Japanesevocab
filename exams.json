@@ -1,0 +1,1532 @@
+{
+  "N5": [
+    {
+      "id": "n5-exam-1",
+      "title": "JLPT N5 Probetest 1 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 25,
+          "questions": [
+            {
+              "id": "n5-e1-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "あそこに<u>車</u>があります。",
+              "options": [
+                "くるま",
+                "でんしゃ",
+                "じてんしゃ",
+                "ひこうき"
+              ],
+              "correctAnswer": "くるま",
+              "translation": "Dort drüben steht ein Auto.",
+              "explanation": "Das Kanji 車 wird 'くるま' (kuruma) gelesen und bedeutet Auto."
+            },
+            {
+              "id": "n5-e1-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "これは私の<u>本</u>です。",
+              "options": [
+                "ほん",
+                "もと",
+                "ぽん",
+                "ぼん"
+              ],
+              "correctAnswer": "ほん",
+              "translation": "Das ist mein Buch.",
+              "explanation": "Das Kanji 本 wird hier 'ほん' (hon) gelesen."
+            },
+            {
+              "id": "n5-e1-q3",
+              "type": "multiple-choice-kanji-reading",
+              "question": "毎日<u>新聞</u>を読みます。",
+              "options": [
+                "しんぶん",
+                "しんふん",
+                "しんもん",
+                "しんぼん"
+              ],
+              "correctAnswer": "しんぶん",
+              "translation": "Ich lese jeden Tag Zeitung.",
+              "explanation": "新聞 wird 'しんぶん' (shinbun) gelesen."
+            },
+            {
+              "id": "n5-e1-q4",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "「大きい」の反対の言葉は何ですか。",
+              "options": [
+                "小さい",
+                "高い",
+                "安い",
+                "新しい"
+              ],
+              "correctAnswer": "小さい",
+              "translation": "Was ist das Gegenteil von 'groß' (大きい)?",
+              "explanation": "Das Gegenteil von 大きい (ōkii - groß) ist 小さい (chiisai - klein)."
+            },
+            {
+              "id": "n5-e1-q5",
+              "type": "multiple-choice-usage",
+              "question": "（　　）へ行きます。",
+              "options": [
+                "えき",
+                "いす",
+                "さかな",
+                "きのう"
+              ],
+              "correctAnswer": "えき",
+              "translation": "Ich gehe zum (Bahnhof).",
+              "explanation": "へ markiert die Richtung/den Zielort. えき (eki = Bahnhof) ist das einzige passende Ortsnomen."
+            },
+            {
+              "id": "n5-e1-q6",
+              "type": "multiple-choice-usage",
+              "question": "部屋に（　　）がありません。",
+              "options": [
+                "いす",
+                "あるく",
+                "たかい",
+                "およぐ"
+              ],
+              "correctAnswer": "いす",
+              "translation": "Im Zimmer gibt es keinen (Stuhl).",
+              "explanation": "いす (isu) ist das passende Nomen vor がありません."
+            },
+            {
+              "id": "n5-e1-q7",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>食べる</u> in Hiragana:",
+              "correctAnswer": "たべる",
+              "translation": "Schreibe die Lesung für 食べる in Hiragana.",
+              "explanation": "食べる wird 'たべる' (taberu) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 50,
+          "questions": [
+            {
+              "id": "n5-e1-q8",
+              "type": "multiple-choice-particle",
+              "question": "私（　　）学生です。",
+              "options": [
+                "は",
+                "を",
+                "に",
+                "で"
+              ],
+              "correctAnswer": "は",
+              "translation": "Ich bin Student.",
+              "explanation": "は markiert das Thema des Satzes (私は)."
+            },
+            {
+              "id": "n5-e1-q9",
+              "type": "multiple-choice-particle",
+              "question": "友達（　　）映画を見ます。",
+              "options": [
+                "と",
+                "で",
+                "に",
+                "へ"
+              ],
+              "correctAnswer": "と",
+              "translation": "Ich schaue mit einem Freund einen Film.",
+              "explanation": "と bedeutet 'zusammen mit' einer Person."
+            },
+            {
+              "id": "n5-e1-q10",
+              "type": "multiple-choice-particle",
+              "question": "机の（　　）に猫がいます。",
+              "options": [
+                "上",
+                "前",
+                "間",
+                "中"
+              ],
+              "correctAnswer": "上",
+              "translation": "Auf dem Schreibtisch ist eine Katze.",
+              "explanation": "机の上 (tsukue no ue) = auf dem Tisch."
+            },
+            {
+              "id": "n5-e1-q11",
+              "type": "sentence-ordering",
+              "question": "きのう＿　＿　★　＿買いました。",
+              "parts": [
+                "を",
+                "で",
+                "パン",
+                "スーパー"
+              ],
+              "correctOrder": [
+                "スーパー",
+                "で",
+                "パン",
+                "を"
+              ],
+              "fullSentence": "きのうスーパーでパンを買いました。",
+              "translation": "Gestern habe ich im Supermarkt Brot gekauft.",
+              "explanation": "Reihenfolge: スーパー (Ort) + で + パン (Objekt) + を."
+            },
+            {
+              "id": "n5-e1-q12",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Fülle die Partikel ein: わたしは　みず（　　）のみます。",
+              "correctAnswer": "を",
+              "translation": "Ich trinke Wasser.",
+              "explanation": "Die Partikel を markiert das Akkusativobjekt (Wasser trinken)."
+            },
+            {
+              "id": "n5-e1-q13",
+              "type": "multiple-choice-reading",
+              "question": "【文章】田中さんは学生です。毎日、大学へ行きます。田中さんは図書館で日本語を勉強します。時々、友達と食堂で昼ごはんを食べます。<br><br><b>質問：</b>田中さんはどこで日本語を勉強しますか。",
+              "options": [
+                "図書館",
+                "食堂",
+                "教室",
+                "家"
+              ],
+              "correctAnswer": "図書館",
+              "translation": "Wo lernt Tanaka-san Japanisch?",
+              "explanation": "Im Text: 田中さんは図書館で日本語を勉強します (Tanaka lernt in der Bibliothek)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n5-exam-2",
+      "title": "JLPT N5 Probetest 2 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 25,
+          "questions": [
+            {
+              "id": "n5-e2-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "山に<u>川</u>があります。",
+              "options": [
+                "かわ",
+                "やま",
+                "うみ",
+                "いけ"
+              ],
+              "correctAnswer": "かわ",
+              "translation": "In den Bergen gibt es einen Fluss.",
+              "explanation": "川 wird 'かわ' (kawa - Fluss) gelesen."
+            },
+            {
+              "id": "n5-e2-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "公園に<u>人</u>がたくさんいます。",
+              "options": [
+                "ひと",
+                "おとこ",
+                "おんな",
+                "こども"
+              ],
+              "correctAnswer": "ひと",
+              "translation": "Im Park sind viele Menschen.",
+              "explanation": "人 wird 'ひと' (hito - Mensch/Person) gelesen."
+            },
+            {
+              "id": "n5-e2-q3",
+              "type": "multiple-choice-kanji-reading",
+              "question": "今、<u>何時</u>ですか。",
+              "options": [
+                "なんじ",
+                "なんぷん",
+                "いくら",
+                "いつ"
+              ],
+              "correctAnswer": "なんじ",
+              "translation": "Wie viel Uhr ist es jetzt?",
+              "explanation": "何時 wird 'なんじ' (nanji) gelesen."
+            },
+            {
+              "id": "n5-e2-q4",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "昨日はとても（　　）です。",
+              "options": [
+                "さむかった",
+                "さむい",
+                "さむく",
+                "さむくて"
+              ],
+              "correctAnswer": "さむかった",
+              "translation": "Gestern war es sehr kalt.",
+              "explanation": "Für die Vergangenheit von い-Adjektiven bei 昨日 (gestern) verwendet man かった (さむかった)."
+            },
+            {
+              "id": "n5-e2-q5",
+              "type": "multiple-choice-usage",
+              "question": "あした、いっしょに映画を（　　）か。",
+              "options": [
+                "見ませんか",
+                "見ました",
+                "見ます",
+                "見ない"
+              ],
+              "correctAnswer": "見ませんか",
+              "translation": "Wollen wir morgen zusammen einen Film schauen?",
+              "explanation": "～ませんか drückt eine höfliche Einladung/Vorschlag aus."
+            },
+            {
+              "id": "n5-e2-q6",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>雨</u> in Hiragana:",
+              "correctAnswer": "あめ",
+              "translation": "Schreibe die Lesung für 雨 (Regen) in Hiragana.",
+              "explanation": "雨 wird 'あめ' (ame) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 50,
+          "questions": [
+            {
+              "id": "n5-e2-q7",
+              "type": "multiple-choice-particle",
+              "question": "バス（　　）学校へ行きます。",
+              "options": [
+                "で",
+                "に",
+                "を",
+                "へ"
+              ],
+              "correctAnswer": "で",
+              "translation": "Ich fahre mit dem Bus zur Schule.",
+              "explanation": "Die Partikel で markiert das Verkehrsmittel / das Mittel zur Durchführung."
+            },
+            {
+              "id": "n5-e2-q8",
+              "type": "multiple-choice-particle",
+              "question": "日曜日（　　）どこへも行きませんでした。",
+              "options": [
+                "は",
+                "に",
+                "を",
+                "で"
+              ],
+              "correctAnswer": "は",
+              "translation": "Am Sonntag bin ich nirgendwohin gegangen.",
+              "explanation": "日曜日 wird hier als Thema mit は hervorgehoben."
+            },
+            {
+              "id": "n5-e2-q9",
+              "type": "sentence-ordering",
+              "question": "テーブルの＿　＿　★　＿あります。",
+              "parts": [
+                "に",
+                "上",
+                "りんごが",
+                "の"
+              ],
+              "correctOrder": [
+                "上",
+                "の",
+                "りんごが",
+                "に"
+              ],
+              "fullSentence": "テーブルの上にりんごがあります。",
+              "translation": "Auf dem Tisch liegt ein Apfel.",
+              "explanation": "テーブルの上 (ue) + に (Ort der Existenz) + りんごが (Subjekt) + あります."
+            },
+            {
+              "id": "n5-e2-q10",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Fülle die Partikel ein: ここ（　　）名前を書いてください。",
+              "correctAnswer": "に",
+              "translation": "Bitte schreiben Sie hier Ihren Namen hin.",
+              "explanation": "に markiert das Ziel einer Handlung (hierhin schreiben)."
+            },
+            {
+              "id": "n5-e2-q11",
+              "type": "multiple-choice-reading",
+              "question": "【メモ】マリアさんへ：きょうの午後3時に駅の前のカフェで会いましょう。遅れるときは電話をしてください。けんより。<br><br><b>質問：</b>二人は何時にどこで会いますか。",
+              "options": [
+                "午後3時に駅の前のカフェ",
+                "午後3時にけんさんの家",
+                "午前3時に駅",
+                "午後5時にカフェ"
+              ],
+              "correctAnswer": "午後3時に駅の前のカフェ",
+              "translation": "Um wie viel Uhr und wo treffen sich die beiden?",
+              "explanation": "Im Memo steht: きょうの午後3時に駅の前のカフェで会いましょう (Um 15:00 Uhr im Café vor dem Bahnhof)."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "N4": [
+    {
+      "id": "n4-exam-1",
+      "title": "JLPT N4 Probetest 1 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 30,
+          "questions": [
+            {
+              "id": "n4-e1-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "この服はとても<u>軽い</u>です。",
+              "options": [
+                "かるい",
+                "おもい",
+                "あかるい",
+                "ひろい"
+              ],
+              "correctAnswer": "かるい",
+              "translation": "Diese Kleidung ist sehr leicht.",
+              "explanation": "軽い wird 'かるい' (karui) gelesen und bedeutet 'leicht'."
+            },
+            {
+              "id": "n4-e1-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "友達の結婚式に<u>出席</u>します。",
+              "options": [
+                "しゅっせき",
+                "しゅっせつ",
+                "しゅつせき",
+                "しゅせき"
+              ],
+              "correctAnswer": "しゅっせき",
+              "translation": "Ich nehme an der Hochzeit eines Freundes teil.",
+              "explanation": "出席 wird 'しゅっせき' (shusseki = Anwesenheit/Teilnahme) gelesen."
+            },
+            {
+              "id": "n4-e1-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "雨が降っているので、道が（　　）やすいです。",
+              "options": [
+                "すべり",
+                "とまり",
+                "おち",
+                "ころび"
+              ],
+              "correctAnswer": "すべり",
+              "translation": "Weil es regnet, ist die Straße rutschig.",
+              "explanation": "すべる (rutschen) + やすい = すべりやすい (rutschig / neigt zum Ausrutschen)."
+            },
+            {
+              "id": "n4-e1-q4",
+              "type": "multiple-choice-usage",
+              "question": "約束の時間に（　　）ように早く家を出ました。",
+              "options": [
+                "まにあう",
+                "まにあわない",
+                "おくれる",
+                "あう"
+              ],
+              "correctAnswer": "まにあう",
+              "translation": "Ich bin früh losgegangen, um rechtzeitig zur verabredeten Zeit zu kommen.",
+              "explanation": "間に合う (rechtzeitig kommen) + ように = damit man rechtzeitig ankommt."
+            },
+            {
+              "id": "n4-e1-q5",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>急ぐ</u> in Hiragana:",
+              "correctAnswer": "いそぐ",
+              "translation": "Schreibe die Lesung für 急ぐ in Hiragana.",
+              "explanation": "急ぐ wird 'いそぐ' (isogu = sich beeilen) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 60,
+          "questions": [
+            {
+              "id": "n4-e1-q6",
+              "type": "multiple-choice-grammar",
+              "question": "日本語が上手に（　　）たいです。",
+              "options": [
+                "なり",
+                "して",
+                "なる",
+                "なれ"
+              ],
+              "correctAnswer": "なり",
+              "translation": "Ich möchte gut in Japanisch werden.",
+              "explanation": "上手になる (gut werden) -> ます-Stamm + たい = 上手になりたい."
+            },
+            {
+              "id": "n4-e1-q7",
+              "type": "multiple-choice-grammar",
+              "question": "先生に質問を（　　）いただきました。",
+              "options": [
+                "答えて",
+                "答えられて",
+                "答える",
+                "答えた"
+              ],
+              "correctAnswer": "答えて",
+              "translation": "Der Lehrer war so freundlich, meine Frage zu beantworten.",
+              "explanation": "て-Form + いただく drückt aus, dass jemand höher Gestelltes etwas freundlicherweise für einen tut."
+            },
+            {
+              "id": "n4-e1-q8",
+              "type": "sentence-ordering",
+              "question": "薬を＿　＿　★　＿寝てください。",
+              "parts": [
+                "飲んで",
+                "から",
+                "ゆっくり",
+                "温かい"
+              ],
+              "correctOrder": [
+                "温かい",
+                "薬を",
+                "飲んで",
+                "から"
+              ],
+              "fullSentence": "温かい薬を飲んでからゆっくり寝てください。",
+              "translation": "Bitte trinken Sie warmes Medikament und schlafen Sie dann in Ruhe.",
+              "explanation": "温かい + 薬を + 飲んでから (nachdem man getrunken hat) + ゆっくり."
+            },
+            {
+              "id": "n4-e1-q9",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Ergänze die passende Partikel: 兄は英語（　　）話せます。",
+              "correctAnswer": "が",
+              "translation": "Mein älterer Bruder kann Englisch sprechen.",
+              "explanation": "Beim Potentialverb 話せる (sprechen können) wird das Können-Objekt typischerweise mit が markiert."
+            },
+            {
+              "id": "n4-e1-q10",
+              "type": "multiple-choice-reading",
+              "question": "【案内】図書館の本は一人5冊まで、2週間借りることができます。返却日を過ぎると、新しい本を借りることができなくなります。<br><br><b>質問：</b>図書館のルールについて正しいものはどれですか。",
+              "options": [
+                "返却日を過ぎると新しい本が借りられない",
+                "本は何冊でも借りられる",
+                "1ヶ月間借りることができる",
+                "本は図書館の中だけで読める"
+              ],
+              "correctAnswer": "返却日を過ぎると新しい本が借りられない",
+              "translation": "Was ist laut Ankündigung korrekt über die Regeln der Bibliothek?",
+              "explanation": "Im Text: 返却日を過ぎると、新しい本を借りることができなくなります (Nach Ablauf der Frist kann man keine neuen Bücher leihen)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n4-exam-2",
+      "title": "JLPT N4 Probetest 2 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 30,
+          "questions": [
+            {
+              "id": "n4-e2-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "宿題を<u>忘れて</u>しまいました。",
+              "options": [
+                "わすれて",
+                "おくれて",
+                "こわれて",
+                "はずれて"
+              ],
+              "correctAnswer": "わすれて",
+              "translation": "Ich habe leider die Hausaufgaben vergessen.",
+              "explanation": "忘れる wird 'わすれる' (wasureru = vergessen) gelesen."
+            },
+            {
+              "id": "n4-e2-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "この問題の<u>理由</u>を説明してください。",
+              "options": [
+                "りゆう",
+                "りゆ",
+                "りょう",
+                "りょうゆう"
+              ],
+              "correctAnswer": "りゆう",
+              "translation": "Bitte erklären Sie den Grund für dieses Problem.",
+              "explanation": "理由 wird 'りゆう' (riyū = Grund) gelesen."
+            },
+            {
+              "id": "n4-e2-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "会議が始まるので、資料を（　　）します。",
+              "options": [
+                "準備",
+                "案内",
+                "連絡",
+                "注意"
+              ],
+              "correctAnswer": "準備",
+              "translation": "Weil das Meeting beginnt, bereite ich die Unterlagen vor.",
+              "explanation": "準備 (junbi) bedeutet 'Vorbereitung'."
+            },
+            {
+              "id": "n4-e2-q4",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>届ける</u> in Hiragana:",
+              "correctAnswer": "とどける",
+              "translation": "Schreibe die Lesung für 届ける in Hiragana.",
+              "explanation": "届ける wird 'とどける' (todokeru = liefern/zustellen) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 60,
+          "questions": [
+            {
+              "id": "n4-e2-q5",
+              "type": "multiple-choice-grammar",
+              "question": "テレビを（　　）まま、寝てしまいました。",
+              "options": [
+                "つけた",
+                "つける",
+                "つけ",
+                "つけて"
+              ],
+              "correctAnswer": "つけた",
+              "translation": "Ich bin eingeschlafen, während der Fernseher noch eingeschaltet war.",
+              "explanation": "～たまま drückt aus, dass ein Zustand unverändert beibehalten wird."
+            },
+            {
+              "id": "n4-e2-q6",
+              "type": "multiple-choice-grammar",
+              "question": "雨が（　　）そうですから、傘を持っていきましょう。",
+              "options": [
+                "降り",
+                "降る",
+                "降った",
+                "降れば"
+              ],
+              "correctAnswer": "降り",
+              "translation": "Es sieht so aus, als ob es regnen wird, nehmen wir einen Schirm mit.",
+              "explanation": "Verb-Stamm + そうだ drückt eine Vermutung basierend auf dem Anschein aus (降りそう)."
+            },
+            {
+              "id": "n4-e2-q7",
+              "type": "sentence-ordering",
+              "question": "弟は＿　＿　★　＿言いました。",
+              "parts": [
+                "日本へ",
+                "行きたい",
+                "と",
+                "来年"
+              ],
+              "correctOrder": [
+                "来年",
+                "日本へ",
+                "行きたい",
+                "と"
+              ],
+              "fullSentence": "弟は来年日本へ行きたいと言いました。",
+              "translation": "Mein jüngerer Bruder sagte, dass er nächstes Jahr nach Japan reisen möchte.",
+              "explanation": "来年 + 日本へ + 行きたい + と (Zitierpartikel) + 言いました."
+            },
+            {
+              "id": "n4-e2-q8",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Ergänze die passende Partikel: 先生（　　）褒められました。",
+              "correctAnswer": "に",
+              "translation": "Ich wurde vom Lehrer gelobt.",
+              "explanation": "Im Passivsatz (褒められる) wird der Handelnde/Urheber mit に markiert."
+            },
+            {
+              "id": "n4-e2-q9",
+              "type": "multiple-choice-reading",
+              "question": "【メール】田中さん、明日のミーティングは10時から11時に変更になりました。場所は第2会議室です。よろしくお願いします。<br><br><b>質問：</b>明日のミーティングは何時からどこで行われますか。",
+              "options": [
+                "11時から第2会議室",
+                "10時から第2会議室",
+                "11時から第1会議室",
+                "10時から第1会議室"
+              ],
+              "correctAnswer": "11時から第2会議室",
+              "translation": "Wann und wo findet das morgige Meeting statt?",
+              "explanation": "Im Text: 10時から11時に変更 (von 10 auf 11 Uhr verschoben) und 場所は第2会議室 (Ort: Raum 2)."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "N3": [
+    {
+      "id": "n3-exam-1",
+      "title": "JLPT N3 Probetest 1 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 30,
+          "questions": [
+            {
+              "id": "n3-e1-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "この機械は<u>複雑</u>な構造をしている。",
+              "options": [
+                "ふくざつ",
+                "ふくざっ",
+                "ふくしつ",
+                "ふくじつ"
+              ],
+              "correctAnswer": "ふくざつ",
+              "translation": "Diese Maschine hat eine komplexe Struktur.",
+              "explanation": "複雑 wird 'ふくざつ' (fukuzatsu = kompliziert/komplex) gelesen."
+            },
+            {
+              "id": "n3-e1-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "環境問題を<u>解決</u>するために話し合う。",
+              "options": [
+                "かいけつ",
+                "かいせつ",
+                "かいけい",
+                "かいさつ"
+              ],
+              "correctAnswer": "かいけつ",
+              "translation": "Wir diskutieren, um Umweltprobleme zu lösen.",
+              "explanation": "解決 wird 'かいけつ' (kaiketsu = Lösung/Bereinigung) gelesen."
+            },
+            {
+              "id": "n3-e1-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "彼女の意見には（　　）できる点が多い。",
+              "options": [
+                "納得",
+                "勘違い",
+                "後悔",
+                "苦情"
+              ],
+              "correctAnswer": "納得",
+              "translation": "An ihrer Meinung gibt es viele Punkte, die man nachvollziehen kann.",
+              "explanation": "納得 (nattoku = Verständnis/Zustimmung/Überzeugung) passt semantisch."
+            },
+            {
+              "id": "n3-e1-q4",
+              "type": "multiple-choice-usage",
+              "question": "電車が事故で（　　）、30分遅刻した。",
+              "options": [
+                "見合わせになり",
+                "とまり",
+                "こわれて",
+                "なくなり"
+              ],
+              "correctAnswer": "見合わせになり",
+              "translation": "Wegen eines Unfalls wurde der Zugverkehr vorübergehend ausgesetzt, und ich kam 30 Minuten zu spät.",
+              "explanation": "運転見合わせ (Aussetzen des Betriebs) ist der typische Bahn-Ausdruck."
+            },
+            {
+              "id": "n3-e1-q5",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>補う</u> in Hiragana:",
+              "correctAnswer": "おぎなう",
+              "translation": "Schreibe die Lesung für 補う in Hiragana.",
+              "explanation": "補う wird 'おぎなう' (oginau = ergänzen/ausgleichen) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 70,
+          "questions": [
+            {
+              "id": "n3-e1-q6",
+              "type": "multiple-choice-grammar",
+              "question": "雨が降らない（　　）、運動会は予定通り行われます。",
+              "options": [
+                "かぎり",
+                "ばかり",
+                "ほど",
+                "とおり"
+              ],
+              "correctAnswer": "かぎり",
+              "translation": "Solange es nicht regnet, findet das Sportfest wie geplant statt.",
+              "explanation": "～かぎり bedeutet 'solange wie / unter der Bedingung dass'."
+            },
+            {
+              "id": "n3-e1-q7",
+              "type": "multiple-choice-grammar",
+              "question": "試験の結果が心配で（　　）。",
+              "options": [
+                "たまらない",
+                "いけない",
+                "ならない",
+                "しょうがない"
+              ],
+              "correctAnswer": "たまらない",
+              "translation": "Ich mache mir unerträglich große Sorgen wegen des Prüfungsergebnisses.",
+              "explanation": "～てたまらない drückt ein unkontrollierbares, starkes Gefühl aus."
+            },
+            {
+              "id": "n3-e1-q8",
+              "type": "sentence-ordering",
+              "question": "忙しい＿　＿　★　＿ありがとうございました。",
+              "parts": [
+                "にも",
+                "かかわらず",
+                "お越しいただき",
+                "ところ"
+              ],
+              "correctOrder": [
+                "ところ",
+                "お越しいただき",
+                "にも",
+                "かかわらず"
+              ],
+              "fullSentence": "お忙しいところにもかかわらずお越しいただきありがとうございました。",
+              "translation": "Vielen Dank, dass Sie trotz Ihrer Beschäftigung gekommen sind.",
+              "explanation": "お忙しいところ (obwohl Sie beschäftigt sind) + お越しいただき (dass Sie gekommen sind) + にもかかわらず."
+            },
+            {
+              "id": "n3-e1-q9",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Ergänze die Grammatik (2 Schriftzeichen): 彼はプロの選手（　　）あって、素晴らしい動きをする。",
+              "correctAnswer": "だけ",
+              "translation": "Da er ein Profispieler ist, bewegt er sich entsprechend herausragend.",
+              "explanation": "～だけあって drückt aus: 'Genau wie von ... zu erwarten'."
+            },
+            {
+              "id": "n3-e1-q10",
+              "type": "multiple-choice-reading",
+              "question": "【短文読解】人間は言葉を使って物事を考える。言葉が豊かになれば、思考の幅も広がる。つまり、読書を通じて多くの言葉に触れることは、単に知識を増やすだけでなく、深く考える力を養うことにつながるのである。<br><br><b>質問：</b>筆者が言いたいことは何か。",
+              "options": [
+                "読書は思考力を養うために有効である",
+                "言葉がなくても人間は深く考えることができる",
+                "知識を増やすことだけが読書の目的である",
+                "言葉が多い人は本を読まなくてもよい"
+              ],
+              "correctAnswer": "読書は思考力を養うために有効である",
+              "translation": "Was ist die Kernaussage des Autors?",
+              "explanation": "Der Text betont: 読書を通じて多くの言葉に触れることは...深く考える力を養うことにつながる."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n3-exam-2",
+      "title": "JLPT N3 Probetest 2 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 30,
+          "questions": [
+            {
+              "id": "n3-e2-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "この地域は自然が<u>豊か</u>だ。",
+              "options": [
+                "ゆたか",
+                "ほそか",
+                "のどか",
+                "しずか"
+              ],
+              "correctAnswer": "ゆたか",
+              "translation": "Diese Region ist reich an Natur.",
+              "explanation": "豊か wird 'ゆたか' (yutaka = reich/wohlhabend/üppig) gelesen."
+            },
+            {
+              "id": "n3-e2-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "実験が<u>成功</u>した。",
+              "options": [
+                "せいこう",
+                "しょうこう",
+                "せいごう",
+                "じょうこう"
+              ],
+              "correctAnswer": "せいこう",
+              "translation": "Das Experiment war erfolgreich.",
+              "explanation": "成功 wird 'せいこう' (seikō = Erfolg) gelesen."
+            },
+            {
+              "id": "n3-e2-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "急な用事で旅行を（　　）せざるを得なくなった。",
+              "options": [
+                "延期",
+                "修理",
+                "開発",
+                "拡大"
+              ],
+              "correctAnswer": "延期",
+              "translation": "Wegen einer dringenden Angelegenheit musste die Reise verschoben werden.",
+              "explanation": "延期 (enki) bedeutet Aufschub/Verschiebung."
+            },
+            {
+              "id": "n3-e2-q4",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>省く</u> in Hiragana:",
+              "correctAnswer": "はぶく",
+              "translation": "Schreibe die Lesung für 省く in Hiragana.",
+              "explanation": "省く wird 'はぶく' (habuku = weglassen/einsparen) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 70,
+          "questions": [
+            {
+              "id": "n3-e2-q5",
+              "type": "multiple-choice-grammar",
+              "question": "先生の（　　）通りに発音してみた。",
+              "options": [
+                "おっしゃった",
+                "言った",
+                "話した",
+                "申した"
+              ],
+              "correctAnswer": "おっしゃった",
+              "translation": "Ich habe versucht, es genau so auszusprechen, wie der Lehrer es gesagt hat.",
+              "explanation": "おっしゃる ist das Sonkeigo (Respektsprache) für 言う des Lehrers."
+            },
+            {
+              "id": "n3-e2-q6",
+              "type": "multiple-choice-grammar",
+              "question": "どんなに難しくても、最後まで（　　）抜くつもりだ。",
+              "options": [
+                "やり",
+                "やる",
+                "やって",
+                "やれば"
+              ],
+              "correctAnswer": "やり",
+              "translation": "Egal wie schwer es ist, ich habe vor, es bis zum bitteren Ende durchzuziehen.",
+              "explanation": "Verb-Stamm + 抜く (ぬく) bedeutet, etwas bis zum Ende durchzuhalten."
+            },
+            {
+              "id": "n3-e2-q7",
+              "type": "sentence-ordering",
+              "question": "健康の＿　＿　★　＿大切です。",
+              "parts": [
+                "運動することが",
+                "ためには",
+                "毎朝",
+                "散歩や"
+              ],
+              "correctOrder": [
+                "ためには",
+                "毎朝",
+                "散歩や",
+                "運動することが"
+              ],
+              "fullSentence": "健康のためには毎朝散歩や運動することが大切です。",
+              "translation": "Für die Gesundheit ist es wichtig, jeden Morgen spazieren zu gehen oder Sport zu treiben.",
+              "explanation": "健康のためには + 毎朝 + 散歩や + 運動することが + 大切です."
+            },
+            {
+              "id": "n3-e2-q8",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Ergänze die Partikel (1 Zeichen): 噂（　　）よると、あの店は近々閉店するらしい。",
+              "correctAnswer": "に",
+              "translation": "Gerüchten zufolge soll dieses Geschäft demnächst schließen.",
+              "explanation": "～によると drückt eine Informationsquelle aus ('gemäß / laut')."
+            },
+            {
+              "id": "n3-e2-q9",
+              "type": "multiple-choice-reading",
+              "question": "【お知らせ】ゴミの分別収集について：燃えるゴミは火曜日と金曜日の朝8時までに出してください。ペットボトルは洗ってラベルを剥がしてから専用の青い袋に入れて出してください。<br><br><b>質問：</b>ペットボトルを出すときに守るべきルールはどれか。",
+              "options": [
+                "洗ってラベルを剥がして青い袋に入れる",
+                "洗わずにそのまま透明な袋に入れる",
+                "火曜日の夜に出す",
+                "燃えるゴミと同じ袋に入れて出す"
+              ],
+              "correctAnswer": "洗ってラベルを剥がして青い袋に入れる",
+              "translation": "Welche Regel muss bei der Abgabe von PET-Flaschen beachtet werden?",
+              "explanation": "Im Text: 洗ってラベルを剥がしてから専用の青い袋に入れて出してください."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "N2": [
+    {
+      "id": "n2-exam-1",
+      "title": "JLPT N2 Probetest 1 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 35,
+          "questions": [
+            {
+              "id": "n2-e1-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "事故の原因を<u>徹底</u>的に調査する。",
+              "options": [
+                "てってい",
+                "とうてい",
+                "てつてい",
+                "とうたい"
+              ],
+              "correctAnswer": "てってい",
+              "translation": "Die Unfallursache wird gründlich untersucht.",
+              "explanation": "徹底 wird 'てってい' (tettei = gründlich/lückenlos) gelesen."
+            },
+            {
+              "id": "n2-e1-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "新製品の需要が急速に<u>拡大</u>している。",
+              "options": [
+                "かくだい",
+                "こうだい",
+                "きゃくだい",
+                "かくたい"
+              ],
+              "correctAnswer": "かくだい",
+              "translation": "Die Nachfrage nach dem neuen Produkt expandiert rasant.",
+              "explanation": "拡大 wird 'かくだい' (kakudai = Vergrößerung/Expansion) gelesen."
+            },
+            {
+              "id": "n2-e1-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "計画はほぼ（　　）通りに進んでいる。",
+              "options": [
+                "筋書き",
+                "手がかり",
+                "見積もり",
+                "手配"
+              ],
+              "correctAnswer": "筋書き",
+              "translation": "Der Plan verläuft fast genau nach Drehbuch/Plan.",
+              "explanation": "筋書き (sujigaki = Handlungsablauf / Drehbuch) passt zu '筋書き通り'."
+            },
+            {
+              "id": "n2-e1-q4",
+              "type": "multiple-choice-usage",
+              "question": "彼女の丁寧な説明で、疑問が（　　）解消された。",
+              "options": [
+                "一挙に",
+                "一斉に",
+                "一概に",
+                "一律に"
+              ],
+              "correctAnswer": "一挙に",
+              "translation": "Durch ihre gründliche Erklärung wurden die Zweifel mit einem Schlag beseitigt.",
+              "explanation": "一挙に (ikkyo ni) bedeutet 'mit einem Schlag / auf einen Streich'."
+            },
+            {
+              "id": "n2-e1-q5",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>免れる</u> in Hiragana:",
+              "correctAnswer": "まぬかれる",
+              "translation": "Schreibe die Lesung für 免れる in Hiragana.",
+              "explanation": "免れる wird 'まぬかれる' (manukareru = entgehen/verschont bleiben) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 70,
+          "questions": [
+            {
+              "id": "n2-e1-q6",
+              "type": "multiple-choice-grammar",
+              "question": "プロのピアニスト（　　）、さすがに見事な演奏だ。",
+              "options": [
+                "とあって",
+                "にしては",
+                "にあって",
+                "を皮切りに"
+              ],
+              "correctAnswer": "とあって",
+              "translation": "Da er ein Profi-Pianist ist, ist das Spiel wie erwartet meisterhaft.",
+              "explanation": "～とあって drückt den Grund/die gegebene Situation aus ('da eben...')."
+            },
+            {
+              "id": "n2-e1-q7",
+              "type": "multiple-choice-grammar",
+              "question": "この作品は、単なる娯楽（　　）、深い社会的メッセージを含んでいる。",
+              "options": [
+                "にとどまらず",
+                "にそくして",
+                "をふまえて",
+                "にひきかえ"
+              ],
+              "correctAnswer": "にとどまらず",
+              "translation": "Dieses Werk beschränkt sich nicht nur auf reine Unterhaltung, sondern beinhaltet eine tiefe soziale Botschaft.",
+              "explanation": "～にとどまらず bedeutet 'nicht nur beschränkt auf A, sondern auch B'."
+            },
+            {
+              "id": "n2-e1-q8",
+              "type": "sentence-ordering",
+              "question": "事態が＿　＿　★　＿言わざるを得ない。",
+              "parts": [
+                "以上",
+                "責任を",
+                "ここまで悪化した",
+                "取らざるを"
+              ],
+              "correctOrder": [
+                "ここまで悪化した",
+                "以上",
+                "責任を",
+                "取らざるを"
+              ],
+              "fullSentence": "事態がここまで悪化した以上、責任を取らざるを得ない。",
+              "translation": "Da sich die Lage derart verschlechtert hat, bleibt nichts anderes übrig, als Verantwortung zu übernehmen.",
+              "explanation": "ここまで悪化した + 以上 (da nun einmal...) + 責任を + 取らざるを (得ない)."
+            },
+            {
+              "id": "n2-e1-q9",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Ergänze die Grammatik (2 Kanji): 理由の（　　）を問わず、遅刻は認められません。",
+              "correctAnswer": "如何",
+              "translation": "Unabhängig vom Grund wird ein Zuspätkommen nicht gestattet.",
+              "explanation": "如何を問わず (いかんをとわず) = ungeachtet / unabhängig von."
+            },
+            {
+              "id": "n2-e1-q10",
+              "type": "multiple-choice-reading",
+              "question": "【評論読解】AIの発展により、従来人間が担ってきた単純作業のみならず、高度な専門判断すら機械が代替可能になりつつある。しかし、何を美しいと感じ、何を価値あるものとして選ぶかという根源的な感性や倫理観は、身体性を持つ人間にしか持ち得ない。これからの時代に求められるのは、知識の量ではなく、それらをどう人間らしく結びつけるかという構想力である。<br><br><b>質問：</b>これからの時代に最も重視される能力として筆者が述べているものはどれか。",
+              "options": [
+                "知識を人間らしく統合する構想力",
+                "大量の専門知識を正確に記憶する力",
+                "AIに代わって単純作業を素早く行う力",
+                "機械のアルゴリズムを完璧に理解する力"
+              ],
+              "correctAnswer": "知識を人間らしく統合する構想力",
+              "translation": "Welche Fähigkeit wird laut dem Autor in der kommenden Ära am meisten gefordert sein?",
+              "explanation": "Im Schlusssatz: 求められるのは、知識の量ではなく、それらをどう人間らしく結びつけるかという構想力である."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n2-exam-2",
+      "title": "JLPT N2 Probetest 2 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 35,
+          "questions": [
+            {
+              "id": "n2-e2-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "双方の意見の食い違いを<u>妥協</u>によって収拾した。",
+              "options": [
+                "だきょう",
+                "たいきょう",
+                "たこう",
+                "だこう"
+              ],
+              "correctAnswer": "だきょう",
+              "translation": "Die Meinungsverschiedenheit beider Seiten wurde durch einen Kompromiss beigelegt.",
+              "explanation": "妥協 wird 'だきょう' (dakyō = Kompromiss) gelesen."
+            },
+            {
+              "id": "n2-e2-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "新しい制度の導入を<u>検討</u>する。",
+              "options": [
+                "けんとう",
+                "けんどう",
+                "けんちょう",
+                "かんとう"
+              ],
+              "correctAnswer": "けんとう",
+              "translation": "Wir prüfen die Einführung eines neuen Systems.",
+              "explanation": "検討 wird 'けんとう' (kentō = Prüfung/Überlegung) gelesen."
+            },
+            {
+              "id": "n2-e2-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "彼の突然の辞任は、周囲に大きな（　　）を与えた。",
+              "options": [
+                "衝撃",
+                "衝動",
+                "刺激",
+                "反動"
+              ],
+              "correctAnswer": "衝撃",
+              "translation": "Sein plötzlicher Rücktritt versetzte sein Umfeld in großen Schock.",
+              "explanation": "衝撃を与える (shōgeki o ataeru) = einen Schock/Erschütterung auslösen."
+            },
+            {
+              "id": "n2-e2-q4",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>担う</u> in Hiragana:",
+              "correctAnswer": "になう",
+              "translation": "Schreibe die Lesung für 担う in Hiragana.",
+              "explanation": "担う wird 'になう' (ninau = tragen/übernehmen, z.B. Verantwortung) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 70,
+          "questions": [
+            {
+              "id": "n2-e2-q5",
+              "type": "multiple-choice-grammar",
+              "question": "周囲の反対を（　　）、彼は夢を追い続けた。",
+              "options": [
+                "ものともせずに",
+                "よそに",
+                "きっかけに",
+                "契機として"
+              ],
+              "correctAnswer": "ものともせずに",
+              "translation": "Ohne sich um den Widerstand seines Umfelds zu scheren, verfolgte er weiter seinen Traum.",
+              "explanation": "～をものともせずに drückt aus: 'Trotz aller Widrigkeiten/Hindernisse mutig trotzen'."
+            },
+            {
+              "id": "n2-e2-q6",
+              "type": "multiple-choice-grammar",
+              "question": "最新の統計に（　　）、少子高齢化のペースは予想を上回っている。",
+              "options": [
+                "よれば",
+                "即して",
+                "基づき",
+                "照らして"
+              ],
+              "correctAnswer": "よれば",
+              "translation": "Laut neuester Statistik übersteigt das Tempo der Überalterung die Prognosen.",
+              "explanation": "統計によれば = 'gemäß der Statistik'."
+            },
+            {
+              "id": "n2-e2-q7",
+              "type": "sentence-ordering",
+              "question": "長年の努力が＿　＿　★　＿感無量だ。",
+              "parts": [
+                "実を結んだ",
+                "瞬間を",
+                "迎えて",
+                "今"
+              ],
+              "correctOrder": [
+                "実を結んだ",
+                "今",
+                "瞬間を",
+                "迎えて"
+              ],
+              "fullSentence": "長年の努力が実を結んだ今、瞬間を迎えて感無量だ。",
+              "translation": "Jetzt, da die langjährigen Mühen Früchte getragen haben, bin ich voller Rührung.",
+              "explanation": "実を結んだ + 今 + 瞬間を迎えて + 感無量だ."
+            },
+            {
+              "id": "n2-e2-q8",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Ergänze die Partikel (1 Zeichen): 成功するかどうかは、本人の努力（　　）かかっている。",
+              "correctAnswer": "に",
+              "translation": "Ob es gelingt oder nicht, hängt vom Einsatz der Person selbst ab.",
+              "explanation": "～にかかっている = 'abhängen von'."
+            },
+            {
+              "id": "n2-e2-q9",
+              "type": "multiple-choice-reading",
+              "question": "【社内通知】業務効率化の一環として、来月より全社的にコアタイムなしのフルフレックスタイム制度を試験導入いたします。これに伴い、各部署での情報共有やスケジュール管理はクラウドツールを徹底してご活用ください。<br><br><b>質問：</b>この通知の目的は何か。",
+              "options": [
+                "フルフレックス制度の試験導入と管理ツールの徹底周知",
+                "コアタイムの延長告知",
+                "クラウドツールの利用禁止案内",
+                "残業時間の削減目標の義務化"
+              ],
+              "correctAnswer": "フルフレックス制度の試験導入と管理ツールの徹底周知",
+              "translation": "Was ist der Zweck dieser Bekanntmachung?",
+              "explanation": "Im Text: コアタイムなしのフルフレックスタイム制度を試験導入いたします... クラウドツールを徹底してご活用ください."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "N1": [
+    {
+      "id": "n1-exam-1",
+      "title": "JLPT N1 Probetest 1 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 40,
+          "questions": [
+            {
+              "id": "n1-e1-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "過去の失敗を<u>省察</u>し、次なる方針を固める。",
+              "options": [
+                "せいさつ",
+                "しょうさつ",
+                "せいさい",
+                "しょうさい"
+              ],
+              "correctAnswer": "せいさつ",
+              "translation": "Vergangene Fehler selbstkritisch reflektieren und den nächsten Kurs festlegen.",
+              "explanation": "省察 wird 'せいさつ' (seisatsu = Selbstprüfung / kritische Reflexion) gelesen."
+            },
+            {
+              "id": "n1-e1-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "彼の学識の深さには<u>感服</u>するほかない。",
+              "options": [
+                "かんぷく",
+                "かんぽく",
+                "かんふく",
+                "がんぷく"
+              ],
+              "correctAnswer": "かんぷく",
+              "translation": "Vor der Tiefe seiner Gelehrsamkeit kann man nur Bewunderung empfinden.",
+              "explanation": "感服 wird 'かんぷく' (kanpuku = tiefe Bewunderung / Hochachtung) gelesen."
+            },
+            {
+              "id": "n1-e1-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "これまでの定説を覆す新たな発見が、学会に大きな（　　）を巻き起こした。",
+              "options": [
+                "波紋",
+                "余波",
+                "波動",
+                "旋風"
+              ],
+              "correctAnswer": "波紋",
+              "translation": "Eine neue Entdeckung, die gängige Theorien umstößt, schlug hohe Wellen in der Wissenschaftswelt.",
+              "explanation": "波紋を巻き起こす (hamon o makiokosu) = weite Wellen / Aufruhr schlagen."
+            },
+            {
+              "id": "n1-e1-q4",
+              "type": "multiple-choice-usage",
+              "question": "彼の演説は聴衆の心を激しく揺さぶり、（　　）拍手が鳴り響いた。",
+              "options": [
+                "割れんばかりの",
+                "破れんばかりの",
+                "裂けんばかりの",
+                "壊れんばかりの"
+              ],
+              "correctAnswer": "割れんばかりの",
+              "translation": "Seine Rede ergriff die Zuhörer zutiefst und ohrenbetäubender, tosender Applaus erklang.",
+              "explanation": "割れんばかりの拍手 (waren bakari no hakushu) = tosender / donnernder Applaus."
+            },
+            {
+              "id": "n1-e1-q5",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>滞る</u> in Hiragana:",
+              "correctAnswer": "とどこおる",
+              "translation": "Schreibe die Lesung für 滞る in Hiragana.",
+              "explanation": "滞る wird 'とどこおる' (todokōru = ins Stocken geraten / im Rückstand sein) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 70,
+          "questions": [
+            {
+              "id": "n1-e1-q6",
+              "type": "multiple-choice-grammar",
+              "question": "国家の命運を（　　）重大な岐路に立たされている。",
+              "options": [
+                "かけた",
+                "めぐる",
+                "おける",
+                "とおした"
+              ],
+              "correctAnswer": "かけた",
+              "translation": "Wir stehen an einer folgenschweren Wegkreuzung, bei der das Schicksal der Nation auf dem Spiel steht.",
+              "explanation": "命運をかける (das Schicksal aufs Spiel setzen)."
+            },
+            {
+              "id": "n1-e1-q7",
+              "type": "multiple-choice-grammar",
+              "question": "どれほど技術が進歩しようとも、人間の温もり（　　）医療は成り立たない。",
+              "options": [
+                "なくしては",
+                "なしには",
+                "をぬきにして",
+                "はおろか"
+              ],
+              "correctAnswer": "なくしては",
+              "translation": "Egal wie weit die Technologie fortschreitet, ohne menschliche Wärme kann Medizin nicht existieren.",
+              "explanation": "～なくしては drückt eine unabdingbare Voraussetzung aus ('ohne ... ist ... unmöglich')."
+            },
+            {
+              "id": "n1-e1-q8",
+              "type": "sentence-ordering",
+              "question": "国民の信頼を＿　＿　★　＿極めて重い。",
+              "parts": [
+                "損なった",
+                "政治的責任は",
+                "政治家の",
+                "ことに対する"
+              ],
+              "correctOrder": [
+                "損なった",
+                "ことに対する",
+                "政治家の",
+                "政治的責任は"
+              ],
+              "fullSentence": "国民の信頼を損なったことに対する政治家の政治的責任は極めて重い。",
+              "translation": "Die politische Verantwortung der Politiker dafür, das Vertrauen des Volkes verspielt zu haben, wiegt außerordentlich schwer.",
+              "explanation": "損なった + ことに対する + 政治家の + 政治的責任は + 極めて重い."
+            },
+            {
+              "id": "n1-e1-q9",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Ergänze die Grammatik (2 Kanji): 相手が誰で（　　）、法の下では平等でなければならない。",
+              "correctAnswer": "あれ",
+              "translation": "Wer auch immer das Gegenüber sein mag, vor dem Gesetz muss Gleichheit herrschen.",
+              "explanation": "～であれ bedeutet 'wer/was auch immer es sei'."
+            },
+            {
+              "id": "n1-e1-q10",
+              "type": "multiple-choice-reading",
+              "question": "【論説文読解】言葉は思考の道具にとどまらず、私たちが世界を分節化し認識する枠組みそのものを規定している。文化ごとに固有の語彙や概念が存在するのは、各共同体が生存の文脈において何を重視し、何を見過ごしてきたかの集積に他ならない。したがって、他言語を学ぶ営みとは、単なる記号の置き換え作業ではなく、異質な世界像を内面化し、自らの認識論的偏りを相対化する契機となり得るのである。<br><br><b>質問：</b>筆者は「他言語を学ぶ営み」をどのようなものとして捉えているか。",
+              "options": [
+                "自己の世界認識を相対化し広げる契機",
+                "機械翻訳の精度を補完するための記号変換作業",
+                "自国の文化の優位性を証明するための手段",
+                "固有の語彙を失わせる均質化のプロセス"
+              ],
+              "correctAnswer": "自己の世界認識を相対化し広げる契機",
+              "translation": "Wie versteht der Autor das Erlernen einer Fremdsprache?",
+              "explanation": "Schlüsselsatz: 異質な世界像を内面化し、自らの認識論的偏りを相対化する契機となり得るのである."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n1-exam-2",
+      "title": "JLPT N1 Probetest 2 (Offizielles Testformat)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 40,
+          "questions": [
+            {
+              "id": "n1-e2-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "条約の<u>批准</u>を巡って激しい議論が交わされた。",
+              "options": [
+                "ひじゅん",
+                "はいじゅん",
+                "ひしゅん",
+                "ほうじゅん"
+              ],
+              "correctAnswer": "ひじゅん",
+              "translation": "Über die Ratifizierung des Vertrags wurde eine hitzige Debatte geführt.",
+              "explanation": "批准 wird 'ひじゅん' (hijun = Ratifizierung) gelesen."
+            },
+            {
+              "id": "n1-e2-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "法改正によって生じる影響は極めて<u>甚大</u>である。",
+              "options": [
+                "じんだい",
+                "しんだい",
+                "じんたい",
+                "しんたい"
+              ],
+              "correctAnswer": "じんだい",
+              "translation": "Die durch die Gesetzesänderung entstehenden Auswirkungen sind immens.",
+              "explanation": "甚大 wird 'じんだい' (jindai = enorm/kolossal) gelesen."
+            },
+            {
+              "id": "n1-e2-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "相手の挑発に（　　）動じることなく、冷静に対応した。",
+              "options": [
+                "みじんも",
+                "いっそ",
+                "まんまと",
+                "ろくに"
+              ],
+              "correctAnswer": "みじんも",
+              "translation": "Ohne sich auch nur im Geringsten von den Provokationen des Gegners beirren zu lassen, reagierte er gelassen.",
+              "explanation": "微塵も～ない (mijin mo ... nai) = 'nicht im Geringsten / kein bisschen'."
+            },
+            {
+              "id": "n1-e2-q4",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>賄う</u> in Hiragana:",
+              "correctAnswer": "まかなう",
+              "translation": "Schreibe die Lesung für 賄う in Hiragana.",
+              "explanation": "賄う wird 'まかなう' (makanau = bestreiten/decken/finanzieren) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 70,
+          "questions": [
+            {
+              "id": "n1-e2-q5",
+              "type": "multiple-choice-grammar",
+              "question": "この不祥事は、組織全体のモラルの崩壊を（　　）何ものでもない。",
+              "options": [
+                "物語るに",
+                "おいて",
+                "鑑みて",
+                "余儀なくされて"
+              ],
+              "correctAnswer": "物語るに",
+              "translation": "Dieser Skandal ist nichts anderes, als dass er den moralischen Zerfall der gesamten Organisation bezeugt.",
+              "explanation": "～を物語るにほかならない / ～何ものでもない = 'bezeugt nichts Geringeres als...'."
+            },
+            {
+              "id": "n1-e2-q6",
+              "type": "multiple-choice-grammar",
+              "question": "景気の回復（　　）、雇用の改善が見られない。",
+              "options": [
+                "にあって",
+                "をよそに",
+                "にかまけて",
+                "と相まって"
+              ],
+              "correctAnswer": "をよそに",
+              "translation": "Ungeachtet der Konjunkturbelebung ist keine Verbesserung auf dem Arbeitsmarkt in Sicht.",
+              "explanation": "～をよそに drückt aus: 'Völlig unbeeindruckt / ungeachtet von etwas, das eigentlich Einfluss haben sollte'."
+            },
+            {
+              "id": "n1-e2-q7",
+              "type": "sentence-ordering",
+              "question": "科学技術が＿　＿　★　＿忘れてはならない。",
+              "parts": [
+                "どんなに発展しようと",
+                "存在であることを",
+                "人間が自然の一部である",
+                "という事実を"
+              ],
+              "correctOrder": [
+                "どんなに発展しようと",
+                "人間が自然の一部である",
+                "存在であることを",
+                "という事実を"
+              ],
+              "fullSentence": "科学技術がどんなに発展しようと、人間が自然の一部である存在であることをという事実を忘れてはならない。",
+              "translation": "Egal wie sehr sich Technologie entwickelt, man darf die Tatsache nicht vergessen, dass der Mensch ein Teil der Natur ist.",
+              "explanation": "どんなに発展しようと + 人間が自然の一部である + という事実を + 忘れてはならない."
+            },
+            {
+              "id": "n1-e2-q8",
+              "type": "fill-in-the-blank-grammar",
+              "question": "Ergänze die Grammatik (1 Zeichen): 危険極まり（　　）行為だ。",
+              "correctAnswer": "ない",
+              "translation": "Das ist ein extrem gefährliches Verhalten.",
+              "explanation": "極まりない (きわまりない) = äußerst / ungemein."
+            },
+            {
+              "id": "n1-e2-q9",
+              "type": "multiple-choice-reading",
+              "question": "【評論文読解】芸術の根底にあるのは、日常言語が取りこぼしてしまう世界の生々しい手触りを救い出すことである。記号化され、効率化された社会においては、名付け得ぬ感情や曖昧な陰影は切り捨てられがちだ。しかし、真に人間を人間たらしめているのは、そうした効率の外部にある無駄や沈黙の領分である。芸術作品と対峙する体験は、私たちが自らの中に眠るその領分を再発見する儀式に他ならない。<br><br><b>質問：</b>筆者の主張と一致するものはどれか。",
+              "options": [
+                "芸術は日常の効率化社会で見失われがちな人間の本質を再発見させる",
+                "日常言語をより論理的かつ効率的に洗練させることが芸術の役割である",
+                "芸術作品を鑑賞することは無駄であり、社会の発展を妨げる",
+                "名付け得ぬ感情は速やかに排除され、記号化されるべきである"
+              ],
+              "correctAnswer": "芸術は日常の効率化社会で見失われがちな人間の本質を再発見させる",
+              "translation": "Welche Aussage stimmt mit der These des Autors überein?",
+              "explanation": "Der Text belegt: 芸術作品と対峙する体験は、私たちが自らの中に眠るその領分（効率の外部にある無駄や沈黙）を再発見する儀式に他ならない."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
