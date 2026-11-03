@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JLPT Study de</title>
+    <link rel="icon" type="image/png" href="icon.png" />
+    <link rel="apple-touch-icon" href="icon.png" />
     <style>
         /* --- GRUNDDESIGN & FARBEN --- */
         :root {
@@ -458,6 +460,9 @@
         .block-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
         .block-card.special { background: var(--accent-pink-light); color: var(--accent-pink); border-color: transparent; }
         .block-card.special-global { background: var(--primary-light); color: white; border-color: transparent; }
+        .block-size-control { display: flex; align-items: center; justify-content: space-between; gap: 15px; background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 18px; margin-bottom: 15px; flex-wrap: wrap; }
+        .block-size-slider { flex: 1; min-width: 140px; accent-color: var(--accent-pink); cursor: pointer; height: 6px; }
+        .block-size-badge { background: var(--accent-pink-light); color: var(--accent-pink); font-weight: 700; font-size: 13px; padding: 4px 12px; border-radius: 15px; min-width: 95px; text-align: center; }
     </style>
     <!-- Drag and Drop Library -->
     <header>
@@ -561,6 +566,11 @@
         </div>
 
         <div class="section-label" style="margin-top:30px;" id="ui-block-label">Wähle einen Block (je 20 Vokabeln)</div>
+        <div class="block-size-control">
+            <span id="ui-block-size-text" style="font-size: 14px; font-weight: 600; color: var(--primary-dark);">Vokabeln pro Block:</span>
+            <input type="range" id="block-size-slider" class="block-size-slider" min="5" max="100" step="5" value="20" oninput="setBlockSize(this.value)" />
+            <span id="block-size-display" class="block-size-badge">20 Vokabeln</span>
+        </div>
         <div id="blocks-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;"></div>
 
         <div id="path-blocks-section" class="hidden">
@@ -570,8 +580,8 @@
 
         <div class="section-label" id="ui-special-label">Spezial-Training</div>
         <div style="display: flex; gap: 15px; margin-bottom: 40px;">
-            <div class="block-card special" style="flex:1" onclick="startRandom(false, false)">Level Mix (20)</div>
-            <div class="block-card special-global" style="flex:1" onclick="startRandom(true, false)">Global Mix (20)</div>
+            <div class="block-card special" id="btn-level-mix-block" style="flex:1" onclick="startRandom(false, false)">Level Mix (20)</div>
+            <div class="block-card special-global" id="btn-global-mix-block" style="flex:1" onclick="startRandom(true, false)">Global Mix (20)</div>
             <div class="block-card special" style="flex:1" onclick="startRandom(false, true)">Level Mix (Alle)</div>
             <div class="block-card special-global" style="flex:1" onclick="startRandom(true, true)">Global Mix (Alle)</div>
         </div>
@@ -1221,6 +1231,7 @@
         lang: 'de',
         level: 'N5',
         mode: 'karteikarten',
+        blockSize: parseInt(localStorage.getItem('vocabBlockSize') || '20', 10) || 20,
         // Zustand für die JLPT Prüfungsfunktion
         currentExam: {
             data: null,
@@ -1609,7 +1620,13 @@
         setTxt('inline-dir-de-jp', state.lang === 'en' ? '🇬🇧 EN → 🇯🇵 Write Japanese' : '🇩🇪 DE → 🇯🇵 Japanisch schreiben');
         setTxt('inline-dir-mix', state.lang === 'en' ? '🔀 Both Languages' : '🔀 Beide Sprachen');
         setTxt('ui-start-btn', t.startBtn);
-        setTxt('ui-block-label', t.blockLabel);
+        setTxt('ui-block-label', state.lang === 'en' ? `Select a block (${state.blockSize} words each)` : `Wähle einen Block (je ${state.blockSize} Vokabeln)`);
+        setTxt('ui-block-size-text', state.lang === 'en' ? 'Words per block:' : 'Vokabeln pro Block:');
+        setTxt('block-size-display', state.lang === 'en' ? `${state.blockSize} words` : `${state.blockSize} Vokabeln`);
+        setTxt('btn-level-mix-block', `Level Mix (${state.blockSize})`);
+        setTxt('btn-global-mix-block', `Global Mix (${state.blockSize})`);
+        const blockSlider = document.getElementById('block-size-slider');
+        if (blockSlider) blockSlider.value = state.blockSize;
         setTxt('ui-path-blocks-label', t.pathBlocksLabel);
         setTxt('ui-special-label', t.specialLabel);
         setTxt('ui-daily-btn', t.dailyBtn);
@@ -6939,11 +6956,20 @@
     function vLearned(w) { return !!(w && w.learned); }
     
     // --- BLÖCKE RENDERN ---
+    function setBlockSize(val) {
+        const size = Math.max(5, parseInt(val, 10) || 20);
+        state.blockSize = size;
+        localStorage.setItem('vocabBlockSize', String(size));
+        updateUILanguage();
+        renderBlocks();
+    }
+    window.setBlockSize = setBlockSize;
+
     function renderBlocks() {
         const container = document.getElementById('blocks-container');
         if (!container) return;
         const words = window.vocabData[state.level] || [];
-        const blockSize = 20;
+        const blockSize = state.blockSize || 20;
         let html = '';
         for (let i = 0; i < Math.ceil(words.length / blockSize); i++) {
             const slice = words.slice(i * blockSize, (i + 1) * blockSize);
@@ -6976,9 +7002,10 @@
     function switchActiveBlockMode(mode) {
         stopMatchGame();
         setMode(mode);
+        const blockSize = state.blockSize || 20;
         const sourceWords = (state.lastUsedSource && state.lastUsedSource.length > 0)
             ? state.lastUsedSource
-            : (window.vocabData[state.level] || []).slice(0, 20);
+            : (window.vocabData[state.level] || []).slice(0, blockSize);
         startLearning(-1, sourceWords);
     }
     window.switchActiveBlockMode = switchActiveBlockMode;
@@ -7103,9 +7130,10 @@
     // --- LERNLOGIK STARTEN ---
     function startLearning(blockIdx = -1, customWords = null) {
         let words = customWords;
+        const blockSize = state.blockSize || 20;
         if (!words) {
             const fullList = window.vocabData[state.level] || []; // Zugriff auf die globale vocabData
-            words = blockIdx === -1 ? fullList : fullList.slice(blockIdx * 20, (blockIdx + 1) * 20); // Korrekte Blockauswahl
+            words = blockIdx === -1 ? fullList : fullList.slice(blockIdx * blockSize, (blockIdx + 1) * blockSize); // Korrekte Blockauswahl
         }
         if (!words || words.length === 0) return alert("Keine Vokabeln vorhanden.");
 
@@ -7150,7 +7178,8 @@
         } else {
             pool = window.vocabData[state.level] || [];
         }
-        const selection = fullPool ? [...pool].sort(() => Math.random() - 0.5) : [...pool].sort(() => Math.random() - 0.5).slice(0, 20);
+        const blockSize = state.blockSize || 20;
+        const selection = fullPool ? [...pool].sort(() => Math.random() - 0.5) : [...pool].sort(() => Math.random() - 0.5).slice(0, blockSize);
         startLearning(-1, selection);
     }
 

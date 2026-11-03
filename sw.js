@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jlpt-study-v4';
+const CACHE_NAME = 'jlpt-study-v5';
 const ASSETS = [
     './',
     './index.html',
@@ -8,7 +8,7 @@ const ASSETS = [
     './exams.json',
     './achievements.json',
     './manifest.json',
-    './Icon.jpeg'
+    './icon.png'
 ];
 
 self.addEventListener('install', event => {
