@@ -8,6 +8,738 @@
     <link rel="apple-touch-icon" href="icon.png" />
     <style>
         /* --- GRUNDDESIGN & FARBEN --- */
+
+        /* ========================================================
+           --- THEMES (SAKURA, MATCHA, FUJI NACHT, SUNSET, CLASSIC) ---
+           ======================================================== */
+        :root, [data-theme="classic"] {
+            --bg-color: #fafafa;
+            --text-main: #333333;
+            --text-light: #777777;
+            --primary-dark: #272a48;
+            --primary-light: #3f4474;
+            --accent-pink: #df4478;
+            --accent-pink-light: #fcebf1;
+            --badge-blue-bg: #e6eefa;
+            --badge-blue-text: #3266d6;
+            --border-color: #e5e5e5;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            --subtle-bg: #f5f6fa;
+        }
+
+        /* 🌸 SAKURA THEME (Kirschblüte) */
+        [data-theme="sakura"] {
+            --bg-color: #fff5f8;
+            --text-main: #2e1822;
+            --text-light: #87566b;
+            --primary-dark: #b82d5c;
+            --primary-light: #d44e7c;
+            --accent-pink: #e83675;
+            --accent-pink-light: #fee8f1;
+            --badge-blue-bg: #fde8f2;
+            --badge-blue-text: #b82d5c;
+            --border-color: #f7d3e2;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 16px rgba(184, 45, 92, 0.08);
+            --subtle-bg: #fff0f5;
+        }
+
+        /* 🍵 MATCHA THEME (Zen Garten & Grüner Tee) */
+        [data-theme="matcha"] {
+            --bg-color: #f3f7f4;
+            --text-main: #1c2b20;
+            --text-light: #526b58;
+            --primary-dark: #2a5839;
+            --primary-light: #3f7751;
+            --accent-pink: #d96f32;
+            --accent-pink-light: #fbeee6;
+            --badge-blue-bg: #e2ede5;
+            --badge-blue-text: #2a5839;
+            --border-color: #d2e2d5;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 16px rgba(42, 88, 57, 0.08);
+            --subtle-bg: #eaf1ec;
+        }
+
+        /* 🗻 FUJI NACHT THEME (Dark Mode / Mitternacht am Fuji) */
+        [data-theme="fuji"] {
+            --bg-color: #0f1422;
+            --text-main: #f1f4fb;
+            --text-light: #8e9bb5;
+            --primary-dark: #43557e;
+            --primary-light: #5d74a7;
+            --accent-pink: #f472b6;
+            --accent-pink-light: rgba(244, 114, 182, 0.16);
+            --badge-blue-bg: #1c243a;
+            --badge-blue-text: #93c5fd;
+            --border-color: #27314d;
+            --white: #171f33;
+            --card-bg: #171f33;
+            --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            --subtle-bg: #1c253c;
+        }
+
+        /* 🏮 TOKYO AKANE THEME (Abendrot & Laternen) */
+        [data-theme="sunset"] {
+            --bg-color: #fff9f5;
+            --text-main: #331b14;
+            --text-light: #8c5a4d;
+            --primary-dark: #992812;
+            --primary-light: #bf3f24;
+            --accent-pink: #ea580c;
+            --accent-pink-light: #ffedd5;
+            --badge-blue-bg: #fee2d5;
+            --badge-blue-text: #992812;
+            --border-color: #fed7aa;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 16px rgba(153, 40, 18, 0.08);
+            --subtle-bg: #fff1eb;
+        }
+
+        /* Floating Sakura Canvas */
+        #sakura-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Theme Selector Modal */
+        .theme-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(3px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease-out;
+        }
+        .theme-modal-box {
+            background: var(--card-bg, #fff);
+            color: var(--text-main, #333);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 440px;
+            width: 90%;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+        }
+        .theme-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .theme-card-option {
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: all 0.2s ease;
+            background: var(--white);
+        }
+        .theme-card-option:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-pink);
+        }
+        .theme-card-option.active {
+            border-color: var(--accent-pink);
+            background: var(--accent-pink-light);
+        }
+        .theme-swatches {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .theme-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* ========================================================
+           --- KANJI STROKE ORDER LIB VIEWER & CONTROLS ---
+           ======================================================== */
+        .kanji-canvas-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            border: 2px solid var(--primary-dark);
+            border-radius: 16px;
+            background: var(--white);
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        #kanji-stroke-layer svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .kvg-stroke-path {
+            fill: none;
+            stroke: var(--text-main);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.3s, opacity 0.3s;
+        }
+        .kvg-stroke-ghost {
+            fill: none;
+            stroke: rgba(180, 185, 200, 0.35);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .kvg-stroke-animating {
+            stroke: var(--accent-pink) !important;
+            stroke-width: 5 !important;
+        }
+        .kvg-stroke-num {
+            font-size: 11px;
+            font-weight: 800;
+            fill: var(--accent-pink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            text-shadow: 0 0 3px var(--white), 0 0 5px var(--white);
+        }
+        .stroke-lib-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 15px 0 10px 0;
+        }
+        .btn-stroke-ctl {
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            background: var(--white);
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-stroke-ctl:hover {
+            border-color: var(--primary-dark);
+            background: var(--subtle-bg);
+            transform: translateY(-1px);
+        }
+        .btn-stroke-ctl.active {
+            background: var(--primary-dark);
+            color: var(--white);
+            border-color: var(--primary-dark);
+        }
+        .kanji-steps-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 4px;
+            scrollbar-width: thin;
+        }
+        .kanji-step-card {
+            flex: 0 0 64px;
+            height: 74px;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 4px;
+        }
+        .kanji-step-card:hover {
+            border-color: var(--accent-pink);
+            transform: scale(1.05);
+        }
+        .kanji-step-card.active {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 2px var(--accent-pink);
+            background: var(--accent-pink-light);
+        }
+        .kanji-step-card svg {
+            width: 44px;
+            height: 44px;
+        }
+        .kanji-step-num {
+            font-size: 10px;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        /* ========================================================
+           --- DUOLINGO-STYLE KANA TRAINER & EXERCISES ---
+           ======================================================== */
+        .kana-hub-tabs {
+            display: flex;
+            gap: 8px;
+            background: var(--white);
+            padding: 6px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+        .kana-hub-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .kana-hub-tab.active {
+            background: var(--primary-dark);
+            color: var(--white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .kana-category-box {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        .kana-category-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .kana-grid-responsive {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(62px, 1fr));
+            gap: 10px;
+        }
+        .kana-card-tile {
+            aspect-ratio: 1;
+            background: var(--white);
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+            user-select: none;
+            position: relative;
+        }
+        .kana-card-tile:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-pink);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .kana-card-tile:active {
+            transform: translateY(0);
+        }
+        .kana-card-char {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.1;
+        }
+        .kana-card-romaji {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* DUOLINGO LESSON SESSION UI */
+        .duo-lesson-container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        .duo-top-bar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .duo-close-btn {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+        .duo-progress-track {
+            flex: 1;
+            height: 14px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .duo-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #58cc02, #46a302);
+            border-radius: 10px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .duo-xp-badge {
+            font-size: 14px;
+            font-weight: 800;
+            color: #eab308;
+            background: rgba(234, 179, 8, 0.12);
+            padding: 6px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* DUOLINGO EXERCISE CARD */
+        .duo-card {
+            background: var(--white);
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            padding: 30px 24px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .duo-question-prompt {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+
+        /* Audio Question */
+        .duo-audio-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--primary-dark);
+            color: var(--white);
+            border: none;
+            font-size: 36px;
+            cursor: pointer;
+            margin: 0 auto 24px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .duo-audio-btn:hover {
+            transform: scale(1.08);
+        }
+        .duo-audio-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Multiple Choice Options */
+        .duo-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .duo-opt-btn {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-bottom: 4px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            cursor: pointer;
+            transition: all 0.15s;
+            user-select: none;
+        }
+        .duo-opt-btn:hover {
+            border-color: var(--primary-light);
+            background: var(--subtle-bg);
+            transform: translateY(-2px);
+        }
+        .duo-opt-btn:active {
+            transform: translateY(2px);
+            border-bottom-width: 2px;
+        }
+        .duo-opt-btn.correct {
+            border-color: #58cc02 !important;
+            background: #d7ffb8 !important;
+            color: #276902 !important;
+        }
+        .duo-opt-btn.wrong {
+            border-color: var(--accent-pink) !important;
+            background: var(--accent-pink-light) !important;
+            color: var(--accent-pink) !important;
+            animation: shake 0.4s;
+        }
+
+        /* MATCH-PAIRS (Duolingo Style Matching Game) */
+        .duo-match-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .duo-match-tile {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-bottom: 4px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px 12px;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-main);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 64px;
+        }
+        .duo-match-tile:hover:not(.matched) {
+            border-color: var(--primary-light);
+            background: var(--subtle-bg);
+        }
+        .duo-match-tile.selected {
+            border-color: #3b82f6 !important;
+            border-bottom-color: #1d4ed8 !important;
+            background: #eff6ff !important;
+            color: #1d4ed8 !important;
+            transform: scale(1.03);
+        }
+        .duo-match-tile.matched {
+            border-color: #58cc02 !important;
+            border-bottom-color: #46a302 !important;
+            background: #f0fdf4 !important;
+            color: #86efac !important;
+            opacity: 0.35;
+            cursor: default;
+            transform: none !important;
+        }
+        .duo-match-tile.wrong {
+            border-color: #ef4444 !important;
+            border-bottom-color: #b91c1c !important;
+            background: #fef2f2 !important;
+            color: #ef4444 !important;
+            animation: shake 0.4s;
+        }
+
+        /* WORD BUILDER (Wort zusammensetzen) */
+        .duo-word-slots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0 25px 0;
+            min-height: 58px;
+            flex-wrap: wrap;
+        }
+        .duo-slot-chip {
+            min-width: 52px;
+            height: 52px;
+            background: var(--subtle-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            cursor: pointer;
+            padding: 0 10px;
+            transition: all 0.15s;
+        }
+        .duo-slot-chip.filled {
+            background: var(--white);
+            border: 2px solid var(--primary-dark);
+            border-bottom: 4px solid var(--primary-dark);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .duo-chip-bank {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .duo-bank-chip {
+            min-width: 50px;
+            height: 50px;
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-bottom: 4px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            cursor: pointer;
+            padding: 0 12px;
+            user-select: none;
+            transition: all 0.15s;
+        }
+        .duo-bank-chip:hover {
+            border-color: var(--primary-dark);
+            background: var(--subtle-bg);
+            transform: translateY(-2px);
+        }
+        .duo-bank-chip.used {
+            opacity: 0.2;
+            cursor: default;
+            pointer-events: none;
+            transform: none !important;
+        }
+
+        /* DUOLINGO BOTTOM FEEDBACK SHEET */
+        .duo-feedback-sheet {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            z-index: 1000;
+            animation: slideUp 0.25s ease-out;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        }
+        .duo-feedback-sheet.correct {
+            background: #d7ffb8;
+            border-top: 2px solid #58cc02;
+            color: #276902;
+        }
+        .duo-feedback-sheet.wrong {
+            background: #ffebe9;
+            border-top: 2px solid #ea2b2b;
+            color: #ea2b2b;
+        }
+        .duo-feedback-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            max-width: 650px;
+            margin: 0 auto;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .duo-feedback-text {
+            font-size: 20px;
+            font-weight: 800;
+        }
+        .duo-feedback-sub {
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 2px;
+            opacity: 0.9;
+        }
+        .duo-continue-btn {
+            padding: 14px 36px;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.15s, opacity 0.15s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            white-space: nowrap;
+        }
+        .duo-feedback-sheet.correct .duo-continue-btn {
+            background: #58cc02;
+        }
+        .duo-feedback-sheet.wrong .duo-continue-btn {
+            background: #ea2b2b;
+        }
+        .duo-continue-btn:hover {
+            transform: scale(1.04);
+        }
+
+        /* DUOLINGO COMPLETION SCREEN */
+        .duo-complete-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 40px 24px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+        }
+        .duo-trophy {
+            font-size: 72px;
+            margin-bottom: 15px;
+            animation: bounce 1s infinite alternate;
+        }
+        .duo-stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 25px 0;
+        }
+        .duo-stat-card {
+            background: var(--subtle-bg);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid var(--border-color);
+        }
+        .duo-stat-num {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+        .duo-stat-lbl {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
         :root {
             --bg-color: #fafafa;
             --text-main: #333;
@@ -468,6 +1200,8 @@
         .app-top-sub { font-size: 12px; font-weight: 500; color: var(--text-light); margin-top: 2px; }
     </style>
     <!-- Drag and Drop Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
     <div class="app-top-banner">
         <div class="app-top-title">JLPT StudyDE</div>
         <div class="app-top-sub">powered by Duckling</div>
@@ -480,6 +1214,10 @@
             </div>
             <span onclick="changeLevel(1)" style="padding: 5px 10px; cursor: pointer;">&gt;</span>
         </div>
+        <div class="theme-switch" onclick="toggleThemeModal()" id="theme-btn" title="Theme wechseln" style="cursor:pointer; font-weight:bold; color:var(--text-main); padding: 5px 12px; background: var(--white); border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color); display:flex; align-items:center; gap:6px; user-select:none;">
+                <span id="current-theme-icon">🌸</span>
+                <span id="current-theme-name" style="font-size:13px;">Sakura</span>
+            </div>
         <div class="language-switch" onclick="toggleLanguage()" style="cursor:pointer; font-weight:bold; color:var(--accent-pink); padding: 5px 15px; background: white; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
             <span id="current-lang-display">DE</span>
         </div>
@@ -487,6 +1225,7 @@
             <button class="tab active" onclick="switchTab('lernen')" id="tab-lernen">Lernen</button>
             <button class="tab" onclick="switchTab('liste')" id="tab-liste">Liste</button>
             <button class="tab" onclick="switchTab('lesen')" id="tab-lesen">Lesen</button>
+            <button class="tab" onclick="switchTab('kana')" id="tab-kana">あア Kana</button>
             <button class="tab" onclick="switchTab('kanji')" id="tab-kanji">Kanji</button>
             <button class="tab" onclick="switchTab('grammatik')" id="tab-grammatik">Grammatik</button>
             <button class="tab" onclick="switchTab('alltag')" id="tab-alltag">Alltag</button>
@@ -496,6 +1235,73 @@
             <button class="tab" onclick="switchTab('test-center')" id="tab-test-center">JLPT Center</button>
         </div>
     </header>
+
+    <!-- SAKURA FLOATING PETALS CANVAS -->
+    <canvas id="sakura-canvas"></canvas>
+
+    <!-- THEME SELECTION MODAL -->
+    <div id="theme-modal" class="theme-modal-backdrop hidden" onclick="if(event.target === this) toggleThemeModal(false)">
+        <div class="theme-modal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h3 style="font-size:18px; font-weight:800; display:flex; align-items:center; gap:8px;">🎨 App-Design (Themes)</h3>
+                <button onclick="toggleThemeModal(false)" style="background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-light);">&times;</button>
+            </div>
+            <p style="font-size:13px; color:var(--text-light); margin-bottom:15px;">Wähle dein bevorzugtes Farbschema für das Japanisch-Lernen.</p>
+            <div class="theme-grid">
+                <div class="theme-card-option" id="theme-opt-sakura" onclick="setAppTheme('sakura')">
+                    <div style="font-weight:700; font-size:14px;">🌸 Sakura</div>
+                    <div style="font-size:11px; color:var(--text-light);">Kirschblüte (Rosa/Rot)</div>
+                    <div class="theme-swatches">
+                        <div class="theme-dot" style="background:#b82d5c;"></div>
+                        <div class="theme-dot" style="background:#e83675;"></div>
+                        <div class="theme-dot" style="background:#fff5f8;"></div>
+                    </div>
+                </div>
+                <div class="theme-card-option" id="theme-opt-matcha" onclick="setAppTheme('matcha')">
+                    <div style="font-weight:700; font-size:14px;">🍵 Matcha</div>
+                    <div style="font-size:11px; color:var(--text-light);">Zen-Garten (Grün)</div>
+                    <div class="theme-swatches">
+                        <div class="theme-dot" style="background:#2a5839;"></div>
+                        <div class="theme-dot" style="background:#d96f32;"></div>
+                        <div class="theme-dot" style="background:#f3f7f4;"></div>
+                    </div>
+                </div>
+                <div class="theme-card-option" id="theme-opt-fuji" onclick="setAppTheme('fuji')">
+                    <div style="font-weight:700; font-size:14px;">🗻 Fuji Nacht</div>
+                    <div style="font-size:11px; color:var(--text-light);">Dark Mode (Slate/Pink)</div>
+                    <div class="theme-swatches">
+                        <div class="theme-dot" style="background:#0f1422;"></div>
+                        <div class="theme-dot" style="background:#43557e;"></div>
+                        <div class="theme-dot" style="background:#f472b6;"></div>
+                    </div>
+                </div>
+                <div class="theme-card-option" id="theme-opt-sunset" onclick="setAppTheme('sunset')">
+                    <div style="font-weight:700; font-size:14px;">🏮 Tokyo Akane</div>
+                    <div style="font-size:11px; color:var(--text-light);">Abendrot (Warm/Rot)</div>
+                    <div class="theme-swatches">
+                        <div class="theme-dot" style="background:#992812;"></div>
+                        <div class="theme-dot" style="background:#ea580c;"></div>
+                        <div class="theme-dot" style="background:#fff9f5;"></div>
+                    </div>
+                </div>
+                <div class="theme-card-option" id="theme-opt-classic" onclick="setAppTheme('classic')">
+                    <div style="font-weight:700; font-size:14px;">🌊 Kanagawa</div>
+                    <div style="font-size:11px; color:var(--text-light);">Klassisch (Navy/Pink)</div>
+                    <div class="theme-swatches">
+                        <div class="theme-dot" style="background:#272a48;"></div>
+                        <div class="theme-dot" style="background:#df4478;"></div>
+                        <div class="theme-dot" style="background:#fafafa;"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+                <label style="font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="checkbox" id="sakura-petals-toggle" onchange="togglePetalsAnimation(this.checked)" checked /> 🌸 Blütenblätter animieren
+                </label>
+                <button class="btn-main btn-small" onclick="toggleThemeModal(false)" style="width:auto; padding:6px 16px;">Fertig</button>
+            </div>
+        </div>
+    </div>
     
     <div class="container">
     <main id="view-lernen" class="">
@@ -771,20 +1577,36 @@
                 <div class="kanji-info">
                     <div class="kanji-readings" id="kw-readings"></div>
                     <div class="kanji-meaning" id="kw-meaning"></div>
+                    <div id="kw-stroke-count" style="font-size:13px; font-weight:600; color:var(--text-light); margin-top:5px;">Striche: -</div>
                 </div>
-                <div class="kanji-canvas-container">
-                    <div id="kanji-numbers-layer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:4;"></div>
-                    <div id="kanji-ghost"></div>
-                    <div class="stroke-order-hint" onclick="showStrokeNumbers()">Strichfolge</div>
-                    <canvas id="kanji-canvas" width="300" height="300"></canvas>
+                
+                <div class="kanji-canvas-container" id="kanji-canvas-container">
+                    <!-- SVG Strichfolge Layer aus KanjiVG Lib -->
+                    <div id="kanji-stroke-layer" style="position:absolute; top:0; left:0; width:300px; height:300px; z-index:2; pointer-events:none;"></div>
+                    <!-- Interaktive Zeichenfläche für Freihand-Schreiben -->
+                    <canvas id="kanji-canvas" width="300" height="300" style="position:absolute; top:0; left:0; z-index:5;"></canvas>
+                    <!-- Strich-Nummern Layer (Startpunkte 1, 2, 3...) -->
+                    <div id="kanji-numbers-layer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:6;"></div>
                 </div>
+
+                <!-- Steuerung für Strichfolge aus der Lib -->
+                <div class="stroke-lib-controls">
+                    <button class="btn-stroke-ctl" id="btn-play-strokes" onclick="playKanjiStrokeAnimation()">▶ Strichfolge abspielen</button>
+                    <button class="btn-stroke-ctl" onclick="stepKanjiStroke(-1)">⏮ Zurück</button>
+                    <button class="btn-stroke-ctl" onclick="stepKanjiStroke(1)">⏭ Weiter</button>
+                    <button class="btn-stroke-ctl active" id="btn-toggle-numbers" onclick="toggleStrokeNumbers()">🔢 Nummern (1 2 3)</button>
+                    <button class="btn-stroke-ctl" onclick="clearKanjiCanvas()">🧹 Löschen</button>
+                </div>
+                
+                <!-- Strich-für-Strich Diagramm (Evolution des Kanji aus Lib) -->
+                <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-light); margin-top:15px; margin-bottom:4px;">Strichfolge Schritt-für-Schritt (aus Lib)</div>
+                <div id="kanji-stroke-steps" class="kanji-steps-scroll"></div>
+                
                 <div id="kw-feedback" class="stroke-error"></div>
-                <div class="canvas-actions">
-                    <button class="btn-main btn-small" onclick="clearKanjiCanvas()">Löschen</button>
-                    <button class="btn-main btn-small" style="background: var(--primary-light)" onclick="nextKanjiInBlock()">Nächstes Kanji →</button>
+                <div class="canvas-actions" style="margin-top:16px;">
+                    <button class="btn-main" onclick="nextKanjiInBlock()">Nächstes Kanji →</button>
                 </div>
             </div>
-
             
             <div id="kanji-quiz-view" class="hidden">
                 <div class="typing-container">
@@ -986,24 +1808,110 @@
     <main id="view-kana" class="hidden">
         <div class="fc-header">
             <span style="cursor:pointer;" onclick="switchTab('lernen')">← Zurück zum Lernen</span>
-            <span style="font-weight:bold; color:var(--primary-dark);">あア Kana-Trainer</span>
+            <span style="font-weight:bold; color:var(--primary-dark);">あア Kana-Lerncenter</span>
         </div>
-        <h1>Hiragana & Katakana</h1>
-        <p class="subtitle">Tippe auf ein Zeichen für die Aussprache oder starte das Kana-Schnellquiz.</p>
-        <div class="toggle-group" style="margin-bottom: 20px;">
-            <button class="toggle-btn active" id="kana-tab-hiragana" onclick="switchKanaView('hiragana')">あ Hiragana</button>
-            <button class="toggle-btn" id="kana-tab-katakana" onclick="switchKanaView('katakana')">ア Katakana</button>
-            <button class="toggle-btn" id="kana-tab-quiz" onclick="switchKanaView('quiz')">🎯 Kana-Quiz</button>
+        
+        <!-- KANA HUB NAVIGATION -->
+        <div class="kana-hub-tabs">
+            <button class="kana-hub-tab active" id="btn-kana-tab-duo" onclick="switchKanaHubView('duo')">🚀 Duolingo-Übungen</button>
+            <button class="kana-hub-tab" id="btn-kana-tab-hiragana" onclick="switchKanaHubView('hiragana')">あ Hiragana</button>
+            <button class="kana-hub-tab" id="btn-kana-tab-katakana" onclick="switchKanaHubView('katakana')">ア Katakana</button>
         </div>
-        <div id="kana-table-area" class="kana-grid"></div>
-        <div id="kana-quiz-area" class="hidden">
-            <div class="typing-container">
-                <span class="badge" id="kana-quiz-badge">Hiragana & Katakana</span>
-                <div class="fc-word" id="kana-quiz-char" style="font-size: 72px; margin: 20px 0; color: var(--primary-dark);">あ</div>
-                <p style="color:var(--text-light); margin-bottom: 15px;">Wie lautet die Lesung (Romaji)?</p>
-                <div id="kana-quiz-options" class="path-option-grid"></div>
-                <div id="kana-quiz-feedback" class="typing-feedback"></div>
+
+        <!-- BEREICH 1: DUOLINGO KANA ÜBUNGEN -->
+        <div id="kana-duo-area">
+            <!-- Setup / Modus-Auswahl -->
+            <div id="duo-setup-box" class="duo-card" style="text-align:left; min-height:auto; padding:24px;">
+                <h2 style="font-size:24px; color:var(--primary-dark); margin-bottom:6px;">Kana trainieren wie bei Duolingo</h2>
+                <p style="color:var(--text-light); margin-bottom:20px; font-size:14px;">Meistere Hiragana & Katakana mit interaktiven Hör-, Lese- und Zuordnungs-Übungen.</p>
+                
+                <div class="section-label" style="margin-top:0;">Wähle dein Zeichensystem</div>
+                <div class="toggle-group" style="margin-bottom:20px;">
+                    <button class="toggle-btn active" id="duo-scope-all" onclick="setDuoScope('all')">🔀 Hiragana & Katakana</button>
+                    <button class="toggle-btn" id="duo-scope-hira" onclick="setDuoScope('hiragana')">あ Nur Hiragana</button>
+                    <button class="toggle-btn" id="duo-scope-kata" onclick="setDuoScope('katakana')">ア Nur Katakana</button>
+                </div>
+
+                <div class="section-label">Wähle deinen Übungs-Modus</div>
+                <div class="card-grid" style="margin-bottom:24px;">
+                    <div class="option-card active" id="duo-mode-mix" onclick="setDuoMode('mix')">
+                        <h3>🌟 Duolingo Lektion</h3>
+                        <p>10 abwechslungsreiche Übungen (Hören, Lesen, Paare verbinden, Wörter bilden)</p>
+                    </div>
+                    <div class="option-card" id="duo-mode-pairs" onclick="setDuoMode('pairs')">
+                        <h3>🧩 Paare verbinden</h3>
+                        <p>Das beliebte Duolingo Match-Minispiel: Finde passende Kana- & Romaji-Paare</p>
+                    </div>
+                    <div class="option-card" id="duo-mode-listening" onclick="setDuoMode('listening')">
+                        <h3>🔊 Hörverständnis</h3>
+                        <p>Höre die Aussprache und wähle das passende Schriftzeichen</p>
+                    </div>
+                    <div class="option-card" id="duo-mode-words" onclick="setDuoMode('words')">
+                        <h3>🔤 Wörter zusammensetzen</h3>
+                        <p>Bilde japanische Alltagswörter Silbe für Silbe (z. B. Sushi, Neko, Sakura)</p>
+                    </div>
+                </div>
+
+                <button class="btn-main" onclick="startDuolingoKanaSession()" style="font-size:17px; padding:16px;">🚀 Übung jetzt starten (+15 XP)</button>
             </div>
+
+            <!-- Aktive Duolingo Lektion -->
+            <div id="duo-active-lesson" class="duo-lesson-container hidden">
+                <div class="duo-top-bar">
+                    <button class="duo-close-btn" onclick="exitDuolingoSession()" title="Lektion beenden">&times;</button>
+                    <div class="duo-progress-track">
+                        <div class="duo-progress-bar" id="duo-progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <div class="duo-xp-badge" id="duo-xp-counter">⭐ 0 XP</div>
+                </div>
+
+                <!-- Dynamischer Aufgaben-Container -->
+                <div id="duo-exercise-container"></div>
+
+                <!-- Duolingo Bottom Feedback Bar -->
+                <div id="duo-feedback-sheet" class="duo-feedback-sheet hidden">
+                    <div class="duo-feedback-content">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span id="duo-feedback-icon" style="font-size:32px;">✅</span>
+                            <div>
+                                <div class="duo-feedback-text" id="duo-feedback-title">Super gemacht!</div>
+                                <div class="duo-feedback-sub" id="duo-feedback-subtitle"></div>
+                            </div>
+                        </div>
+                        <button class="duo-continue-btn" id="duo-continue-btn" onclick="nextDuolingoExercise()">WEITER</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lektions-Abschluss (Duolingo Style Celebration) -->
+            <div id="duo-completion-view" class="duo-lesson-container hidden">
+                <div class="duo-complete-card">
+                    <div class="duo-trophy">🎉</div>
+                    <h2 style="font-size:28px; color:var(--primary-dark); margin-bottom:8px;">Lektion abgeschlossen!</h2>
+                    <p style="color:var(--text-light); font-size:15px;">Du hast deine Kana-Kenntnisse erfolgreich trainiert.</p>
+                    
+                    <div class="duo-stat-grid">
+                        <div class="duo-stat-card">
+                            <div class="duo-stat-num" id="duo-result-xp" style="color:#eab308;">+15 XP</div>
+                            <div class="duo-stat-lbl">Erfahrungspunkte</div>
+                        </div>
+                        <div class="duo-stat-card">
+                            <div class="duo-stat-num" id="duo-result-acc" style="color:#58cc02;">100%</div>
+                            <div class="duo-stat-lbl">Genauigkeit</div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:12px; margin-top:20px;">
+                        <button class="btn-main" onclick="startDuolingoKanaSession()" style="flex:1;">Nochmal üben</button>
+                        <button class="btn-main btn-nochmal" onclick="exitDuolingoSession()" style="flex:1;">Zur Übersicht</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEREICH 2 & 3: KANA ÜBERSICHTS-TABELLEN (HIRAGANA & KATAKANA) -->
+        <div id="kana-tables-area" class="hidden">
+            <div id="kana-sections-container"></div>
         </div>
     </main>
 
@@ -6786,7 +7694,7 @@
         if (tabId === 'grammatik') renderGrammarList();
         if (tabId === 'kanji') renderKanjiBlocks();
         if (tabId === 'stats') renderStats();
-        if (tabId === 'kana') switchKanaView('hiragana');
+        if (tabId === 'kana') switchKanaHubView('duo');
     }
     window.switchTab = switchTab;
 
@@ -7875,11 +8783,14 @@
                 `<span class="kanji-reading-label">On: ${item.on || '-'}</span>
                  <span class="kanji-kana-large">Kun: ${item.kun || '-'}</span>`;
             document.getElementById('kw-meaning').innerText = item.de;
-            document.getElementById('kanji-ghost').innerText = item.kanji;
+            const ghost = document.getElementById('kanji-ghost');
+            if (ghost) ghost.innerText = item.kanji;
             state.kanji.strokesDrawn = 0;
             document.getElementById('kw-feedback').innerText = '';
-            document.getElementById('kanji-numbers-layer').innerHTML = '';
             clearKanjiCanvas();
+            if (typeof loadKanjiStrokeOrder === 'function') {
+                loadKanjiStrokeOrder(item.kanji);
+            }
         } else if (state.kanji.subMode === 'quiz') {
             renderKanjiQuiz();
         } else if (state.kanji.subMode === 'combo') {
@@ -8423,85 +9334,994 @@
     }
     window.selectMatchTile = selectMatchTile;
 
-    // --- KANA TRAINER (HIRAGANA & KATAKANA) ---
-    const KANA_DATA = [
-        { h: 'あ', k: 'ア', r: 'a' }, { h: 'い', k: 'イ', r: 'i' }, { h: 'う', k: 'ウ', r: 'u' }, { h: 'え', k: 'エ', r: 'e' }, { h: 'お', k: 'オ', r: 'o' },
-        { h: 'か', k: 'カ', r: 'ka' }, { h: 'き', k: 'キ', r: 'ki' }, { h: 'く', k: 'ク', r: 'ku' }, { h: 'け', k: 'ケ', r: 'ke' }, { h: 'こ', k: 'コ', r: 'ko' },
-        { h: 'さ', k: 'サ', r: 'sa' }, { h: 'し', k: 'シ', r: 'shi' }, { h: 'す', k: 'ス', r: 'su' }, { h: 'せ', k: 'セ', r: 'se' }, { h: 'そ', k: 'ソ', r: 'so' },
-        { h: 'た', k: 'タ', r: 'ta' }, { h: 'ち', k: 'チ', r: 'chi' }, { h: 'つ', k: 'ツ', r: 'tsu' }, { h: 'て', k: 'テ', r: 'te' }, { h: 'と', k: 'ト', r: 'to' },
-        { h: 'な', k: 'ナ', r: 'na' }, { h: 'に', k: 'ニ', r: 'ni' }, { h: 'ぬ', k: 'ヌ', r: 'nu' }, { h: 'ね', k: 'ネ', r: 'ne' }, { h: 'の', k: 'ノ', r: 'no' },
-        { h: 'は', k: 'ハ', r: 'ha' }, { h: 'ひ', k: 'ヒ', r: 'hi' }, { h: 'ふ', k: 'フ', r: 'fu' }, { h: 'へ', k: 'ヘ', r: 'he' }, { h: 'ほ', k: 'ホ', r: 'ho' },
-        { h: 'ま', k: 'マ', r: 'ma' }, { h: 'み', k: 'ミ', r: 'mi' }, { h: 'む', k: 'ム', r: 'mu' }, { h: 'め', k: 'メ', r: 'me' }, { h: 'も', k: 'モ', r: 'mo' },
-        { h: 'や', k: 'ヤ', r: 'ya' }, { h: 'ゆ', k: 'ユ', r: 'yu' }, { h: 'よ', k: 'ヨ', r: 'yo' },
-        { h: 'ら', k: 'ラ', r: 'ra' }, { h: 'り', k: 'リ', r: 'ri' }, { h: 'る', k: 'ル', r: 'ru' }, { h: 'れ', k: 'レ', r: 're' }, { h: 'ろ', k: 'ロ', r: 'ro' },
-        { h: 'わ', k: 'ワ', r: 'wa' }, { h: 'を', k: 'ヲ', r: 'wo' }, { h: 'ん', k: 'ン', r: 'n' }
-    ];
+    
+    // =========================================================================
+    // --- APP THEMES (SAKURA, MATCHA, FUJI NACHT, SUNSET, CLASSIC) ---
+    // =========================================================================
+    const APP_THEMES = {
+        sakura: { name: 'Sakura', icon: '🌸' },
+        matcha: { name: 'Matcha', icon: '🍵' },
+        fuji: { name: 'Fuji Nacht', icon: '🗻' },
+        sunset: { name: 'Tokyo Akane', icon: '🏮' },
+        classic: { name: 'Kanagawa', icon: '🌊' }
+    };
 
-    function switchKanaView(mode) {
-        document.getElementById('kana-tab-hiragana').classList.toggle('active', mode === 'hiragana');
-        document.getElementById('kana-tab-katakana').classList.toggle('active', mode === 'katakana');
-        document.getElementById('kana-tab-quiz').classList.toggle('active', mode === 'quiz');
+    let currentAppTheme = localStorage.getItem('jlpt_app_theme') || 'sakura';
+    let sakuraPetalsEnabled = localStorage.getItem('jlpt_sakura_petals') !== 'false';
+    let sakuraAnimActive = false;
+    let sakuraPetals = [];
 
-        const tableArea = document.getElementById('kana-table-area');
-        const quizArea = document.getElementById('kana-quiz-area');
+    function initAppTheme() {
+        setAppTheme(currentAppTheme, false);
+        const toggleEl = document.getElementById('sakura-petals-toggle');
+        if (toggleEl) toggleEl.checked = sakuraPetalsEnabled;
+        window.addEventListener('resize', resizeSakuraCanvas);
+    }
 
-        if (mode === 'quiz') {
-            tableArea.classList.add('hidden');
-            quizArea.classList.remove('hidden');
-            loadKanaQuizQuestion();
+    function setAppTheme(themeKey, save = true) {
+        if (!APP_THEMES[themeKey]) themeKey = 'sakura';
+        currentAppTheme = themeKey;
+        if (save) localStorage.setItem('jlpt_app_theme', themeKey);
+
+        document.documentElement.setAttribute('data-theme', themeKey);
+        
+        // Update Header Button
+        const themeIcon = document.getElementById('current-theme-icon');
+        const themeName = document.getElementById('current-theme-name');
+        if (themeIcon) themeIcon.innerText = APP_THEMES[themeKey].icon;
+        if (themeName) themeName.innerText = APP_THEMES[themeKey].name;
+
+        // Update Modal Cards
+        document.querySelectorAll('.theme-card-option').forEach(el => el.classList.remove('active'));
+        const activeCard = document.getElementById('theme-opt-' + themeKey);
+        if (activeCard) activeCard.classList.add('active');
+
+        // Manage Sakura Canvas
+        if (themeKey === 'sakura' && sakuraPetalsEnabled) {
+            startSakuraPetals();
         } else {
-            quizArea.classList.add('hidden');
-            tableArea.classList.remove('hidden');
-            tableArea.innerHTML = KANA_DATA.map(item => {
-                const ch = mode === 'hiragana' ? item.h : item.k;
-                return `
-                    <div class="kana-cell" onclick="speak('${ch}')">
-                        <div class="kana-char">${ch}</div>
-                        <div class="kana-romaji">${item.r}</div>
+            stopSakuraPetals();
+        }
+    }
+    window.setAppTheme = setAppTheme;
+
+    function toggleThemeModal(show) {
+        const modal = document.getElementById('theme-modal');
+        if (!modal) return;
+        if (show === undefined) {
+            modal.classList.toggle('hidden');
+        } else if (show) {
+            modal.classList.remove('hidden');
+        } else {
+            modal.classList.add('hidden');
+        }
+    }
+    window.toggleThemeModal = toggleThemeModal;
+
+    function togglePetalsAnimation(enabled) {
+        sakuraPetalsEnabled = enabled;
+        localStorage.setItem('jlpt_sakura_petals', enabled ? 'true' : 'false');
+        if (enabled && currentAppTheme === 'sakura') {
+            startSakuraPetals();
+        } else {
+            stopSakuraPetals();
+        }
+    }
+    window.togglePetalsAnimation = togglePetalsAnimation;
+
+    function resizeSakuraCanvas() {
+        const canvas = document.getElementById('sakura-canvas');
+        if (canvas) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+    }
+
+    function startSakuraPetals() {
+        const canvas = document.getElementById('sakura-canvas');
+        if (!canvas) return;
+        canvas.style.display = 'block';
+        resizeSakuraCanvas();
+
+        if (sakuraPetals.length === 0) {
+            const count = Math.min(28, Math.floor(window.innerWidth / 40));
+            for (let i = 0; i < count; i++) {
+                sakuraPetals.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: 8 + Math.random() * 8,
+                    speedY: 0.8 + Math.random() * 1.2,
+                    speedX: 0.4 + Math.random() * 0.8,
+                    angle: Math.random() * Math.PI * 2,
+                    angularSpeed: (Math.random() - 0.5) * 0.03,
+                    flip: Math.random() * Math.PI,
+                    flipSpeed: 0.02 + Math.random() * 0.03,
+                    color: Math.random() > 0.4 ? 'rgba(255, 183, 197, 0.75)' : 'rgba(255, 209, 220, 0.65)'
+                });
+            }
+        }
+
+        if (!sakuraAnimActive) {
+            sakuraAnimActive = true;
+            requestAnimationFrame(renderSakuraPetals);
+        }
+    }
+
+    function stopSakuraPetals() {
+        sakuraAnimActive = false;
+        const canvas = document.getElementById('sakura-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'none';
+        }
+    }
+
+    function renderSakuraPetals() {
+        if (!sakuraAnimActive) return;
+        const canvas = document.getElementById('sakura-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < sakuraPetals.length; i++) {
+            const p = sakuraPetals[i];
+            p.y += p.speedY;
+            p.x += Math.sin(p.angle) * 0.6 + p.speedX;
+            p.angle += p.angularSpeed;
+            p.flip += p.flipSpeed;
+
+            if (p.y > canvas.height + 20) {
+                p.y = -20;
+                p.x = Math.random() * canvas.width;
+            }
+            if (p.x > canvas.width + 20) p.x = -20;
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.angle);
+            ctx.scale(Math.cos(p.flip), 1);
+
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            // Draw cherry blossom petal shape
+            ctx.moveTo(0, 0);
+            ctx.bezierCurveTo(-p.size / 2, -p.size / 2, -p.size, p.size / 3, 0, p.size);
+            ctx.bezierCurveTo(p.size, p.size / 3, p.size / 2, -p.size / 2, 0, 0);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        requestAnimationFrame(renderSakuraPetals);
+    }
+
+    // =========================================================================
+    // --- KANJI STROKE ORDER LIB ENGINE (KanjiVG & HanziWriter) ---
+    // =========================================================================
+    const kanjiSvgCache = {};
+    let kanjiStrokeState = {
+        currentChar: '',
+        strokes: [],
+        numbers: [],
+        activeStrokeIdx: -1,
+        showNumbers: true,
+        animationTimer: null,
+        isAnimating: false
+    };
+
+    async function loadKanjiStrokeOrder(char) {
+        if (!char) return;
+        kanjiStrokeState.currentChar = char;
+        kanjiStrokeState.activeStrokeIdx = -1;
+        kanjiStrokeState.isAnimating = false;
+        if (kanjiStrokeState.animationTimer) clearInterval(kanjiStrokeState.animationTimer);
+
+        const hex = char.charCodeAt(0).toString(16).padStart(5, '0').toLowerCase();
+        const strokeLayer = document.getElementById('kanji-stroke-layer');
+        const numLayer = document.getElementById('kanji-numbers-layer');
+        const stepsContainer = document.getElementById('kanji-stroke-steps');
+        const strokeCountEl = document.getElementById('kw-stroke-count');
+        const feedbackEl = document.getElementById('kw-feedback');
+
+        if (feedbackEl) feedbackEl.innerText = '';
+        if (strokeLayer) strokeLayer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#aaa;font-size:13px;">Lade Strichfolge...</div>';
+
+        try {
+            let svgText = kanjiSvgCache[char];
+            if (!svgText) {
+                const localStored = localStorage.getItem('kanjivg_cache_' + hex);
+                if (localStored) {
+                    svgText = localStored;
+                    kanjiSvgCache[char] = svgText;
+                }
+            }
+
+            if (!svgText) {
+                const url = `https://cdn.jsdelivr.net/gh/KanjiVG/kanjivg/kanji/${hex}.svg`;
+                const response = await fetch(url);
+                if (response.ok) {
+                    svgText = await response.text();
+                    kanjiSvgCache[char] = svgText;
+                    try { localStorage.setItem('kanjivg_cache_' + hex, svgText); } catch(e){}
+                }
+            }
+
+            if (svgText) {
+                renderKanjiSvg(svgText, char);
+            } else {
+                renderKanjiFallback(char);
+            }
+        } catch (err) {
+            console.warn('KanjiVG load error for ' + char, err);
+            renderKanjiFallback(char);
+        }
+    }
+    window.loadKanjiStrokeOrder = loadKanjiStrokeOrder;
+
+    function renderKanjiSvg(svgText, char) {
+        const strokeLayer = document.getElementById('kanji-stroke-layer');
+        const numLayer = document.getElementById('kanji-numbers-layer');
+        const stepsContainer = document.getElementById('kanji-stroke-steps');
+        const strokeCountEl = document.getElementById('kw-stroke-count');
+
+        // Extract stroke paths
+        const paths = [...svgText.matchAll(/<path[^>]*d="([^"]+)"[^>]*>/g)].map(m => m[1]);
+        // Extract stroke numbers and matrix
+        const numbers = [...svgText.matchAll(/<text[^>]*transform="matrix\(([^)]+)\)"[^>]*>(\d+)<\/text>/g)].map(m => {
+            const parts = m[1].trim().split(/\s+/).map(Number);
+            return {
+                x: parts[4] || 0,
+                y: parts[5] || 0,
+                num: m[2]
+            };
+        });
+
+        kanjiStrokeState.strokes = paths;
+        kanjiStrokeState.numbers = numbers;
+
+        if (strokeCountEl) strokeCountEl.innerText = `Striche: ${paths.length}`;
+
+        // Build SVG HTML for the 300x300 canvas container
+        let svgHtml = `<svg viewBox="0 0 109 109" style="width:300px; height:300px; display:block;">`;
+        
+        // 1. Ghost paths (guideline outline in grey)
+        svgHtml += `<g id="kvg-ghost-group">`;
+        paths.forEach((d, i) => {
+            svgHtml += `<path d="${d}" class="kvg-stroke-ghost" />`;
+        });
+        svgHtml += `</g>`;
+
+        // 2. Active paths (drawn strokes)
+        svgHtml += `<g id="kvg-active-group">`;
+        paths.forEach((d, i) => {
+            svgHtml += `<path id="kvg-stroke-${i}" d="${d}" class="kvg-stroke-path" style="opacity: 1;" />`;
+        });
+        svgHtml += `</g>`;
+
+        // 3. Numbers layer inside SVG
+        svgHtml += `<g id="kvg-numbers-group" style="display: ${kanjiStrokeState.showNumbers ? 'block' : 'none'};">`;
+        numbers.forEach(n => {
+            svgHtml += `<text x="${n.x}" y="${n.y}" class="kvg-stroke-num">${n.num}</text>`;
+        });
+        svgHtml += `</g>`;
+
+        svgHtml += `</svg>`;
+
+        if (strokeLayer) strokeLayer.innerHTML = svgHtml;
+        if (numLayer) numLayer.innerHTML = '';
+
+        // Render Step-by-Step Evolution Diagram
+        if (stepsContainer) {
+            let stepsHtml = '';
+            for (let step = 0; step < paths.length; step++) {
+                stepsHtml += `
+                    <div class="kanji-step-card ${step === kanjiStrokeState.activeStrokeIdx ? 'active' : ''}" onclick="stepToKanjiStroke(${step})">
+                        <svg viewBox="0 0 109 109">
+                            <g>
+                                ${paths.slice(0, step + 1).map((d, i) => `
+                                    <path d="${d}" style="fill:none; stroke:${i === step ? 'var(--accent-pink)' : 'var(--text-main)'}; stroke-width:${i === step ? '5' : '3.5'}; stroke-linecap:round; stroke-linejoin:round;" />
+                                `).join('')}
+                            </g>
+                        </svg>
+                        <div class="kanji-step-num">${step + 1}. Strich</div>
                     </div>
                 `;
-            }).join('');
+            }
+            stepsContainer.innerHTML = stepsHtml;
         }
+    }
+
+    function renderKanjiFallback(char) {
+        const strokeLayer = document.getElementById('kanji-stroke-layer');
+        const strokeCountEl = document.getElementById('kw-stroke-count');
+        const stepsContainer = document.getElementById('kanji-stroke-steps');
+        if (strokeLayer) {
+            strokeLayer.innerHTML = `<div style="display:flex; align-items:center; justify-content:center; height:100%; font-size:180px; color:#e0e0e0; user-select:none;">${char}</div>`;
+        }
+        if (strokeCountEl) strokeCountEl.innerText = '';
+        if (stepsContainer) stepsContainer.innerHTML = '<span style="font-size:12px; color:var(--text-light); padding:10px;">Strichdiagramm für dieses Zeichen nicht als Vektor verfügbar.</span>';
+    }
+
+    function playKanjiStrokeAnimation() {
+        if (!kanjiStrokeState.strokes || kanjiStrokeState.strokes.length === 0) return;
+        if (kanjiStrokeState.animationTimer) clearInterval(kanjiStrokeState.animationTimer);
+
+        kanjiStrokeState.isAnimating = true;
+        const total = kanjiStrokeState.strokes.length;
+        let current = 0;
+
+        // Hide all active strokes first, showing ghost guide
+        for (let i = 0; i < total; i++) {
+            const el = document.getElementById('kvg-stroke-' + i);
+            if (el) {
+                el.style.opacity = '0';
+                el.classList.remove('kvg-stroke-animating');
+            }
+        }
+
+        const playBtn = document.getElementById('btn-play-strokes');
+        if (playBtn) playBtn.innerText = '⏹ Stopp';
+
+        function drawNext() {
+            if (current >= total) {
+                clearInterval(kanjiStrokeState.animationTimer);
+                kanjiStrokeState.isAnimating = false;
+                if (playBtn) playBtn.innerText = '▶ Strichfolge abspielen';
+                // Reset all to visible
+                for (let i = 0; i < total; i++) {
+                    const el = document.getElementById('kvg-stroke-' + i);
+                    if (el) {
+                        el.style.opacity = '1';
+                        el.classList.remove('kvg-stroke-animating');
+                    }
+                }
+                return;
+            }
+
+            // Highlight current stroke
+            for (let i = 0; i < current; i++) {
+                const el = document.getElementById('kvg-stroke-' + i);
+                if (el) {
+                    el.style.opacity = '1';
+                    el.classList.remove('kvg-stroke-animating');
+                }
+            }
+            const activeEl = document.getElementById('kvg-stroke-' + current);
+            if (activeEl) {
+                activeEl.style.opacity = '1';
+                activeEl.classList.add('kvg-stroke-animating');
+            }
+            current++;
+        }
+
+        drawNext();
+        kanjiStrokeState.animationTimer = setInterval(drawNext, 650);
+    }
+    window.playKanjiStrokeAnimation = playKanjiStrokeAnimation;
+
+    function stepKanjiStroke(dir) {
+        if (!kanjiStrokeState.strokes || kanjiStrokeState.strokes.length === 0) return;
+        if (kanjiStrokeState.animationTimer) clearInterval(kanjiStrokeState.animationTimer);
+        kanjiStrokeState.isAnimating = false;
+        const playBtn = document.getElementById('btn-play-strokes');
+        if (playBtn) playBtn.innerText = '▶ Strichfolge abspielen';
+
+        const total = kanjiStrokeState.strokes.length;
+        if (kanjiStrokeState.activeStrokeIdx === -1) {
+            kanjiStrokeState.activeStrokeIdx = dir > 0 ? 0 : total - 1;
+        } else {
+            kanjiStrokeState.activeStrokeIdx += dir;
+            if (kanjiStrokeState.activeStrokeIdx < 0) kanjiStrokeState.activeStrokeIdx = 0;
+            if (kanjiStrokeState.activeStrokeIdx >= total) kanjiStrokeState.activeStrokeIdx = total - 1;
+        }
+
+        stepToKanjiStroke(kanjiStrokeState.activeStrokeIdx);
+    }
+    window.stepKanjiStroke = stepKanjiStroke;
+
+    function stepToKanjiStroke(idx) {
+        kanjiStrokeState.activeStrokeIdx = idx;
+        const total = kanjiStrokeState.strokes.length;
+
+        for (let i = 0; i < total; i++) {
+            const el = document.getElementById('kvg-stroke-' + i);
+            if (el) {
+                if (i < idx) {
+                    el.style.opacity = '1';
+                    el.classList.remove('kvg-stroke-animating');
+                } else if (i === idx) {
+                    el.style.opacity = '1';
+                    el.classList.add('kvg-stroke-animating');
+                } else {
+                    el.style.opacity = '0';
+                    el.classList.remove('kvg-stroke-animating');
+                }
+            }
+        }
+
+        // Highlight step card in diagram
+        document.querySelectorAll('.kanji-step-card').forEach((c, i) => {
+            c.classList.toggle('active', i === idx);
+        });
+    }
+    window.stepToKanjiStroke = stepToKanjiStroke;
+
+    function toggleStrokeNumbers() {
+        kanjiStrokeState.showNumbers = !kanjiStrokeState.showNumbers;
+        const group = document.getElementById('kvg-numbers-group');
+        if (group) group.style.display = kanjiStrokeState.showNumbers ? 'block' : 'none';
+        const btn = document.getElementById('btn-toggle-numbers');
+        if (btn) btn.classList.toggle('active', kanjiStrokeState.showNumbers);
+    }
+    window.toggleStrokeNumbers = toggleStrokeNumbers;
+
+    function showStrokeNumbers() {
+        toggleStrokeNumbers();
+    }
+    window.showStrokeNumbers = showStrokeNumbers;
+
+
+    // =========================================================================
+    // --- DUOLINGO-STYLE KANA TRAINER & EXERCISES ---
+    // =========================================================================
+    const KANA_EXTENDED = {
+        gojuon: [
+            { h: 'あ', k: 'ア', r: 'a' }, { h: 'い', k: 'イ', r: 'i' }, { h: 'う', k: 'ウ', r: 'u' }, { h: 'え', k: 'エ', r: 'e' }, { h: 'お', k: 'オ', r: 'o' },
+            { h: 'か', k: 'カ', r: 'ka' }, { h: 'き', k: 'キ', r: 'ki' }, { h: 'く', k: 'ク', r: 'ku' }, { h: 'け', k: 'ケ', r: 'ke' }, { h: 'こ', k: 'コ', r: 'ko' },
+            { h: 'さ', k: 'サ', r: 'sa' }, { h: 'し', k: 'シ', r: 'shi' }, { h: 'す', k: 'ス', r: 'su' }, { h: 'せ', k: 'セ', r: 'se' }, { h: 'そ', k: 'ソ', r: 'so' },
+            { h: 'た', k: 'タ', r: 'ta' }, { h: 'ち', k: 'チ', r: 'chi' }, { h: 'つ', k: 'ツ', r: 'tsu' }, { h: 'て', k: 'テ', r: 'te' }, { h: 'と', k: 'ト', r: 'to' },
+            { h: 'な', k: 'ナ', r: 'na' }, { h: 'に', k: 'ニ', r: 'ni' }, { h: 'ぬ', k: 'ヌ', r: 'nu' }, { h: 'ね', k: 'ネ', r: 'ne' }, { h: 'の', k: 'ノ', r: 'no' },
+            { h: 'は', k: 'ハ', r: 'ha' }, { h: 'ひ', k: 'ヒ', r: 'hi' }, { h: 'ふ', k: 'フ', r: 'fu' }, { h: 'へ', k: 'ヘ', r: 'he' }, { h: 'ほ', k: 'ホ', r: 'ho' },
+            { h: 'ま', k: 'マ', r: 'ma' }, { h: 'み', k: 'ミ', r: 'mi' }, { h: 'む', k: 'ム', r: 'mu' }, { h: 'め', k: 'メ', r: 'me' }, { h: 'も', k: 'モ', r: 'mo' },
+            { h: 'や', k: 'ヤ', r: 'ya' }, { h: 'ゆ', k: 'ユ', r: 'yu' }, { h: 'よ', k: 'ヨ', r: 'yo' },
+            { h: 'ら', k: 'ラ', r: 'ra' }, { h: 'り', k: 'リ', r: 'ri' }, { h: 'る', k: 'ル', r: 'ru' }, { h: 'れ', k: 'レ', r: 're' }, { h: 'ろ', k: 'ロ', r: 'ro' },
+            { h: 'わ', k: 'ワ', r: 'wa' }, { h: 'を', k: 'ヲ', r: 'wo' }, { h: 'ん', k: 'ン', r: 'n' }
+        ],
+        dakuon: [
+            { h: 'が', k: 'ガ', r: 'ga' }, { h: 'ぎ', k: 'ギ', r: 'gi' }, { h: 'ぐ', k: 'グ', r: 'gu' }, { h: 'げ', k: 'ゲ', r: 'ge' }, { h: 'ご', k: 'ゴ', r: 'go' },
+            { h: 'ざ', k: 'ザ', r: 'za' }, { h: 'じ', k: 'ジ', r: 'ji' }, { h: 'ず', k: 'ズ', r: 'zu' }, { h: 'ぜ', k: 'ゼ', r: 'ze' }, { h: 'ぞ', k: 'ゾ', r: 'zo' },
+            { h: 'だ', k: 'ダ', r: 'da' }, { h: 'ぢ', k: 'ヂ', r: 'ji' }, { h: 'づ', k: 'ヅ', r: 'zu' }, { h: 'で', k: 'デ', r: 'de' }, { h: 'ど', k: 'ド', r: 'do' },
+            { h: 'ば', k: 'バ', r: 'ba' }, { h: 'び', k: 'ビ', r: 'bi' }, { h: 'ぶ', k: 'ブ', r: 'bu' }, { h: 'べ', k: 'ベ', r: 'be' }, { h: 'ぼ', k: 'ボ', r: 'bo' }
+        ],
+        handakuon: [
+            { h: 'ぱ', k: 'パ', r: 'pa' }, { h: 'ぴ', k: 'ピ', r: 'pi' }, { h: 'ぷ', k: 'プ', r: 'pu' }, { h: 'ぺ', k: 'ペ', r: 'pe' }, { h: 'ぽ', k: 'ポ', r: 'po' }
+        ],
+        yoon: [
+            { h: 'きゃ', k: 'キャ', r: 'kya' }, { h: 'きゅ', k: 'キュ', r: 'kyu' }, { h: 'きょ', k: 'キョ', r: 'kyo' },
+            { h: 'しゃ', k: 'シャ', r: 'sha' }, { h: 'しゅ', k: 'シュ', r: 'shu' }, { h: 'しょ', k: 'ショ', r: 'sho' },
+            { h: 'ちゃ', k: 'チャ', r: 'cha' }, { h: 'ちゅ', k: 'チュ', r: 'chu' }, { h: 'ちょ', k: 'チョ', r: 'cho' },
+            { h: 'にゃ', k: 'ニャ', r: 'nya' }, { h: 'にゅ', k: 'ニュ', r: 'nyu' }, { h: 'にょ', k: 'ニョ', r: 'nyo' },
+            { h: 'ひゃ', k: 'ヒャ', r: 'hya' }, { h: 'ひゅ', k: 'ヒュ', r: 'hyu' }, { h: 'ひょ', k: 'ヒョ', r: 'hyo' },
+            { h: 'みゃ', k: 'ミャ', r: 'mya' }, { h: 'みゅ', k: 'ミュ', r: 'myu' }, { h: 'みょ', k: 'ミョ', r: 'myo' },
+            { h: 'りゃ', k: 'リャ', r: 'rya' }, { h: 'りゅ', k: 'リュ', r: 'ryu' }, { h: 'りょ', k: 'リョ', r: 'ryo' },
+            { h: 'ぎゃ', k: 'ギャ', r: 'gya' }, { h: 'ぎゅ', k: 'ギュ', r: 'gyu' }, { h: 'ぎょ', k: 'ギョ', r: 'gyo' },
+            { h: 'じゃ', k: 'ジャ', r: 'ja' },  { h: 'じゅ', k: 'ジュ', r: 'ju' },  { h: 'じょ', k: 'ジョ', r: 'jo' },
+            { h: 'びゃ', k: 'ビャ', r: 'bya' }, { h: 'びゅ', k: 'ビュ', r: 'byu' }, { h: 'びょ', k: 'ビョ', r: 'byo' },
+            { h: 'ぴゃ', k: 'ピャ', r: 'pya' }, { h: 'ぴゅ', k: 'ピュ', r: 'pyu' }, { h: 'ぴょ', k: 'ピョ', r: 'pyo' }
+        ]
+    };
+
+    // Flattened array for easy access
+    const ALL_KANA = [
+        ...KANA_EXTENDED.gojuon,
+        ...KANA_EXTENDED.dakuon,
+        ...KANA_EXTENDED.handakuon,
+        ...KANA_EXTENDED.yoon
+    ];
+
+    // Everyday vocabulary for word builder exercises
+    const KANA_WORDS = [
+        { word: 'すし', katakana: 'スシ', romaji: 'sushi', de: 'Sushi', icon: '🍣' },
+        { word: 'ねこ', katakana: 'ネコ', romaji: 'neko', de: 'Katze', icon: '🐱' },
+        { word: 'いぬ', katakana: 'イヌ', romaji: 'inu', de: 'Hund', icon: '🐶' },
+        { word: 'みず', katakana: 'ミズ', romaji: 'mizu', de: 'Wasser', icon: '💧' },
+        { word: 'さくら', katakana: 'サクラ', romaji: 'sakura', de: 'Kirschblüte', icon: '🌸' },
+        { word: 'やま', katakana: 'ヤマ', romaji: 'yama', de: 'Berg', icon: '⛰️' },
+        { word: 'はな', katakana: 'ハナ', romaji: 'hana', de: 'Blume', icon: '🌼' },
+        { word: 'とり', katakana: 'トリ', romaji: 'tori', de: 'Vogel', icon: '🐦' },
+        { word: 'あさ', katakana: 'アサ', romaji: 'asa', de: 'Morgen', icon: '🌅' },
+        { word: 'よる', katakana: 'ヨル', romaji: 'yoru', de: 'Nacht', icon: '🌙' },
+        { word: 'てんき', katakana: 'テンキ', romaji: 'tenki', de: 'Wetter', icon: '☀️' },
+        { word: 'ほん', katakana: 'ホン', romaji: 'hon', de: 'Buch', icon: '📖' },
+        { word: 'くるま', katakana: 'クルマ', romaji: 'kuruma', de: 'Auto', icon: '🚗' },
+        { word: 'りんご', katakana: 'リンゴ', romaji: 'ringo', de: 'Apfel', icon: '🍎' },
+        { word: 'おちゃ', katakana: 'オチャ', romaji: 'ocha', de: 'Grüner Tee', icon: '🍵' },
+        { word: 'ラーメン', katakana: 'ラーメン', romaji: 'raamen', de: 'Ramen', icon: '🍜' },
+        { word: 'パン', katakana: 'パン', romaji: 'pan', de: 'Brot', icon: '🍞' },
+        { word: 'コーヒー', katakana: 'コーヒー', romaji: 'koohii', de: 'Kaffee', icon: '☕' },
+        { word: 'カメラ', katakana: 'カメラ', romaji: 'kamera', de: 'Kamera', icon: '📷' },
+        { word: 'バス', katakana: 'バス', romaji: 'basu', de: 'Bus', icon: '🚌' },
+        { word: 'ありがとう', katakana: 'アリガトウ', romaji: 'arigatou', de: 'Danke', icon: '🙏' },
+        { word: 'さようなら', katakana: 'サヨウナラ', romaji: 'sayounara', de: 'Auf Wiedersehen', icon: '👋' }
+    ];
+
+    let duoState = {
+        scope: 'all', // 'all', 'hiragana', 'katakana'
+        mode: 'mix',  // 'mix', 'pairs', 'listening', 'words'
+        queue: [],
+        currentIndex: 0,
+        correctCount: 0,
+        currentStepData: null,
+        userWordSlots: [],
+        selectedMatchTile: null,
+        matchedPairsCount: 0,
+        totalPairsCount: 0
+    };
+
+    function switchKanaHubView(tab) {
+        document.getElementById('btn-kana-tab-duo')?.classList.toggle('active', tab === 'duo');
+        document.getElementById('btn-kana-tab-hiragana')?.classList.toggle('active', tab === 'hiragana');
+        document.getElementById('btn-kana-tab-katakana')?.classList.toggle('active', tab === 'katakana');
+
+        const duoArea = document.getElementById('kana-duo-area');
+        const tablesArea = document.getElementById('kana-tables-area');
+
+        if (tab === 'duo') {
+            duoArea?.classList.remove('hidden');
+            tablesArea?.classList.add('hidden');
+        } else {
+            duoArea?.classList.add('hidden');
+            tablesArea?.classList.remove('hidden');
+            renderKanaTables(tab);
+        }
+    }
+    window.switchKanaHubView = switchKanaHubView;
+
+    function renderKanaTables(alphabet) {
+        const container = document.getElementById('kana-sections-container');
+        if (!container) return;
+        const isHira = alphabet === 'hiragana';
+
+        const sections = [
+            { title: 'Grundlaute (Gojūon)', data: KANA_EXTENDED.gojuon },
+            { title: 'Trübungen (Dakuon & Handakuon)', data: [...KANA_EXTENDED.dakuon, ...KANA_EXTENDED.handakuon] },
+            { title: 'Kombinationen (Yōon)', data: KANA_EXTENDED.yoon }
+        ];
+
+        let html = '';
+        sections.forEach(sec => {
+            html += `
+                <div class="kana-category-box">
+                    <div class="kana-category-title">
+                        <span>${sec.title}</span>
+                        <span style="font-size:12px; font-weight:600; color:var(--text-light);">Tippen zum Anhören 🔊</span>
+                    </div>
+                    <div class="kana-grid-responsive">
+                        ${sec.data.map(item => {
+                            const char = isHira ? item.h : item.k;
+                            return `
+                                <div class="kana-card-tile" onclick="speak('${char}')" title="${char} (${item.r})">
+                                    <div class="kana-card-char">${char}</div>
+                                    <div class="kana-card-romaji">${item.r}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    function setDuoScope(scope) {
+        duoState.scope = scope;
+        document.getElementById('duo-scope-all')?.classList.toggle('active', scope === 'all');
+        document.getElementById('duo-scope-hira')?.classList.toggle('active', scope === 'hiragana');
+        document.getElementById('duo-scope-kata')?.classList.toggle('active', scope === 'katakana');
+    }
+    window.setDuoScope = setDuoScope;
+
+    function setDuoMode(mode) {
+        duoState.mode = mode;
+        ['mix', 'pairs', 'listening', 'words'].forEach(m => {
+            document.getElementById('duo-mode-' + m)?.classList.toggle('active', m === mode);
+        });
+    }
+    window.setDuoMode = setDuoMode;
+
+    function startDuolingoKanaSession() {
+        document.getElementById('duo-setup-box')?.classList.add('hidden');
+        document.getElementById('duo-completion-view')?.classList.add('hidden');
+        document.getElementById('duo-active-lesson')?.classList.remove('hidden');
+
+        // Build 10 dynamic exercises
+        duoState.queue = generateDuolingoQuestions(10, duoState.mode, duoState.scope);
+        duoState.currentIndex = 0;
+        duoState.correctCount = 0;
+
+        loadDuolingoExercise();
+    }
+    window.startDuolingoKanaSession = startDuolingoKanaSession;
+
+    function exitDuolingoSession() {
+        document.getElementById('duo-active-lesson')?.classList.add('hidden');
+        document.getElementById('duo-completion-view')?.classList.add('hidden');
+        document.getElementById('duo-setup-box')?.classList.remove('hidden');
+        document.getElementById('duo-feedback-sheet')?.classList.add('hidden');
+    }
+    window.exitDuolingoSession = exitDuolingoSession;
+
+    function generateDuolingoQuestions(count, mode, scope) {
+        const pool = ALL_KANA.filter(k => k.r.length <= 4);
+        const questions = [];
+
+        for (let i = 0; i < count; i++) {
+            let type = 'choice';
+            if (mode === 'listening') type = 'listening';
+            else if (mode === 'pairs') type = 'pairs';
+            else if (mode === 'words') type = 'word';
+            else {
+                // Mix mode
+                const rand = Math.random();
+                if (rand < 0.28) type = 'listening';
+                else if (rand < 0.52) type = 'choice';
+                else if (rand < 0.76) type = 'pairs';
+                else type = 'word';
+            }
+
+            const useKata = scope === 'katakana' ? true : (scope === 'hiragana' ? false : Math.random() > 0.5);
+            const item = pool[Math.floor(Math.random() * pool.length)];
+            const char = useKata ? item.k : item.h;
+
+            if (type === 'listening') {
+                const options = [char];
+                while (options.length < 4) {
+                    const r = pool[Math.floor(Math.random() * pool.length)];
+                    const c = useKata ? r.k : r.h;
+                    if (!options.includes(c)) options.push(c);
+                }
+                options.sort(() => Math.random() - 0.5);
+                questions.push({
+                    type: 'listening',
+                    audioChar: char,
+                    romaji: item.r,
+                    correct: char,
+                    options: options,
+                    prompt: 'Welches Zeichen hörst du?'
+                });
+            } else if (type === 'choice') {
+                const toRomaji = Math.random() > 0.5;
+                if (toRomaji) {
+                    const options = [item.r];
+                    while (options.length < 4) {
+                        const randR = pool[Math.floor(Math.random() * pool.length)].r;
+                        if (!options.includes(randR)) options.push(randR);
+                    }
+                    options.sort(() => Math.random() - 0.5);
+                    questions.push({
+                        type: 'choice',
+                        displayChar: char,
+                        prompt: `Wie lautet die Lesung für "${char}"?`,
+                        correct: item.r,
+                        options: options
+                    });
+                } else {
+                    const options = [char];
+                    while (options.length < 4) {
+                        const r = pool[Math.floor(Math.random() * pool.length)];
+                        const c = useKata ? r.k : r.h;
+                        if (!options.includes(c)) options.push(c);
+                    }
+                    options.sort(() => Math.random() - 0.5);
+                    questions.push({
+                        type: 'choice',
+                        displayRomaji: item.r,
+                        prompt: `Wähle das passende Zeichen für "${item.r}":`,
+                        correct: char,
+                        options: options
+                    });
+                }
+            } else if (type === 'pairs') {
+                // 4 distinct pairs
+                const chosen = [];
+                while (chosen.length < 4) {
+                    const candidate = pool[Math.floor(Math.random() * pool.length)];
+                    if (!chosen.some(c => c.r === candidate.r)) chosen.push(candidate);
+                }
+                const tiles = [];
+                chosen.forEach((c, idx) => {
+                    const ch = useKata ? c.k : c.h;
+                    tiles.push({ id: 'pair_' + idx, type: 'char', text: ch, matchKey: idx });
+                    tiles.push({ id: 'pair_' + idx + '_r', type: 'romaji', text: c.r, matchKey: idx });
+                });
+                tiles.sort(() => Math.random() - 0.5);
+                questions.push({
+                    type: 'pairs',
+                    prompt: 'Finde die passenden Paare!',
+                    tiles: tiles,
+                    totalPairs: chosen.length
+                });
+            } else if (type === 'word') {
+                const wordObj = KANA_WORDS[Math.floor(Math.random() * KANA_WORDS.length)];
+                const wordString = useKata ? wordObj.katakana : wordObj.word;
+                const chars = [...wordString];
+                
+                // Add 2-3 distractor characters
+                const bank = [...chars];
+                while (bank.length < chars.length + 3) {
+                    const r = pool[Math.floor(Math.random() * pool.length)];
+                    const c = useKata ? r.k : r.h;
+                    if (!bank.includes(c)) bank.push(c);
+                }
+                bank.sort(() => Math.random() - 0.5);
+
+                questions.push({
+                    type: 'word',
+                    wordObj: wordObj,
+                    correctWord: wordString,
+                    chars: chars,
+                    bank: bank,
+                    prompt: `Bilde das Wort für "${wordObj.de}" ${wordObj.icon}:`
+                });
+            }
+        }
+        return questions;
+    }
+
+    function loadDuolingoExercise() {
+        const step = duoState.queue[duoState.currentIndex];
+        duoState.currentStepData = step;
+        document.getElementById('duo-feedback-sheet')?.classList.add('hidden');
+
+        // Update progress bar
+        const progress = (duoState.currentIndex / duoState.queue.length) * 100;
+        const bar = document.getElementById('duo-progress-bar');
+        if (bar) bar.style.width = progress + '%';
+        const xpCounter = document.getElementById('duo-xp-counter');
+        if (xpCounter) xpCounter.innerText = `⭐ ${duoState.correctCount * 2} XP`;
+
+        const container = document.getElementById('duo-exercise-container');
+        if (!container) return;
+
+        if (step.type === 'listening') {
+            container.innerHTML = `
+                <div class="duo-card">
+                    <div class="duo-question-prompt">${step.prompt}</div>
+                    <button class="duo-audio-btn" onclick="speak('${step.audioChar}')">🔊</button>
+                    <div class="duo-options-grid">
+                        ${step.options.map(opt => `
+                            <button class="duo-opt-btn" onclick="selectDuoChoice('${opt}', '${step.correct}', this)">${opt}</button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            setTimeout(() => speak(step.audioChar), 200);
+        } else if (step.type === 'choice') {
+            container.innerHTML = `
+                <div class="duo-card">
+                    <div class="duo-question-prompt">${step.prompt}</div>
+                    ${step.displayChar ? `
+                        <div style="font-size:72px; font-weight:800; color:var(--primary-dark); margin:10px 0 20px 0; cursor:pointer;" onclick="speak('${step.displayChar}')">
+                            ${step.displayChar} <span style="font-size:24px; vertical-align:middle;">🔊</span>
+                        </div>
+                    ` : `
+                        <div style="font-size:36px; font-weight:800; color:var(--accent-pink); margin:15px 0 25px 0;">${step.displayRomaji}</div>
+                    `}
+                    <div class="duo-options-grid">
+                        ${step.options.map(opt => `
+                            <button class="duo-opt-btn" onclick="selectDuoChoice('${opt}', '${step.correct}', this)">${opt}</button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            if (step.displayChar) setTimeout(() => speak(step.displayChar), 200);
+        } else if (step.type === 'pairs') {
+            duoState.selectedMatchTile = null;
+            duoState.matchedPairsCount = 0;
+            duoState.totalPairsCount = step.totalPairs;
+
+            container.innerHTML = `
+                <div class="duo-card">
+                    <div class="duo-question-prompt">${step.prompt}</div>
+                    <p style="color:var(--text-light); font-size:13px; margin-bottom:15px;">Tippe auf ein Kana und die passende Lesung.</p>
+                    <div class="duo-match-grid" id="duo-match-grid">
+                        ${step.tiles.map((tile, i) => `
+                            <div class="duo-match-tile" id="duo-tile-${i}" data-index="${i}" data-match="${tile.matchKey}" data-type="${tile.type}" data-text="${tile.text}" onclick="clickDuoMatchTile(this)">
+                                ${tile.text}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        } else if (step.type === 'word') {
+            duoState.userWordSlots = [];
+            container.innerHTML = `
+                <div class="duo-card">
+                    <div class="duo-question-prompt">${step.prompt}</div>
+                    <div style="font-size:16px; color:var(--text-light); margin-bottom:10px;">
+                        Romaji: <b>${step.wordObj.romaji}</b>
+                        <button class="btn-stroke-ctl" style="margin-left:8px; padding:4px 10px;" onclick="speak('${step.correctWord}')">🔊 Anhören</button>
+                    </div>
+                    
+                    <!-- Leere Zielfelder -->
+                    <div class="duo-word-slots" id="duo-word-slots">
+                        ${step.chars.map((_, i) => `
+                            <div class="duo-slot-chip" id="duo-slot-${i}" onclick="removeDuoWordChip(${i})"></div>
+                        `).join('')}
+                    </div>
+
+                    <!-- Silben-Bank -->
+                    <div class="duo-chip-bank" id="duo-chip-bank">
+                        ${step.bank.map((ch, i) => `
+                            <div class="duo-bank-chip" id="duo-chip-${i}" data-char="${ch}" onclick="clickDuoWordChip(this, '${ch}')">
+                                ${ch}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            setTimeout(() => speak(step.correctWord), 200);
+        }
+    }
+
+    function selectDuoChoice(selected, correct, btn) {
+        if (selected === correct) {
+            playSound('correct');
+            btn.classList.add('correct');
+            speak(selected);
+            duoState.correctCount++;
+            showDuoFeedback(true, 'Richtig! ✓', `"${selected}" ist die richtige Lösung.`);
+        } else {
+            playSound('wrong');
+            btn.classList.add('wrong');
+            showDuoFeedback(false, 'Nicht ganz!', `Die richtige Antwort war "${correct}".`);
+        }
+    }
+    window.selectDuoChoice = selectDuoChoice;
+
+    function clickDuoMatchTile(el) {
+        if (el.classList.contains('matched')) return;
+
+        // Play subtle click sound
+        if (el.dataset.type === 'char') speak(el.dataset.text);
+
+        if (!duoState.selectedMatchTile) {
+            duoState.selectedMatchTile = el;
+            el.classList.add('selected');
+        } else if (duoState.selectedMatchTile === el) {
+            el.classList.remove('selected');
+            duoState.selectedMatchTile = null;
+        } else {
+            const first = duoState.selectedMatchTile;
+            const second = el;
+
+            if (first.dataset.match === second.dataset.match && first.dataset.type !== second.dataset.type) {
+                // Match!
+                playSound('correct');
+                first.classList.remove('selected');
+                first.classList.add('matched');
+                second.classList.add('matched');
+                duoState.selectedMatchTile = null;
+                duoState.matchedPairsCount++;
+
+                if (duoState.matchedPairsCount >= duoState.totalPairsCount) {
+                    duoState.correctCount++;
+                    setTimeout(() => {
+                        showDuoFeedback(true, 'Großartig! Alle Paare gefunden! ✓', '');
+                    }, 400);
+                }
+            } else {
+                // Wrong Match
+                playSound('wrong');
+                first.classList.add('wrong');
+                second.classList.add('wrong');
+                setTimeout(() => {
+                    first.classList.remove('wrong', 'selected');
+                    second.classList.remove('wrong', 'selected');
+                }, 400);
+                duoState.selectedMatchTile = null;
+            }
+        }
+    }
+    window.clickDuoMatchTile = clickDuoMatchTile;
+
+    function clickDuoWordChip(chipEl, char) {
+        const step = duoState.currentStepData;
+        if (!step || chipEl.classList.contains('used')) return;
+        if (duoState.userWordSlots.length >= step.chars.length) return;
+
+        speak(char);
+        const slotIdx = duoState.userWordSlots.length;
+        duoState.userWordSlots.push({ char: char, chipEl: chipEl });
+        chipEl.classList.add('used');
+
+        const slotEl = document.getElementById('duo-slot-' + slotIdx);
+        if (slotEl) {
+            slotEl.innerText = char;
+            slotEl.classList.add('filled');
+        }
+
+        // Auto-check when all slots filled
+        if (duoState.userWordSlots.length === step.chars.length) {
+            const constructed = duoState.userWordSlots.map(s => s.char).join('');
+            if (constructed === step.correctWord) {
+                playSound('correct');
+                speak(step.correctWord);
+                duoState.correctCount++;
+                showDuoFeedback(true, 'Perfekt! ✓', `${step.correctWord} = ${step.wordObj.de}`);
+            } else {
+                playSound('wrong');
+                showDuoFeedback(false, 'Leider falsch!', `Richtig wäre: ${step.correctWord} (${step.wordObj.romaji})`);
+            }
+        }
+    }
+    window.clickDuoWordChip = clickDuoWordChip;
+
+    function removeDuoWordChip(slotIdx) {
+        if (!duoState.userWordSlots[slotIdx]) return;
+        const removed = duoState.userWordSlots.splice(slotIdx, 1)[0];
+        if (removed && removed.chipEl) removed.chipEl.classList.remove('used');
+
+        // Re-render slots
+        const step = duoState.currentStepData;
+        for (let i = 0; i < step.chars.length; i++) {
+            const slotEl = document.getElementById('duo-slot-' + i);
+            if (slotEl) {
+                if (duoState.userWordSlots[i]) {
+                    slotEl.innerText = duoState.userWordSlots[i].char;
+                    slotEl.classList.add('filled');
+                } else {
+                    slotEl.innerText = '';
+                    slotEl.classList.remove('filled');
+                }
+            }
+        }
+    }
+    window.removeDuoWordChip = removeDuoWordChip;
+
+    function showDuoFeedback(isCorrect, title, subtitle) {
+        const sheet = document.getElementById('duo-feedback-sheet');
+        const icon = document.getElementById('duo-feedback-icon');
+        const titleEl = document.getElementById('duo-feedback-title');
+        const subEl = document.getElementById('duo-feedback-subtitle');
+        if (!sheet) return;
+
+        sheet.className = 'duo-feedback-sheet ' + (isCorrect ? 'correct' : 'wrong');
+        if (icon) icon.innerText = isCorrect ? '✅' : '❌';
+        if (titleEl) titleEl.innerText = title;
+        if (subEl) subEl.innerText = subtitle;
+
+        sheet.classList.remove('hidden');
+    }
+
+    function nextDuolingoExercise() {
+        document.getElementById('duo-feedback-sheet')?.classList.add('hidden');
+        duoState.currentIndex++;
+
+        if (duoState.currentIndex >= duoState.queue.length) {
+            finishDuolingoSession();
+        } else {
+            loadDuolingoExercise();
+        }
+    }
+    window.nextDuolingoExercise = nextDuolingoExercise;
+
+    function finishDuolingoSession() {
+        document.getElementById('duo-active-lesson')?.classList.add('hidden');
+        document.getElementById('duo-completion-view')?.classList.remove('hidden');
+
+        const total = duoState.queue.length;
+        const accuracy = Math.round((duoState.correctCount / total) * 100);
+        const earnedXP = duoState.correctCount * 2 + 5; // Bonus for finishing
+
+        addXP(earnedXP);
+        updateStreak();
+        startConfetti();
+
+        const xpEl = document.getElementById('duo-result-xp');
+        const accEl = document.getElementById('duo-result-acc');
+        if (xpEl) xpEl.innerText = `+${earnedXP} XP`;
+        if (accEl) accEl.innerText = `${accuracy}%`;
+    }
+    window.finishDuolingoSession = finishDuolingoSession;
+
+    // Backward-compatibility wrapper for any old switchKanaView calls
+    function switchKanaView(mode) {
+        switchKanaHubView('duo');
     }
     window.switchKanaView = switchKanaView;
 
-    function loadKanaQuizQuestion() {
-        const item = KANA_DATA[Math.floor(Math.random() * KANA_DATA.length)];
-        const useKatakana = Math.random() > 0.5;
-        const char = useKatakana ? item.k : item.h;
-        document.getElementById('kana-quiz-badge').innerText = useKatakana ? 'Katakana' : 'Hiragana';
-        document.getElementById('kana-quiz-char').innerText = char;
-        document.getElementById('kana-quiz-feedback').innerHTML = '';
-
-        const options = [item.r];
-        while (options.length < 4) {
-            const rand = KANA_DATA[Math.floor(Math.random() * KANA_DATA.length)].r;
-            if (!options.includes(rand)) options.push(rand);
-        }
-        options.sort(() => Math.random() - 0.5);
-
-        document.getElementById('kana-quiz-options').innerHTML = options.map(opt =>
-            `<button class="quiz-option" onclick="checkKanaQuizAnswer('${opt}', '${item.r}', '${char}', this)">${opt}</button>`
-        ).join('');
-    }
-
-    function checkKanaQuizAnswer(selected, correct, char, btn) {
-        const fb = document.getElementById('kana-quiz-feedback');
-        if (selected === correct) {
-            playSound('correct');
-            if (btn) btn.classList.add('correct');
-            speak(char);
-            addXP(5);
-            fb.innerHTML = '<span class="feedback-correct">Richtig! ✓ (+5 XP)</span>';
-            setTimeout(loadKanaQuizQuestion, 700);
-        } else {
-            playSound('wrong');
-            if (btn) btn.classList.add('wrong');
-            fb.innerHTML = `<span class="feedback-wrong">Falsch! "${char}" wird "${correct}" gelesen.</span>`;
-            setTimeout(loadKanaQuizQuestion, 1400);
-        }
-    }
-    window.checkKanaQuizAnswer = checkKanaQuizAnswer;
 
     function setDirection(dir) {
         state.direction = dir;
@@ -8747,7 +10567,8 @@
         if (state.isFlipped && e.code === 'ArrowLeft') nextCard(false);
     });
 
-    loadAllData(); // Startet den gesamten Lade- und Initialisierungsprozess
+    loadAllData();
+    setTimeout(initAppTheme, 100); // Startet den gesamten Lade- und Initialisierungsprozess
 </script>
 
 </body>
