@@ -810,6 +810,13 @@
         .flashcard { width: 100%; aspect-ratio: 4/3; perspective: 1000px; cursor: pointer; }
         .fc-inner { width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; position: relative; will-change: transform; backface-visibility: hidden; }
         .flashcard.flipped .fc-inner { transform: rotateY(180deg); }
+        .flashcard.no-transition .fc-inner,
+        .fc-inner.no-transition { transition: none !important; }
+        @keyframes fcCardEnter {
+            0% { opacity: 0.5; transform: translateY(8px) scale(0.985); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .flashcard.card-enter { animation: fcCardEnter 0.22s ease-out; }
         .fc-front, .fc-back { width: 100%; height: 100%; position: absolute; backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
         .fc-front { background: var(--white); }
         .fc-back { background: var(--primary-dark); color: var(--white); transform: rotateY(180deg); }
@@ -25168,11 +25175,30 @@
         return state.direction || 'jp-de';
     }
 
+    function resetFlashcardToFront(flashcardEl) {
+        if (!flashcardEl) return;
+        const inner = flashcardEl.querySelector('.fc-inner');
+        if (inner) inner.style.transition = 'none';
+        flashcardEl.classList.remove('flipped');
+        if (inner) {
+            void inner.offsetHeight; // Reflow erzwingen: setzt die Drehung ohne 180°-Umdrehanimation sofort zurück
+            inner.style.transition = '';
+        }
+    }
+
     function loadFlashcard() {
         const word = state.currentQueue[state.currentIndex];
         const activeDir = resolveActiveDirection();
         const isJpToDe = activeDir === 'jp-de';
         const t = uiTranslations[state.lang] || uiTranslations.de;
+
+        // Karteikarte sofort und ohne Umdreh-Animation auf Vorderseite zurücksetzen,
+        // damit beim Wechsel zur nächsten Karte die Antwort der Rückseite niemals sichtbar ist
+        const flashcard = document.getElementById('flashcard');
+        resetFlashcardToFront(flashcard);
+        state.isFlipped = false;
+        const fcActions = document.getElementById('fc-actions');
+        if (fcActions) fcActions.classList.remove('visible');
 
         const targetLangCode = state.lang === 'en' ? 'EN' : 'DE';
         document.getElementById('fc-direction-display').innerText = state.direction === 'mix'
@@ -25206,11 +25232,11 @@
             document.getElementById('fc-trans-back').innerText = word.kanji ? `${word.kanji} (${word.kana})` : word.kana;
         }
 
-        // Karte zurücksetzen, bevor die neue angezeigt wird
-        const flashcard = document.getElementById('flashcard');
-        flashcard.classList.remove('flipped');
-        state.isFlipped = false;
-        document.getElementById('fc-actions').classList.remove('visible');
+        if (flashcard) {
+            flashcard.classList.remove('card-enter');
+            void flashcard.offsetWidth;
+            flashcard.classList.add('card-enter');
+        }
     }
 
     function flipCard() {
@@ -25907,10 +25933,19 @@
         const list = kanjiComboData[state.level] || [];
         if (list.length === 0) return;
         const item = list[state.kanji.comboIndex || 0];
+
+        const comboCard = document.getElementById('combo-flashcard');
+        resetFlashcardToFront(comboCard);
+
         document.getElementById('kcf-word').innerText = item.word;
         document.getElementById('kcf-reading').innerText = item.reading;
         document.getElementById('kcf-trans').innerText = item.de;
-        document.getElementById('combo-flashcard').classList.remove('flipped');
+
+        if (comboCard) {
+            comboCard.classList.remove('card-enter');
+            void comboCard.offsetWidth;
+            comboCard.classList.add('card-enter');
+        }
     }
 
     function nextCombo() {
@@ -26150,6 +26185,7 @@
     window.startDailyChallenge = startDailyChallenge;
     window.flipCard = flipCard;
     window.nextCard = nextCard;
+    window.resetFlashcardToFront = resetFlashcardToFront;
     window.skipToNext = skipToNext;
     window.renderList = renderList;
     window.displayReadingText = displayReadingText;
