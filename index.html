@@ -71,29 +71,30 @@
 
         /* 🗻 FUJI NACHT THEME (Dark Mode / Mitternacht am Fuji) */
         [data-theme="fuji"] {
-            --bg-color: #0f1422;
-            --text-main: #f1f4fb;
-            --text-light: #8e9bb5;
-            --primary-dark: #43557e;
-            --primary-light: #5d74a7;
+            --bg-color: #0b101d;
+            --text-main: #f1f5f9;
+            --text-light: #94a3b8;
+            --primary-dark: #60a5fa;
+            --primary-light: #3b82f6;
             --accent-pink: #f472b6;
-            --accent-pink-light: rgba(244, 114, 182, 0.16);
-            --badge-blue-bg: #1c243a;
+            --accent-pink-light: rgba(244, 114, 182, 0.18);
+            --badge-blue-bg: #1e293b;
             --badge-blue-text: #93c5fd;
-            --border-color: #27314d;
-            --white: #171f33;
-            --card-bg: #171f33;
-            --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-            --subtle-bg: #1c253c;
+            --border-color: #28354e;
+            --white: #151e32;
+            --card-bg: #151e32;
+            --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            --subtle-bg: #1c2740;
+            color-scheme: dark;
         }
 
         /* 🏮 TOKYO AKANE THEME (Abendrot & Laternen) */
         [data-theme="sunset"] {
-            --bg-color: #fff9f5;
+            --bg-color: #fff8f3;
             --text-main: #331b14;
             --text-light: #8c5a4d;
-            --primary-dark: #992812;
-            --primary-light: #bf3f24;
+            --primary-dark: #b92b10;
+            --primary-light: #d94625;
             --accent-pink: #ea580c;
             --accent-pink-light: #ffedd5;
             --badge-blue-bg: #fee2d5;
@@ -103,6 +104,43 @@
             --card-bg: #ffffff;
             --card-shadow: 0 4px 16px rgba(153, 40, 18, 0.08);
             --subtle-bg: #fff1eb;
+        }
+
+        /* 🌌 CYBER TOKYO THEME (Neon Night) */
+        [data-theme="cyber"] {
+            --bg-color: #090714;
+            --text-main: #f3e8ff;
+            --text-light: #a78bfa;
+            --primary-dark: #c084fc;
+            --primary-light: #a855f7;
+            --accent-pink: #00f5d4;
+            --accent-pink-light: rgba(0, 245, 212, 0.15);
+            --badge-blue-bg: #1c1438;
+            --badge-blue-text: #38bdf8;
+            --border-color: #2e2157;
+            --white: #130e26;
+            --card-bg: #130e26;
+            --card-shadow: 0 6px 22px rgba(0, 0, 0, 0.6);
+            --subtle-bg: #1b1435;
+            color-scheme: dark;
+        }
+
+        /* ⛩️ KYOTO HERBST THEME (Momiji / Gold & Ahornrot) */
+        [data-theme="kyoto"] {
+            --bg-color: #fdfaf5;
+            --text-main: #2c1a11;
+            --text-light: #7c5c4a;
+            --primary-dark: #8c2d19;
+            --primary-light: #b03e26;
+            --accent-pink: #d97706;
+            --accent-pink-light: #fef3c7;
+            --badge-blue-bg: #f5ebe1;
+            --badge-blue-text: #8c2d19;
+            --border-color: #e6d5c3;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 16px rgba(140, 45, 25, 0.08);
+            --subtle-bg: #f7f0e6;
         }
 
         /* Floating Sakura Canvas */
@@ -859,32 +897,13 @@
             margin-top: 4px;
         }
 
-        :root {
-            --bg-color: #fafafa;
-            --text-main: #333;
-            --text-light: #777;
-            --primary-dark: #272a48;
-            --primary-light: #3f4474;
-            --accent-pink: #df4478;
-            --accent-pink-light: #fcebf1;
-            --badge-blue-bg: #e6eefa;
-            --badge-blue-text: #3266d6;
-            --border-color: #e5e5e5;
-            --white: #ffffff;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg-color); color: var(--text-main); -webkit-font-smoothing: antialiased; }
-
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .hidden { display: none !important; }
-
         /* --- NAVIGATION --- */
         header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 15px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 30px; }
         .level-switch { font-size: 18px; font-weight: bold; color: var(--primary-dark); cursor: pointer; display: flex; align-items: center; gap: 10px; user-select: none; }
-        .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--white); padding: 6px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .tab { padding: 8px 14px; border-radius: 15px; border: none; background: transparent; cursor: pointer; font-weight: 500; color: var(--text-light); transition: 0.2s; font-size: 14px; }
-        .tab.active { background: var(--bg-color); color: var(--text-main); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tabs { display: flex; flex-wrap: wrap; gap: 6px; background: var(--white); padding: 6px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
+        .tab { padding: 8px 14px; border-radius: 15px; border: none; background: transparent; cursor: pointer; font-weight: 600; color: var(--text-light); transition: 0.2s; font-size: 13.5px; }
+        .tab:hover { color: var(--text-main); background: var(--subtle-bg); }
+        .tab.active { background: var(--primary-dark); color: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
 
         /* --- TYPOGRAFIE & LAYOUT --- */
         h1 { font-size: 28px; margin-bottom: 5px; color: var(--primary-dark); }
@@ -893,37 +912,37 @@
 
         /* --- KARTEN & BUTTONS --- */
         .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .option-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
-        .option-card.active { border-color: var(--primary-dark); background: #f8f9fc; }
-        .option-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
-        .option-card.active:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+        .option-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; color: var(--text-main); }
+        .option-card.active { border-color: var(--primary-dark); background: var(--subtle-bg); box-shadow: 0 0 0 1px var(--primary-dark); }
+        .option-card:hover { transform: translateY(-4px); box-shadow: var(--card-shadow); }
+        .option-card.active:hover { transform: translateY(-2px); box-shadow: var(--card-shadow); }
 
-        .option-card h3 { font-size: 16px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .option-card h3 { font-size: 16px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; color: var(--primary-dark); }
         .option-card p { font-size: 13px; color: var(--text-light); }
 
-        .toggle-group { display: flex; background: #f0f0f0; border-radius: 12px; overflow: hidden; }
-        .toggle-btn { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; font-weight: 500; color: var(--text-light); }
-        .toggle-btn.active { background: var(--white); color: var(--text-main); box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin: 4px; border-radius: 8px; }
+        .toggle-group { display: flex; background: var(--subtle-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+        .toggle-btn { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; font-weight: 600; color: var(--text-light); transition: 0.2s; }
+        .toggle-btn.active { background: var(--white); color: var(--text-main); box-shadow: 0 2px 4px rgba(0,0,0,0.08); margin: 4px; border-radius: 8px; }
 
-        .btn-main { background: var(--primary-dark); color: var(--white); border: none; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: 500; cursor: pointer; width: 100%; transition: 0.2s; }
+        .btn-main { background: var(--primary-dark); color: #ffffff; border: none; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s; }
         .btn-main:hover { background: var(--primary-light); }
 
         /* --- LISTEN ANSICHT --- */
-        .search-bar { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); font-size: 16px; margin-bottom: 20px; }
+        .search-bar { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--white); color: var(--text-main); font-size: 16px; margin-bottom: 20px; }
         .list-item { background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 15px 20px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
-        .list-num { color: #ccc; font-size: 14px; width: 25px; }
+        .list-num { color: var(--text-light); font-size: 14px; width: 25px; }
         .list-content { flex: 1; }
-        .list-jp { font-size: 18px; font-weight: bold; margin-bottom: 4px; }
+        .list-jp { font-size: 18px; font-weight: bold; margin-bottom: 4px; color: var(--text-main); }
         .list-jp span { font-weight: normal; font-size: 14px; color: var(--text-light); margin-left: 5px; }
         .list-de { font-size: 14px; color: var(--text-main); }
         .badge { background: var(--badge-blue-bg); color: var(--badge-blue-text); padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; }
-        .badge.nomen { background: #f3f0ff; color: #6b46c1; }
-        .badge.adjektiv { background: #fff0f6; color: #c2255c; }
+        .badge.nomen { background: rgba(107, 70, 193, 0.14); color: #7c3aed; }
+        .badge.adjektiv { background: var(--accent-pink-light); color: var(--accent-pink); }
         .status-check { color: var(--accent-pink); font-weight: bold; margin-left: 10px; }
 
         /* --- FLASHCARDS ANSICHT --- */
         .fc-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; color: var(--text-light); }
-        .progress-bar { height: 6px; background: #e0e0e0; border-radius: 3px; margin-bottom: 30px; overflow: hidden; }
+        .progress-bar { height: 6px; background: var(--border-color); border-radius: 3px; margin-bottom: 30px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary-dark); width: 5%; transition: width 0.3s; }
         
         .flashcard {
@@ -990,34 +1009,33 @@
         .btn-gewusst { background: var(--accent-pink); color: var(--white); }
 
         /* --- ABFRAGE (Tippen) ANSICHT --- */
-        .typing-container { background: var(--white); border-radius: 20px; padding: 40px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .typing-input { width: 100%; padding: 15px; font-size: 20px; border: 2px solid var(--border-color); border-radius: 10px; margin-top: 20px; text-align: center; outline: none; }
-        .typing-input:focus { border-color: var(--primary-dark); }
+        .typing-container { background: var(--white); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px; text-align: center; box-shadow: var(--card-shadow); color: var(--text-main); }
+        .typing-input { width: 100%; padding: 15px; font-size: 20px; border: 2px solid var(--border-color); border-radius: 10px; margin-top: 20px; text-align: center; outline: none; background: var(--subtle-bg); color: var(--text-main); }
+        .typing-input:focus { border-color: var(--primary-dark); background: var(--white); }
         .typing-feedback { margin-top: 15px; font-weight: bold; min-height: 24px; }
         .feedback-correct { color: #10b981; }
         .feedback-wrong { color: var(--accent-pink); }
 
         /* --- NEW PATH FEEDBACK STYLES (from React Code) --- */
         .path-feedback-card { margin-top: 20px; padding: 20px; border-radius: 12px; border: 2px solid transparent; display: none; }
-        .path-feedback-card.correct { display: block; background: rgba(16, 185, 129, 0.1); border-color: #10b981; color: #065f46; }
-        .path-feedback-card.wrong { display: block; background: rgba(223, 68, 120, 0.1); border-color: var(--accent-pink); color: #9d174d; }
+        .path-feedback-card.correct { display: block; background: rgba(16, 185, 129, 0.14); border-color: #10b981; color: #10b981; }
+        .path-feedback-card.wrong { display: block; background: var(--accent-pink-light); border-color: var(--accent-pink); color: var(--accent-pink); }
         .path-feedback-header { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 18px; margin-bottom: 8px; }
         .path-option-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
         @media (min-width: 600px) { .path-option-grid { grid-template-columns: 1fr 1fr; } }
 
         /* --- RESULTS VIEW --- */
-        .kanji-canvas-container { position: relative; width: 300px; height: 300px; margin: 20px auto; border: 2px solid var(--primary-dark); background: white; border-radius: 12px; cursor: crosshair; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .kanji-canvas-container { position: relative; width: 300px; height: 300px; margin: 20px auto; border: 2px solid var(--primary-dark); background: var(--white); border-radius: 12px; cursor: crosshair; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         #kanji-canvas { position: absolute; top: 0; left: 0; z-index: 5; background: transparent; }
-        #kanji-ghost, #kanji-ghost-radical { font-size: 220px; color: #f5f5f5; z-index: 1; user-select: none; pointer-events: none; }
-        .kanji-info { text-align: center; margin-bottom: 20px; }
-        .kanji-big { font-size: 80px; font-weight: bold; color: var(--primary-dark); }
-        .kanji-info { text-align: center; margin-bottom: 20px; padding: 10px; background: #fff; border-radius: 12px; }
-        .kanji-big { font-size: 120px; font-weight: bold; color: var(--primary-dark); }
+        #kanji-ghost, #kanji-ghost-radical { font-size: 220px; color: var(--border-color); z-index: 1; user-select: none; pointer-events: none; }
+        .kanji-info { text-align: center; margin-bottom: 20px; padding: 14px; background: var(--subtle-bg); border: 1px solid var(--border-color); border-radius: 12px; }
+        .kanji-big { font-size: 100px; font-weight: bold; color: var(--primary-dark); }
         .kanji-readings { font-size: 18px; color: var(--text-light); }
-        .kanji-meaning { font-size: 24px; font-weight: 500; margin-top: 10px; }
+        .kanji-meaning { font-size: 24px; font-weight: 500; margin-top: 10px; color: var(--text-main); }
         .kanji-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 20px; }
-        .kanji-block-btn { padding: 10px; background: white; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
-        .kanji-block-btn.active { background: var(--primary-dark); color: white; border-color: var(--primary-dark); }
+        .kanji-block-btn { padding: 10px; background: var(--white); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; transition: 0.15s; }
+        .kanji-block-btn:hover { border-color: var(--primary-dark); background: var(--subtle-bg); }
+        .kanji-block-btn.active { background: var(--primary-dark); color: #ffffff; border-color: var(--primary-dark); }
         .canvas-actions { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
         .btn-small { padding: 8px 15px; border-radius: 20px; font-size: 12px; }
         .stroke-error { color: var(--accent-pink); font-weight: bold; text-align: center; margin-top: 10px; height: 20px; }
@@ -1033,7 +1051,7 @@
             max-width: 400px; 
             margin: 0 auto; 
         }
-        .path-unit-header { width: 100%; padding: 20px; background: var(--primary-dark); color: white; border-radius: 15px; margin: 20px 0; text-align: center; box-shadow: 0 4px 0 #1a1c31; }
+        .path-unit-header { width: 100%; padding: 20px; background: var(--primary-dark); color: white; border-radius: 15px; margin: 20px 0; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
         .path-unit-header h2 { color: white; font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
 
         .path-step-wrapper { display: flex; flex-direction: column; align-items: center; position: relative; width: 100%; }
@@ -1041,9 +1059,9 @@
             width: 75px; 
             height: 75px; 
             border-radius: 50%; 
-            background: #e5e5e5; 
-            border: none; 
-            border-bottom: 6px solid #afafaf; 
+            background: var(--subtle-bg); 
+            border: 2px solid var(--border-color); 
+            border-bottom: 6px solid var(--border-color); 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -1051,23 +1069,23 @@
             cursor: pointer; 
             transition: 0.1s; 
             z-index: 2; 
-            color: white; 
+            color: var(--text-light); 
             position: relative; 
         }
         .path-step:active { transform: translateY(4px); border-bottom-width: 2px; }
-        .path-step.completed { background: #58cc02; border-bottom-color: #46a302; color: white; }
-        .path-step.current { background: #58cc02; border-bottom-color: #46a302; transform: scale(1.1); box-shadow: 0 0 20px rgba(88, 204, 2, 0.4); color: white; }
-        .path-step.locked { background: #e5e5e5; border-bottom-color: #afafaf; cursor: not-allowed; }
-        .path-step-label { margin-top: 10px; font-weight: 800; color: #4b4b4b; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .path-step.completed { background: #58cc02; border-color: #46a302; border-bottom-color: #46a302; color: white; }
+        .path-step.current { background: #58cc02; border-color: #46a302; border-bottom-color: #46a302; transform: scale(1.1); box-shadow: 0 0 20px rgba(88, 204, 2, 0.4); color: white; }
+        .path-step.locked { background: var(--subtle-bg); border-color: var(--border-color); border-bottom-color: var(--border-color); cursor: not-allowed; }
+        .path-step-label { margin-top: 10px; font-weight: 800; color: var(--text-main); font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
         
         .path-lesson-node:nth-child(4n+2) { transform: translateX(50px); }
         .path-lesson-node:nth-child(4n+4) { transform: translateX(-50px); }
-        .path-connector { width: 12px; height: 25px; background: #e5e5e5; margin: -5px 0; z-index: 1; border-radius: 6px; }
+        .path-connector { width: 12px; height: 25px; background: var(--border-color); margin: -5px 0; z-index: 1; border-radius: 6px; }
         .path-connector.completed { background: #58cc02; }
         
         .level-complete-card { 
-            width: 100%; padding: 30px; background: #fff3e0; border: 2px dashed #ff9800; 
-            border-radius: 15px; margin: 40px 0; text-align: center; color: #e65100;
+            width: 100%; padding: 30px; background: var(--accent-pink-light); border: 2px dashed var(--accent-pink); 
+            border-radius: 15px; margin: 40px 0; text-align: center; color: var(--accent-pink);
             animation: pulse 2s infinite;
         }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
@@ -1075,7 +1093,7 @@
         /* --- LEVEL UP ANIMATION STYLES --- */
         #view-level-up { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: var(--white); z-index: 1000; 
+            background: var(--bg-color); z-index: 1000; 
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; overflow: hidden;
         }
@@ -1087,34 +1105,34 @@
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         @keyframes bounce { from { transform: scale(1); } to { transform: scale(1.2); } }
 
-        .streak-badge { background: #fff3e0; color: #ff9800; padding: 10px 20px; border-radius: 25px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; border: 2px solid #ffb74d; }
+        .streak-badge { background: rgba(255, 152, 0, 0.15); color: #ff9800; padding: 10px 20px; border-radius: 25px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; border: 2px solid #ffb74d; }
         #confetti-canvas { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             pointer-events: none; z-index: 1001; 
         }
 
         /* --- SPEECH STYLES --- */
-        .btn-speak { background: #6b46c1; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-top: 10px; display: flex; align-items: center; gap: 8px; justify-content: center; width: auto; margin-inline: auto; }
+        .btn-speak { background: #6b46c1; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-top: 10px; display: flex; align-items: center; gap: 8px; justify-content: center; width: auto; margin-inline: auto; font-weight: 600; }
         .listening-task { background: var(--badge-blue-bg); padding: 20px; border-radius: 15px; margin-bottom: 20px; }
         
-        .quiz-option { width: 100%; padding: 15px; background: white; border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 10px; text-align: left; cursor: pointer; transition: 0.2s; font-size: 16px; }
-        .quiz-option:hover { background: #f8f9fc; }
+        .quiz-option { width: 100%; padding: 15px; background: var(--white); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 10px; text-align: left; cursor: pointer; transition: 0.2s; font-size: 16px; }
+        .quiz-option:hover { background: var(--subtle-bg); border-color: var(--primary-dark); }
         .quiz-option.correct { background: #10b981; color: white; border-color: #10b981; }
         .quiz-option.wrong { background: var(--accent-pink); color: white; border-color: var(--accent-pink); }
 
         .results-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0; }
-        .result-stat { background: white; padding: 20px; border-radius: 15px; border: 1px solid var(--border-color); text-align: center; }
-        .stat-val { font-size: 32px; font-weight: bold; display: block; }
+        .result-stat { background: var(--white); color: var(--text-main); padding: 20px; border-radius: 15px; border: 1px solid var(--border-color); text-align: center; }
+        .stat-val { font-size: 32px; font-weight: bold; display: block; color: var(--primary-dark); }
         .stat-label { font-size: 12px; color: var(--text-light); text-transform: uppercase; }
         .stat-correct { color: #10b981; }
         .stat-wrong { color: var(--accent-pink); }
         .results-actions { display: flex; flex-direction: column; gap: 10px; }
 
         /* --- NEUE KANJI STYLES --- */
-        .kanji-overview-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 12px; overflow: hidden; font-size: 14px; }
+        .kanji-overview-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--white); color: var(--text-main); border-radius: 12px; overflow: hidden; font-size: 14px; }
         .kanji-overview-table th, .kanji-overview-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
         .kanji-overview-table th { background: var(--primary-dark); color: white; }
-        .kanji-overview-table tr:hover { background: #f8f9fc; }
+        .kanji-overview-table tr:hover { background: var(--subtle-bg); }
         .kanji-reading-label { font-size: 10px; color: var(--text-light); text-transform: uppercase; display: block; margin-top: 2px; }
         .kanji-kana-large { font-size: 24px; font-weight: bold; color: var(--primary-light); display: block; margin-bottom: 5px; }
         
@@ -1133,23 +1151,23 @@
         }
 
         /* --- LESEN & FURIGANA STYLES --- */
-        .reading-content { background: var(--white); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); line-height: 2.2; font-size: 18px; clear: both; }
+        .reading-content { background: var(--white); color: var(--text-main); padding: 25px; border-radius: 16px; border: 1px solid var(--border-color); line-height: 2.2; font-size: 18px; clear: both; }
         .reading-sentence { cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: background 0.2s; display: inline-block; }
         .reading-sentence:hover { background: var(--accent-pink-light); }
-        .sentence-translation { font-size: 14px; color: var(--primary-light); background: #f8f9fc; padding: 8px 12px; border-left: 3px solid var(--accent-pink); border-radius: 4px; margin-top: 4px; line-height: 1.5; }
+        .sentence-translation { font-size: 14px; color: var(--text-main); background: var(--subtle-bg); padding: 8px 12px; border-left: 3px solid var(--accent-pink); border-radius: 4px; margin-top: 4px; line-height: 1.5; }
         .hide-furigana rt { visibility: hidden; }
 
         /* --- STATISTIKEN & ERFOLGE STYLES --- */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; }
         .achievement-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 15px; }
         .achievement-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; opacity: 0.55; filter: grayscale(1); transition: 0.2s; }
-        .achievement-card.unlocked { opacity: 1; filter: none; border-color: #10b981; background: #f0fdf4; }
+        .achievement-card.unlocked { opacity: 1; filter: none; border-color: #10b981; background: rgba(16, 185, 129, 0.1); }
         .achievement-icon { font-size: 32px; }
         .achievement-info h4 { font-size: 15px; color: var(--primary-dark); margin-bottom: 4px; }
         .achievement-info p { font-size: 12px; color: var(--text-light); }
 
         /* --- NEUE LERN-FEATURES STYLES (XP, SRS, MATCH, KANA) --- */
-        .daily-goal-banner { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%); color: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(39, 42, 72, 0.12); }
+        .daily-goal-banner { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%); color: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
         .daily-goal-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
         .xp-badge { background: rgba(255,255,255,0.18); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
         .daily-goal-bar { height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; }
@@ -1157,31 +1175,31 @@
 
         .smart-review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 12px; margin-bottom: 20px; }
         .smart-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 14px; padding: 16px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 6px; }
-        .smart-card:hover { transform: translateY(-3px); border-color: var(--primary-dark); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
-        .smart-card.srs-due { border-color: #6b46c1; background: #faf8ff; }
-        .smart-card.mistakes { border-color: var(--accent-pink); background: #fff8fa; }
-        .smart-card.favorites { border-color: #f59e0b; background: #fffdf5; }
+        .smart-card:hover { transform: translateY(-3px); border-color: var(--primary-dark); box-shadow: var(--card-shadow); }
+        .smart-card.srs-due { border-color: #7c3aed; background: rgba(124, 58, 237, 0.08); }
+        .smart-card.mistakes { border-color: var(--accent-pink); background: var(--accent-pink-light); }
+        .smart-card.favorites { border-color: #f59e0b; background: rgba(245, 158, 11, 0.08); }
         .smart-card-title { font-weight: 700; font-size: 15px; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; }
         .smart-card-sub { font-size: 12px; color: var(--text-light); }
         .smart-count-pill { font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 12px; background: var(--primary-dark); color: white; }
 
-        .block-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .block-card.completed-block { border-color: #10b981; background: #f0fdf4; }
+        .block-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-main); }
+        .block-card.completed-block { border-color: #10b981; background: rgba(16, 185, 129, 0.1); }
         .block-progress-mini { font-size: 11px; color: var(--text-light); font-weight: 600; }
 
-        .icon-btn { background: #f0f2f8; border: none; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; transition: 0.2s; }
-        .icon-btn:hover { background: var(--accent-pink-light); transform: scale(1.08); }
-        .star-btn { background: transparent; border: none; font-size: 20px; cursor: pointer; color: #d1d5db; transition: 0.2s; padding: 4px; }
+        .icon-btn { background: var(--subtle-bg); color: var(--text-main); border: 1px solid var(--border-color); width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; transition: 0.2s; }
+        .icon-btn:hover { background: var(--accent-pink-light); border-color: var(--accent-pink); transform: scale(1.08); }
+        .star-btn { background: transparent; border: none; font-size: 20px; cursor: pointer; color: var(--border-color); transition: 0.2s; padding: 4px; }
         .star-btn.active { color: #f59e0b; transform: scale(1.1); }
-        .srs-pill { font-size: 10px; padding: 2px 7px; border-radius: 8px; background: #ede9fe; color: #6d28d9; font-weight: 700; }
+        .srs-pill { font-size: 10px; padding: 2px 7px; border-radius: 8px; background: rgba(124, 58, 237, 0.16); color: #8b5cf6; font-weight: 700; }
 
         /* --- MATCH GAME STYLES --- */
         .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
         .match-col { display: flex; flex-direction: column; gap: 10px; }
-        .match-tile { background: var(--white); border: 2px solid var(--border-color); border-radius: 12px; padding: 16px 12px; text-align: center; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s; min-height: 60px; display: flex; align-items: center; justify-content: center; user-select: none; }
-        .match-tile:hover { border-color: var(--primary-light); }
+        .match-tile { background: var(--white); color: var(--text-main); border: 2px solid var(--border-color); border-radius: 12px; padding: 16px 12px; text-align: center; font-weight: 600; font-size: 16px; cursor: pointer; transition: all 0.2s; min-height: 60px; display: flex; align-items: center; justify-content: center; user-select: none; }
+        .match-tile:hover { border-color: var(--primary-light); background: var(--subtle-bg); }
         .match-tile.selected { border-color: var(--primary-dark); background: var(--badge-blue-bg); color: var(--badge-blue-text); transform: scale(1.02); }
-        .match-tile.matched { background: #d1fae5; border-color: #10b981; color: #065f46; opacity: 0.45; pointer-events: none; transform: scale(0.97); }
+        .match-tile.matched { background: rgba(16, 185, 129, 0.18); border-color: #10b981; color: #10b981; opacity: 0.45; pointer-events: none; transform: scale(0.97); }
         .match-tile.wrong { background: var(--accent-pink-light); border-color: var(--accent-pink); animation: shake 0.4s; }
 
         /* --- KANA TRAINER STYLES --- */
@@ -1193,9 +1211,9 @@
 
         /* --- SCHREIB-TRAINING & BLOCK MODUS STYLES --- */
         .block-mode-actions { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; justify-content: center; width: 100%; }
-        .block-mode-pill { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-color); background: #f8f9fc; color: var(--text-main); cursor: pointer; transition: 0.15s; }
+        .block-mode-pill { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--subtle-bg); color: var(--text-main); cursor: pointer; transition: 0.15s; }
         .block-mode-pill:hover { background: var(--primary-dark); color: white; border-color: var(--primary-dark); }
-        .block-mode-pill.write-pill { background: var(--accent-pink-light); color: var(--accent-pink); border-color: rgba(223, 68, 120, 0.25); }
+        .block-mode-pill.write-pill { background: var(--accent-pink-light); color: var(--accent-pink); border-color: var(--accent-pink); }
         .block-mode-pill.write-pill:hover { background: var(--accent-pink); color: white; border-color: var(--accent-pink); }
         .target-lang-banner { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-top: 12px; margin-bottom: 6px; background: var(--badge-blue-bg); color: var(--badge-blue-text); }
         .target-lang-banner.lang-jp { background: var(--accent-pink-light); color: var(--accent-pink); }
@@ -1204,7 +1222,7 @@
         .btn-check-answer { background: var(--primary-dark); color: white; border: none; padding: 0 22px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.2s; white-space: nowrap; }
         .btn-check-answer:hover { background: var(--primary-light); }
         .kana-helper-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 12px; }
-        .kana-chip { background: #f0f2f8; border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 11px; font-size: 16px; font-weight: 700; color: var(--primary-dark); cursor: pointer; transition: 0.15s; user-select: none; }
+        .kana-chip { background: var(--subtle-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 11px; font-size: 16px; font-weight: 700; color: var(--primary-dark); cursor: pointer; transition: 0.15s; user-select: none; }
         .kana-chip:hover { background: var(--accent-pink-light); border-color: var(--accent-pink); color: var(--accent-pink); transform: translateY(-1px); }
     </style>
     <!-- NEUE STYLES FÜR DAS TEST CENTER -->
@@ -1285,41 +1303,42 @@
             font-size: 12px;
             padding: 3px 10px;
             border-radius: 6px;
-            background: #f0f2f8;
+            background: var(--subtle-bg);
             color: var(--text-light);
             font-weight: 500;
+            border: 1px solid var(--border-color);
         }
 
         /* --- PRÜFUNGS-SESSION STYLES --- */
-        #view-exam-session { background-color: var(--white); }
+        #view-exam-session { background-color: var(--white); border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--card-shadow); }
         .exam-header { padding: 15px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
         .exam-timer { font-size: 16px; font-weight: bold; color: var(--primary-dark); }
-        .exam-progress-bar { height: 8px; background: #e0e0e0; }
+        .exam-progress-bar { height: 8px; background: var(--border-color); }
         .exam-progress-fill { height: 100%; background: var(--accent-pink); width: 0%; transition: width 0.3s; }
         .exam-question-area { padding: 40px 20px; }
         .exam-question-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 10px; font-weight: 600; }
-        .exam-question-text { font-size: 20px; font-weight: 500; margin-bottom: 30px; line-height: 1.6; }
-        .exam-question-text u { text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: var(--accent-pink-light); }
+        .exam-question-text { font-size: 20px; font-weight: 500; margin-bottom: 30px; line-height: 1.6; color: var(--text-main); }
+        .exam-question-text u { text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: var(--accent-pink); }
         .exam-option-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .exam-option { padding: 18px 25px; background: var(--white); border: 2px solid var(--border-color); border-radius: 12px; text-align: left; cursor: pointer; transition: 0.2s; font-size: 16px; font-weight: 500; }
-        .exam-option:hover { border-color: var(--primary-dark); }
-        .exam-option.selected { border-color: var(--primary-dark); background-color: #f8f9fc; }
+        .exam-option { padding: 18px 25px; background: var(--white); color: var(--text-main); border: 2px solid var(--border-color); border-radius: 12px; text-align: left; cursor: pointer; transition: 0.2s; font-size: 16px; font-weight: 500; }
+        .exam-option:hover { border-color: var(--primary-dark); background: var(--subtle-bg); }
+        .exam-option.selected { border-color: var(--primary-dark); background-color: var(--subtle-bg); box-shadow: 0 0 0 1px var(--primary-dark); }
         .exam-option.correct { background: #10b981; color: white; border-color: #10b981; }
         .exam-option.wrong { background: var(--accent-pink); color: white; border-color: var(--accent-pink); }
-        .exam-footer { padding: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; }
-        .exam-feedback { margin-top: 20px; padding: 15px; border-radius: 10px; background: var(--bg-color); }
-        .exam-feedback h4 { margin-bottom: 10px; }
+        .exam-footer { padding: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .exam-feedback { margin-top: 20px; padding: 15px; border-radius: 10px; background: var(--subtle-bg); color: var(--text-main); border: 1px solid var(--border-color); }
+        .exam-feedback h4 { margin-bottom: 10px; color: var(--primary-dark); }
         .exam-nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 8px; margin-top: 20px; }
-        .exam-nav-item { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 500; }
+        .exam-nav-item { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--white); color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 600; }
         .exam-nav-item.answered { background: var(--badge-blue-bg); border-color: var(--badge-blue-text); color: var(--badge-blue-text); }
-        .exam-nav-item.marked { box-shadow: 0 0 0 3px var(--accent-pink-light); }
+        .exam-nav-item.marked { box-shadow: 0 0 0 3px var(--accent-pink); }
         .exam-nav-item.current { border-color: var(--primary-dark); background: var(--primary-dark); color: white; }
 
         /* --- ZUSÄTZLICHE STYLES FÜR NEUE FUNKTIONEN --- */
-        .sentence-part { background-color: white; border: 2px solid var(--border-color); padding: 12px 20px; margin: 5px; border-radius: 10px; cursor: grab; font-weight: 500; }
+        .sentence-part { background-color: var(--white); color: var(--text-main); border: 2px solid var(--border-color); padding: 12px 20px; margin: 5px; border-radius: 10px; cursor: grab; font-weight: 600; display: inline-block; }
         .sentence-part.sortable-ghost { background-color: var(--accent-pink-light); }
-        .drop-area { border: 2px dashed var(--border-color); border-radius: 12px; padding: 10px; min-height: 60px; margin-top: 15px; }
-        .exam-review-item { border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .drop-area { border: 2px dashed var(--border-color); background: var(--subtle-bg); border-radius: 12px; padding: 10px; min-height: 60px; margin-top: 15px; }
+        .exam-review-item { border: 1px solid var(--border-color); background: var(--white); color: var(--text-main); padding: 20px; border-radius: 12px; margin-bottom: 20px; }
         .exam-review-item.correct { border-left: 5px solid #10b981; }
         .exam-review-item.wrong { border-left: 5px solid var(--accent-pink); }
         .exam-review-item .user-answer { color: var(--accent-pink); font-weight: bold; }
@@ -1328,8 +1347,38 @@
         .grammar-explanation-section h3 { color: var(--primary-dark); border-bottom: 2px solid var(--accent-pink-light); padding-bottom: 5px; margin-bottom: 15px; }
         .grammar-explanation-section ul { list-style-position: inside; padding-left: 10px; }
         .grammar-explanation-section li { margin-bottom: 10px; }
-        .exercise-container { background: #f8f9fc; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
-        .exercise-feedback { margin-top: 15px; font-weight: normal; min-height: 24px; font-size: 14px; background: white; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .exercise-container { background: var(--subtle-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; color: var(--text-main); }
+        .exercise-feedback { margin-top: 15px; font-weight: normal; min-height: 24px; font-size: 14px; background: var(--white); color: var(--text-main); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); }
+
+        /* --- SENSEI / TUTOR & JLPT REACH SYSTEM STYLES --- */
+        .sensei-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px; }
+        .sensei-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 16px; padding: 18px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 8px; position: relative; }
+        .sensei-card:hover { transform: translateY(-3px); border-color: var(--primary-dark); box-shadow: var(--card-shadow); }
+        .sensei-card.active { border-color: var(--accent-pink); background: var(--accent-pink-light); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+        .sensei-avatar { font-size: 38px; width: 60px; height: 60px; border-radius: 50%; background: var(--subtle-bg); display: flex; align-items: center; justify-content: center; border: 2px solid var(--border-color); }
+        .sensei-role-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 10px; background: var(--badge-blue-bg); color: var(--badge-blue-text); align-self: flex-start; }
+        .sensei-chat-box { background: var(--white); border: 2px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); display: flex; flex-direction: column; height: 480px; }
+        .sensei-chat-header { padding: 14px 20px; background: var(--primary-dark); color: #ffffff; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .sensei-chat-messages { flex: 1; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: var(--subtle-bg); }
+        .sensei-msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.55; word-wrap: break-word; }
+        .sensei-msg.tutor { background: var(--white); color: var(--text-main); border: 1px solid var(--border-color); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+        .sensei-msg.user { background: var(--primary-dark); color: #ffffff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .sensei-quick-chips { display: flex; gap: 8px; padding: 10px 16px; background: var(--white); border-top: 1px solid var(--border-color); overflow-x: auto; white-space: nowrap; }
+        .sensei-chip { padding: 6px 12px; border-radius: 16px; border: 1px solid var(--border-color); background: var(--subtle-bg); color: var(--text-main); font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.15s; }
+        .sensei-chip:hover { border-color: var(--accent-pink); background: var(--accent-pink-light); color: var(--accent-pink); }
+        .sensei-input-bar { display: flex; gap: 10px; padding: 12px 16px; background: var(--white); border-top: 1px solid var(--border-color); }
+        .sensei-input-bar input { flex: 1; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--subtle-bg); color: var(--text-main); font-size: 14px; outline: none; }
+        .sensei-input-bar input:focus { border-color: var(--primary-dark); background: var(--white); }
+
+        .reach-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 18px; padding: 20px; margin-bottom: 18px; box-shadow: var(--card-shadow); }
+        .reach-meter-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 16px 0; }
+        .reach-pillar { background: var(--subtle-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px; text-align: center; }
+        .reach-pillar-val { font-size: 22px; font-weight: 800; color: var(--primary-dark); }
+        .reach-pillar-lbl { font-size: 11px; color: var(--text-light); font-weight: 700; text-transform: uppercase; margin-top: 4px; }
+        .syllabus-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .syllabus-tab { padding: 8px 16px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--white); color: var(--text-main); font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.15s; }
+        .syllabus-tab.active { background: var(--primary-dark); color: #ffffff; border-color: var(--primary-dark); }
+        .tutor-explain-box { margin-top: 14px; padding: 16px; border-radius: 14px; background: var(--subtle-bg); border: 1.5px solid var(--accent-pink); color: var(--text-main); text-align: left; font-size: 14px; line-height: 1.6; animation: fadeIn 0.25s ease-out; }
     </style>
     <link rel="manifest" href="manifest.json" />
     <!-- NEUE STYLES FÜR LEVEL-AUSWAHL-MODAL -->
@@ -1381,7 +1430,7 @@
                 <span id="current-theme-icon">🌸</span>
                 <span id="current-theme-name" style="font-size:13px;">Sakura</span>
             </div>
-        <div class="language-switch" onclick="toggleLanguage()" style="cursor:pointer; font-weight:bold; color:var(--accent-pink); padding: 5px 15px; background: white; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
+        <div class="language-switch" onclick="toggleLanguage()" style="cursor:pointer; font-weight:bold; color:var(--accent-pink); padding: 5px 15px; background: var(--white); border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
             <span id="current-lang-display">DE</span>
         </div>
         <div class="account-switch" onclick="toggleAccountModal(true)" id="account-btn" title="Account & Synchronisation" style="cursor:pointer; font-weight:bold; color:var(--text-main); padding: 5px 12px; background: var(--white); border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid var(--border-color); display:flex; align-items:center; gap:6px; user-select:none;">
@@ -1390,6 +1439,8 @@
         </div>
         <div class="tabs">
             <button class="tab active" onclick="switchTab('lernen')" id="tab-lernen">Lernen</button>
+            <button class="tab" onclick="switchTab('reach')" id="tab-reach">🎯 JLPT Reach</button>
+            <button class="tab" onclick="switchTab('sensei')" id="tab-sensei">👨‍🏫 Sensei</button>
             <button class="tab" onclick="switchTab('liste')" id="tab-liste">Liste</button>
             <button class="tab" onclick="switchTab('lesen')" id="tab-lesen">Lesen</button>
             <button class="tab" onclick="switchTab('kana')" id="tab-kana">あア Kana</button>
@@ -1397,7 +1448,7 @@
             <button class="tab" onclick="switchTab('grammatik')" id="tab-grammatik">Grammatik</button>
             <button class="tab" onclick="switchTab('alltag')" id="tab-alltag">Alltag</button>
             <button class="tab" onclick="switchTab('pfad')" id="tab-pfad">Pfad</button>
-            <button class="tab" onclick="switchTab('test')" id="tab-test">Test (alt)</button>
+            <button class="tab" onclick="switchTab('test')" id="tab-test">Tests & Quiz</button>
             <button class="tab" onclick="switchTab('stats')" id="tab-stats">Statistiken</button>
             <button class="tab" onclick="switchTab('test-center')" id="tab-test-center">JLPT Center</button>
         </div>
@@ -1458,6 +1509,24 @@
                         <div class="theme-dot" style="background:#272a48;"></div>
                         <div class="theme-dot" style="background:#df4478;"></div>
                         <div class="theme-dot" style="background:#fafafa;"></div>
+                    </div>
+                </div>
+                <div class="theme-card-option" id="theme-opt-cyber" onclick="setAppTheme('cyber')">
+                    <div style="font-weight:700; font-size:14px;">🌌 Cyber Tokyo</div>
+                    <div style="font-size:11px; color:var(--text-light);">Neon Night (Dark/Violet)</div>
+                    <div class="theme-swatches">
+                        <div class="theme-dot" style="background:#090714;"></div>
+                        <div class="theme-dot" style="background:#c084fc;"></div>
+                        <div class="theme-dot" style="background:#00f5d4;"></div>
+                    </div>
+                </div>
+                <div class="theme-card-option" id="theme-opt-kyoto" onclick="setAppTheme('kyoto')">
+                    <div style="font-weight:700; font-size:14px;">⛩️ Kyoto Herbst</div>
+                    <div style="font-size:11px; color:var(--text-light);">Momiji (Ahornrot/Gold)</div>
+                    <div class="theme-swatches">
+                        <div class="theme-dot" style="background:#8c2d19;"></div>
+                        <div class="theme-dot" style="background:#d97706;"></div>
+                        <div class="theme-dot" style="background:#fdfaf5;"></div>
                     </div>
                 </div>
             </div>
@@ -1869,18 +1938,33 @@
     </main>
 
     <main id="view-grammatik" class="hidden">
-        <h1>Grammatik Trainer <span class="badge" id="grammatik-level-badge">N5</span></h1>
-        <p class="subtitle">Lerne wichtige Grammatikregeln und übe sie direkt.</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+            <div>
+                <h1>Grammatik Trainer <span class="badge" id="grammatik-level-badge">N5</span></h1>
+                <p class="subtitle" style="margin-bottom:0;">Lerne wichtige Grammatikregeln, frag deinen Sensei und teste dein Wissen.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+                <button class="btn-main" style="width:auto; padding:10px 18px; font-size:13px;" onclick="startQuickGrammarTest()">📐 Grammatik-Test (<span class="current-lvl">N5</span>) starten</button>
+                <button class="btn-main" style="width:auto; padding:10px 18px; font-size:13px; background:var(--accent-pink);" onclick="openSenseiWithTopic('grammar_overview')">👨‍🏫 Sensei fragen</button>
+            </div>
+        </div>
         
         <div id="grammar-list" class="card-grid">
             <!-- Liste der Grammatikpunkte -->
         </div>
 
         <div id="grammar-lesson-viewer" class="hidden">
-            <button class="tab" onclick="showGrammarList()" style="margin-bottom: 20px;">← Zurück zur Übersicht</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+                <button class="tab" onclick="showGrammarList()">← Zurück zur Übersicht</button>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn-stroke-ctl" id="btn-mark-grammar-learned" onclick="toggleCurrentGrammarLearned()">✓ Als gelernt markieren</button>
+                    <button class="btn-stroke-ctl" style="border-color:var(--accent-pink); color:var(--accent-pink);" onclick="askSenseiAboutCurrentGrammar()">👨‍🏫 Sensei: Einfach erklären & Tipps</button>
+                </div>
+            </div>
             <div class="typing-container" style="text-align: left; box-shadow: none; border: 1px solid var(--border-color);">
                 <h2 id="grammar-title" style="color: var(--primary-dark);"></h2>
                 <p id="grammar-summary" class="subtitle" style="margin-bottom: 20px;"></p>
+                <div id="grammar-sensei-tip-box" class="tutor-explain-box hidden" style="margin-bottom: 24px;"></div>
                 <div id="grammar-explanation-container" style="line-height: 1.7; font-size: 15px;"></div>
                 <div id="grammar-exercises-container" style="margin-top: 40px;"></div>
             </div>
@@ -2024,28 +2108,198 @@
     </main>
 
     <main id="view-test" class="hidden">
-        <h1>Vokabeltest</h1>
-        <p class="subtitle">Wähle Einstellungen und starte den Test</p>
-        
-        <div class="section-label">Richtung</div>
-        <div class="toggle-group">
-            <button class="toggle-btn active" onclick="setTestDirection('jp-de', this)">JP → Deutsch</button>
-            <button class="toggle-btn" onclick="setTestDirection('de-jp', this)">DE → Japanisch</button>
+        <h1>Tests & Quiz-Generator <span class="badge current-lvl">N5</span></h1>
+        <p class="subtitle">Stelle deinen individuellen Vokabel-, Grammatik-, Kanji-, Lese- oder Hörtest zusammen – mit Sensei-Erklärungen!</p>
+
+        <div class="reach-card">
+            <div class="section-label" style="margin-top: 0;">1. Test-Kategorie wählen</div>
+            <div class="card-grid" style="margin-bottom: 18px;">
+                <div class="option-card active" id="custom-cat-vocab" onclick="setCustomTestCategory('vocab', this)">
+                    <h3>📚 Vokabel-Test</h3>
+                    <p>Bedeutungen, Lesungen & Kontext für <span class="current-lvl">N5</span></p>
+                </div>
+                <div class="option-card" id="custom-cat-grammar" onclick="setCustomTestCategory('grammar', this)">
+                    <h3>📐 Grammatik-Test</h3>
+                    <p>Partikeln, Satzbau (★), Lückentexte & Formen</p>
+                </div>
+                <div class="option-card" id="custom-cat-kanji" onclick="setCustomTestCategory('kanji', this)">
+                    <h3>漢 Kanji-Test</h3>
+                    <p>On-/Kun-Lesungen, Bedeutungen & Komposita</p>
+                </div>
+                <div class="option-card" id="custom-cat-listening" onclick="setCustomTestCategory('listening', this)">
+                    <h3>🔊 Hörverständnis (Chōkai)</h3>
+                    <p>Audio-Sätze & Vokabeln nach Gehör verstehen</p>
+                </div>
+                <div class="option-card" id="custom-cat-reading" onclick="setCustomTestCategory('reading', this)">
+                    <h3>📖 Leseverständnis (Dokkai)</h3>
+                    <p>Sätze & Kurztexte ohne Furigana analysieren</p>
+                </div>
+                <div class="option-card" id="custom-cat-mix" onclick="setCustomTestCategory('mix', this)">
+                    <h3>🏆 JLPT Reach Mix-Test</h3>
+                    <p>Kompletter Querschnitt (Vokabeln, Kanji, Grammatik, Hören)</p>
+                </div>
+            </div>
+
+            <div class="section-label">2. Antwort-Format</div>
+            <div class="toggle-group" style="margin-bottom: 18px;">
+                <button class="toggle-btn active" id="custom-fmt-mc" onclick="setCustomTestFormat('mc', this)">🎯 Multiple Choice</button>
+                <button class="toggle-btn" id="custom-fmt-write" onclick="setCustomTestFormat('write', this)">✍️ Selbst schreiben</button>
+                <button class="toggle-btn" id="custom-fmt-mix" onclick="setCustomTestFormat('mix', this)">🔀 Gemischt</button>
+            </div>
+
+            <div class="section-label">3. Richtung (für Vokabeln)</div>
+            <div class="toggle-group" style="margin-bottom: 18px;">
+                <button class="toggle-btn active" onclick="setTestDirection('jp-de', this)">🇯🇵 JP → 🇩🇪 Deutsch</button>
+                <button class="toggle-btn" onclick="setTestDirection('de-jp', this)">🇩🇪 DE → 🇯🇵 Japanisch</button>
+            </div>
+
+            <div class="section-label">4. Anzahl Fragen</div>
+            <div class="toggle-group" style="margin-bottom: 24px;">
+                <button class="toggle-btn" onclick="setTestCount(10, this)">10 Fragen</button>
+                <button class="toggle-btn active" onclick="setTestCount(20, this)">20 Fragen</button>
+                <button class="toggle-btn" onclick="setTestCount(30, this)">30 Fragen</button>
+                <button class="toggle-btn" onclick="setTestCount(50, this)">50 Fragen</button>
+            </div>
+
+            <button class="btn-main" onclick="startCustomModularTest()">🚀 Individuellen Test starten</button>
         </div>
 
-        <div class="section-label">Anzahl Fragen</div>
-        <div class="toggle-group">
-            <button class="toggle-btn" onclick="setTestCount(10, this)">10</button>
-            <button class="toggle-btn active" onclick="setTestCount(20, this)">20</button>
-            <button class="toggle-btn" onclick="setTestCount(30, this)">30</button>
-            <button class="toggle-btn" onclick="setTestCount(50, this)">50</button>
+        <div class="reach-card" style="border-color: var(--accent-pink);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                <div>
+                    <h3 style="color:var(--primary-dark); font-size:18px; margin-bottom:4px;">🏛️ Offizielle JLPT Prüfungs-Simulationen</h3>
+                    <p style="font-size:13px; color:var(--text-light);">Vollständige Probetests mit Sektionen, Timer, ★-Satzbau, Lesetexten und Hörverständnis (聴解).</p>
+                </div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button class="btn-main" style="width:auto; padding:10px 18px; background:var(--accent-pink);" onclick="switchTab('test-center')">Zum JLPT Test Center →</button>
+                    <button class="btn-main" style="width:auto; padding:10px 18px;" onclick="startFullTest()">Schneller <span class="current-lvl">N5</span> Volltest</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- NEUE ANSICHT: INTERAKTIVER MODULARER TEST-RUNNER (MIT SENSEI HILFE) -->
+    <main id="view-modular-test" class="hidden">
+        <div class="fc-header">
+            <span style="cursor:pointer;" onclick="switchTab('test')">← Test beenden</span>
+            <span id="mod-test-title" style="font-weight:800; color:var(--primary-dark);">JLPT Test</span>
+            <span style="font-weight:700;"><span id="mod-test-idx">1</span> / <span id="mod-test-total">10</span></span>
+        </div>
+        <div class="progress-bar" style="margin-bottom: 20px;">
+            <div class="progress-fill" id="mod-test-progress" style="width: 10%;"></div>
         </div>
 
-        <button class="btn-main" style="margin-top: 40px;" onclick="startTest()">Test starten →</button>
+        <div class="typing-container" style="text-align: left; padding: 28px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+                <span class="badge" id="mod-test-cat-badge">Grammatik</span>
+                <div style="display:flex; gap:8px;">
+                    <button type="button" class="btn-stroke-ctl" id="mod-test-audio-btn" onclick="speakModularTestCurrent()" title="Frage vorlesen">🔊 Anhören</button>
+                    <button type="button" class="btn-stroke-ctl" onclick="askSenseiAboutModularQuestion()" style="border-color:var(--accent-pink); color:var(--accent-pink);">👨‍🏫 Sensei um Tipp / Erklärung bitten</button>
+                </div>
+            </div>
 
-        <div class="section-label" style="margin-top: 40px;">JLPT Simulation</div>
-        <p class="subtitle">Ein vollständiger Test mit Vokabeln, Kanji, Grammatik und Lesen (ohne Furigana).</p>
-        <button class="btn-main" style="background: var(--accent-pink);" onclick="startFullTest()">Vollständigen JLPT <span class="current-lvl">N5</span> Test starten</button>
+            <div id="mod-test-prompt" style="font-size: 22px; font-weight: 700; color: var(--primary-dark); margin-bottom: 18px; line-height: 1.5;"></div>
+            <div id="mod-test-subprompt" style="font-size: 14px; color: var(--text-light); margin-bottom: 20px;"></div>
+
+            <!-- Multiple Choice Area -->
+            <div id="mod-test-mc-area" style="display:grid; gap:10px;"></div>
+
+            <!-- Text Input Area -->
+            <div id="mod-test-write-area" class="hidden">
+                <div class="typing-input-row">
+                    <input type="text" id="mod-test-input" class="typing-input" placeholder="Deine Antwort..." onkeydown="if(event.key==='Enter') submitModularWriteAnswer()">
+                    <button class="btn-check-answer" onclick="submitModularWriteAnswer()">Prüfen ✓</button>
+                </div>
+            </div>
+
+            <!-- Feedback & Sensei Explanation Box -->
+            <div id="mod-test-feedback" class="tutor-explain-box hidden"></div>
+
+            <button id="mod-test-next-btn" class="btn-main hidden" style="margin-top: 18px;" onclick="nextModularTestQuestion()">Nächste Frage →</button>
+        </div>
+    </main>
+
+    <!-- NEUE ANSICHT: JLPT REACH SYSTEM & WAS LERNEN FÜR WELCHES LEVEL (CURRICULUM) -->
+    <main id="view-reach" class="hidden">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:10px;">
+            <div>
+                <h1>🎯 JLPT Reach & Lernplan <span class="badge current-lvl">N5</span></h1>
+                <p class="subtitle" style="margin-bottom:0;">Was du für <span class="current-lvl">N5</span> lernen musst, wie weit du bist und was deine nächsten Schritte zur Bestehensgrenze sind.</p>
+            </div>
+            <div style="display:flex; gap:6px; background:var(--white); padding:6px; border-radius:14px; border:1px solid var(--border-color);">
+                <button class="syllabus-tab" id="reach-lvl-btn-N5" onclick="selectLevel('N5')">N5</button>
+                <button class="syllabus-tab" id="reach-lvl-btn-N4" onclick="selectLevel('N4')">N4</button>
+                <button class="syllabus-tab" id="reach-lvl-btn-N3" onclick="selectLevel('N3')">N3</button>
+                <button class="syllabus-tab" id="reach-lvl-btn-N2" onclick="selectLevel('N2')">N2</button>
+                <button class="syllabus-tab" id="reach-lvl-btn-N1" onclick="selectLevel('N1')">N1</button>
+            </div>
+        </div>
+
+        <!-- Readiness Score Overview Card -->
+        <div class="reach-card" id="reach-overview-card"></div>
+
+        <!-- Next Recommended Actions / Smart Coach -->
+        <div class="reach-card" id="reach-recommendations-card"></div>
+
+        <!-- Actual Shows on What to Learn for the Level (Interactive Curriculum) -->
+        <div class="reach-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+                <div>
+                    <h3 style="font-size:18px; color:var(--primary-dark);">📋 Offizieller Lernkatalog: Was du für <span class="current-lvl">N5</span> beherrschen musst</h3>
+                    <p style="font-size:12px; color:var(--text-light);">Klicke auf einen Eintrag, um ihn dir sofort vom Sensei erklären zu lassen oder direkt zu üben.</p>
+                </div>
+                <div class="syllabus-tabs" style="margin-bottom:0;">
+                    <button class="syllabus-tab active" id="syl-tab-roadmap" onclick="switchSyllabusTab('roadmap')">🗺️ Level-Guide & Tipps</button>
+                    <button class="syllabus-tab" id="syl-tab-grammar" onclick="switchSyllabusTab('grammar')">📐 Pflicht-Grammatik</button>
+                    <button class="syllabus-tab" id="syl-tab-kanji" onclick="switchSyllabusTab('kanji')">漢 Pflicht-Kanji</button>
+                    <button class="syllabus-tab" id="syl-tab-vocab" onclick="switchSyllabusTab('vocab')">📚 Kern-Vokabular</button>
+                </div>
+            </div>
+            <div id="reach-syllabus-content"></div>
+        </div>
+    </main>
+
+    <!-- NEUE ANSICHT: SENSEI / TUTOREN-LOUNGE -->
+    <main id="view-sensei" class="hidden">
+        <h1>👨‍🏫 Deine JLPT Sensei-Tutoren</h1>
+        <p class="subtitle">Wähle deinen persönlichen Tutor zum Unterrichten, Erklären von Grammatik, Vokabel-Nuancen, Eselsbrücken und Prüfungsfragen.</p>
+
+        <!-- Tutor Selection Cards -->
+        <div class="sensei-grid" id="sensei-roster-grid"></div>
+
+        <!-- Interactive Tutor Classroom & Chat -->
+        <div class="sensei-chat-box">
+            <div class="sensei-chat-header">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <span id="active-sensei-avatar" style="font-size:28px;">🌸</span>
+                    <div>
+                        <div id="active-sensei-name" style="font-weight:800; font-size:16px;">Hana-sensei</div>
+                        <div id="active-sensei-specialty" style="font-size:11px; opacity:0.85;">Grundlagen, Motivation & N5/N4</div>
+                    </div>
+                </div>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn-stroke-ctl" style="background:rgba(255,255,255,0.15); color:white; border:none;" onclick="triggerSenseiMiniLesson()">🎓 Mini-Lektion (<span class="current-lvl">N5</span>)</button>
+                    <button class="btn-stroke-ctl" style="background:rgba(255,255,255,0.15); color:white; border:none;" onclick="triggerSenseiQuizMe()">🎯 Prüf mich!</button>
+                </div>
+            </div>
+
+            <div class="sensei-chat-messages" id="sensei-chat-messages"></div>
+
+            <div class="sensei-quick-chips" id="sensei-quick-chips">
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('what_to_learn')">📋 Was muss ich für dieses Level lernen?</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('explain_grammar')">📐 Erkläre einen Grammatikpunkt</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('wa_vs_ga')">⚖️ Unterschied は (wa) vs. が (ga)</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('ni_vs_de')">📍 Unterschied に (ni) vs. で (de)</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('kanji_tip')">漢 Kanji-Eselsbrücke zeigen</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('weak_words')">⚠️ Meine Problemwörter erklären</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('exam_strategy')">🏛️ JLPT Prüfungs-Strategie</button>
+            </div>
+
+            <div class="sensei-input-bar">
+                <input type="text" id="sensei-user-input" placeholder="Frage deinen Sensei nach einer Vokabel, einem Kanji, einer Grammatikregel oder einem Satz..." onkeydown="if(event.key==='Enter') handleSenseiUserSend()">
+                <button class="btn-main" style="width:auto; padding:10px 20px; font-size:14px;" onclick="handleSenseiUserSend()">Fragen →</button>
+            </div>
+        </div>
     </main>
 
     <!-- NEUE ANSICHT: JLPT TEST CENTER -->
@@ -2277,10 +2531,12 @@
         <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-light); margin-bottom:5px;">
             <span>Karte <span id="fc-current-num">1</span>/<span id="fc-total-num">20</span> · <span id="fc-srs-badge" class="srs-pill">Box 1</span></span>
             <div style="display:flex; gap:8px; align-items:center;">
+                <button class="btn-stroke-ctl" style="padding:4px 10px; font-size:11px; border-color:var(--accent-pink); color:var(--accent-pink);" onclick="explainCurrentVocabWithSensei('fc')" title="Sensei erklärt Nuancen & Beispielsatz">👨‍🏫 Sensei</button>
                 <button class="icon-btn" onclick="speakCurrentWord(event)" title="Aussprache anhören">🔊</button>
                 <button class="star-btn" id="fc-fav-btn" onclick="toggleCurrentWordFavorite(event)" title="Als Favorit markieren">★</button>
             </div>
         </div>
+        <div id="fc-sensei-explain-box" class="tutor-explain-box hidden" style="margin-bottom: 14px;"></div>
         <div class="progress-bar">
             <div class="progress-fill" id="fc-progress"></div>
         </div>
@@ -2336,11 +2592,13 @@
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <span class="badge" id="type-badge">Verben</span>
                 <div style="display:flex; gap:8px; align-items:center;">
+                    <button class="btn-stroke-ctl" style="padding:4px 10px; font-size:11px; border-color:var(--accent-pink); color:var(--accent-pink);" onclick="explainCurrentVocabWithSensei('type')" title="Sensei erklärt diese Vokabel">👨‍🏫 Sensei</button>
                     <button class="icon-btn" onclick="speakCurrentWord(event)" title="Aussprache anhören">🔊</button>
                     <button class="icon-btn" id="btn-typing-hint" onclick="showTypingHint()" title="Buchstaben-Tipp anzeigen">💡</button>
                     <button class="star-btn" id="type-fav-btn" onclick="toggleCurrentWordFavorite(event)" title="Favorit">★</button>
                 </div>
             </div>
+            <div id="type-sensei-explain-box" class="tutor-explain-box hidden"></div>
             <div class="fc-reading" id="type-reading" style="margin-top:14px; margin-bottom:0; font-size:20px; min-height:24px; cursor:pointer;" onclick="this.style.opacity = this.style.opacity === '0.15' ? '1' : '0.15'" title="Klicken zum Ein-/Ausblenden der Lesung"></div>
             <div class="fc-word" id="type-word" style="margin-top:4px; color:var(--primary-dark);">ある</div>
             <div>
@@ -2548,6 +2806,8 @@
 
         const renderFunctions = {
             'lernen': updateStats,
+            'reach': renderReachView,
+            'sensei': renderSenseiView,
             'liste': renderList,
             'lesen': renderReadingList,
             'kanji': renderKanjiBlocks,
@@ -3022,9 +3282,23 @@
 
         // Frage und Optionen rendern
         let html = `
-            <div class="exam-question-title">Frage ${qIndex + 1} von ${state.currentExam.allQuestions.length}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                <div class="exam-question-title" style="margin-bottom:0;">Frage ${qIndex + 1} von ${state.currentExam.allQuestions.length}</div>
+                <button type="button" class="btn-stroke-ctl" style="border-color:var(--accent-pink); color:var(--accent-pink); padding:4px 12px; font-size:12px;" onclick="showExamSenseiHint(${qIndex})">👨‍🏫 Sensei-Tipp anzeigen</button>
+            </div>
             <div class="exam-question-text">${question.question}</div>
+            <div id="exam-sensei-hint-box" class="tutor-explain-box hidden" style="margin-bottom:20px;"></div>
         `;
+
+        if (question.audioText) {
+            const escAudio = String(question.audioText).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            html += `
+                <div class="listening-task" style="text-align:center; margin-bottom:24px; border:1px solid var(--border-color);">
+                    <div style="font-size:13px; font-weight:700; color:var(--badge-blue-text); margin-bottom:10px;">🎧 Hörverständnis-Aufgabe (聴解) – Klicke zum Abspielen</div>
+                    <button type="button" class="btn-speak" style="font-size:16px; padding:12px 28px;" onclick="speak('${escAudio}')">🔊 Audio abspielen</button>
+                </div>
+            `;
+        }
 
         if (question.type.startsWith('multiple-choice')) {
             html += `<div class="exam-option-grid">`;
@@ -3060,7 +3334,7 @@
                     ${shuffledParts.map(part => `<div class="sentence-part" data-id="${part}">${part}</div>`).join('')}
                 </div>
                 <div style="font-size: 24px; margin: 20px 0; text-align: center;">↓</div>
-                <div id="sentence-parts-dropzone" class="drop-area" style="background: #f8f9fc;">
+                <div id="sentence-parts-dropzone" class="drop-area">
                     ${orderedParts.map(part => `<div class="sentence-part" data-id="${part}">${part}</div>`).join('')}
                 </div>
                 <p style="font-size:12px; color:var(--text-light); text-align:center; margin-top:10px;">Ziehe oder klicke die Teile in die richtige Reihenfolge in das untere Feld.</p>
@@ -3285,8 +3559,9 @@
 
             html += `
                     </div>
-                    <div class="exam-feedback" style="background: #f8f9fc;">
-                        <h4>Erklärung</h4>
+                    <div class="exam-feedback">
+                        <h4>👨‍🏫 Sensei-Erklärung & Übersetzung</h4>
+                        ${q.translation ? `<p style="font-style:italic; color:var(--text-light); margin-bottom:6px;">„${q.translation}“</p>` : ''}
                         <p>${q.explanation || 'Keine Erklärung verfügbar.'}</p>
                     </div>
                 </div>`;
@@ -22767,7 +23042,54 @@
         ]
 };
 
-    // --- GRAMMATIK (NEU) ---
+    // --- GRAMMATIK (NEU & ERWEITERT MIT SENSEI & TRACKING) ---
+    let currentGrammarIdx = 0;
+
+    function getLearnedGrammarMap() {
+        try {
+            const stats = JSON.parse(localStorage.getItem('userStats') || '{}');
+            return stats.learnedGrammar || {};
+        } catch(e) { return {}; }
+    }
+
+    function isGrammarPointLearned(level, title) {
+        const map = getLearnedGrammarMap();
+        return Array.isArray(map[level]) && map[level].includes(title);
+    }
+
+    function markGrammarPointLearned(level, title, learned = true) {
+        try {
+            const stats = JSON.parse(localStorage.getItem('userStats') || '{}');
+            if (!stats.learnedGrammar) stats.learnedGrammar = {};
+            if (!Array.isArray(stats.learnedGrammar[level])) stats.learnedGrammar[level] = [];
+            const idx = stats.learnedGrammar[level].indexOf(title);
+            if (learned && idx === -1) {
+                stats.learnedGrammar[level].push(title);
+                addXP(15);
+            } else if (!learned && idx !== -1) {
+                stats.learnedGrammar[level].splice(idx, 1);
+            }
+            localStorage.setItem('userStats', JSON.stringify(stats));
+        } catch(e) {}
+    }
+
+    function toggleCurrentGrammarLearned() {
+        const item = (grammarData[state.level] || [])[currentGrammarIdx];
+        if (!item) return;
+        const currentlyLearned = isGrammarPointLearned(state.level, item.title);
+        markGrammarPointLearned(state.level, item.title, !currentlyLearned);
+        updateGrammarLearnedBtnUI(item.title);
+    }
+    window.toggleCurrentGrammarLearned = toggleCurrentGrammarLearned;
+
+    function updateGrammarLearnedBtnUI(title) {
+        const btn = document.getElementById('btn-mark-grammar-learned');
+        if (!btn) return;
+        const learned = isGrammarPointLearned(state.level, title);
+        btn.classList.toggle('active', learned);
+        btn.innerText = learned ? '✓ Gelernt (Erledigt)' : '○ Als gelernt markieren';
+    }
+
     function renderGrammarList() {
         const container = document.getElementById('grammar-list');
         const levelItems = grammarData[state.level] || []; // Nutze die globale Variable
@@ -22777,23 +23099,31 @@
             container.innerHTML = `<p style="text-align:center; padding:20px;">Grammatik-Lektionen für ${state.level} folgen in Kürze.</p>`;
             return;
         }
-        container.innerHTML = levelItems.map((item, idx) => `
-            <div class="option-card" onclick="displayGrammarLesson(${idx})">
-                <h3>${item.title}</h3>
+        container.innerHTML = levelItems.map((item, idx) => {
+            const learned = isGrammarPointLearned(state.level, item.title);
+            return `
+            <div class="option-card" style="${learned ? 'border-color:#10b981;' : ''}" onclick="displayGrammarLesson(${idx})">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
+                    <h3>${item.title}</h3>
+                    ${learned ? '<span class="badge" style="background:rgba(16,185,129,0.15); color:#10b981; flex-shrink:0;">✓ Gelernt</span>' : `<span class="badge" style="flex-shrink:0;">#${idx + 1}</span>`}
+                </div>
                 <p>${item.summary}</p>
             </div>
-        `).join('');
+        `}).join('');
     }
 
     function displayGrammarLesson(idx) {
+        currentGrammarIdx = idx;
         const item = grammarData[state.level][idx];
         if (!item) return;
 
         document.getElementById('grammar-list').classList.add('hidden');
         document.getElementById('grammar-lesson-viewer').classList.remove('hidden');
+        document.getElementById('grammar-sensei-tip-box')?.classList.add('hidden');
 
         document.getElementById('grammar-title').innerText = item.title;
         document.getElementById('grammar-summary').innerText = item.summary;
+        updateGrammarLearnedBtnUI(item.title);
 
         const explanationContainer = document.getElementById('grammar-explanation-container');
         let explanationHtml = `<p>${item.explanation.introduction}</p>`;
@@ -22804,8 +23134,11 @@
                     <p>${section.content}</p>
                     ${section.points ? `<ul>${section.points.map(p => `<li>${p}</li>`).join('')}</ul>` : ''}
                     ${section.examples ? `
-                        <div style="margin-top:15px; padding-left:15px; border-left: 3px solid var(--border-color);">
-                            ${section.examples.map(ex => `<p><strong>${ex.jp}</strong><br><span style="color:var(--text-light); font-size:14px;">${ex.de}</span></p>`).join('')}
+                        <div style="margin-top:15px; padding-left:15px; border-left: 3px solid var(--accent-pink);">
+                            ${section.examples.map(ex => {
+                                const escJp = (ex.jp || '').replace(/'/g, "\\'");
+                                return `<p style="margin-bottom:10px;"><strong style="cursor:pointer;" onclick="speak('${escJp}')" title="Klicken zum Anhören">${ex.jp} 🔊</strong><br><span style="color:var(--text-light); font-size:14px;">${ex.de}</span></p>`;
+                            }).join('')}
                         </div>
                     ` : ''}
                 </div>`;
@@ -22813,55 +23146,84 @@
         explanationContainer.innerHTML = explanationHtml;
 
         const exercisesContainer = document.getElementById('grammar-exercises-container');
-        let exercisesHtml = `<div class="section-label" style="margin-top:0;">Übungen</div>`;
+        let exercisesHtml = `<div class="section-label" style="margin-top:0;">Interaktive Übungen</div>`;
         item.exercises.forEach((ex, exIdx) => {
             exercisesHtml += `<div class="exercise-container" id="ex-container-${exIdx}">`;
-            exercisesHtml += `<p class="exercise-question"><strong>Übung ${exIdx + 1}:</strong> ${ex.instruction}</p>`;
+            exercisesHtml += `<p class="exercise-question" style="margin-bottom:12px;"><strong>Übung ${exIdx + 1}:</strong> ${ex.instruction}</p>`;
             
             if (ex.type === 'fill-in-the-blank') {
                 ex.questions.forEach((q, qIdx) => {
                     const inputId = `ex-${exIdx}-q-${qIdx}-input`;
                     const feedbackId = `ex-${exIdx}-q-${qIdx}-feedback`;
+                    let blankIdx = 0;
+                    const renderedSentence = q.sentence.replace(/（　　）/g, () => {
+                        const curId = blankIdx === 0 ? inputId : `${inputId}-${blankIdx}`;
+                        blankIdx++;
+                        return `<input type="text" id="${curId}" class="typing-input" placeholder="..." style="width: 120px; font-size:16px; text-align: center; margin: 0 5px; display: inline-block; padding: 6px 10px;">`;
+                    });
                     exercisesHtml += ` 
                         <div style="margin-bottom: 15px;">
-                            <p style="font-size: 16px;">${qIdx + 1}. ${q.sentence.replace(/（　　）/g, `<input type="text" id="${inputId}" class="typing-input" style="width: 60px; text-align: center; margin: 0 5px; display: inline-block; padding: 5px;">`)}</p>
+                            <p style="font-size: 16px;">${qIdx + 1}. ${renderedSentence}</p>
                             <div class="exercise-feedback hidden" id="${feedbackId}"></div>
                         </div>`;
                 });
-            } else if (ex.type === 'conjugation') {
+            } else if (ex.type === 'conjugation' || ex.type === 'classification') {
                  ex.questions.forEach((q, qIdx) => {
                     const inputId = `ex-${exIdx}-q-${qIdx}-input`;
                     const feedbackId = `ex-${exIdx}-q-${qIdx}-feedback`;
                     exercisesHtml += ` 
                         <div style="margin-bottom: 15px;">
-                            <p style="font-size: 16px;">${qIdx + 1}. ${q.verb} → <input type="text" id="${inputId}" class="typing-input" style="width: 100px; text-align: center; margin: 0 5px; display: inline-block; padding: 5px;"></p>
+                            <p style="font-size: 16px;">${qIdx + 1}. <b>${q.verb}</b> → <input type="text" id="${inputId}" class="typing-input" placeholder="${ex.type === 'classification' ? 'u-Verb / ru-Verb' : 'Konjugation...'}" style="width: 150px; font-size:16px; text-align: center; margin: 0 5px; display: inline-block; padding: 6px 10px;"></p>
+                            <div class="exercise-feedback hidden" id="${feedbackId}"></div>
+                        </div>`;
+                });
+            } else if (ex.type === 'sentence-ordering') {
+                ex.questions.forEach((q, qIdx) => {
+                    const inputId = `ex-${exIdx}-q-${qIdx}-input`;
+                    const feedbackId = `ex-${exIdx}-q-${qIdx}-feedback`;
+                    const partsDisplay = (q.parts || []).join('  /  ');
+                    exercisesHtml += ` 
+                        <div style="margin-bottom: 15px;">
+                            <p style="font-size: 14px; color:var(--text-light); margin-bottom:6px;">Bausteine: <b>${partsDisplay}</b></p>
+                            <input type="text" id="${inputId}" class="typing-input" placeholder="Ganzen Satz in richtiger Reihenfolge eingeben..." style="width: 100%; font-size:16px; text-align: left; margin-top:4px; padding: 10px 14px;">
                             <div class="exercise-feedback hidden" id="${feedbackId}"></div>
                         </div>`;
                 });
             }
-            exercisesHtml += `<button class="btn-main" style="margin-top:10px;" onclick="checkGrammarExercise(${idx}, ${exIdx})">Antworten prüfen</button>`;
+            exercisesHtml += `<button class="btn-main" style="margin-top:10px;" onclick="checkGrammarExercise(${idx}, ${exIdx})">Antworten prüfen ✓</button>`;
             exercisesHtml += `</div>`;
         });
         exercisesContainer.innerHTML = exercisesHtml;
     }
 
     function checkGrammarExercise(lessonIdx, exIdx) {
-        const exercise = grammarData[state.level][lessonIdx].exercises[exIdx];
+        const item = grammarData[state.level][lessonIdx];
+        const exercise = item.exercises[exIdx];
+        let allCorrect = true;
         exercise.questions.forEach((q, qIdx) => {
             const inputId = `ex-${exIdx}-q-${qIdx}-input`;
             const feedbackId = `ex-${exIdx}-q-${qIdx}-feedback`;
             const inputEl = document.getElementById(inputId);
             const feedbackEl = document.getElementById(feedbackId);
-            const userAnswer = inputEl.value.trim();
-            const correctAnswer = Array.isArray(q.answer) ? q.answer[0] : q.answer; // Vereinfacht für den ersten Input
+            if (!inputEl || !feedbackEl) return;
+            const userAnswer = inputEl.value.trim().replace(/\s+/g, '');
+            const rawCorrect = Array.isArray(q.answer) ? q.answer[0] : q.answer;
+            const cleanCorrect = String(rawCorrect || '').trim().replace(/\s+/g, '');
 
             feedbackEl.classList.remove('hidden');
-            if (userAnswer === correctAnswer) {
-                feedbackEl.innerHTML = `<span class="feedback-correct">✓ Richtig!</span> ${q.explanation}`;
+            if (userAnswer.toLowerCase() === cleanCorrect.toLowerCase() || isRomajiMatch(userAnswer, cleanCorrect)) {
+                playSound('correct');
+                feedbackEl.innerHTML = `<span class="feedback-correct">✓ Richtig!</span> ${q.explanation || ''}`;
             } else {
-                feedbackEl.innerHTML = `<span class="feedback-wrong">✕ Falsch.</span> Deine Antwort: "${userAnswer}". Richtig: "${correctAnswer}".<br>${q.explanation}`;
+                allCorrect = false;
+                playSound('wrong');
+                feedbackEl.innerHTML = `<span class="feedback-wrong">✕ Nicht ganz.</span> Deine Antwort: "${inputEl.value.trim()}". Richtig: <b>"${rawCorrect}"</b>.<br>${q.explanation || ''}`;
             }
         });
+        if (allCorrect) {
+            markGrammarPointLearned(state.level, item.title, true);
+            updateGrammarLearnedBtnUI(item.title);
+        }
     }
 
     function showGrammarList() {
@@ -24840,6 +25202,10 @@
                 .filter(k => k.learned)
                 .map(k => k.kanji);
         }
+        try {
+            const existing = JSON.parse(localStorage.getItem('userStats') || '{}');
+            if (existing.learnedGrammar) stats.learnedGrammar = existing.learnedGrammar;
+        } catch(e) {}
 
         localStorage.setItem('userStats', JSON.stringify(stats));
         if (typeof triggerAutoSyncDebounced === 'function') triggerAutoSyncDebounced();
@@ -25068,11 +25434,13 @@
         if (targetView) targetView.classList.remove('hidden');
 
         const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
-        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson', 'path-results', 'exam-session', 'exam-results', 'exam-review', 'match', 'kana'].includes(tabId)) {
+        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson', 'path-results', 'exam-session', 'exam-results', 'exam-review', 'match', 'kana', 'modular-test'].includes(tabId)) {
             tabBtn.classList.add('active');
         }
 
         if (tabId === 'lernen') updateStats();
+        if (tabId === 'reach' && typeof renderReachView === 'function') renderReachView();
+        if (tabId === 'sensei' && typeof renderSenseiView === 'function') renderSenseiView();
         if (tabId === 'alltag') renderAlltagCategories();
         if (tabId === 'pfad') renderPath();
         if (tabId === 'liste') renderList();
@@ -25537,6 +25905,7 @@
         state.isFlipped = false;
         const fcActions = document.getElementById('fc-actions');
         if (fcActions) fcActions.classList.remove('visible');
+        document.getElementById('fc-sensei-explain-box')?.classList.add('hidden');
 
         const targetLangCode = state.lang === 'en' ? 'EN' : 'DE';
         document.getElementById('fc-direction-display').innerText = state.direction === 'mix'
@@ -25691,6 +26060,7 @@
         if (hintDisplay) hintDisplay.innerText = '';
         const hintBtn = document.getElementById('btn-typing-hint');
         if (hintBtn) hintBtn.classList.remove('hidden');
+        document.getElementById('type-sensei-explain-box')?.classList.add('hidden');
 
         const inputArea = document.getElementById('type-input-area');
         const choiceArea = document.getElementById('type-choice-area');
@@ -25796,6 +26166,7 @@
         if (typeFavBtn) typeFavBtn.classList.toggle('active', !!word.favorite);
         const hintBtn = document.getElementById('btn-typing-hint');
         if (hintBtn) hintBtn.classList.add('hidden');
+        document.getElementById('type-sensei-explain-box')?.classList.add('hidden');
         const readingEl = document.getElementById('type-reading');
         if (readingEl) readingEl.innerText = '';
         const targetBadge = document.getElementById('type-target-lang-badge');
@@ -26745,14 +27116,16 @@
 
     
     // =========================================================================
-    // --- APP THEMES (SAKURA, MATCHA, FUJI NACHT, SUNSET, CLASSIC) ---
+    // --- APP THEMES (SAKURA, MATCHA, FUJI NACHT, SUNSET, CLASSIC, CYBER, KYOTO) ---
     // =========================================================================
     const APP_THEMES = {
         sakura: { name: 'Sakura', icon: '🌸' },
         matcha: { name: 'Matcha', icon: '🍵' },
         fuji: { name: 'Fuji Nacht', icon: '🗻' },
         sunset: { name: 'Tokyo Akane', icon: '🏮' },
-        classic: { name: 'Kanagawa', icon: '🌊' }
+        classic: { name: 'Kanagawa', icon: '🌊' },
+        cyber: { name: 'Cyber Tokyo', icon: '🌌' },
+        kyoto: { name: 'Kyoto Herbst', icon: '⛩️' }
     };
 
     let currentAppTheme = localStorage.getItem('jlpt_app_theme') || 'sakura';
@@ -28736,6 +29109,1278 @@
         if (state.isFlipped && e.code === 'ArrowRight') nextCard(true);
         if (state.isFlipped && e.code === 'ArrowLeft') nextCard(false);
     });
+
+    // ========================================================
+    // --- JLPT REACH SYSTEM, LEVEL CURRICULUM, SENSEI TUTORS & MODULAR TESTS ---
+    // ========================================================
+
+    const JLPT_LEVEL_BLUEPRINTS = {
+        N5: {
+            subtitle: "Grundstufe (A1) – Fundament des Japanischen",
+            cefr: "GER A1",
+            passMark: "80 / 180 Punkte (ca. 45%)",
+            studyHours: "150 – 250 Stunden",
+            targetVocab: 800,
+            targetKanji: 100,
+            targetGrammar: 20,
+            canDo: [
+                "Alltägliche Sätze, Begrüßungen und Vorstellungen verstehen & bilden",
+                "Hiragana, Katakana und die ersten ~100 Basis-Kanji (Zahlen, Zeit, Orte, Verben) sicher lesen",
+                "Grundlegende Partikeln (は, が, を, に, で, へ, と, も, から, まで) richtig einsetzen",
+                "Verben in ます-Form, て-Form, ない-Form und た-Form sowie い-/な-Adjektive konjugieren"
+            ],
+            sectionsInfo: [
+                { name: "Sprachwissen (Vokabeln & Kanji)", time: "20 Min.", details: "Kanji-Lesungen, Orthografie, Wortbedeutung im Kontext" },
+                { name: "Grammatik & Leseverständnis", time: "40 Min.", details: "Satzgrammatik, ★-Satzbau, kurze Notizen & E-Mails" },
+                { name: "Hörverständnis (聴解 Chōkai)", time: "30 Min.", details: "Kurze Alltagsdialoge, Uhrzeiten, Preise, Orte" }
+            ],
+            focusAreas: [
+                "Partikeln-Unterschiede: は vs. が (Thema vs. Subjekt) und に vs. で (Ort der Existenz vs. Handlungsort)",
+                "Die 3 Verbgruppen (u-Verben, ru-Verben, する/来る) und die て-Form (～てください, ～ています)",
+                "Zählwörter (～つ, ～人, ～本, ～枚, ～匹) und Zeitangaben"
+            ]
+        },
+        N4: {
+            subtitle: "Obere Grundstufe (A2) – Selbstständiger Alltag",
+            cefr: "GER A2",
+            passMark: "90 / 180 Punkte (ca. 50%)",
+            studyHours: "300 – 450 Stunden",
+            targetVocab: 1500,
+            targetKanji: 300,
+            targetGrammar: 20,
+            canDo: [
+                "Gespräche über Familie, Arbeit, Einkaufen, Gesundheit und Reisepläne führen",
+                "Texte zu vertrauten Themen mit ~300 Kanji ohne durchgehende Furigana lesen",
+                "Bedingungsformen (～たら, ～ば, ～と, ～なら) sicher unterscheiden",
+                "Passiv (～られる), Kausativ (～させる), Potentialform (können) sowie Geben/Nehmen (あげる/もらう/くれる) beherrschen"
+            ],
+            sectionsInfo: [
+                { name: "Sprachwissen (Vokabeln & Kanji)", time: "25 Min.", details: "Komposita-Lesungen, transitive/intransitive Verben, Synonyme" },
+                { name: "Grammatik & Leseverständnis", time: "55 Min.", details: "Nebensätze, ★-Satzbau, Briefe & Informationstafeln" },
+                { name: "Hörverständnis (聴解 Chōkai)", time: "35 Min.", details: "Alltagsgespräche, Bitten, Ankündigungen" }
+            ],
+            focusAreas: [
+                "Transitive vs. intransitive Verbpaare (開ける vs. 開く, 始める vs. 始まる)",
+                "Geben & Empfangen von Gefälligkeiten (～てあげる, ～てもらう, ～てくれる)",
+                "Vermutungen & Hörensagen (～そうだ vs. ～ようだ vs. ～らしい)"
+            ]
+        },
+        N3: {
+            subtitle: "Mittelstufe (B1) – Brücke zum echten Japanisch",
+            cefr: "GER B1",
+            passMark: "95 / 180 Punkte (ca. 53%)",
+            studyHours: "600 – 900 Stunden",
+            targetVocab: 3750,
+            targetKanji: 650,
+            targetGrammar: 15,
+            canDo: [
+                "Artikel, Essays und Berichte des täglichen Lebens verstehen und Meinungen begründen",
+                "Natürlichen Gesprächen in normaler Sprechgeschwindigkeit folgen",
+                "Zwischen gesprochener Umgangssprache und formeller Schriftsprache wechseln",
+                "Höflichkeitssprache (Keigo: Sonkeigo & Kenjōgo) in Beruf und Service anwenden"
+            ],
+            sectionsInfo: [
+                { name: "Sprachwissen (Vokabeln)", time: "30 Min.", details: "2-Kanji-Komposita, Onomatopoesie (オノマトペ), Wortgebrauch" },
+                { name: "Grammatik & Leseverständnis", time: "70 Min.", details: "Komplexe Konnektoren, Kurz-, Mittel- und Informationssuche-Texte" },
+                { name: "Hörverständnis (聴解 Chōkai)", time: "40 Min.", details: "Aufgabenorientiertes Hören, Zusammenfassungen, schnelle Reaktionen" }
+            ],
+            focusAreas: [
+                "Kausale & konzessive Strukturen (～おかげで vs. ～せいで, ～にもかかわらず)",
+                "Zielgruppen & Perspektive (～向けに vs. ～向きに, ～にとって vs. ～に対して)",
+                "Onomatopoesie & Adverbien (はっきり, そっと, ぎっしり)"
+            ]
+        },
+        N2: {
+            subtitle: "Oberstufe (B2) – Business, Medien & Studium",
+            cefr: "GER B2",
+            passMark: "90 / 180 Punkte (mit Sektions-Minimum)",
+            studyHours: "1100 – 1600 Stunden",
+            targetVocab: 6000,
+            targetKanji: 1000,
+            targetGrammar: 15,
+            canDo: [
+                "Zeitungsartikel, Kritiken, Geschäftskorrespondenz und Sachtexte mühelos lesen",
+                "Nachrichten, Vorträge und Meetings in natürlicher Geschwindigkeit verstehen",
+                "Feine Nuancen von formellen Ausdrücken (～に際して, ～をめぐって, ～にとどまらず) erfassen",
+                "Berufliche Verhandlungen und komplexe Argumentationen verstehen"
+            ],
+            sectionsInfo: [
+                { name: "Sprachwissen (Vokabeln & Grammatik)", time: "105 Min. (kombiniert mit Lesen)", details: "Wortbildung (Präfixe/Suffixe), formelle Grammatik, Textkohäsion" },
+                { name: "Leseverständnis (読解 Dokkai)", time: "In 105 Min. enthalten", details: "Leitartikel, Vergleich zweier Texte (A/B), komplexe Informationsblätter" },
+                { name: "Hörverständnis (聴解 Chōkai)", time: "50 Min.", details: "Längere Diskussionen, implizite Meinungen, Business-Kontexte" }
+            ],
+            focusAreas: [
+                "Formelle Schriftsprache (～に先立ち, ～を契機に, ～反面, ～ざるを得ない)",
+                "Vergleichs-Lesetexte (AとBの共通点・相違点) schnell scannen",
+                "Abgeleitete Wortbedeutungen und Vier-Zeichen-Komposita"
+            ]
+        },
+        N1: {
+            subtitle: "Meisterstufe (C1/C2) – Akademisch & Literarisch",
+            cefr: "GER C1/C2",
+            passMark: "100 / 180 Punkte (ca. 56%)",
+            studyHours: "1800 – 2500+ Stunden",
+            targetVocab: 10000,
+            targetKanji: 2000,
+            targetGrammar: 15,
+            canDo: [
+                "Philosophische, wissenschaftliche und literarische Texte mit abstrakter Logik durchdringen",
+                "Klassisch geprägte Grammatik (～にあるまじき, ～極まりない, ～を余儀なくされる, ～はおろか) beherrschen",
+                "Rhetorische Stilmittel, Ironie und subtile Autorenintentionen analysieren",
+                "Auf muttersprachlichem Niveau in Wissenschaft, Politik und Wirtschaft kommunizieren"
+            ],
+            sectionsInfo: [
+                { name: "Sprachwissen & Leseverständnis", time: "110 Min.", details: "Seltene Lesungen, gehobener Wortschatz, anspruchsvolle Essays & Kritiken" },
+                { name: "Hörverständnis (聴解 Chōkai)", time: "55 Min.", details: "Akademische Vorträge, komplexe Abwägungen, schnelle Dialogwechsel" }
+            ],
+            focusAreas: [
+                "Klassisch-literarische Strukturen (～（よ）うが～まいが, ～にたえない, ～にほかならない)",
+                "Abstrakte Argumentationsketten in N1-Essays (評論文)",
+                "Seltene Kun-Lesungen (賄う まかなう, 滞る とどこおる, 覆す くつがえす)"
+            ]
+        }
+    };
+
+    const SENSEI_ROSTER = [
+        {
+            id: 'hana',
+            name: 'Hana-sensei (花先生)',
+            avatar: '🌸',
+            role: 'Grundlagen & Motivation (N5–N4)',
+            tagline: 'Geduldig, herzlich und erklärt Schritt für Schritt mit Alltagsbeispielen.',
+            greeting: 'こんにちは！ Ich bin Hana-sensei 🌸. Egal ob Partikeln, Verbgruppen oder deine ersten Sätze – ich erkläre dir alles ganz entspannt Schritt für Schritt!'
+        },
+        {
+            id: 'kenji',
+            name: 'Kenji-sensei (健司先生)',
+            avatar: '🥷',
+            role: 'Grammatik-Architekt & Satzbau',
+            tagline: 'Zerlegt jeden Satz logisch in seine Bausteine und zeigt den Unterschied ähnlicher Formen.',
+            greeting: 'よっ！ Ich bin Kenji-sensei 🥷. Japanische Grammatik ist wie Lego: Wenn du die Verbindung (Partikel & Verbform) kennst, kannst du jeden Satz knacken!'
+        },
+        {
+            id: 'akira',
+            name: 'Prof. Akira (明教授)',
+            avatar: '🦉',
+            role: 'Kanji, Etymologie & N2/N1 Meister',
+            tagline: 'Meister der Schriftzeichen, Radikale, Eselsbrücken und gehobenen Schriftsprache.',
+            greeting: 'ようこそ。 Ich bin Professor Akira 🦉. Jedes Kanji erzählt eine Geschichte aus Radikalen. Lass uns gemeinsam die Struktur hinter den Zeichen und N2/N1-Texten entdecken.'
+        },
+        {
+            id: 'yuki',
+            name: 'Yuki-coach (雪コーチ)',
+            avatar: '🎯',
+            role: 'JLPT Prüfungs-Coach & Strategie',
+            tagline: 'Trainiert dich auf Zeitmanagement, typische JLPT-Fallen und ★-Stern-Fragen.',
+            greeting: '頑張ろう！ Ich bin Yuki, dein JLPT-Prüfungscoach 🎯. Ich zeige dir, worauf die Prüfer achten, wie du ★-Fragen in Sekunden löst und deine Punkte maximierst!'
+        }
+    ];
+
+    let activeSenseiId = 'hana';
+    let currentSyllabusTab = 'roadmap';
+    let senseiChatHistory = [];
+    let senseiActiveQuiz = null;
+
+    function getActiveSensei() {
+        return SENSEI_ROSTER.find(s => s.id === activeSenseiId) || SENSEI_ROSTER[0];
+    }
+
+    // --- JLPT REACH SYSTEM & SYLLABUS VIEW ---
+    function calculateLevelReachStats(level) {
+        const vocabList = window.vocabData[level] || [];
+        const kanjiList = kanjiData[level] || [];
+        const grammarList = window.grammarData[level] || [];
+        const learnedGrammarMap = getLearnedGrammarMap();
+        const learnedGrammarArr = learnedGrammarMap[level] || [];
+
+        const vTotal = Math.max(1, vocabList.length);
+        const vLearned = vocabList.filter(v => v.learned).length;
+        const vPct = Math.min(100, Math.round((vLearned / vTotal) * 100));
+
+        const kTotal = Math.max(1, kanjiList.length);
+        const kLearned = kanjiList.filter(k => k.learned).length;
+        const kPct = Math.min(100, Math.round((kLearned / kTotal) * 100));
+
+        const gTotal = Math.max(1, grammarList.length);
+        const gLearned = learnedGrammarArr.length;
+        const gPct = Math.min(100, Math.round((gLearned / gTotal) * 100));
+
+        const examsCompleted = parseInt(localStorage.getItem('examsCompleted') || '0', 10);
+        const ePct = Math.min(100, examsCompleted * 25);
+
+        const overallReach = Math.round(vPct * 0.35 + gPct * 0.30 + kPct * 0.25 + ePct * 0.10);
+        const estimatedPoints = Math.min(180, Math.round((overallReach / 100) * 180));
+
+        return {
+            vLearned, vTotal: vocabList.length, vPct,
+            kLearned, kTotal: kanjiList.length, kPct,
+            gLearned, gTotal: grammarList.length, gPct,
+            examsCompleted, ePct,
+            overallReach, estimatedPoints
+        };
+    }
+
+    function renderReachView() {
+        const lvl = state.level;
+        const bp = JLPT_LEVEL_BLUEPRINTS[lvl] || JLPT_LEVEL_BLUEPRINTS.N5;
+        const stats = calculateLevelReachStats(lvl);
+
+        ['N5', 'N4', 'N3', 'N2', 'N1'].forEach(l => {
+            document.getElementById('reach-lvl-btn-' + l)?.classList.toggle('active', l === lvl);
+        });
+
+        const overviewEl = document.getElementById('reach-overview-card');
+        if (overviewEl) {
+            const statusText = stats.overallReach >= 75
+                ? '🟢 Prüfungsreif! Du bist auf bestem Kurs für das Zertifikat.'
+                : (stats.overallReach >= 40 ? '🟡 Gute Basis! Trainiere gezielt deine schwächeren Säulen.' : '🌱 Aufbauphase – Starte mit dem Pflichtkatalog unten!');
+            overviewEl.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:14px;">
+                    <div>
+                        <span class="badge" style="margin-bottom:6px; display:inline-block;">${bp.cefr} · Richtwert: ${bp.studyHours}</span>
+                        <h2 style="font-size:22px; color:var(--primary-dark);">JLPT ${lvl}: ${bp.subtitle}</h2>
+                        <p style="font-size:13px; color:var(--text-light); margin-top:4px;">Offizielle Bestehensgrenze: <b>${bp.passMark}</b> · ${statusText}</p>
+                    </div>
+                    <div style="text-align:right; background:var(--subtle-bg); padding:12px 18px; border-radius:14px; border:1px solid var(--border-color);">
+                        <div style="font-size:26px; font-weight:900; color:var(--accent-pink);">${stats.overallReach}% Reach</div>
+                        <div style="font-size:11px; font-weight:700; color:var(--text-light);">Prognose: ~${stats.estimatedPoints} / 180 Pkt.</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar" style="height:12px; margin:16px 0 18px 0;">
+                    <div class="progress-fill" style="width:${Math.max(3, stats.overallReach)}%; background:linear-gradient(90deg, var(--primary-dark), var(--accent-pink));"></div>
+                </div>
+
+                <div class="reach-meter-row">
+                    <div class="reach-pillar" style="cursor:pointer;" onclick="switchSyllabusTab('vocab')">
+                        <div class="reach-pillar-val">${stats.vPct}%</div>
+                        <div class="reach-pillar-lbl">📚 Vokabeln (${stats.vLearned}/${stats.vTotal})</div>
+                    </div>
+                    <div class="reach-pillar" style="cursor:pointer;" onclick="switchSyllabusTab('grammar')">
+                        <div class="reach-pillar-val">${stats.gPct}%</div>
+                        <div class="reach-pillar-lbl">📐 Grammatik (${stats.gLearned}/${stats.gTotal})</div>
+                    </div>
+                    <div class="reach-pillar" style="cursor:pointer;" onclick="switchSyllabusTab('kanji')">
+                        <div class="reach-pillar-val">${stats.kPct}%</div>
+                        <div class="reach-pillar-lbl">漢 Kanji (${stats.kLearned}/${stats.kTotal})</div>
+                    </div>
+                    <div class="reach-pillar" style="cursor:pointer;" onclick="switchTab('test-center')">
+                        <div class="reach-pillar-val">${stats.examsCompleted}</div>
+                        <div class="reach-pillar-lbl">🏛️ Probetests absolviert</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        const recEl = document.getElementById('reach-recommendations-card');
+        if (recEl) {
+            recEl.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                    <h3 style="font-size:17px; color:var(--primary-dark);">🚀 Dein JLPT Reach Trainings-Plan für heute (${lvl})</h3>
+                    <span style="font-size:12px; color:var(--text-light);">Wähle eine Aktion, um deinen Reach-Score direkt zu steigern:</span>
+                </div>
+                <div class="smart-review-grid" style="margin-bottom:0;">
+                    <div class="smart-card" onclick="startQuickVocabTest()">
+                        <div class="smart-card-title"><span>📚 ${lvl} Vokabel-Test</span><span class="smart-count-pill">+XP</span></div>
+                        <div class="smart-card-sub">Prüfe die wichtigsten ${lvl}-Wörter im Quiz</div>
+                    </div>
+                    <div class="smart-card" onclick="startQuickGrammarTest()">
+                        <div class="smart-card-title"><span>📐 ${lvl} Grammatik-Test</span><span class="smart-count-pill">+XP</span></div>
+                        <div class="smart-card-sub">Partikeln, Satzstrukturen & Formen mit Sensei-Feedback</div>
+                    </div>
+                    <div class="smart-card" onclick="startQuickKanjiTest()">
+                        <div class="smart-card-title"><span>漢 ${lvl} Kanji-Test</span><span class="smart-count-pill">+XP</span></div>
+                        <div class="smart-card-sub">Lesungen & Bedeutungen der ${lvl}-Pflichtkanji testen</div>
+                    </div>
+                    <div class="smart-card" onclick="openSenseiWithTopic('what_to_learn')">
+                        <div class="smart-card-title"><span>👨‍🏫 Sensei Lehrstunde</span><span class="smart-count-pill" style="background:var(--accent-pink);">Live</span></div>
+                        <div class="smart-card-sub">Lass dir vom Sensei die wichtigsten ${lvl}-Schwerpunkte erklären</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        renderSyllabusContent();
+    }
+    window.renderReachView = renderReachView;
+
+    function switchSyllabusTab(tab) {
+        currentSyllabusTab = tab;
+        ['roadmap', 'grammar', 'kanji', 'vocab'].forEach(t => {
+            document.getElementById('syl-tab-' + t)?.classList.toggle('active', t === tab);
+        });
+        renderSyllabusContent();
+    }
+    window.switchSyllabusTab = switchSyllabusTab;
+
+    function renderSyllabusContent() {
+        const container = document.getElementById('reach-syllabus-content');
+        if (!container) return;
+        const lvl = state.level;
+        const bp = JLPT_LEVEL_BLUEPRINTS[lvl] || JLPT_LEVEL_BLUEPRINTS.N5;
+
+        if (currentSyllabusTab === 'roadmap') {
+            container.innerHTML = `
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+                    <div style="background:var(--subtle-bg); padding:16px; border-radius:14px; border:1px solid var(--border-color);">
+                        <h4 style="color:var(--primary-dark); margin-bottom:10px;">✅ Was du für ${lvl} können musst (Can-Do)</h4>
+                        <ul style="padding-left:18px; font-size:13.5px; line-height:1.6; color:var(--text-main);">
+                            ${bp.canDo.map(c => `<li style="margin-bottom:6px;">${c}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div style="background:var(--subtle-bg); padding:16px; border-radius:14px; border:1px solid var(--border-color);">
+                        <h4 style="color:var(--primary-dark); margin-bottom:10px;">🔥 Wichtigste Prüfungs-Schwerpunkte (${lvl})</h4>
+                        <ul style="padding-left:18px; font-size:13.5px; line-height:1.6; color:var(--text-main);">
+                            ${bp.focusAreas.map(f => `<li style="margin-bottom:6px;">${f}</li>`).join('')}
+                        </ul>
+                        <button class="btn-main" style="margin-top:12px; padding:10px; font-size:13px;" onclick="openSenseiWithTopic('what_to_learn')">👨‍🏫 Sensei: Erkläre mir diese Schwerpunkte!</button>
+                    </div>
+                </div>
+                <div style="margin-top:16px; background:var(--subtle-bg); padding:16px; border-radius:14px; border:1px solid var(--border-color);">
+                    <h4 style="color:var(--primary-dark); margin-bottom:10px;">⏱️ Offizieller Prüfungsaufbau für JLPT ${lvl}</h4>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+                        ${bp.sectionsInfo.map(s => `
+                            <div style="background:var(--white); padding:12px; border-radius:10px; border:1px solid var(--border-color);">
+                                <div style="font-weight:800; font-size:14px; color:var(--primary-dark);">${s.name}</div>
+                                <div style="font-size:12px; font-weight:700; color:var(--accent-pink); margin:4px 0;">⏱ ${s.time}</div>
+                                <div style="font-size:12px; color:var(--text-light);">${s.details}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        } else if (currentSyllabusTab === 'grammar') {
+            const gList = window.grammarData[lvl] || [];
+            container.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                    <span style="font-size:13px; font-weight:700; color:var(--text-light);">${gList.length} Grammatik-Konstruktionen im ${lvl}-Lehrplan:</span>
+                    <button class="btn-stroke-ctl" style="background:var(--primary-dark); color:white;" onclick="startQuickGrammarTest()">📐 Alle ${lvl}-Grammatikpunkte testen</button>
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:12px;">
+                    ${gList.map((g, i) => {
+                        const learned = isGrammarPointLearned(lvl, g.title);
+                        const ex = g.explanation?.sections?.[0]?.examples?.[0];
+                        return `
+                            <div class="option-card" style="padding:14px; ${learned ? 'border-color:#10b981;' : ''}" onclick="switchTab('grammatik'); displayGrammarLesson(${i});">
+                                <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:4px;">
+                                    <span style="font-weight:800; font-size:14px; color:var(--primary-dark);">${i + 1}. ${g.title}</span>
+                                    <span class="badge" style="${learned ? 'background:rgba(16,185,129,0.15); color:#10b981;' : ''}">${learned ? '✓' : lvl}</span>
+                                </div>
+                                <p style="font-size:12px; margin-bottom:8px;">${g.summary}</p>
+                                ${ex ? `<div style="font-size:12px; background:var(--subtle-bg); padding:6px 10px; border-radius:8px; border-left:2px solid var(--accent-pink);"><b>${ex.jp}</b><br><span style="color:var(--text-light);">${ex.de}</span></div>` : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        } else if (currentSyllabusTab === 'kanji') {
+            const kList = kanjiData[lvl] || [];
+            container.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                    <span style="font-size:13px; font-weight:700; color:var(--text-light);">${kList.length} Kanji im ${lvl}-Katalog (Klicke auf ein Kanji für Sensei-Analyse & Aussprache):</span>
+                    <button class="btn-stroke-ctl" style="background:var(--primary-dark); color:white;" onclick="startQuickKanjiTest()">漢 ${lvl} Kanji-Quiz starten</button>
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap:10px; max-height:460px; overflow-y:auto; padding:4px;">
+                    ${kList.map((k, idx) => {
+                        const escK = (k.kanji || '').replace(/'/g, "\\'");
+                        return `
+                            <div class="option-card" style="padding:10px; text-align:center; ${k.learned ? 'border-color:#10b981;' : ''}" onclick="explainKanjiWithSenseiModal('${escK}', ${idx})">
+                                <div style="font-size:28px; font-weight:800; color:var(--primary-dark);">${k.kanji}</div>
+                                <div style="font-size:12px; font-weight:700; color:var(--text-main); margin-top:2px;">${k.de}</div>
+                                <div style="font-size:10px; color:var(--text-light); margin-top:2px;">${k.on || '-'} / ${k.kun || '-'}</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        } else if (currentSyllabusTab === 'vocab') {
+            const vList = (window.vocabData[lvl] || []).slice(0, 60);
+            const totalV = (window.vocabData[lvl] || []).length;
+            container.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                    <span style="font-size:13px; font-weight:700; color:var(--text-light);">Vorschau der wichtigsten Kern-Vokabeln für ${lvl} (Gesamt: ${totalV} Wörter):</span>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn-stroke-ctl" onclick="switchTab('liste')">📖 Komplette Liste (${totalV})</button>
+                        <button class="btn-stroke-ctl" style="background:var(--primary-dark); color:white;" onclick="startQuickVocabTest()">📚 ${lvl} Vokabel-Test</button>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap:10px; max-height:460px; overflow-y:auto; padding:4px;">
+                    ${vList.map(v => {
+                        const esc = (v.kana || v.kanji || '').replace(/'/g, "\\'");
+                        return `
+                            <div class="option-card" style="padding:12px; ${v.learned ? 'border-color:#10b981;' : ''}" onclick="speak('${esc}')">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span style="font-weight:800; font-size:16px; color:var(--primary-dark);">${v.kanji || v.kana} 🔊</span>
+                                    <span class="badge">${v.type || 'Wort'}</span>
+                                </div>
+                                ${v.kanji && v.kanji !== v.kana ? `<div style="font-size:12px; color:var(--text-light);">${v.kana}</div>` : ''}
+                                <div style="font-size:13px; font-weight:600; color:var(--text-main); margin-top:4px;">${v.de}</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+    }
+
+    function explainKanjiWithSenseiModal(char) {
+        speak(char);
+        openSenseiWithCustomQuery(char);
+    }
+    window.explainKanjiWithSenseiModal = explainKanjiWithSenseiModal;
+
+    // --- SENSEI TUTOR SYSTEM (TEACH, HELP, EXPLAIN & QUIZ) ---
+    function renderSenseiView() {
+        const grid = document.getElementById('sensei-roster-grid');
+        if (grid) {
+            grid.innerHTML = SENSEI_ROSTER.map(s => `
+                <div class="sensei-card ${s.id === activeSenseiId ? 'active' : ''}" onclick="selectSenseiTutor('${s.id}')">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                        <div class="sensei-avatar">${s.avatar}</div>
+                        <div>
+                            <div style="font-weight:800; font-size:15px; color:var(--primary-dark);">${s.name}</div>
+                            <span class="sensei-role-badge">${s.role}</span>
+                        </div>
+                    </div>
+                    <p style="font-size:12px; color:var(--text-light); margin-top:4px;">${s.tagline}</p>
+                </div>
+            `).join('');
+        }
+
+        const active = getActiveSensei();
+        const avEl = document.getElementById('active-sensei-avatar');
+        const nmEl = document.getElementById('active-sensei-name');
+        const spEl = document.getElementById('active-sensei-specialty');
+        if (avEl) avEl.innerText = active.avatar;
+        if (nmEl) nmEl.innerText = active.name;
+        if (spEl) spEl.innerText = `${active.role} · Aktuelles Level: ${state.level}`;
+
+        if (senseiChatHistory.length === 0) {
+            senseiChatHistory.push({ sender: 'tutor', html: active.greeting });
+        }
+        renderSenseiMessages();
+    }
+    window.renderSenseiView = renderSenseiView;
+
+    function selectSenseiTutor(id) {
+        activeSenseiId = id;
+        const active = getActiveSensei();
+        senseiChatHistory.push({
+            sender: 'tutor',
+            html: `<b>${active.name}:</b> ${active.greeting}`
+        });
+        renderSenseiView();
+    }
+    window.selectSenseiTutor = selectSenseiTutor;
+
+    function renderSenseiMessages() {
+        const box = document.getElementById('sensei-chat-messages');
+        if (!box) return;
+        box.innerHTML = senseiChatHistory.map(m => `
+            <div class="sensei-msg ${m.sender}">${m.html}</div>
+        `).join('');
+        box.scrollTop = box.scrollHeight;
+    }
+
+    function appendSenseiMessage(sender, html) {
+        senseiChatHistory.push({ sender, html });
+        renderSenseiMessages();
+    }
+
+    function openSenseiWithTopic(topicKey) {
+        switchTab('sensei');
+        sendSenseiQuickPrompt(topicKey);
+    }
+    window.openSenseiWithTopic = openSenseiWithTopic;
+
+    function openSenseiWithCustomQuery(query) {
+        switchTab('sensei');
+        const input = document.getElementById('sensei-user-input');
+        if (input) input.value = query;
+        handleSenseiUserSend();
+    }
+    window.openSenseiWithCustomQuery = openSenseiWithCustomQuery;
+
+    function triggerSenseiMiniLesson() {
+        const lvl = state.level;
+        const active = getActiveSensei();
+        const gList = window.grammarData[lvl] || [];
+        const vList = window.vocabData[lvl] || [];
+        const kList = kanjiData[lvl] || [];
+
+        const gItem = gList[Math.floor(Math.random() * Math.max(1, gList.length))];
+        const vItem = vList[Math.floor(Math.random() * Math.max(1, vList.length))];
+        const kItem = kList[Math.floor(Math.random() * Math.max(1, kList.length))];
+        const gEx = gItem?.explanation?.sections?.[0]?.examples?.[0];
+
+        let html = `<b>${active.avatar} ${active.name} – Mini-Lektion für JLPT ${lvl}:</b><br><br>`;
+        if (gItem) {
+            html += `📐 <b>1. Grammatik-Fokus: ${gItem.title}</b><br>${gItem.summary}<br>`;
+            if (gEx) html += `<i>Beispiel:</i> <b>${gEx.jp}</b> (${gEx.de})<br><br>`;
+        }
+        if (vItem) {
+            html += `📚 <b>2. Schlüssel-Vokabel: ${vItem.kanji || vItem.kana} (${vItem.kana})</b> = <b>${vItem.de}</b> [${vItem.type}]<br><br>`;
+        }
+        if (kItem) {
+            html += `漢 <b>3. Pflicht-Kanji: ${kItem.kanji}</b> (${kItem.de}) · On: ${kItem.on || '-'} | Kun: ${kItem.kun || '-'}<br>`;
+        }
+        html += `<div style="margin-top:10px;"><button class="sensei-chip" onclick="triggerSenseiQuizMe()">🎯 Teste mich jetzt dazu!</button></div>`;
+        appendSenseiMessage('tutor', html);
+    }
+    window.triggerSenseiMiniLesson = triggerSenseiMiniLesson;
+
+    function triggerSenseiQuizMe() {
+        const lvl = state.level;
+        const active = getActiveSensei();
+        const vList = window.vocabData[lvl] || [];
+        if (vList.length < 4) return;
+
+        const target = vList[Math.floor(Math.random() * vList.length)];
+        const opts = [target.de];
+        while (opts.length < 4) {
+            const r = vList[Math.floor(Math.random() * vList.length)].de;
+            if (r && !opts.includes(r)) opts.push(r);
+        }
+        opts.sort(() => Math.random() - 0.5);
+        senseiActiveQuiz = { word: target, answer: target.de };
+
+        const qHtml = `
+            <b>${active.avatar} ${active.name} – Blitz-Quiz (${lvl}):</b><br>
+            Was bedeutet <b>「${target.kanji || target.kana}」</b> ${target.kanji && target.kanji !== target.kana ? `(${target.kana})` : ''}?
+            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
+                ${opts.map(o => {
+                    const esc = String(o).replace(/'/g, "\\'");
+                    return `<button class="sensei-chip" onclick="answerSenseiChatQuiz('${esc}')">${o}</button>`;
+                }).join('')}
+            </div>
+        `;
+        appendSenseiMessage('tutor', qHtml);
+    }
+    window.triggerSenseiQuizMe = triggerSenseiQuizMe;
+
+    function answerSenseiChatQuiz(choice) {
+        if (!senseiActiveQuiz) return;
+        const { word, answer } = senseiActiveQuiz;
+        senseiActiveQuiz = null;
+        appendSenseiMessage('user', choice);
+
+        if (choice === answer) {
+            playSound('correct');
+            addXP(10);
+            appendSenseiMessage('tutor', `✅ <b>Richtig! (+10 XP)</b> 「${word.kanji || word.kana}」 (${word.kana}) bedeutet <b>${word.de}</b>. Weiter so!`);
+        } else {
+            playSound('wrong');
+            appendSenseiMessage('tutor', `❌ Fast! 「${word.kanji || word.kana}」 (${word.kana}) bedeutet <b>${word.de}</b> (Wortart: ${word.type}). Merk es dir gut!`);
+        }
+    }
+    window.answerSenseiChatQuiz = answerSenseiChatQuiz;
+
+    function sendSenseiQuickPrompt(key) {
+        const lvl = state.level;
+        const active = getActiveSensei();
+        const bp = JLPT_LEVEL_BLUEPRINTS[lvl] || JLPT_LEVEL_BLUEPRINTS.N5;
+
+        if (key === 'what_to_learn') {
+            appendSenseiMessage('user', `Was muss ich für JLPT ${lvl} alles lernen?`);
+            const html = `
+                <b>${active.avatar} ${active.name} – Dein Fahrplan für JLPT ${lvl} (${bp.cefr}):</b><br><br>
+                <b>1. Umfang & Zielwerte:</b><br>
+                • ~<b>${bp.targetVocab} Vokabeln</b> & ~<b>${bp.targetKanji} Kanji</b><br>
+                • Bestehensgrenze: <b>${bp.passMark}</b><br><br>
+                <b>2. Die wichtigsten Schwerpunkte für ${lvl}:</b><br>
+                ${bp.focusAreas.map(f => `• ${f}`).join('<br>')}<br><br>
+                <b>3. Könnensziele:</b><br>
+                ${bp.canDo.map(c => `✓ ${c}`).join('<br>')}<br><br>
+                <button class="sensei-chip" onclick="switchTab('reach')">🎯 Im JLPT Reach Dashboard öffnen</button>
+            `;
+            appendSenseiMessage('tutor', html);
+        } else if (key === 'explain_grammar' || key === 'grammar_overview') {
+            appendSenseiMessage('user', `Erkläre mir einen wichtigen Grammatikpunkt für ${lvl}.`);
+            const gList = window.grammarData[lvl] || [];
+            const g = gList[Math.floor(Math.random() * Math.max(1, gList.length))];
+            if (!g) return;
+            const sec = g.explanation?.sections?.[0];
+            const exs = sec?.examples || [];
+            appendSenseiMessage('tutor', `
+                <b>📐 ${g.title} (${lvl}):</b><br>
+                ${g.explanation?.introduction || g.summary}<br><br>
+                ${sec ? `<b>${sec.title}:</b> ${sec.content}<br>` : ''}
+                ${exs.map(e => `• <b>${e.jp}</b> → <i>${e.de}</i>`).join('<br>')}
+            `);
+        } else if (key === 'wa_vs_ga') {
+            appendSenseiMessage('user', 'Was ist der genaue Unterschied zwischen は (wa) und が (ga)?');
+            appendSenseiMessage('tutor', `
+                <b>⚖️ Kenji-senseis goldene Regel zu は (wa) vs. が (ga):</b><br><br>
+                <b>1. は (wa) = Das Scheinwerfer-Thema („Was X betrifft...“)</b><br>
+                • Hebt ein bekanntes Thema hervor oder drückt einen <b>Kontrast</b> aus.<br>
+                • Der Fokus liegt auf dem, was <i>nach</i> は kommt: <b>私は学生です</b> (Was mich betrifft: Ich bin Student).<br><br>
+                <b>2. が (ga) = Der Fingerzeig auf das Subjekt („Genau X ist es!“)</b><br>
+                • Markiert neue Informationen, Fragewörter (<b>誰が</b>来ましたか = Wer ist gekommen?) sowie Objekte von Können/Mögen/Existenz (<b>猫がいます</b>, <b>日本語がわかります</b>).
+            `);
+        } else if (key === 'ni_vs_de') {
+            appendSenseiMessage('user', 'Wann benutze ich bei Orten に (ni) und wann で (de)?');
+            appendSenseiMessage('tutor', `
+                <b>📍 Orts-Partikeln に (ni) vs. で (de) einfach gemerkt:</b><br><br>
+                • <b>に (ni) = Statische Existenz oder Zielpunkt</b><br>
+                Verwende に bei <b>いる / ある / 住む</b> (wo sich etwas befindet) oder als Ziel einer Bewegung (行く / 来る / 乗る):<br>
+                <i>Beispiel:</i> 部屋<b>に</b>机があります (Im Zimmer <i>befindet sich</i> ein Tisch).<br><br>
+                • <b>で (de) = Aktive Handlung (Action-Bühne!)</b><br>
+                Verwende で immer dann, wenn an einem Ort aktiv etwas <i>getan</i> wird (essen, lernen, arbeiten, kaufen) oder als Mittel/Verkehrsmittel:<br>
+                <i>Beispiel:</i> レストラン<b>で</b>食べます (Im Restaurant <i>essen</i> wir).
+            `);
+        } else if (key === 'kanji_tip') {
+            appendSenseiMessage('user', `Gib mir eine Kanji-Analyse & Eselsbrücke für ${lvl}.`);
+            const kList = kanjiData[lvl] || [];
+            const k = kList[Math.floor(Math.random() * Math.max(1, kList.length))];
+            if (!k) return;
+            const combos = (window.vocabData[lvl] || []).filter(v => v.kanji && v.kanji.includes(k.kanji)).slice(0, 3);
+            appendSenseiMessage('tutor', `
+                <b>🦉 Prof. Akiras Kanji-Spotlight (${lvl}): 「${k.kanji}」</b><br><br>
+                • <b>Bedeutung:</b> ${k.de}<br>
+                • <b>On-Lesung (Chinesisch, in Komposita):</b> ${k.on || '-'}<br>
+                • <b>Kun-Lesung (Japanisch, einzeln/mit Okurigana):</b> ${k.kun || '-'}<br>
+                • <b>Striche:</b> ${k.strokes || '-'}<br><br>
+                <b>Wichtige Vokabel-Verbindungen in ${lvl}:</b><br>
+                ${combos.length > 0 ? combos.map(c => `• <b>${c.kanji}</b> (${c.kana}) = ${c.de}`).join('<br>') : '• Übe dieses Zeichen direkt im Kanji-Schreibtrainer!'}
+            `);
+        } else if (key === 'weak_words') {
+            appendSenseiMessage('user', 'Welche Vokabeln bereiten mir aktuell Schwierigkeiten?');
+            const weak = (window.vocabData[lvl] || []).filter(w => (w.mistakeCount && w.mistakeCount > 0) || w.srsBox === 1).slice(0, 5);
+            if (weak.length === 0) {
+                appendSenseiMessage('tutor', `🌟 Fantastisch! Du hast aktuell keine Problemwörter in ${lvl}. Starte einen neuen Vokabel- oder Grammatiktest, um dich weiter herauszufordern!`);
+            } else {
+                appendSenseiMessage('tutor', `
+                    <b>⚠️ Deine aktuellen Fokus-Wörter in ${lvl}:</b><br><br>
+                    ${weak.map(w => `• <b>${w.kanji || w.kana}</b> (${w.kana}) = <b>${w.de}</b> [${w.type}]`).join('<br>')}<br><br>
+                    <i>Tipp:</i> Sprich sie laut aus und bilde mit jedem Wort einen kurzen Satz!
+                `);
+            }
+        } else if (key === 'exam_strategy') {
+            appendSenseiMessage('user', `Welche Prüfungsstrategie empfiehlst du für JLPT ${lvl}?`);
+            appendSenseiMessage('tutor', `
+                <b>🎯 Yuki-coachs Top-3 Prüfungsstrategien für JLPT ${lvl}:</b><br><br>
+                <b>1. Die ★-Stern-Satzbaufragen (問題: ＿ ＿ ★ ＿):</b><br>
+                Schau zuerst direkt <i>vor</i> die erste Lücke und direkt <i>hinter</i> die letzte Lücke! Suche nach festen Grammatik-Paaren (z.B. Partikel + Verb oder Nomen + の + Nomen).<br><br>
+                <b>2. Leseverständnis (読解 Dokkai):</b><br>
+                Lies <b>immer zuerst die Frage</b> (質問), bevor du den Text liest! Achte besonders auf Sätze nach <b>しかし</b> (jedoch), <b>つまり</b> (mit anderen Worten) und den letzten Absatz.<br><br>
+                <b>3. Hörverständnis (聴解 Chōkai):</b><br>
+                Notiere sofort Zahlen, Uhrzeiten und geänderte Pläne (oft wird der erste Vorschlag verworfen und der zweite gewählt!).
+            `);
+        }
+    }
+    window.sendSenseiQuickPrompt = sendSenseiQuickPrompt;
+
+    function handleSenseiUserSend() {
+        const input = document.getElementById('sensei-user-input');
+        if (!input || !input.value.trim()) return;
+        const query = input.value.trim();
+        input.value = '';
+        appendSenseiMessage('user', query);
+
+        const responseHtml = generateSenseiKnowledgeResponse(query);
+        appendSenseiMessage('tutor', responseHtml);
+    }
+    window.handleSenseiUserSend = handleSenseiUserSend;
+
+    function generateSenseiKnowledgeResponse(rawQuery) {
+        const q = rawQuery.trim().toLowerCase();
+        const active = getActiveSensei();
+
+        // 1. Check Grammar across all levels
+        for (const lvl of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+            const gList = window.grammarData[lvl] || [];
+            const foundG = gList.find(g =>
+                g.title.toLowerCase().includes(q) ||
+                g.summary.toLowerCase().includes(q)
+            );
+            if (foundG) {
+                const sec = foundG.explanation?.sections?.[0];
+                const exs = sec?.examples || [];
+                return `
+                    <b>${active.avatar} ${active.name} – Grammatik-Erklärung (${lvl}): ${foundG.title}</b><br><br>
+                    ${foundG.explanation?.introduction || foundG.summary}<br><br>
+                    ${sec ? `<b>${sec.title}:</b> ${sec.content}<br>` : ''}
+                    ${exs.map(e => `• <b>${e.jp}</b> → <i>${e.de}</i>`).join('<br>')}
+                `;
+            }
+        }
+
+        // 2. Check Kanji across all levels
+        for (const lvl of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+            const kList = kanjiData[lvl] || [];
+            const foundK = kList.find(k =>
+                k.kanji === rawQuery.trim() ||
+                (k.de && k.de.toLowerCase() === q)
+            );
+            if (foundK) {
+                const relatedVocab = (window.vocabData[lvl] || []).filter(v => v.kanji && v.kanji.includes(foundK.kanji)).slice(0, 4);
+                return `
+                    <b>${active.avatar} ${active.name} – Kanji-Analyse (${lvl}): 「${foundK.kanji}」</b><br><br>
+                    • <b>Bedeutung:</b> ${foundK.de}<br>
+                    • <b>On-Lesung:</b> ${foundK.on || '-'} | <b>Kun-Lesung:</b> ${foundK.kun || '-'}<br>
+                    • <b>Strichanzahl:</b> ${foundK.strokes || '-'}<br><br>
+                    ${relatedVocab.length ? `<b>Wichtige Wörter mit ${foundK.kanji}:</b><br>${relatedVocab.map(v => `• <b>${v.kanji}</b> (${v.kana}) = ${v.de}`).join('<br>')}` : ''}
+                `;
+            }
+        }
+
+        // 3. Check Vocabulary across all levels
+        const matches = [];
+        for (const lvl of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+            const vList = window.vocabData[lvl] || [];
+            for (const v of vList) {
+                if (
+                    (v.kanji && v.kanji.toLowerCase() === q) ||
+                    (v.kana && v.kana.toLowerCase() === q) ||
+                    (v.de && v.de.toLowerCase().includes(q))
+                ) {
+                    matches.push({ ...v, level: lvl });
+                    if (matches.length >= 4) break;
+                }
+            }
+            if (matches.length >= 4) break;
+        }
+
+        if (matches.length > 0) {
+            const primary = matches[0];
+            let sampleSentence = '';
+            if (primary.type === 'Verb') {
+                sampleSentence = `<i>Beispielstruktur:</i> 毎日、<b>${primary.kanji || primary.kana}</b> (Im Satz steht das Verb am Ende).`;
+            } else if (primary.type && primary.type.includes('Adjektiv')) {
+                sampleSentence = `<i>Beispielstruktur:</i> とても <b>${primary.kanji || primary.kana}</b> です (Sehr ${primary.de}).`;
+            } else {
+                sampleSentence = `<i>Beispielstruktur:</i> これは <b>${primary.kanji || primary.kana}</b> です (Das ist ${primary.de}).`;
+            }
+            return `
+                <b>${active.avatar} ${active.name} – Wörterbuch & Tutor-Erklärung:</b><br><br>
+                ${matches.map(m => `• <b>${m.kanji || m.kana}</b> (${m.kana}) = <b>${m.de}</b> <span class="badge">${m.level} · ${m.type}</span>`).join('<br>')}<br><br>
+                ${sampleSentence}
+            `;
+        }
+
+        // 4. Fallback intelligent tutor advice
+        const bp = JLPT_LEVEL_BLUEPRINTS[state.level] || JLPT_LEVEL_BLUEPRINTS.N5;
+        return `
+            <b>${active.avatar} ${active.name}:</b><br>
+            Zu <i>„${rawQuery}“</i> empfehle ich dir auf deinem aktuellen Level <b>JLPT ${state.level}</b>:<br>
+            • Schau dir die <b>${bp.focusAreas[0]}</b> an.<br>
+            • Du kannst mich jederzeit nach einem konkreten <b>Kanji</b> (z.B. 食, 車), einer <b>Vokabel</b> (auf Deutsch oder Japanisch) oder einer <b>Grammatikregel</b> (z.B. て-Form, はおろか, につれて) fragen!
+        `;
+    }
+
+    // Inline Tutor Helpers for Flashcards, Typing, Grammar & Exams
+    function explainCurrentVocabWithSensei(viewType) {
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return;
+        const boxId = viewType === 'fc' ? 'fc-sensei-explain-box' : 'type-sensei-explain-box';
+        const box = document.getElementById(boxId);
+        if (!box) return;
+
+        if (!box.classList.contains('hidden')) {
+            box.classList.add('hidden');
+            return;
+        }
+
+        const active = getActiveSensei();
+        const kanjiChars = Array.from(word.kanji || '').filter(ch => /[\u4e00-\u9faf]/.test(ch));
+        const kanjiBreakdown = kanjiChars.map(ch => {
+            for (const l of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+                const found = (kanjiData[l] || []).find(k => k.kanji === ch);
+                if (found) return `<b>${ch}</b> (${found.de}, On: ${found.on || '-'}, Kun: ${found.kun || '-'})`;
+            }
+            return `<b>${ch}</b>`;
+        });
+
+        let usageTip = '';
+        if (word.type === 'Verb') {
+            usageTip = `Verwende dieses Verb am Satzende nach Objekt + を (oder Ort + に/で).`;
+        } else if (word.type && word.type.includes('Adjektiv')) {
+            usageTip = `Kann direkt vor einem Nomen stehen oder mit です das Prädikat bilden.`;
+        } else {
+            usageTip = `Wird als ${word.type || 'Wort'} mit passenden Partikeln (は, が, を, の) verbunden.`;
+        }
+
+        box.innerHTML = `
+            <div style="font-weight:800; color:var(--primary-dark); margin-bottom:4px;">${active.avatar} ${active.name} erklärt: 「${word.kanji || word.kana}」</div>
+            <div>• <b>Lesung:</b> ${word.kana} · <b>Bedeutung:</b> ${word.de} (${word.type})</div>
+            ${kanjiBreakdown.length ? `<div>• <b>Kanji-Bausteine:</b> ${kanjiBreakdown.join(' + ')}</div>` : ''}
+            <div>• <b>Anwendung:</b> ${usageTip}</div>
+        `;
+        box.classList.remove('hidden');
+    }
+    window.explainCurrentVocabWithSensei = explainCurrentVocabWithSensei;
+
+    function askSenseiAboutCurrentGrammar() {
+        const item = (window.grammarData[state.level] || [])[currentGrammarIdx];
+        if (!item) return;
+        const box = document.getElementById('grammar-sensei-tip-box');
+        if (!box) return;
+        const active = getActiveSensei();
+        const ex = item.explanation?.sections?.[0]?.examples?.[0];
+        box.innerHTML = `
+            <div style="font-weight:800; color:var(--primary-dark); margin-bottom:6px;">${active.avatar} ${active.name} – Prüfungs-Tipp zu „${item.title}“:</div>
+            <p><b>Merksatz:</b> ${item.summary}</p>
+            <p style="margin-top:6px;"><b>Worauf du im JLPT ${state.level} achten musst:</b> Achte genau darauf, welche Wortart (Nomen, Verb-Stamm oder Wörterbuchform) direkt <i>vor</i> dieser Konstruktion steht – das ist in den ★-Satzbaufragen oft der entscheidende Hinweis!</p>
+            ${ex ? `<p style="margin-top:6px;"><b>Mustersatz zum Einprägen:</b> ${ex.jp} → <i>${ex.de}</i></p>` : ''}
+        `;
+        box.classList.remove('hidden');
+    }
+    window.askSenseiAboutCurrentGrammar = askSenseiAboutCurrentGrammar;
+
+    function showExamSenseiHint(qIndex) {
+        const q = state.currentExam.allQuestions[qIndex];
+        if (!q) return;
+        const box = document.getElementById('exam-sensei-hint-box');
+        if (!box) return;
+        const active = getActiveSensei();
+        box.innerHTML = `
+            <div style="font-weight:800; color:var(--primary-dark); margin-bottom:4px;">${active.avatar} ${active.name} – Denkansatz & Hinweis:</div>
+            ${q.translation ? `<div>💡 <b>Satzbedeutung:</b> „${q.translation}“</div>` : ''}
+            <div style="margin-top:4px;">🔍 <b>Grammatik-/Vokabel-Hinweis:</b> ${q.explanation ? q.explanation.split('.')[0] + '.' : 'Achte auf die Partikeln und den Kontext vor und nach der Lücke.'}</div>
+        `;
+        box.classList.toggle('hidden');
+    }
+    window.showExamSenseiHint = showExamSenseiHint;
+
+    // --- MODULAR CUSTOM TEST ENGINE (VOCAB, GRAMMAR, KANJI, LISTENING, READING, MIX) ---
+    let modularTestState = {
+        category: 'vocab',
+        format: 'mc',
+        questions: [],
+        currentIndex: 0,
+        correctCount: 0,
+        answeredCurrent: false
+    };
+
+    function setCustomTestCategory(cat, el) {
+        modularTestState.category = cat;
+        ['vocab', 'grammar', 'kanji', 'listening', 'reading', 'mix'].forEach(c => {
+            document.getElementById('custom-cat-' + c)?.classList.toggle('active', c === cat);
+        });
+    }
+    window.setCustomTestCategory = setCustomTestCategory;
+
+    function setCustomTestFormat(fmt, el) {
+        modularTestState.format = fmt;
+        ['mc', 'write', 'mix'].forEach(f => {
+            document.getElementById('custom-fmt-' + f)?.classList.toggle('active', f === fmt);
+        });
+    }
+    window.setCustomTestFormat = setCustomTestFormat;
+
+    function startQuickGrammarTest() {
+        modularTestState.category = 'grammar';
+        modularTestState.format = 'mc';
+        state.testSettings.count = 10;
+        startCustomModularTest();
+    }
+    window.startQuickGrammarTest = startQuickGrammarTest;
+
+    function startQuickVocabTest() {
+        modularTestState.category = 'vocab';
+        modularTestState.format = 'mc';
+        state.testSettings.count = 15;
+        startCustomModularTest();
+    }
+    window.startQuickVocabTest = startQuickVocabTest;
+
+    function startQuickKanjiTest() {
+        modularTestState.category = 'kanji';
+        modularTestState.format = 'mc';
+        state.testSettings.count = 10;
+        startCustomModularTest();
+    }
+    window.startQuickKanjiTest = startQuickKanjiTest;
+
+    function buildModularTestQuestions(level, category, format, count) {
+        const questions = [];
+        const vocabPool = window.vocabData[level] || [];
+        const grammarPool = window.grammarData[level] || [];
+        const kanjiPool = kanjiData[level] || [];
+        const readingPool = readingData[level] || [];
+        const examPool = (state.exams && state.exams[level]) ? state.exams[level].flatMap(e => e.sections.flatMap(s => s.questions)) : [];
+
+        const resolveFmt = () => format === 'mix' ? (Math.random() < 0.65 ? 'mc' : 'write') : format;
+
+        // Helper builders
+        const makeVocabQ = () => {
+            if (vocabPool.length === 0) return null;
+            const v = vocabPool[Math.floor(Math.random() * vocabPool.length)];
+            const isJpToDe = state.testSettings.direction !== 'de-jp';
+            const qFmt = resolveFmt();
+            const prompt = isJpToDe
+                ? `Was bedeutet 「${v.kanji || v.kana}」 ${v.kanji && v.kanji !== v.kana ? `(${v.kana})` : ''}?`
+                : `Wie heißt „${v.de}“ auf Japanisch?`;
+            const correct = isJpToDe ? v.de : (v.kanji || v.kana);
+            const altCorrect = isJpToDe ? v.de : v.kana;
+            const opts = [correct];
+            while (opts.length < 4 && vocabPool.length >= 4) {
+                const cand = vocabPool[Math.floor(Math.random() * vocabPool.length)];
+                const val = isJpToDe ? cand.de : (cand.kanji || cand.kana);
+                if (val && !opts.includes(val)) opts.push(val);
+            }
+            opts.sort(() => Math.random() - 0.5);
+            return {
+                cat: `📚 Vokabeln (${level})`,
+                format: qFmt,
+                prompt,
+                subprompt: `Wortart: ${v.type || 'Vokabel'}`,
+                audio: v.kana || v.kanji,
+                correct,
+                altCorrect,
+                options: opts,
+                explanation: `「${v.kanji || v.kana}」 wird „${v.kana}“ gelesen und bedeutet „${v.de}“ (${v.type}).`,
+                wordRef: v
+            };
+        };
+
+        const makeGrammarQ = () => {
+            // Pull from grammar.json exercises + exam grammar questions
+            const gExercises = [];
+            grammarPool.forEach(g => {
+                (g.exercises || []).forEach(ex => {
+                    (ex.questions || []).forEach(q => {
+                        if (q.sentence && q.answer) {
+                            gExercises.push({
+                                title: g.title,
+                                summary: g.summary,
+                                sentence: q.sentence,
+                                answer: Array.isArray(q.answer) ? q.answer[0] : q.answer,
+                                explanation: q.explanation || g.summary
+                            });
+                        }
+                    });
+                });
+            });
+            const examGrammarQs = examPool.filter(eq => eq.type && (eq.type.includes('grammar') || eq.type.includes('particle')));
+
+            if (Math.random() < 0.5 && examGrammarQs.length > 0) {
+                const eq = examGrammarQs[Math.floor(Math.random() * examGrammarQs.length)];
+                const qFmt = eq.options ? resolveFmt() : 'write';
+                return {
+                    cat: `📐 Grammatik (${level})`,
+                    format: eq.options ? qFmt : 'write',
+                    prompt: eq.question,
+                    subprompt: eq.translation ? `Kontext: „${eq.translation}“` : 'Wähle oder ergänze die grammatikalisch korrekte Form.',
+                    audio: eq.question.replace(/<[^>]+>/g, '').replace(/（　　）/g, eq.correctAnswer || ''),
+                    correct: eq.correctAnswer,
+                    altCorrect: eq.correctAnswer,
+                    options: eq.options ? [...eq.options].sort(() => Math.random() - 0.5) : [eq.correctAnswer],
+                    explanation: eq.explanation || ''
+                };
+            }
+
+            if (gExercises.length === 0) return makeVocabQ();
+            const gq = gExercises[Math.floor(Math.random() * gExercises.length)];
+            const qFmt = resolveFmt();
+            const distractors = ['に', 'で', 'を', 'が', 'は', 'から', 'まで', 'より', 'ため', 'ように', 'ばかり', 'につれて', 'に対して', 'はおろか', 'にほかならない'];
+            const opts = [gq.answer];
+            while (opts.length < 4) {
+                const other = gExercises[Math.floor(Math.random() * gExercises.length)]?.answer || distractors[Math.floor(Math.random() * distractors.length)];
+                if (other && !opts.includes(other)) opts.push(other);
+            }
+            opts.sort(() => Math.random() - 0.5);
+            return {
+                cat: `📐 Grammatik: ${gq.title}`,
+                format: qFmt,
+                prompt: gq.sentence,
+                subprompt: `Regel: ${gq.summary}`,
+                audio: gq.sentence.replace(/（　　）/g, gq.answer),
+                correct: gq.answer,
+                altCorrect: gq.answer,
+                options: opts,
+                explanation: `${gq.explanation} (Grammatikpunkt: ${gq.title})`
+            };
+        };
+
+        const makeKanjiQ = () => {
+            if (kanjiPool.length === 0) return makeVocabQ();
+            const k = kanjiPool[Math.floor(Math.random() * kanjiPool.length)];
+            const qFmt = resolveFmt();
+            const askReading = Math.random() < 0.5 && (k.kun || k.on);
+            const targetReading = (k.kun || k.on || '').split(',')[0].replace(/-/g, '').trim();
+            const correct = askReading ? targetReading : k.de;
+            const opts = [correct];
+            while (opts.length < 4 && kanjiPool.length >= 4) {
+                const cand = kanjiPool[Math.floor(Math.random() * kanjiPool.length)];
+                const val = askReading ? ((cand.kun || cand.on || '').split(',')[0].replace(/-/g, '').trim()) : cand.de;
+                if (val && !opts.includes(val)) opts.push(val);
+            }
+            opts.sort(() => Math.random() - 0.5);
+            return {
+                cat: `漢 Kanji (${level})`,
+                format: qFmt,
+                prompt: askReading ? `Wie lautet eine Lesung für das Kanji 「${k.kanji}」 (${k.de})?` : `Welche Bedeutung hat das Kanji 「${k.kanji}」?`,
+                subprompt: `Striche: ${k.strokes || '-'} · On: ${k.on || '-'} · Kun: ${k.kun || '-'}`,
+                audio: k.kanji,
+                correct,
+                altCorrect: correct,
+                options: opts,
+                explanation: `Das Kanji 「${k.kanji}」 bedeutet „${k.de}“ (On-Lesung: ${k.on || '-'}, Kun-Lesung: ${k.kun || '-'}).`
+            };
+        };
+
+        const makeListeningQ = () => {
+            const listeningExamQs = examPool.filter(eq => eq.type === 'multiple-choice-listening' && eq.audioText);
+            if (Math.random() < 0.45 && listeningExamQs.length > 0) {
+                const eq = listeningExamQs[Math.floor(Math.random() * listeningExamQs.length)];
+                return {
+                    cat: `🔊 Hörverständnis (${level})`,
+                    format: 'mc',
+                    prompt: `🎧 Klicke auf „Anhören“: ${eq.question}`,
+                    subprompt: 'Höre genau auf den gesprochenen japanischen Satz.',
+                    audio: eq.audioText,
+                    autoSpeak: true,
+                    correct: eq.correctAnswer,
+                    altCorrect: eq.correctAnswer,
+                    options: [...eq.options].sort(() => Math.random() - 0.5),
+                    explanation: `Gesprochener Text: 「${eq.audioText}」 — „${eq.translation || ''}“. ${eq.explanation || ''}`
+                };
+            }
+            if (vocabPool.length === 0) return null;
+            const v = vocabPool[Math.floor(Math.random() * vocabPool.length)];
+            const opts = [v.de];
+            while (opts.length < 4 && vocabPool.length >= 4) {
+                const cand = vocabPool[Math.floor(Math.random() * vocabPool.length)].de;
+                if (cand && !opts.includes(cand)) opts.push(cand);
+            }
+            opts.sort(() => Math.random() - 0.5);
+            return {
+                cat: `🔊 Hörverständnis (${level})`,
+                format: resolveFmt(),
+                prompt: `🎧 Welches Wort hörst du? (Klicke auf 🔊 Anhören)`,
+                subprompt: `Bestimme die deutsche Bedeutung des gehörten Wortes.`,
+                audio: v.kana || v.kanji,
+                autoSpeak: true,
+                correct: v.de,
+                altCorrect: v.kana,
+                options: opts,
+                explanation: `Du hast 「${v.kanji || v.kana}」 (${v.kana}) gehört = „${v.de}“.`
+            };
+        };
+
+        const makeReadingQ = () => {
+            const readingExamQs = examPool.filter(eq => eq.type === 'multiple-choice-reading');
+            if (Math.random() < 0.5 && readingExamQs.length > 0) {
+                const eq = readingExamQs[Math.floor(Math.random() * readingExamQs.length)];
+                return {
+                    cat: `📖 Leseverständnis (${level})`,
+                    format: 'mc',
+                    prompt: eq.question,
+                    subprompt: 'Lies den Textabschnitt sorgfältig und wähle die passende Aussage.',
+                    audio: '',
+                    correct: eq.correctAnswer,
+                    altCorrect: eq.correctAnswer,
+                    options: [...eq.options].sort(() => Math.random() - 0.5),
+                    explanation: eq.explanation || ''
+                };
+            }
+            if (readingPool.length === 0) return makeGrammarQ();
+            const textObj = readingPool[Math.floor(Math.random() * readingPool.length)];
+            const sentObj = textObj.content[Math.floor(Math.random() * textObj.content.length)];
+            const cleanJp = sentObj.jp.replace(/<rt>.*?<\/rt>/g, '').replace(/<[^>]+>/g, '');
+            const opts = [sentObj.de];
+            while (opts.length < 4) {
+                const otherT = readingPool[Math.floor(Math.random() * readingPool.length)];
+                const otherS = otherT.content[Math.floor(Math.random() * otherT.content.length)].de;
+                if (otherS && !opts.includes(otherS)) opts.push(otherS);
+            }
+            opts.sort(() => Math.random() - 0.5);
+            return {
+                cat: `📖 Leseverständnis: ${textObj.title}`,
+                format: 'mc',
+                prompt: `Was bedeutet dieser Satz (ohne Furigana)?<br><span style="font-size:20px; display:block; margin-top:8px;">「${cleanJp}」</span>`,
+                subprompt: `Aus dem Text: ${textObj.title}`,
+                audio: cleanJp,
+                correct: sentObj.de,
+                altCorrect: sentObj.de,
+                options: opts,
+                explanation: `Vollständiger Satz: ${sentObj.jp} → „${sentObj.de}“`
+            };
+        };
+
+        for (let i = 0; i < count; i++) {
+            let q = null;
+            let activeCat = category;
+            if (category === 'mix') {
+                const cats = ['vocab', 'grammar', 'kanji', 'listening', 'reading'];
+                activeCat = cats[i % cats.length];
+            }
+            if (activeCat === 'vocab') q = makeVocabQ();
+            else if (activeCat === 'grammar') q = makeGrammarQ();
+            else if (activeCat === 'kanji') q = makeKanjiQ();
+            else if (activeCat === 'listening') q = makeListeningQ();
+            else if (activeCat === 'reading') q = makeReadingQ();
+            if (q) questions.push(q);
+        }
+        return questions;
+    }
+
+    function startCustomModularTest() {
+        const count = state.testSettings.count || 20;
+        modularTestState.questions = buildModularTestQuestions(state.level, modularTestState.category, modularTestState.format, count);
+        if (modularTestState.questions.length === 0) {
+            return alert('Für diese Auswahl konnten keine Fragen geladen werden.');
+        }
+        modularTestState.currentIndex = 0;
+        modularTestState.correctCount = 0;
+        switchTab('modular-test');
+        renderModularTestQuestion();
+    }
+    window.startCustomModularTest = startCustomModularTest;
+
+    function renderModularTestQuestion() {
+        const q = modularTestState.questions[modularTestState.currentIndex];
+        if (!q) return finishModularTest();
+        modularTestState.answeredCurrent = false;
+
+        document.getElementById('mod-test-idx').innerText = modularTestState.currentIndex + 1;
+        document.getElementById('mod-test-total').innerText = modularTestState.questions.length;
+        document.getElementById('mod-test-progress').style.width = `${((modularTestState.currentIndex) / modularTestState.questions.length) * 100}%`;
+        document.getElementById('mod-test-cat-badge').innerText = q.cat;
+        document.getElementById('mod-test-prompt').innerHTML = q.prompt;
+        document.getElementById('mod-test-subprompt').innerText = q.subprompt || '';
+
+        const fb = document.getElementById('mod-test-feedback');
+        fb.classList.add('hidden');
+        fb.innerHTML = '';
+        document.getElementById('mod-test-next-btn').classList.add('hidden');
+
+        const mcArea = document.getElementById('mod-test-mc-area');
+        const writeArea = document.getElementById('mod-test-write-area');
+
+        if (q.format === 'mc' && q.options && q.options.length > 1) {
+            mcArea.classList.remove('hidden');
+            writeArea.classList.add('hidden');
+            mcArea.innerHTML = q.options.map(opt => {
+                const esc = String(opt).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                return `<button class="quiz-option" onclick="submitModularMcAnswer('${esc}', this)">${opt}</button>`;
+            }).join('');
+        } else {
+            mcArea.classList.add('hidden');
+            writeArea.classList.remove('hidden');
+            const inp = document.getElementById('mod-test-input');
+            if (inp) {
+                inp.value = '';
+                inp.disabled = false;
+                inp.focus();
+            }
+        }
+
+        if (q.autoSpeak && q.audio) {
+            setTimeout(() => speak(q.audio), 250);
+        }
+    }
+
+    function speakModularTestCurrent() {
+        const q = modularTestState.questions[modularTestState.currentIndex];
+        if (q && q.audio) speak(q.audio);
+    }
+    window.speakModularTestCurrent = speakModularTestCurrent;
+
+    function askSenseiAboutModularQuestion() {
+        const q = modularTestState.questions[modularTestState.currentIndex];
+        if (!q) return;
+        const active = getActiveSensei();
+        const fb = document.getElementById('mod-test-feedback');
+        fb.classList.remove('hidden');
+        fb.innerHTML = `
+            <div style="font-weight:800; color:var(--primary-dark); margin-bottom:4px;">${active.avatar} ${active.name} – Tutor-Hilfe & Erklärung:</div>
+            <div>${q.explanation || 'Achte auf die Wortart und den Satzkontext.'}</div>
+            ${!modularTestState.answeredCurrent ? `<div style="font-size:12px; color:var(--accent-pink); margin-top:4px;">💡 Tipp: Anfangsbuchstabe/Zeichen der Lösung ist „<b>${String(q.correct || '').slice(0, 1)}...</b>“</div>` : ''}
+        `;
+    }
+    window.askSenseiAboutModularQuestion = askSenseiAboutModularQuestion;
+
+    function submitModularMcAnswer(selected, btn) {
+        if (modularTestState.answeredCurrent) return;
+        modularTestState.answeredCurrent = true;
+        const q = modularTestState.questions[modularTestState.currentIndex];
+        document.querySelectorAll('#mod-test-mc-area .quiz-option').forEach(b => b.disabled = true);
+
+        const isCorrect = selected === q.correct;
+        const active = getActiveSensei();
+        const fb = document.getElementById('mod-test-feedback');
+        fb.classList.remove('hidden');
+
+        if (isCorrect) {
+            playSound('correct');
+            btn?.classList.add('correct');
+            modularTestState.correctCount++;
+            addXP(10);
+            if (q.wordRef) updateWordSRS(q.wordRef, true);
+            fb.innerHTML = `<b style="color:#10b981;">✓ Richtig! (+10 XP)</b><br>${active.avatar} <b>${active.name}:</b> ${q.explanation}`;
+        } else {
+            playSound('wrong');
+            btn?.classList.add('wrong');
+            if (q.wordRef) updateWordSRS(q.wordRef, false);
+            fb.innerHTML = `<b style="color:var(--accent-pink);">✕ Nicht ganz! Richtige Antwort: „${q.correct}“</b><br>${active.avatar} <b>${active.name}:</b> ${q.explanation}`;
+        }
+        document.getElementById('mod-test-next-btn').classList.remove('hidden');
+    }
+    window.submitModularMcAnswer = submitModularMcAnswer;
+
+    function submitModularWriteAnswer() {
+        if (modularTestState.answeredCurrent) {
+            nextModularTestQuestion();
+            return;
+        }
+        const inp = document.getElementById('mod-test-input');
+        const val = inp ? inp.value.trim() : '';
+        if (!val) return;
+        modularTestState.answeredCurrent = true;
+        if (inp) inp.disabled = true;
+
+        const q = modularTestState.questions[modularTestState.currentIndex];
+        const cleanVal = val.toLowerCase();
+        const cleanCorr = String(q.correct || '').toLowerCase();
+        const cleanAlt = String(q.altCorrect || '').toLowerCase();
+        const validParts = cleanCorr.split(/[\/,;]/).map(s => s.replace(/\(.*?\)/g, '').trim()).filter(Boolean);
+
+        const isCorrect = cleanVal === cleanCorr ||
+            cleanVal === cleanAlt ||
+            validParts.includes(cleanVal) ||
+            isRomajiMatch(cleanVal, q.altCorrect || q.correct);
+
+        const active = getActiveSensei();
+        const fb = document.getElementById('mod-test-feedback');
+        fb.classList.remove('hidden');
+
+        if (isCorrect) {
+            playSound('correct');
+            modularTestState.correctCount++;
+            addXP(12);
+            if (q.wordRef) updateWordSRS(q.wordRef, true);
+            fb.innerHTML = `<b style="color:#10b981;">✓ Perfekt geschrieben! (+12 XP)</b><br>${active.avatar} <b>${active.name}:</b> ${q.explanation}`;
+        } else {
+            playSound('wrong');
+            if (q.wordRef) updateWordSRS(q.wordRef, false);
+            fb.innerHTML = `<b style="color:var(--accent-pink);">✕ Falsch. Richtige Lösung: „${q.correct}“</b><br>${active.avatar} <b>${active.name}:</b> ${q.explanation}`;
+        }
+        document.getElementById('mod-test-next-btn').classList.remove('hidden');
+    }
+    window.submitModularWriteAnswer = submitModularWriteAnswer;
+
+    function nextModularTestQuestion() {
+        modularTestState.currentIndex++;
+        if (modularTestState.currentIndex >= modularTestState.questions.length) {
+            finishModularTest();
+        } else {
+            renderModularTestQuestion();
+        }
+    }
+    window.nextModularTestQuestion = nextModularTestQuestion;
+
+    function finishModularTest() {
+        saveUserStats();
+        state.sessionCorrectCount = modularTestState.correctCount;
+        state.currentQueue = modularTestState.questions;
+        state.sessionMistakes = [];
+        switchTab('results');
+        document.getElementById('res-correct-count').innerText = modularTestState.correctCount;
+        document.getElementById('res-wrong-count').innerText = modularTestState.questions.length - modularTestState.correctCount;
+        document.getElementById('btn-retry-mistakes')?.classList.add('hidden');
+    }
 
     initUserAccount();
     loadAllData();

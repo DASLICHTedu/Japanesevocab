@@ -1,11 +1,14 @@
-{
-  "general": [
-    { "id": "first-test", "title": "Erster Test", "description": "Schließe deine erste Prüfung ab.", "icon": "🥇" },
-    { "id": "streak-7", "title": "7-Tage-Streak", "description": "Lerne 7 Tage hintereinander.", "icon": "🔥" },
-    { "id": "streak-30", "title": "30-Tage-Streak", "description": "Lerne 30 Tage hintereinander.", "icon": "🚀" }
-  ],
-  "vocab": [
-    { "id": "vocab-100", "title": "Wortschatz-Anfänger", "description": "Lerne 100 Vokabeln.", "icon": "📖" },
-    { "id": "vocab-500", "title": "Wortschatz-Kenner", "description": "Lerne 500 Vokabeln.", "icon": "📚" }
-  ]
-}
+[
+  { "id": "first-test", "type": "exam_completed", "goal": 1, "title": "Erste Prüfung", "description": "Schließe deine erste JLPT-Prüfung ab.", "icon": "🥇" },
+  { "id": "exam-3", "type": "exam_completed", "goal": 3, "title": "Prüfungs-Routine", "description": "Schließe 3 JLPT-Prüfungen ab.", "icon": "📝" },
+  { "id": "exam-5", "type": "exam_completed", "goal": 5, "title": "JLPT-Veteran", "description": "Schließe 5 JLPT-Prüfungen ab.", "icon": "🎓" },
+  { "id": "streak-3", "type": "streak", "goal": 3, "title": "3-Tage-Streak", "description": "Lerne 3 Tage hintereinander.", "icon": "✨" },
+  { "id": "streak-7", "type": "streak", "goal": 7, "title": "7-Tage-Streak", "description": "Lerne 7 Tage hintereinander.", "icon": "🔥" },
+  { "id": "streak-30", "type": "streak", "goal": 30, "title": "30-Tage-Streak", "description": "Lerne 30 Tage hintereinander.", "icon": "🚀" },
+  { "id": "vocab-50", "type": "vocab_learned", "goal": 50, "title": "Erste 50 Wörter", "description": "Lerne 50 Vokabeln.", "icon": "🌱" },
+  { "id": "vocab-100", "type": "vocab_learned", "goal": 100, "title": "Wortschatz-Anfänger", "description": "Lerne 100 Vokabeln.", "icon": "📖" },
+  { "id": "vocab-500", "type": "vocab_learned", "goal": 500, "title": "Wortschatz-Kenner", "description": "Lerne 500 Vokabeln.", "icon": "📚" },
+  { "id": "vocab-1000", "type": "vocab_learned", "goal": 1000, "title": "Vokabel-Meister", "description": "Lerne 1.000 Vokabeln.", "icon": "👑" },
+  { "id": "kanji-25", "type": "kanji_learned", "goal": 25, "title": "Kanji-Starter", "description": "Meistere 25 Kanji.", "icon": "漢" },
+  { "id": "kanji-100", "type": "kanji_learned", "goal": 100, "title": "Kanji-Gelehrter", "description": "Meistere 100 Kanji.", "icon": "⛩️" }
+]

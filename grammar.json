@@ -2440,6 +2440,240 @@
           ]
         }
       ]
+    },
+    {
+      "title": "Nichts anderes als...: ～にほかならない",
+      "summary": "Betont nachdrücklich, dass A die wahre Ursache oder das wahre Wesen von B ist ('ist nichts anderes als...').",
+      "explanation": {
+        "introduction": "～にほかならない (ni hoka naranai) wird in formellen Texten und Reden verwendet, um eine Schlussfolgerung mit Nachdruck als die einzig wahre Erklärung darzustellen.",
+        "sections": [
+          {
+            "title": "Struktur und Anwendung",
+            "content": "Nomen + にほかならない / Satz (informell) + からにほかならない",
+            "examples": [
+              { "jp": "彼の成功は、長年の努力の結果にほかならない。", "de": "Sein Erfolg ist nichts anderes als das Ergebnis jahrelanger Bemühungen." },
+              { "jp": "厳しく注意するのは、君の将来を思えばこその愛情にほかならない。", "de": "Dass ich dich streng ermahne, ist nichts anderes als Zuneigung aus Sorge um deine Zukunft." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "この事故は、安全管理の怠慢（　　）。", "answer": "にほかならない", "explanation": "Betont, dass Nachlässigkeit der wahre und einzige Grund ist." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Selbst wenn / Egal wie...: ～（よ）うが～まいが / ～（よ）うと～まいと",
+      "summary": "Drückt aus, dass das Ergebnis völlig unabhängig davon ist, ob eine Handlung stattfindet oder nicht.",
+      "explanation": {
+        "introduction": "Diese fortgeschrittene N1-Struktur kombiniert die Volitionalform (～よう/～おう) mit der negativen Vermutungsform (～まい), um 'ob nun ... oder nicht' auszudrücken.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (Volitionalform) + が/と + dasselbe Verb (Wörterbuchform / ます-Stamm) + まいが/まいと",
+            "examples": [
+              { "jp": "雨が降ろうが降るまいが、明日の試合は行われます。", "de": "Ob es nun regnet oder nicht, das morgige Spiel findet statt." },
+              { "jp": "周りに何を言われようと言われまいと、自分の信じる道を進む。", "de": "Egal ob die Umgebung etwas sagt oder nicht, ich gehe den Weg, an den ich glaube." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "彼が来ようが来（　　）、会議は時間通りに始める。", "answer": "まいが", "explanation": "Kombiniert Volitionalform + が mit まいが ('ob er kommt oder nicht')." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Widerwillig gezwungen sein: ～を余儀なくされる",
+      "summary": "Drückt aus, dass man durch äußere Umstände gezwungen ist, etwas Unangenehmes zu tun ('gezwungen sein zu...').",
+      "explanation": {
+        "introduction": "～を余儀なくされる (wo yoginaku sareru) ist ein gehobener Ausdruck aus Nachrichten und Sachtexten. Er zeigt, dass keine andere Wahl blieb.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen (meist する-Nomen wie 変更, 中止, 撤退) + を余儀なくされる",
+            "examples": [
+              { "jp": "悪天候のため、登山計画の中止を余儀なくされた。", "de": "Wegen des schlechten Wetters waren wir gezwungen, den Bergsteigerplan abzubrechen." },
+              { "jp": "被災者たちは避難所での生活を余儀なくされている。", "de": "Die Katastrophenopfer sind gezwungen, in Notunterkünften zu leben." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "資金不足により、計画の変更（　　）。", "answer": "をよぎなくされた", "explanation": "変更を余儀なくされた = war gezwungen, den Plan zu ändern." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ungeachtet / Völlig unbeeindruckt von: ～をよそに",
+      "summary": "Drückt aus, dass jemand völlig unbeeindruckt von den Sorgen oder Meinungen anderer handelt.",
+      "explanation": {
+        "introduction": "～をよそに (wo yoso ni) zeigt, dass eine Person oder Sache äußere Umstände (wie Kritik, Sorgen oder Erwartungen) komplett ignoriert.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen (Sorge, Kritik, Aufregung) + をよそに",
+            "examples": [
+              { "jp": "親の心配をよそに、彼は一人で海外へ旅立った。", "de": "Ungeachtet der Sorgen seiner Eltern brach er allein ins Ausland auf." },
+              { "jp": "住民の反対をよそに、マンションの建設工事が進められた。", "de": "Ungeachtet des Widerstands der Anwohner wurden die Bauarbeiten fortgesetzt." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "周囲の批判（　　）、彼は自分の計画を強行した。", "answer": "をよそに", "explanation": "Drückt aus, dass er die Kritik der Umgebung komplett ignorierte." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Unerträglich / Nicht umhin können: ～にたえない",
+      "summary": "Hat zwei Bedeutungen: 1. 'Nicht ertragen können (es mit anzusehen/anzuhören)' oder 2. 'Tiefstes Gefühl empfinden (Dankbarkeit, Bedauern)'.",
+      "explanation": {
+        "introduction": "～にたえない (ni taenai) wird einerseits mit Verben der Wahrnehmung (見る, 聞く) genutzt ('nicht mit ansehen können'), andererseits mit Nomen der Emotion (感謝, 遺憾).",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Verb (Wörterbuchform) + に堪えない / Nomen + に堪えない",
+            "examples": [
+              { "jp": "彼のひどい悪口は聞くに堪えない。", "de": "Seine schlimmen Lästereien sind unerträglich anzuhören." },
+              { "jp": "皆様のご支援には感謝に堪えません。", "de": "Für Ihre Unterstützung bin ich zutiefst dankbar." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "あの映画の残酷なシーンは見る（　　）。", "answer": "にたえない", "explanation": "見るに堪えない = unerträglich mit anzusehen." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Angesichts / Unter Berücksichtigung von: ～に鑑みて",
+      "summary": "Formeller Ausdruck für 'in Anbetracht von...' oder 'unter Berücksichtigung von Präzedenzfällen/Umständen'.",
+      "explanation": {
+        "introduction": "～に鑑みて (ni kangamite) wird in Gesetzestexten, offiziellen Erklärungen und Nachrichten verwendet, wenn Entscheidungen auf Basis bisheriger Erfahrungen oder Situationen getroffen werden.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen + に鑑みて / に鑑み",
+            "examples": [
+              { "jp": "過去の失敗に鑑みて、安全対策を強化した。", "de": "Im Hinblick auf vergangene Fehler wurden die Sicherheitsmaßnahmen verstärkt." },
+              { "jp": "社会情勢の変化に鑑み、法律が改正された。", "de": "Unter Berücksichtigung des Wandels der gesellschaftlichen Lage wurde das Gesetz geändert." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "これまでの実績（　　）、彼をリーダーに選んだ。", "answer": "にかんがみて", "explanation": "に鑑みて = unter Berücksichtigung der bisherigen Leistungen." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Verbunden mit / Im Zusammenspiel mit: ～と相まって",
+      "summary": "Drückt aus, dass zwei Faktoren synergetisch zusammenwirken und ein (oft positives) Ergebnis hervorbringen.",
+      "explanation": {
+        "introduction": "～と相まって (to aimatte) beschreibt, wie sich Faktor A und Faktor B gegenseitig verstärken.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen A (+ が) + Nomen B + と相まって",
+            "examples": [
+              { "jp": "伝統的な技術が現代のデザインと相まって、素晴らしい作品が生まれた。", "de": "Traditionelle Technik gepaart mit modernem Design brachte ein wunderbares Werk hervor." },
+              { "jp": "円安の影響と相まって、外国人観光客が急増している。", "de": "Im Zusammenspiel mit dem schwachen Yen steigt die Zahl ausländischer Touristen rasant." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "美しい照明が音楽（　　）、幻想的な雰囲気を作り出した。", "answer": "とあいまって", "explanation": "と相まって = im Zusammenspiel mit der Musik." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Einer Position unwürdig / Unvereinbar mit: ～にあるまじき",
+      "summary": "Drückt scharfe Kritik aus: 'Für jemanden in der Position X absolut ungehörig / unverzeihlich'.",
+      "explanation": {
+        "introduction": "～にあるまじき (ni arumajiki) ist ein klassischer Ausdruck, der an Berufe oder Rollen angehängt wird, um ein Fehlverhalten zu verurteilen.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen (Rolle/Beruf) + にあるまじき + Nomen (Tat/Verhalten)",
+            "examples": [
+              { "jp": "それは教育者にあるまじき発言だ。", "de": "Das ist eine für einen Pädagogen absolut ungehörige Äußerung." },
+              { "jp": "プロにあるまじきミスを犯してしまった。", "de": "Ich habe einen eines Profis unwürdigen Fehler begangen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "患者の秘密を漏らすとは、医師（　　）行為だ。", "answer": "にあるまじき", "explanation": "医師にあるまじき行為 = eine eines Arztes unwürdige Handlung." }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Nicht einmal... geschweige denn...: ～はおろか",
+      "summary": "Drückt aus, dass A (selbstverständlicher) schon nicht zutrifft, und B (noch schwieriger/weitergehend) erst recht nicht.",
+      "explanation": {
+        "introduction": "～はおろか (wa oroka) hebt ein extremes Beispiel A hervor, um zu betonen, dass B erst recht unmöglich oder ausgeschlossen ist.",
+        "sections": [
+          {
+            "title": "Struktur",
+            "content": "Nomen A + はおろか + Nomen B (+ も/さえ)",
+            "examples": [
+              { "jp": "彼は漢字はおろか、ひらがなさえ読めない。", "de": "Er kann nicht einmal Hiragana lesen, geschweige denn Kanji." },
+              { "jp": "給料が増えるはおろか、ボーナスまでカットされた。", "de": "Von einer Gehaltserhöhung ganz zu schweigen, wurde sogar der Bonus gestrichen." }
+            ]
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "fill-in-the-blank",
+          "instruction": "Vervollständige den Satz.",
+          "questions": [
+            { "sentence": "忙しすぎて、海外旅行（　　）国内旅行にも行けない。", "answer": "はおろか", "explanation": "Auslandsreisen schon gar nicht, nicht einmal Inlandsreisen." }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -359,6 +359,123 @@
           ]
         }
       ]
+    },
+    {
+      "id": "n5-exam-3",
+      "title": "JLPT N5 Probetest 3 (Inkl. Hörverständnis / 聴解)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 20,
+          "questions": [
+            {
+              "id": "n5-e3-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "あしたは<u>金曜日</u>です。",
+              "options": ["きんようび", "かようび", "すいようび", "もくようび"],
+              "correctAnswer": "きんようび",
+              "translation": "Morgen ist Freitag.",
+              "explanation": "金曜日 wird 'きんようび' (kin'yōbi = Freitag) gelesen."
+            },
+            {
+              "id": "n5-e3-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "<u>父</u>は会社で働いています。",
+              "options": ["ちち", "はは", "あに", "おとうさん"],
+              "correctAnswer": "ちち",
+              "translation": "Mein Vater arbeitet in einer Firma.",
+              "explanation": "父 (eigener Vater) wird 'ちち' (chichi) gelesen."
+            },
+            {
+              "id": "n5-e3-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "手が汚いですから、石けんで（　　）ください。",
+              "options": ["あらって", "みがいて", "ふいて", "きって"],
+              "correctAnswer": "あらって",
+              "translation": "Da deine Hände schmutzig sind, wasche sie bitte mit Seife.",
+              "explanation": "洗う (arau = waschen) -> 洗ってください."
+            },
+            {
+              "id": "n5-e3-q4",
+              "type": "multiple-choice-usage",
+              "question": "カメラで家族の（　　）をとりました。",
+              "options": ["しゃしん", "てがみ", "おんがく", "えいが"],
+              "correctAnswer": "しゃしん",
+              "translation": "Ich habe mit der Kamera ein Foto meiner Familie gemacht.",
+              "explanation": "写真をとる (shashin o toru) = ein Foto machen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 40,
+          "questions": [
+            {
+              "id": "n5-e3-q5",
+              "type": "multiple-choice-particle",
+              "question": "東京（　　）大阪のほうが近いです。",
+              "options": ["より", "から", "まで", "ほど"],
+              "correctAnswer": "より",
+              "translation": "Osaka ist näher als Tokio.",
+              "explanation": "A より B のほうが... = B ist mehr ... als A."
+            },
+            {
+              "id": "n5-e3-q6",
+              "type": "multiple-choice-grammar",
+              "question": "ここでタバコを（　　）はいけません。",
+              "options": ["吸って", "吸い", "吸う", "吸った"],
+              "correctAnswer": "吸って",
+              "translation": "Hier darf man nicht rauchen.",
+              "explanation": "Verb (て-Form) + はいけません drückt ein Verbot aus."
+            },
+            {
+              "id": "n5-e3-q7",
+              "type": "sentence-ordering",
+              "question": "きのう＿　＿　★　＿とてもおいしかったです。",
+              "parts": ["ケーキは", "母が", "作った", "チョコレート"],
+              "correctOrder": ["母が", "作った", "チョコレート", "ケーキは"],
+              "fullSentence": "きのう母が作ったチョコレートケーキはとてもおいしかったです。",
+              "translation": "Der Schokoladenkuchen, den meine Mutter gestern gebacken hat, war sehr lecker.",
+              "explanation": "Relativsatz 母が作った modifiziert チョコレートケーキは."
+            },
+            {
+              "id": "n5-e3-q8",
+              "type": "multiple-choice-reading",
+              "question": "【案内】「さくらプール」は月曜日から土曜日まで、朝9時から夜8時まであいています。日曜日は休みです。大人は500円、子どもは200円です。<br><br><b>質問：</b>さくらプールにいつ行くことができますか。",
+              "options": ["水曜日の午後2時", "日曜日の午前10時", "火曜日の夜9時", "土曜日の朝7時"],
+              "correctAnswer": "水曜日の午後2時",
+              "translation": "Wann kann man ins Sakura-Schwimmbad gehen?",
+              "explanation": "Geöffnet Mo-Sa von 9:00 bis 20:00 Uhr. Mittwoch 14:00 Uhr liegt in dieser Zeit."
+            }
+          ]
+        },
+        {
+          "title": "聴解 (Chōkai) - Hörverständnis",
+          "time": 20,
+          "questions": [
+            {
+              "id": "n5-e3-q9",
+              "type": "multiple-choice-listening",
+              "audioText": "すみません、りんごを三つと、みかんを五つください。",
+              "question": "🔊 Hörverständnis: Höre dir das Gespräch im Obstladen an. Wie viele Äpfel (りんご) kauft die Person?",
+              "options": ["3個 (三つ)", "5個 (五つ)", "8個 (八つ)", "2個 (二つ)"],
+              "correctAnswer": "3個 (三つ)",
+              "translation": "Entschuldigung, bitte drei Äpfel und fünf Mandarinen.",
+              "explanation": "りんごを三つ (mittsu = 3 Stück) und みかんを五つ (itsutsu = 5 Stück)."
+            },
+            {
+              "id": "n5-e3-q10",
+              "type": "multiple-choice-listening",
+              "audioText": "あしたは朝八時に駅の北口で会いましょう。バスではなく、電車で行きます。",
+              "question": "🔊 Hörverständnis: Womit fahren sie morgen?",
+              "options": ["電車 (Mit dem Zug)", "バス (Mit dem Bus)", "自転車 (Mit dem Fahrrad)", "タクシー (Mit dem Taxi)"],
+              "correctAnswer": "電車 (Mit dem Zug)",
+              "translation": "Treffen wir uns morgen früh um 8 Uhr am Nordausgang des Bahnhofs. Wir fahren nicht mit dem Bus, sondern mit dem Zug.",
+              "explanation": "バスではなく、電車で行きます = Nicht mit dem Bus, sondern mit dem Zug."
+            }
+          ]
+        }
+      ]
     }
   ],
   "N4": [
@@ -647,6 +764,122 @@
               "correctAnswer": "11時から第2会議室",
               "translation": "Wann und wo findet das morgige Meeting statt?",
               "explanation": "Im Text: 10時から11時に変更 (von 10 auf 11 Uhr verschoben) und 場所は第2会議室 (Ort: Raum 2)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n4-exam-3",
+      "title": "JLPT N4 Probetest 3 (Inkl. Hörverständnis / 聴解)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 25,
+          "questions": [
+            {
+              "id": "n4-e3-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "日本の<u>習慣</u>に慣れましたか。",
+              "options": ["しゅうかん", "じゅうかん", "しゅかん", "しょうかん"],
+              "correctAnswer": "しゅうかん",
+              "translation": "Haben Sie sich an die japanischen Gepflogenheiten gewöhnt?",
+              "explanation": "習慣 wird 'しゅうかん' (shūkan = Brauch/Gewohnheit) gelesen."
+            },
+            {
+              "id": "n4-e3-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "新しい<u>計画</u>を立てる。",
+              "options": ["けいかく", "けいが", "きかく", "けいか"],
+              "correctAnswer": "けいかく",
+              "translation": "Einen neuen Plan aufstellen.",
+              "explanation": "計画 wird 'けいかく' (keikaku = Plan) gelesen."
+            },
+            {
+              "id": "n4-e3-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "風邪をひいたので、明日の旅行は（　　）です。",
+              "options": ["無理", "無料", "無駄", "無事"],
+              "correctAnswer": "無理",
+              "translation": "Weil ich mich erkältet habe, ist die morgige Reise unmöglich.",
+              "explanation": "無理 (muri) bedeutet 'unmöglich / unvernünftig / zu viel verlangt'."
+            },
+            {
+              "id": "n4-e3-q4",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>調べる</u> in Hiragana:",
+              "correctAnswer": "しらべる",
+              "translation": "Schreibe die Lesung für 調べる in Hiragana.",
+              "explanation": "調べる wird 'しらべる' (shiraberu = untersuchen/nachschlagen) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 45,
+          "questions": [
+            {
+              "id": "n4-e3-q5",
+              "type": "multiple-choice-grammar",
+              "question": "漢字の読み方が（　　）ので、辞書で調べました。",
+              "options": ["わからなかった", "わかった", "わかる", "わからない"],
+              "correctAnswer": "わからなかった",
+              "translation": "Weil ich die Lesung des Kanji nicht wusste, habe ich im Wörterbuch nachgeschlagen.",
+              "explanation": "Vergangenheit 調べました erfordert die Vergangenheitsform im Grundsatz (わからなかったので)."
+            },
+            {
+              "id": "n4-e3-q6",
+              "type": "multiple-choice-grammar",
+              "question": "母は私に野菜を（　　）ました。",
+              "options": ["食べさせ", "食べられ", "食べて", "食べる"],
+              "correctAnswer": "食べさせ",
+              "translation": "Meine Mutter ließ mich Gemüse essen.",
+              "explanation": "Kausativ (Veranlassung) von 食べる (ru-Verb) ist 食べさせる -> 食べさせました."
+            },
+            {
+              "id": "n4-e3-q7",
+              "type": "sentence-ordering",
+              "question": "もう少し＿　＿　★　＿いただけますか。",
+              "parts": ["話して", "ゆっくり", "大きく", "声を"],
+              "correctOrder": ["声を", "大きく", "ゆっくり", "話して"],
+              "fullSentence": "もう少し声を大きくゆっくり話していただけますか。",
+              "translation": "Könnten Sie bitte etwas lauter und langsamer sprechen?",
+              "explanation": "声を大きく (Stimme lauter) + ゆっくり (langsam) + 話して + いただけますか."
+            },
+            {
+              "id": "n4-e3-q8",
+              "type": "multiple-choice-reading",
+              "question": "【掲示板】来週の月曜日、マンションのエレベーターの点検があります。午前10時から正午までエレベーターは使えません。階段をご利用ください。<br><br><b>質問：</b>月曜日の午前11時に上の階へ行きたい人はどうしますか。",
+              "options": ["階段を使って上がる", "エレベーターを待つ", "午後まで外に出られない", "管理人に電話する"],
+              "correctAnswer": "階段を使って上がる",
+              "translation": "Was macht jemand, der am Montag um 11 Uhr vormittags in ein oberes Stockwerk möchte?",
+              "explanation": "Von 10:00 bis 12:00 Uhr (正午) ist der Aufzug gesperrt -> 階段をご利用ください (Bitte Treppe benutzen)."
+            }
+          ]
+        },
+        {
+          "title": "聴解 (Chōkai) - Hörverständnis",
+          "time": 25,
+          "questions": [
+            {
+              "id": "n4-e3-q9",
+              "type": "multiple-choice-listening",
+              "audioText": "田中さん、会議の資料をコピーしておいてくれませんか。二十部お願いします。",
+              "question": "🔊 Hörverständnis: Was soll Herr Tanaka tun?",
+              "options": ["20 Kopien der Meeting-Unterlagen machen", "20 Stühle im Konferenzraum aufstellen", "Um 20 Uhr zum Meeting kommen", "Die Unterlagen per E-Mail senden"],
+              "correctAnswer": "20 Kopien der Meeting-Unterlagen machen",
+              "translation": "Herr Tanaka, könnten Sie bitte im Voraus die Unterlagen für das Meeting kopieren? 20 Exemplare bitte.",
+              "explanation": "会議の資料をコピーしておいて (im Voraus kopieren) + 二十部 (20 Exemplare)."
+            },
+            {
+              "id": "n4-e3-q10",
+              "type": "multiple-choice-listening",
+              "audioText": "この薬は朝と夜、ご飯を食べたあとで飲んでください。昼は飲まなくてもいいです。",
+              "question": "🔊 Hörverständnis: Wann soll das Medikament eingenommen werden?",
+              "options": ["Morgens und abends nach dem Essen", "Morgens, mittags und abends nach dem Essen", "Nur mittags vor dem Essen", "Morgens vor dem Frühstück"],
+              "correctAnswer": "Morgens und abends nach dem Essen",
+              "translation": "Bitte nehmen Sie dieses Medikament morgens und abends nach dem Essen ein. Mittags brauchen Sie es nicht zu nehmen.",
+              "explanation": "朝と夜、ご飯を食べたあとで (morgens und abends nach dem Essen)."
             }
           ]
         }
@@ -943,6 +1176,137 @@
           ]
         }
       ]
+    },
+    {
+      "id": "n3-exam-3",
+      "title": "JLPT N3 Probetest 3 (Inkl. Hörverständnis / 聴解)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 30,
+          "questions": [
+            {
+              "id": "n3-e3-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "会議の<u>雰囲気</u>はとても和やかだった。",
+              "options": ["ふんいき", "ふういき", "ふんき", "ふうき"],
+              "correctAnswer": "ふんいき",
+              "translation": "Die Atmosphäre des Meetings war sehr harmonisch.",
+              "explanation": "雰囲気 wird korrekt 'ふんいき' (fun'iki = Atmosphäre/Stimmung) gelesen."
+            },
+            {
+              "id": "n3-e3-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "自分の<u>都合</u>ばかり考えてはいけない。",
+              "options": ["つごう", "とごう", "つあい", "とあい"],
+              "correctAnswer": "つごう",
+              "translation": "Man darf nicht immer nur an die eigenen Umstände denken.",
+              "explanation": "都合 wird 'つごう' (tsugō = Umstände/Gelegenheit) gelesen."
+            },
+            {
+              "id": "n3-e3-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "新しいパソコンを買ったので、古いほうは（　　）した。",
+              "options": ["処分", "処理", "処置", "処罰"],
+              "correctAnswer": "処分",
+              "translation": "Da ich einen neuen PC gekauft habe, habe ich den alten entsorgt.",
+              "explanation": "処分する (shobun suru) = entsorgen / loswerden."
+            },
+            {
+              "id": "n3-e3-q4",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>断る</u> in Hiragana:",
+              "correctAnswer": "ことわる",
+              "translation": "Schreibe die Lesung für 断る in Hiragana.",
+              "explanation": "断る wird 'ことわる' (kotowaru = ablehnen/absagen) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 50,
+          "questions": [
+            {
+              "id": "n3-e3-q5",
+              "type": "multiple-choice-grammar",
+              "question": "日本に来て（　　）、家族のありがたみがわかった。",
+              "options": ["はじめて", "ばかりに", "とたんに", "ついでに"],
+              "correctAnswer": "はじめて",
+              "translation": "Erst als ich nach Japan kam, wurde mir bewusst, wie wertvoll meine Familie ist.",
+              "explanation": "～てはじめて bedeutet 'erst nachdem man ... getan hat (erkennt man)'."
+            },
+            {
+              "id": "n3-e3-q6",
+              "type": "multiple-choice-grammar",
+              "question": "この映画は大人（　　）作られたものだが、子供にも人気がある。",
+              "options": ["向けに", "向きに", "に対して", "にとって"],
+              "correctAnswer": "向けに",
+              "translation": "Dieser Film wurde zwar gezielt für Erwachsene produziert, ist aber auch bei Kindern beliebt.",
+              "explanation": "～向けに drückt aus, dass etwas aktiv für eine bestimmte Zielgruppe konzipiert wurde."
+            },
+            {
+              "id": "n3-e3-q7",
+              "type": "sentence-ordering",
+              "question": "彼は＿　＿　★　＿顔をしている。",
+              "parts": ["まるで", "何も", "知らないかのような", "事実を"],
+              "correctOrder": ["まるで", "事実を", "何も", "知らないかのような"],
+              "fullSentence": "彼はまるで事実を何も知らないかのような顔をしている。",
+              "translation": "Er macht ein Gesicht, als ob er überhaupt nichts von den Tatsachen wüsste.",
+              "explanation": "まるで + 事実を + 何も + 知らないかのような + 顔をしている."
+            },
+            {
+              "id": "n3-e3-q8",
+              "type": "multiple-choice-reading",
+              "question": "【コラム】失敗を恐れて何もしないより、挑戦して失敗するほうがずっと価値があると言われる。確かに失敗から学ぶことは多い。しかし、ただ闇雲に挑戦すればいいというわけではなく、なぜ失敗したのかを振り返る習慣がなければ成長にはつながらない。<br><br><b>質問：</b>筆者の考えに最も近いものはどれか。",
+              "options": [
+                "挑戦するだけでなく、失敗の原因を振り返ることが成長に必要だ",
+                "失敗は恥ずかしいことなので、なるべく挑戦しないほうがよい",
+                "理由を考えなくても、たくさん失敗すれば自然に成長できる",
+                "一度も失敗せずに成功する人だけが成長できる"
+              ],
+              "correctAnswer": "挑戦するだけでなく、失敗の原因を振り返ることが成長に必要だ",
+              "translation": "Welche Aussage kommt der Meinung des Autors am nächsten?",
+              "explanation": "Der Text betont: なぜ失敗したのかを振り返る習慣がなければ成長にはつながらない."
+            }
+          ]
+        },
+        {
+          "title": "聴解 (Chōkai) - Hörverständnis",
+          "time": 30,
+          "questions": [
+            {
+              "id": "n3-e3-q9",
+              "type": "multiple-choice-listening",
+              "audioText": "来週のキャンプですが、雨が降った場合は延期ではなく、体育館でレクリエーションを行うことになりました。",
+              "question": "🔊 Hörverständnis: Was passiert beim Camp nächste Woche, falls es regnet?",
+              "options": [
+                "Es findet ein Freizeitprogramm in der Sporthalle statt",
+                "Das Camp wird um eine Woche verschoben",
+                "Das Camp fällt komplett aus",
+                "Es wird trotzdem draußen gezeltet"
+              ],
+              "correctAnswer": "Es findet ein Freizeitprogramm in der Sporthalle statt",
+              "translation": "Bezüglich des Camps nächste Woche: Falls es regnet, wird es nicht verschoben, sondern wir veranstalten ein Freizeitprogramm in der Sporthalle.",
+              "explanation": "延期ではなく、体育館でレクリエーションを行う (nicht verschoben, sondern Programm in der Sporthalle)."
+            },
+            {
+              "id": "n3-e3-q10",
+              "type": "multiple-choice-listening",
+              "audioText": "お客様、申し訳ございませんが、こちらの商品の青いモデルは現在在庫切れとなっておりまして、入荷は来週の水曜日になります。",
+              "question": "🔊 Hörverständnis: Warum kann der Kunde das blaue Modell heute nicht mitnehmen?",
+              "options": [
+                "Es ist aktuell nicht auf Lager und kommt erst nächsten Mittwoch",
+                "Das blaue Modell wird nicht mehr hergestellt",
+                "Das Geschäft hat heute geschlossen",
+                "Das Modell ist bereits für jemand anderen reserviert"
+              ],
+              "correctAnswer": "Es ist aktuell nicht auf Lager und kommt erst nächsten Mittwoch",
+              "translation": "Es tut uns sehr leid, aber das blaue Modell dieses Produkts ist derzeit ausverkauft; die nächste Lieferung trifft nächsten Mittwoch ein.",
+              "explanation": "在庫切れ (zaikogire = nicht auf Lager/ausverkauft), 入荷は来週の水曜日 (Lieferung nächsten Mittwoch)."
+            }
+          ]
+        }
+      ]
     }
   ],
   "N2": [
@@ -1235,6 +1599,137 @@
           ]
         }
       ]
+    },
+    {
+      "id": "n2-exam-3",
+      "title": "JLPT N2 Probetest 3 (Inkl. Hörverständnis / 聴解)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 30,
+          "questions": [
+            {
+              "id": "n2-e3-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "地域の伝統文化を<u>継承</u>する取り組みが始まった。",
+              "options": ["けいしょう", "けいぞく", "けいじょう", "きょうしょう"],
+              "correctAnswer": "けいしょう",
+              "translation": "Initiativen zur Weitergabe der regionalen Traditionskultur haben begonnen.",
+              "explanation": "継承 wird 'けいしょう' (keishō = Weitergabe/Vererbung/Nachfolge) gelesen."
+            },
+            {
+              "id": "n2-e3-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "予算の<u>削減</u>を迫られている。",
+              "options": ["さくげん", "しょうげん", "さくかん", "しょうかん"],
+              "correctAnswer": "さくげん",
+              "translation": "Man sieht sich zu Budgetkürzungen gezwungen.",
+              "explanation": "削減 wird 'さくげん' (sakugen = Kürzung/Reduzierung) gelesen."
+            },
+            {
+              "id": "n2-e3-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "新しい法律が施行されるのに（　　）、説明会が開かれた。",
+              "options": ["先立ち", "引き換え", "反して", "かかわらず"],
+              "correctAnswer": "先立ち",
+              "translation": "Im Vorfeld des Inkrafttretens des neuen Gesetzes wurde eine Informationsveranstaltung abgehalten.",
+              "explanation": "～に先立ち (ni sakidachi) = vor / im Vorfeld von."
+            },
+            {
+              "id": "n2-e3-q4",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>促す</u> in Hiragana:",
+              "correctAnswer": "うながす",
+              "translation": "Schreibe die Lesung für 促す in Hiragana.",
+              "explanation": "促す wird 'うながす' (unagasu = auffordern/fördern/drängen) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 55,
+          "questions": [
+            {
+              "id": "n2-e3-q5",
+              "type": "multiple-choice-grammar",
+              "question": "開会に（　　）、社長から挨拶があった。",
+              "options": ["際して", "つれて", "したがって", "かけては"],
+              "correctAnswer": "際して",
+              "translation": "Anlässlich der Eröffnung hielt der Firmenchef eine Ansprache.",
+              "explanation": "～に際して bedeutet 'anlässlich / zum Zeitpunkt von'."
+            },
+            {
+              "id": "n2-e3-q6",
+              "type": "multiple-choice-grammar",
+              "question": "この薬は効果が高い（　　）、副作用にも注意が必要だ。",
+              "options": ["反面", "あまり", "どころか", "ばかりに"],
+              "correctAnswer": "反面",
+              "translation": "Während dieses Medikament einerseits hochwirksam ist, muss man andererseits auf Nebenwirkungen achten.",
+              "explanation": "～反面 (hanmen) stellt zwei gegensätzliche Aspekte derselben Sache gegenüber."
+            },
+            {
+              "id": "n2-e3-q7",
+              "type": "sentence-ordering",
+              "question": "どんなに＿　＿　★　＿とは限らない。",
+              "parts": ["いい結果が", "努力した", "からといって", "出るとは"],
+              "correctOrder": ["努力した", "からといって", "いい結果が", "出るとは"],
+              "fullSentence": "どんなに努力したからといっていい結果が出るとは限らない。",
+              "translation": "Nur weil man sich noch so sehr angestrengt hat, heißt das nicht zwangsläufig, dass ein gutes Ergebnis herauskommt.",
+              "explanation": "努力した + からといって (nur weil...) + いい結果が + 出るとは(限らない)."
+            },
+            {
+              "id": "n2-e3-q8",
+              "type": "multiple-choice-reading",
+              "question": "【社説】近年、都市部への人口集中が続く一方で、地方では過疎化が深刻化している。しかし、リモートワークの普及を契機として、自然豊かな地方に移住し、都会の企業で働き続けるという新たなライフスタイルが注目を集めている。<br><br><b>質問：</b>記事が述べている新しい動向はどれか。",
+              "options": [
+                "リモートワークを活用し、地方に暮らしながら都市の企業で働く人が増えている",
+                "地方の過疎化が完全に解決し、都市の人口が急減している",
+                "すべての企業がリモートワークを廃止し、都市への通勤を義務付けている",
+                "地方に移住した人は必ず農業に従事しなければならない"
+              ],
+              "correctAnswer": "リモートワークを活用し、地方に暮らしながら都市の企業で働く人が増えている",
+              "translation": "Welchen neuen Trend beschreibt der Artikel?",
+              "explanation": "Im Text: リモートワークの普及を契機として、自然豊かな地方に移住し、都会の企業で働き続けるという新たなライフスタイル."
+            }
+          ]
+        },
+        {
+          "title": "聴解 (Chōkai) - Hörverständnis",
+          "time": 35,
+          "questions": [
+            {
+              "id": "n2-e3-q9",
+              "type": "multiple-choice-listening",
+              "audioText": "新商品のパッケージデザインですが、アンケート調査の結果を踏まえ、当初の案よりも文字を大きくし、色彩を落ち着いたトーンに改めることに決定しました。",
+              "question": "🔊 Hörverständnis: Wie wird das Verpackungsdesign des neuen Produkts angepasst?",
+              "options": [
+                "Größere Schrift und ruhigere Farbtöne auf Basis der Umfrage",
+                "Kleinere Schrift und auffälligere Neonfarben",
+                "Der ursprüngliche Entwurf wird ohne Änderungen übernommen",
+                "Die Markteinführung des Produkts wird abgesagt"
+              ],
+              "correctAnswer": "Größere Schrift und ruhigere Farbtöne auf Basis der Umfrage",
+              "translation": "Was das Verpackungsdesign des neuen Produkts betrifft, haben wir auf Grundlage der Umfrageergebnisse entschieden, die Schrift größer als im ursprünglichen Entwurf zu gestalten und die Farben auf einen ruhigen Ton umzustellen.",
+              "explanation": "文字を大きくし、色彩を落ち着いたトーンに改める."
+            },
+            {
+              "id": "n2-e3-q10",
+              "type": "multiple-choice-listening",
+              "audioText": "本日のシンポジウムにご参加いただきありがとうございます。質疑応答の時間は講演の最後にまとめて設けておりますので、途中のご質問はお控えください。",
+              "question": "🔊 Hörverständnis: Worum werden die Teilnehmer des Symposiums gebeten?",
+              "options": [
+                "Fragen erst in der Fragerunde ganz am Ende des Vortrags zu stellen",
+                "Fragen jederzeit direkt während des Vortrags dazwischenzurufen",
+                "Während des Vortrags den Saal zu verlassen",
+                "Fragen ausschließlich schriftlich per Post einzureichen"
+              ],
+              "correctAnswer": "Fragen erst in der Fragerunde ganz am Ende des Vortrags zu stellen",
+              "translation": "Vielen Dank für Ihre Teilnahme am heutigen Symposium. Da die Fragerunde gesammelt am Ende des Vortrags stattfindet, bitten wir Sie, von Zwischenfragen abzusehen.",
+              "explanation": "質疑応答の時間は講演の最後にまとめて設けておりますので、途中のご質問はお控えください."
+            }
+          ]
+        }
+      ]
     }
   ],
   "N1": [
@@ -1523,6 +2018,137 @@
               "correctAnswer": "芸術は日常の効率化社会で見失われがちな人間の本質を再発見させる",
               "translation": "Welche Aussage stimmt mit der These des Autors überein?",
               "explanation": "Der Text belegt: 芸術作品と対峙する体験は、私たちが自らの中に眠るその領分（効率の外部にある無駄や沈黙）を再発見する儀式に他ならない."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n1-exam-3",
+      "title": "JLPT N1 Probetest 3 (Inkl. Hörverständnis / 聴解)",
+      "sections": [
+        {
+          "title": "言語知識 (文字・語彙) - Wortschatz & Kanji",
+          "time": 35,
+          "questions": [
+            {
+              "id": "n1-e3-q1",
+              "type": "multiple-choice-kanji-reading",
+              "question": "従来の定説を<u>覆す</u>画期的な発見がなされた。",
+              "options": ["くつがえす", "ひるがえす", "くりかえす", "よみがえす"],
+              "correctAnswer": "くつがえす",
+              "translation": "Es wurde eine bahnbrechende Entdeckung gemacht, die die bisherige etablierte Theorie umstößt.",
+              "explanation": "覆す wird 'くつがえす' (kutsugaesu = umstoßen/widerlegen) gelesen."
+            },
+            {
+              "id": "n1-e3-q2",
+              "type": "multiple-choice-kanji-reading",
+              "question": "両国の関係は依然として<u>緊迫</u>した状態にある。",
+              "options": ["きんぱく", "きっぱく", "きんはく", "きはく"],
+              "correctAnswer": "きんぱく",
+              "translation": "Die Beziehungen zwischen beiden Ländern befinden sich nach wie vor in einem angespannten Zustand.",
+              "explanation": "緊迫 wird 'きんぱく' (kinpaku = Hochspannung/Angespanntheit) gelesen."
+            },
+            {
+              "id": "n1-e3-q3",
+              "type": "multiple-choice-vocab-meaning",
+              "question": "長年の懸案だった問題が、ついに（　　）に向かった。",
+              "options": ["収束", "収容", "収集", "収穫"],
+              "correctAnswer": "収束",
+              "translation": "Das Problem, das jahrelang Sorge bereitet hatte, bewegte sich endlich auf eine Beilegung/Beruhigung zu.",
+              "explanation": "収束 (shūsoku) bedeutet das Abklingen, Beruhigen oder Beilegen einer Krise."
+            },
+            {
+              "id": "n1-e3-q4",
+              "type": "fill-in-the-blank-kana",
+              "question": "Schreibe die Lesung für <u>滞る</u> in Hiragana:",
+              "correctAnswer": "とどこおる",
+              "translation": "Schreibe die Lesung für 滞る in Hiragana.",
+              "explanation": "滞る wird 'とどこおる' (todokōru = stocken/ins Stocken geraten/überfällig sein) gelesen."
+            }
+          ]
+        },
+        {
+          "title": "言語知識 (文法)・読解 - Grammatik & Leseverständnis",
+          "time": 60,
+          "questions": [
+            {
+              "id": "n1-e3-q5",
+              "type": "multiple-choice-grammar",
+              "question": "彼は漢字（　　）、ひらがなさえ満足に書けない。",
+              "options": ["はおろか", "ならでは", "といえども", "をよそに"],
+              "correctAnswer": "はおろか",
+              "translation": "Er kann nicht einmal Hiragana ordentlich schreiben, geschweige denn Kanji.",
+              "explanation": "～はおろか bedeutet 'geschweige denn A, nicht einmal B'."
+            },
+            {
+              "id": "n1-e3-q6",
+              "type": "multiple-choice-grammar",
+              "question": "顧客の個人情報を漏洩するなど、企業人（　　）行為だ。",
+              "options": ["にあるまじき", "にたえない", "にかたくない", "にほかならない"],
+              "correctAnswer": "にあるまじき",
+              "translation": "Kundendaten durchsickern zu lassen, ist eine für einen Geschäftsleute absolut unwürdige/unverzeihliche Tat.",
+              "explanation": "～にあるまじき = einer Rolle/Position absolut unwürdig."
+            },
+            {
+              "id": "n1-e3-q7",
+              "type": "sentence-ordering",
+              "question": "周囲の＿　＿　★　＿成し遂げた。",
+              "parts": ["ものともせず", "批判を", "彼は", "独自の研究を"],
+              "correctOrder": ["批判を", "ものともせず", "彼は", "独自の研究を"],
+              "fullSentence": "周囲の批判をものともせず彼は独自の研究を成し遂げた。",
+              "translation": "Unbeirrt von der Kritik seines Umfelds vollendete er seine eigenständige Forschung.",
+              "explanation": "周囲の批判を + ものともせず (trotzend) + 彼は + 独自の研究を + 成し遂げた."
+            },
+            {
+              "id": "n1-e3-q8",
+              "type": "multiple-choice-reading",
+              "question": "【哲学評論】近代科学は客観性と再現性を至上の価値として掲げることで、自然界の法則を解き明かしてきた。しかし、その過程で個人の主観的な体験や一回性の出来事は「非科学的」として周縁へと追いやられてきたのではないか。私たちが真に豊かな知を取り戻すためには、客観的なデータと主観的な生の経験を対立させるのではなく、両者を架橋する新たな知の枠組みを模索せねばならない。<br><br><b>質問：</b>筆者が提唱している「新たな知の枠組み」とはどのようなものか。",
+              "options": [
+                "客観的な科学的データと個人の主観的な経験を結びつける枠組み",
+                "主観的な体験を完全に排除し、客観的データのみを重視する枠組み",
+                "近代科学の成果をすべて破棄し、主観的感情のみに従う枠組み",
+                "再現性のある実験だけを学問として認める枠組み"
+              ],
+              "correctAnswer": "客観的な科学的データと個人の主観的な経験を結びつける枠組み",
+              "translation": "Was für einen 'neuen Wissensrahmen' schlägt der Autor vor?",
+              "explanation": "Im Text: 客観的なデータと主観的な生の経験を対立させるのではなく、両者を架橋する新たな知の枠組み."
+            }
+          ]
+        },
+        {
+          "title": "聴解 (Chōkai) - Hörverständnis",
+          "time": 40,
+          "questions": [
+            {
+              "id": "n1-e3-q9",
+              "type": "multiple-choice-listening",
+              "audioText": "新規事業への投資については、短期的な収益性に固執するあまり、中長期的な技術革新の芽を摘んでしまうことのないよう、慎重かつ大胆な判断が求められます。",
+              "question": "🔊 Hörverständnis: Wovor warnt der Sprecher bei Investitionen in neue Geschäftsfelder?",
+              "options": [
+                "Dass durch zu starke Fixierung auf kurzfristige Gewinne mittel- bis langfristige Innovationen im Keim erstickt werden",
+                "Dass überhaupt nicht mehr in technologische Innovationen investiert werden darf",
+                "Dass langfristige Planung völlig unwichtig ist und nur der heutige Gewinn zählt",
+                "Dass neue Geschäftsfelder grundsätzlich ohne jede Prüfung abgelehnt werden sollten"
+              ],
+              "correctAnswer": "Dass durch zu starke Fixierung auf kurzfristige Gewinne mittel- bis langfristige Innovationen im Keim erstickt werden",
+              "translation": "Bei Investitionen in neue Geschäftsfelder ist ein umsichtiges und zugleich mutiges Urteil gefragt, damit nicht aus übermäßiger Fixierung auf kurzfristige Rentabilität die Keime mittel- und langfristiger technologischer Innovationen erstickt werden.",
+              "explanation": "短期的な収益性に固執するあまり、中長期的な技術革新の芽を摘んでしまうことのないよう."
+            },
+            {
+              "id": "n1-e3-q10",
+              "type": "multiple-choice-listening",
+              "audioText": "先日の交渉における先方の発言は、一見すると譲歩を示唆しているかのようでしたが、その実、我々に責任を転嫁しようとする意図が透けて見えました。",
+              "question": "🔊 Hörverständnis: Wie beurteilt der Sprecher die Äußerung der Gegenseite in der Verhandlung?",
+              "options": [
+                "Sie wirkte oberflächlich wie ein Entgegenkommen, zielte aber in Wahrheit darauf ab, die Verantwortung abzuwälzen",
+                "Sie war ein aufrichtiges und großzügiges Entgegenkommen ohne Hintergedanken",
+                "Die Gegenseite hat sofort die volle Verantwortung übernommen",
+                "Die Verhandlung hat überhaupt nicht stattgefunden"
+              ],
+              "correctAnswer": "Sie wirkte oberflächlich wie ein Entgegenkommen, zielte aber in Wahrheit darauf ab, die Verantwortung abzuwälzen",
+              "translation": "Die Äußerung der Gegenseite in der jüngsten Verhandlung wirkte auf den ersten Blick so, als deute sie ein Zugeständnis an, doch in Wahrheit schimmerte die Absicht durch, die Verantwortung auf uns abzuwälzen.",
+              "explanation": "一見すると譲歩を示唆... その実、我々に責任を転嫁."
             }
           ]
         }
