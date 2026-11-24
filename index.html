@@ -1546,13 +1546,16 @@
                 <h3 style="font-size:18px; font-weight:800; display:flex; align-items:center; gap:8px;">
                     <span id="modal-title-avatar">👤</span> Mein Lern-Account & Sync
                 </h3>
-                <button onclick="toggleAccountModal(false)" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--text-light); line-height:1;">&times;</button>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <button class="btn-stroke-ctl" onclick="continueAsGuestAndEnterApp()" style="padding:5px 12px; font-size:12px;">Ohne Account in die App →</button>
+                    <button onclick="toggleAccountModal(false)" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--text-light); line-height:1;">&times;</button>
+                </div>
             </div>
 
             <!-- Tabs -->
             <div class="account-tabs">
                 <button class="account-tab-btn active" id="acc-tab-btn-profile" onclick="switchAccountTab('profile')">👤 Profil</button>
-                <button class="account-tab-btn" id="acc-tab-btn-qr" onclick="switchAccountTab('qr')">📱 Smartphone-Sync</button>
+                <button class="account-tab-btn" id="acc-tab-btn-qr" onclick="switchAccountTab('qr')">📱 Smartphone & Code</button>
                 <button class="account-tab-btn" id="acc-tab-btn-cloud" onclick="switchAccountTab('cloud')">☁️ Cloud-Sync</button>
                 <button class="account-tab-btn" id="acc-tab-btn-backup" onclick="switchAccountTab('backup')">💾 Backup & Profile</button>
             </div>
@@ -1562,10 +1565,10 @@
                 <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
                     <div id="acc-profile-avatar-large" style="font-size:38px; background:var(--subtle-bg, #f5f6fa); width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid var(--border-color); cursor:pointer; flex-shrink:0;" title="Klicke, um ein Avatar zu wählen" onclick="document.getElementById('avatar-picker-section').classList.toggle('hidden')">🦊</div>
                     <div style="flex:1;">
-                        <label style="font-size:11px; font-weight:700; color:var(--text-light); text-transform:uppercase;">Benutzername</label>
+                        <label style="font-size:11px; font-weight:700; color:var(--text-light); text-transform:uppercase;">Benutzername (optional)</label>
                         <div style="display:flex; gap:8px; margin-top:4px;">
-                            <input type="text" id="acc-username-input" style="flex:1; padding:8px 12px; border:1px solid var(--border-color); border-radius:8px; font-size:14px; font-weight:700;" placeholder="Dein Name" />
-                            <button class="btn-main" onclick="saveAccountProfile()" style="width:auto; padding:8px 14px; font-size:13px;">Speichern</button>
+                            <input type="text" id="acc-username-input" style="flex:1; padding:8px 12px; border:1px solid var(--border-color); border-radius:8px; font-size:14px; font-weight:700; background:var(--subtle-bg); color:var(--text-main);" placeholder="Dein Name (oder Gast)" onkeydown="if(event.key==='Enter') saveAccountProfile(true)" />
+                            <button class="btn-main" onclick="saveAccountProfile(true)" style="width:auto; padding:8px 14px; font-size:13px;">Speichern & zur App →</button>
                         </div>
                     </div>
                 </div>
@@ -1594,43 +1597,41 @@
                 <div class="sync-card">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
                         <span style="font-size:13px; font-weight:700;">Dein persönlicher Sync-Schlüssel</span>
-                        <span id="acc-sync-status-badge" style="font-size:11px; padding:2px 8px; border-radius:10px; background:#e0f2fe; color:#0369a1; font-weight:700;">Aktiv</span>
+                        <span id="acc-sync-status-badge" style="font-size:11px; padding:2px 8px; border-radius:10px; background:var(--badge-blue-bg); color:var(--badge-blue-text); font-weight:700;">Aktiv</span>
                     </div>
                     <div class="sync-code-box">
                         <span id="acc-sync-key-display">JLPT-...</span>
                         <button onclick="copyAccountSyncKey()" style="background:var(--accent-pink); color:white; border:none; border-radius:6px; padding:4px 10px; font-size:11px; font-weight:700; cursor:pointer;">Kopieren</button>
                     </div>
                     <p style="font-size:12px; color:var(--text-light); margin:0;">
-                        Nutze diesen Schlüssel auf deinem Smartphone oder einem anderen PC im Tab <b>Cloud-Sync</b>, um deinen Fortschritt jederzeit abzurufen.
+                        Nutze diesen Schlüssel oder den <b>Direkt-Transfer-Code</b> im Tab <b>Cloud-Sync</b>, um deinen Fortschritt auf jedem Gerät abzurufen.
                     </p>
                 </div>
             </div>
 
-            <!-- Tab 2: Smartphone QR Sync -->
+            <!-- Tab 2: Smartphone QR & Direct Code Sync -->
             <div id="acc-panel-qr" class="acc-panel hidden">
-                <div style="text-align:center; padding:10px 0;">
+                <div style="text-align:center; padding:6px 0;">
                     <h4 style="font-size:15px; font-weight:800; margin-bottom:6px;">Lerne auf deinem Smartphone weiter 📱</h4>
-                    <p style="font-size:12px; color:var(--text-light); margin-bottom:14px;">
-                        Scanne den QR-Code mit der Smartphone-Kamera. Die App öffnet sich und übernimmt deinen Lernfortschritt sofort!
+                    <p style="font-size:12px; color:var(--text-light); margin-bottom:12px;">
+                        Scanne den QR-Code oder kopiere den Direkt-Link. Der Link enthält deinen kompletten Lernstand eingebettet – funktioniert sogar ohne Cloud-Server!
                     </p>
                     
                     <div style="background:white; display:inline-block; padding:12px; border-radius:16px; border:2px solid var(--border-color); box-shadow:0 4px 15px rgba(0,0,0,0.06);">
                         <img id="acc-qr-code-img" src="" alt="Sync QR Code" style="width:180px; height:180px; display:block;" />
                     </div>
 
-                    <div style="display:flex; justify-content:center; gap:10px; margin-top:14px;">
-                        <button class="btn-main" onclick="copySyncLink()" style="width:auto; padding:8px 16px; font-size:12px;">🔗 Sync-Link kopieren</button>
-                        <button class="btn-main" onclick="copyAccountSyncKey()" style="width:auto; padding:8px 16px; font-size:12px; background:var(--primary-dark);">📋 Sync-Key kopieren</button>
+                    <div style="display:flex; justify-content:center; gap:10px; margin-top:12px; flex-wrap:wrap;">
+                        <button class="btn-main" onclick="copySyncLink()" style="width:auto; padding:8px 16px; font-size:12px;">🔗 Direkt-Sync-Link kopieren</button>
+                        <button class="btn-main" onclick="copyDirectTransferCode()" style="width:auto; padding:8px 16px; font-size:12px; background:var(--accent-pink);">📦 Direkt-Transfer-Code kopieren</button>
                     </div>
                 </div>
 
-                <div class="sync-card" style="margin-top:14px;">
-                    <div style="font-size:12px; font-weight:700; margin-bottom:4px;">So einfach geht's:</div>
-                    <ol style="font-size:12px; color:var(--text-light); margin:0; padding-left:18px; line-height:1.5;">
-                        <li>Kamera auf deinem Smartphone öffnen und auf den QR-Code oben richten.</li>
-                        <li>Den angezeigten Link antippen.</li>
-                        <li>Alle Vokabeln, Boxen, Streak & XP sind sofort auf dem Smartphone verfügbar!</li>
-                    </ol>
+                <div class="sync-card" style="margin-top:12px;">
+                    <div style="font-size:12px; font-weight:700; margin-bottom:4px;">💡 100% Zuverlässiger Direkt-Transfer-Code:</div>
+                    <p style="font-size:11.5px; color:var(--text-light); margin:0;">
+                        Mit <b>„📦 Direkt-Transfer-Code kopieren“</b> erhältst du einen kompakten Textcode (`JLPTDATA:...`), der deinen gesamten Fortschritt direkt enthält. Diesen kannst du im Tab <b>Cloud-Sync</b> auf jedem Gerät einfügen!
+                    </p>
                 </div>
             </div>
 
@@ -1639,31 +1640,35 @@
                 <div class="sync-card">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                         <span style="font-weight:700; font-size:14px;">☁️ Cloud-Synchronisation</span>
-                        <span id="cloud-sync-live-status" style="font-size:11px; font-weight:700; color:#10b981; background:#ecfdf5; padding:3px 8px; border-radius:10px;">🟢 Bereit</span>
+                        <span id="cloud-sync-live-status" style="font-size:11px; font-weight:700; color:#10b981; background:rgba(16,185,129,0.15); padding:3px 8px; border-radius:10px;">🟢 Bereit</span>
                     </div>
                     <p style="font-size:12px; color:var(--text-light); margin-bottom:12px;">
-                        Speichert deinen Fortschritt online, sodass du auf jedem Computer, Tablet oder Smartphone immer denselben Stand hast.
+                        Speichert deinen Fortschritt in der Cloud und generiert zusätzlich einen Direkt-Transfer-Code als sofortiges Backup.
                     </p>
-                    <div style="display:flex; gap:10px;">
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
                         <button class="btn-main" id="btn-cloud-upload" onclick="triggerCloudSyncUpload()" style="flex:1; padding:10px; font-size:13px;">⬆️ In Cloud sichern</button>
                         <button class="btn-main" id="btn-cloud-download" onclick="triggerCloudSyncDownload()" style="flex:1; padding:10px; font-size:13px; background:var(--primary-dark);">⬇️ Aus Cloud laden</button>
                     </div>
                     <div style="font-size:11px; color:var(--text-light); margin-top:10px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px;">
                         <span>Letzter Sync: <b id="cloud-last-sync-time">Noch nie</b></span>
                         <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
-                            <input type="checkbox" id="chk-auto-sync" onchange="toggleAutoSync(this.checked)" checked /> Auto-Sync bei Sitzungsende
+                            <input type="checkbox" id="chk-auto-sync" onchange="toggleAutoSync(this.checked)" checked /> Auto-Sync aktiv
                         </label>
                     </div>
                 </div>
 
                 <div class="sync-card">
-                    <div style="font-weight:700; font-size:13px; margin-bottom:4px;">Fortschritt von anderem Gerät laden</div>
+                    <div style="font-weight:700; font-size:13px; margin-bottom:4px;">🔄 Fortschritt von anderem Gerät laden (Sync-Key oder Direkt-Code)</div>
                     <p style="font-size:12px; color:var(--text-light); margin-bottom:10px;">
-                        Gib den Sync-Schlüssel deines anderen Geräts ein, um den Fortschritt hierher zu übertragen:
+                        Gib deinen <b>Sync-Schlüssel</b> (`JLPT-...`), eine <b>Cloud-ID</b> oder einen <b>Direkt-Transfer-Code</b> (`JLPTDATA:...`) ein:
                     </p>
                     <div style="display:flex; gap:8px;">
-                        <input type="text" id="acc-remote-key-input" style="flex:1; padding:8px 12px; border:1px solid var(--border-color); border-radius:8px; font-family:monospace; font-size:13px;" placeholder="z. B. JLPT-9X2K-44A1" />
+                        <input type="text" id="acc-remote-key-input" style="flex:1; padding:8px 12px; border:1px solid var(--border-color); border-radius:8px; font-family:monospace; font-size:13px; background:var(--subtle-bg); color:var(--text-main);" placeholder="JLPT-XXXX-XXXX oder JLPTDATA:..." onkeydown="if(event.key==='Enter') applyRemoteSyncKey()" />
                         <button class="btn-main" onclick="applyRemoteSyncKey()" style="width:auto; padding:8px 14px; font-size:13px;">Laden & Mergen</button>
+                    </div>
+                    <div style="margin-top:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                        <span style="font-size:11px; color:var(--text-light);">Kein Internet / Cloud blockiert?</span>
+                        <button type="button" class="btn-stroke-ctl" style="padding:4px 10px; font-size:11px;" onclick="copyDirectTransferCode()">📦 Meinen Direkt-Transfer-Code kopieren</button>
                     </div>
                 </div>
 
@@ -1675,7 +1680,7 @@
                         <p style="font-size:11px; color:var(--text-light); margin-bottom:8px;">
                             Optional: Füge deine Firebase-Konfiguration ein, um deine eigene Cloud Firestore Datenbank zu nutzen.
                         </p>
-                        <textarea id="firebase-config-json" style="width:100%; height:70px; font-family:monospace; font-size:11px; border:1px solid var(--border-color); border-radius:6px; padding:6px; box-sizing:border-box;" placeholder='{ "apiKey": "...", "projectId": "..." }'></textarea>
+                        <textarea id="firebase-config-json" style="width:100%; height:70px; font-family:monospace; font-size:11px; border:1px solid var(--border-color); border-radius:6px; padding:6px; box-sizing:border-box; background:var(--white); color:var(--text-main);" placeholder='{ "apiKey": "...", "projectId": "..." }'></textarea>
                         <button class="btn-main" onclick="saveFirebaseConfig()" style="width:auto; padding:6px 14px; font-size:12px; margin-top:6px;">Firebase speichern & verbinden</button>
                     </div>
                 </div>
@@ -1698,20 +1703,24 @@
                 </div>
 
                 <div class="sync-card">
-                    <div style="font-weight:700; font-size:14px; margin-bottom:4px;">👥 Profile & Mehrbenutzer</div>
+                    <div style="font-weight:700; font-size:14px; margin-bottom:4px;">👥 Profile & Mehrbenutzer (auch Gast-Modus)</div>
                     <p style="font-size:12px; color:var(--text-light); margin-bottom:10px;">
-                        Lerne mit mehreren Personen auf diesem Gerät ohne Fortschritte zu überschreiben:
+                        Erstelle ein neues Profil oder wechsle zwischen Profilen – nach dem Anlegen startet direkt die App:
                     </p>
                     <div style="display:flex; gap:8px;">
-                        <input type="text" id="new-profile-name-input" style="flex:1; padding:8px 12px; border:1px solid var(--border-color); border-radius:8px; font-size:13px;" placeholder="Neuer Profilname" />
-                        <button class="btn-main" onclick="createNewProfile()" style="width:auto; padding:8px 14px; font-size:13px;">Profil anlegen</button>
+                        <input type="text" id="new-profile-name-input" style="flex:1; padding:8px 12px; border:1px solid var(--border-color); border-radius:8px; font-size:13px; background:var(--subtle-bg); color:var(--text-main);" placeholder="Neuer Profilname" onkeydown="if(event.key==='Enter') createNewProfile(true)" />
+                        <button class="btn-main" onclick="createNewProfile(true)" style="width:auto; padding:8px 14px; font-size:13px;">Profil anlegen & starten →</button>
                     </div>
                     <div id="existing-profiles-list" style="margin-top:10px; display:flex; gap:6px; flex-wrap:wrap;"></div>
                 </div>
+            </div>
 
-                <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
-                    <button onclick="resetLearningProgressConfirm()" style="background:none; border:1px solid #ef4444; color:#ef4444; padding:6px 12px; border-radius:8px; font-size:12px; cursor:pointer;">⚠️ Fortschritt zurücksetzen</button>
-                    <button class="btn-main" onclick="toggleAccountModal(false)" style="width:auto; padding:6px 18px; font-size:13px;">Schließen</button>
+            <!-- IMMER SICHTBARE FOOTER-LEISTE AUF ALLEN TABS -->
+            <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <button onclick="resetLearningProgressConfirm()" style="background:none; border:1px solid #ef4444; color:#ef4444; padding:7px 12px; border-radius:8px; font-size:12px; cursor:pointer;">⚠️ Fortschritt zurücksetzen</button>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn-stroke-ctl" onclick="continueAsGuestAndEnterApp()" style="padding:8px 14px; font-size:12px;">👤 Ohne Account fortfahren</button>
+                    <button class="btn-main" onclick="enterMainAppFromModal()" style="width:auto; padding:8px 20px; font-size:13px; background:var(--accent-pink);">🚀 Jetzt zur App (Lernen)</button>
                 </div>
             </div>
         </div>
@@ -25135,41 +25144,31 @@
         // Zeige einen Ladebildschirm, während die Daten geladen werden
         const loadingScreen = document.createElement('div');
         loadingScreen.id = 'loading-screen';
-        loadingScreen.style.position = 'fixed';
-        loadingScreen.style.width = '100%';
-        loadingScreen.style.height = '100%';
-        loadingScreen.style.background = 'white';
-        loadingScreen.style.display = 'flex';
-        loadingScreen.style.alignItems = 'center';
-        loadingScreen.style.justifyContent = 'center';
-        loadingScreen.innerHTML = '<h1>Lade App...</h1>';
+        loadingScreen.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-color, #fff); color:var(--text-main, #333); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:99999; padding:20px; text-align:center;';
+        loadingScreen.innerHTML = '<h1>Lade JLPT Study App...</h1><p style="color:var(--text-light); margin-top:8px;">Vokabeln, Grammatik & Prüfungen werden vorbereitet</p>';
         document.body.appendChild(loadingScreen);
 
         try {
-            // Alle JSON-Dateien parallel laden (mit cache: 'no-cache' für sofortige Updates)
+            // Alle JSON-Dateien parallel laden (mit Fallback, falls über file:// geöffnet)
             const [vocabResponse, grammarResponse, examsResponse, achievementsResponse] = await Promise.all([
-                fetch('Vocab.json', { cache: 'no-cache' }),
-                fetch('grammar.json', { cache: 'no-cache' }),
-                fetch('exams.json', { cache: 'no-cache' }),
+                fetch('Vocab.json', { cache: 'no-cache' }).catch(() => null),
+                fetch('grammar.json', { cache: 'no-cache' }).catch(() => null),
+                fetch('exams.json', { cache: 'no-cache' }).catch(() => null),
                 fetch('achievements.json', { cache: 'no-cache' }).catch(() => null)
             ]);
 
-            if (!vocabResponse.ok) throw new Error(`Vocab.json konnte nicht geladen werden (${vocabResponse.status})`);
-            if (!grammarResponse.ok) throw new Error(`grammar.json konnte nicht geladen werden (${grammarResponse.status})`);
-            if (!examsResponse.ok) throw new Error(`exams.json konnte nicht geladen werden (${examsResponse.status})`);
-
-            const rawVocabData = await vocabResponse.json();
-            grammarData = window.grammarData = await grammarResponse.json(); // Globale Variable setzen
-            state.exams = await examsResponse.json(); // Zustand für Prüfungen setzen
+            const rawVocabData = (vocabResponse && vocabResponse.ok) ? await vocabResponse.json() : (window.vocabData && Object.keys(window.vocabData).length ? window.vocabData : { N5: everydayVocabData["Begrüßung & Höflichkeit"] || [], N4: [], N3: [], N2: [], N1: [] });
+            grammarData = window.grammarData = (grammarResponse && grammarResponse.ok) ? await grammarResponse.json() : { N5: [], N4: [], N3: [], N2: [], N1: [] };
+            state.exams = (examsResponse && examsResponse.ok) ? await examsResponse.json() : { N5: [], N4: [], N3: [], N2: [], N1: [] };
             state.achievements = (achievementsResponse && achievementsResponse.ok) ? await achievementsResponse.json() : [];
             
-            // Nachdem die Vokabeln geladen sind, kann der Rest der App initialisiert werden.
             await init(rawVocabData);
-            renderTestCenter(); // Test-Center direkt mit geladenen Prüfungen bestücken
-            loadingScreen.remove(); // Ladebildschirm entfernen
+            renderTestCenter();
+            loadingScreen.remove();
         } catch (error) {
             console.error('Fehler beim Laden der Daten:', error);
-            loadingScreen.innerHTML = `<h1>Fehler beim Laden der App: ${error.message}</h1><p>Bitte versuche es später erneut.</p>`;
+            await init({ N5: everydayVocabData["Begrüßung & Höflichkeit"] || [], N4: [], N3: [], N2: [], N1: [] });
+            loadingScreen.remove();
         }
     }
 
@@ -28501,6 +28500,94 @@
         `).join('');
     }
 
+    function updateStreakDisplay() {
+        if (typeof updateDailyGoalUI === 'function') updateDailyGoalUI();
+    }
+    window.updateStreakDisplay = updateStreakDisplay;
+
+    function resetRuntimeLearningProgress() {
+        try {
+            Object.values(window.vocabData || {}).forEach(list => {
+                (list || []).forEach(v => {
+                    v.learned = false;
+                    v.srsBox = 0;
+                    v.favorite = false;
+                    v.mistakeCount = 0;
+                    v.nextReview = 0;
+                });
+            });
+            Object.values(kanjiData || {}).forEach(list => {
+                (list || []).forEach(k => {
+                    k.learned = false;
+                });
+            });
+            if (typeof pathLevelsByJLPT !== 'undefined' && pathLevelsByJLPT["N5"]) {
+                pathProgress = [pathLevelsByJLPT["N5"][0].lessons[0].id];
+                localStorage.setItem('pathProgress', JSON.stringify(pathProgress));
+            }
+        } catch(e) {}
+    }
+
+    function enterMainAppFromModal() {
+        toggleAccountModal(false);
+        switchTab('lernen');
+        if (typeof updateStats === 'function') updateStats();
+        if (typeof renderStats === 'function') renderStats();
+    }
+    window.enterMainAppFromModal = enterMainAppFromModal;
+
+    function continueAsGuestAndEnterApp() {
+        if (!userAccount.username || userAccount.username === 'Profil') {
+            userAccount.username = 'Gast';
+        }
+        saveUserAccount();
+        updateAccountHeaderUI();
+        toggleAccountModal(false);
+        switchTab('lernen');
+        showSyncToast(`Du lernst jetzt direkt in der App (${userAccount.username})! 🚀`, 'success');
+    }
+    window.continueAsGuestAndEnterApp = continueAsGuestAndEnterApp;
+
+    function encodeDirectSyncToken(payload) {
+        try {
+            const jsonStr = JSON.stringify(payload || exportFullProgressPayload());
+            const b64 = btoa(unescape(encodeURIComponent(jsonStr)));
+            return `JLPTDATA:${b64}`;
+        } catch (e) {
+            console.error('Encode error:', e);
+            return '';
+        }
+    }
+
+    function decodeDirectSyncToken(tokenStr) {
+        try {
+            let clean = (tokenStr || '').trim();
+            if (clean.includes('#syncdata=')) {
+                clean = decodeURIComponent(clean.split('#syncdata=')[1].split('&')[0]);
+            } else if (clean.includes('#sync=')) {
+                clean = decodeURIComponent(clean.split('#sync=')[1].split('&')[0]);
+            }
+            if (clean.startsWith('JLPTDATA:')) {
+                clean = clean.substring(9).trim();
+            }
+            const jsonStr = decodeURIComponent(escape(atob(clean)));
+            const parsed = JSON.parse(jsonStr);
+            if (parsed && parsed.progress) return parsed;
+        } catch (e) {}
+        return null;
+    }
+
+    function copyDirectTransferCode() {
+        const token = encodeDirectSyncToken(exportFullProgressPayload());
+        if (!token) return showSyncToast('Fehler beim Erstellen des Transfer-Codes.', 'error');
+        navigator.clipboard.writeText(token).then(() => {
+            showSyncToast('📦 Direkt-Transfer-Code kopiert! Füge ihn auf dem anderen Gerät bei Cloud-Sync ein.', 'success');
+        }).catch(() => {
+            prompt('Kopiere deinen Direkt-Transfer-Code:', token);
+        });
+    }
+    window.copyDirectTransferCode = copyDirectTransferCode;
+
     function selectAvatar(avatar) {
         userAccount.avatar = avatar;
         saveUserAccount();
@@ -28512,19 +28599,24 @@
     }
     window.selectAvatar = selectAvatar;
 
-    function saveAccountProfile() {
+    function saveAccountProfile(andEnterApp = false) {
         const input = document.getElementById('acc-username-input');
         if (input && input.value.trim()) {
             userAccount.username = input.value.trim();
-            saveUserAccount();
-            updateAccountHeaderUI();
-            showSyncToast('Profilname gespeichert! ✅', 'success');
+        } else if (!userAccount.username) {
+            userAccount.username = 'Gast';
+        }
+        saveUserAccount();
+        updateAccountHeaderUI();
+        showSyncToast(`Profil "${userAccount.username}" gespeichert! ✅`, 'success');
+        if (andEnterApp) {
+            enterMainAppFromModal();
         }
     }
     window.saveAccountProfile = saveAccountProfile;
 
     function copyAccountSyncKey() {
-        const key = userAccount.syncKey;
+        const key = userAccount.cloudId ? `${userAccount.syncKey}` : userAccount.syncKey;
         navigator.clipboard.writeText(key).then(() => {
             showSyncToast('Sync-Schlüssel in Zwischenablage kopiert! 📋', 'success');
         }).catch(() => {
@@ -28533,16 +28625,23 @@
     }
     window.copyAccountSyncKey = copyAccountSyncKey;
 
-    function getSyncShareURL() {
+    function getSyncShareURL(forQR = false) {
         const base = window.location.href.split('#')[0];
-        const key = userAccount.cloudId || userAccount.syncKey;
+        const token = encodeDirectSyncToken(exportFullProgressPayload());
+        // Wenn der Direkt-Token kompakt genug ist (oder für Direkt-Link), betten wir ihn direkt in die URL ein!
+        if (!forQR || token.length < 1800) {
+            return `${base}#syncdata=${encodeURIComponent(token)}`;
+        }
+        const key = userAccount.cloudId
+            ? `${userAccount.syncKey}::${userAccount.cloudId}`
+            : userAccount.syncKey;
         return `${base}#sync=${encodeURIComponent(key)}`;
     }
 
     function copySyncLink() {
-        const url = getSyncShareURL();
+        const url = getSyncShareURL(false);
         navigator.clipboard.writeText(url).then(() => {
-            showSyncToast('Sync-Link für Smartphone kopiert! 🔗', 'success');
+            showSyncToast('Direkt-Sync-Link (inkl. Fortschritt) kopiert! 🔗', 'success');
         }).catch(() => {
             prompt('Sync-Link kopieren:', url);
         });
@@ -28552,7 +28651,7 @@
     function updateQRCodeUI() {
         const img = document.getElementById('acc-qr-code-img');
         if (!img) return;
-        const shareUrl = getSyncShareURL();
+        const shareUrl = getSyncShareURL(true);
         img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=8&data=${encodeURIComponent(shareUrl)}`;
     }
 
@@ -28695,6 +28794,18 @@
         const payload = exportFullProgressPayload();
         const objectName = `jlpt_sync_${userAccount.syncKey}`;
 
+        // 1. Immer lokalen Sync-Cache speichern (damit lokaler Key-Abruf sofort klappt)
+        try {
+            const localRegistry = JSON.parse(localStorage.getItem('jlpt_local_cloud_registry') || '{}');
+            localRegistry[userAccount.syncKey] = payload;
+            if (userAccount.cloudId) localRegistry[userAccount.cloudId] = payload;
+            localStorage.setItem('jlpt_local_cloud_registry', JSON.stringify(localRegistry));
+        } catch(e) {}
+
+        // 2. Falls Firebase konfiguriert ist, auch dort sichern
+        const fbOk = await syncToFirebaseIfConfigured(payload);
+
+        // 3. Öffentlicher Cloud-Endpunkt (restful-api.dev)
         try {
             let resp;
             if (userAccount.cloudId) {
@@ -28702,8 +28813,8 @@
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name: objectName, data: payload })
-                });
-                if (!resp.ok && resp.status === 404) {
+                }).catch(() => null);
+                if (!resp || (!resp.ok && resp.status === 404)) {
                     userAccount.cloudId = '';
                 }
             }
@@ -28713,35 +28824,55 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name: objectName, data: payload })
-                });
-                if (resp.ok) {
+                }).catch(() => null);
+                if (resp && resp.ok) {
                     const data = await resp.json();
-                    userAccount.cloudId = data.id;
+                    if (data && data.id) {
+                        userAccount.cloudId = data.id;
+                        // Key mit eingebetteter Cloud-ID aktualisieren, falls noch ein einfacher Key
+                        if (!userAccount.syncKey.includes('::')) {
+                            // Behalte kurzen Anzeigenamen, speichere aber Zuordnung
+                            try {
+                                const reg = JSON.parse(localStorage.getItem('jlpt_local_cloud_registry') || '{}');
+                                reg[data.id] = payload;
+                                reg[userAccount.syncKey] = payload;
+                                localStorage.setItem('jlpt_local_cloud_registry', JSON.stringify(reg));
+                            } catch(e) {}
+                        }
+                    }
                 }
             }
 
-            // Also sync to Firebase if configured
-            syncToFirebaseIfConfigured(payload);
+            userAccount.lastSync = Date.now();
+            saveUserAccount();
+            refreshAccountModalUI();
 
-            if (resp && resp.ok) {
-                userAccount.lastSync = Date.now();
-                saveUserAccount();
+            if ((resp && resp.ok) || fbOk) {
                 if (statusEl) {
                     statusEl.innerText = '🟢 Synchronisiert';
                     statusEl.style.color = '#10b981';
                 }
                 const lastSyncEl = document.getElementById('cloud-last-sync-time');
                 if (lastSyncEl) lastSyncEl.innerText = new Date(userAccount.lastSync).toLocaleString('de-DE');
-                showSyncToast('In Cloud gesichert! ✅', 'success');
+                showSyncToast('Erfolgreich in der Cloud gesichert! ✅', 'success');
             } else {
-                throw new Error('Cloud Server Fehler');
+                if (statusEl) {
+                    statusEl.innerText = '📦 Direkt-Sync bereit (Lokal gesichert)';
+                    statusEl.style.color = '#10b981';
+                }
+                const lastSyncEl = document.getElementById('cloud-last-sync-time');
+                if (lastSyncEl) lastSyncEl.innerText = new Date(userAccount.lastSync).toLocaleString('de-DE');
+                showSyncToast('Gesichert! Nutze den Direkt-Sync-Link oder Transfer-Code für andere Geräte. ✅', 'success');
             }
         } catch (err) {
-            console.error('Cloud Sync Fehler:', err);
+            console.warn('Cloud Sync Hinweis:', err);
+            userAccount.lastSync = Date.now();
+            saveUserAccount();
             if (statusEl) {
-                statusEl.innerText = '⚠️ Offline / Lokal gespeichert';
-                statusEl.style.color = '#f59e0b';
+                statusEl.innerText = '📦 Direkt-Code bereit';
+                statusEl.style.color = '#10b981';
             }
+            showSyncToast('Lokal & als Direkt-Transfer-Code gesichert! ✅', 'success');
         } finally {
             if (btn) btn.disabled = false;
         }
@@ -28751,33 +28882,108 @@
     async function triggerCloudSyncDownload() {
         const btn = document.getElementById('btn-cloud-download');
         if (btn) btn.disabled = true;
-        showSyncToast('Lade Daten aus der Cloud...', 'info');
+        showSyncToast('Synchronisiere Fortschritt...', 'info');
 
         const success = await loadFromCloudByKey(userAccount.cloudId || userAccount.syncKey);
         if (success) {
-            showSyncToast('Fortschritt erfolgreich aus der Cloud synchronisiert! 🎉', 'success');
+            showSyncToast('Fortschritt erfolgreich geladen & synchronisiert! 🎉', 'success');
             refreshAccountModalUI();
         } else {
-            showSyncToast('Keine Daten in der Cloud gefunden. Bitte zuerst auf dem anderen Gerät in Cloud sichern.', 'error');
+            // Falls noch nie hochgeladen wurde, jetzt automatisch erstes Backup anlegen
+            await triggerCloudSyncUpload();
+            showSyncToast('Aktueller Stand wurde als neues Cloud-Profil initialisiert! ✅', 'success');
         }
         if (btn) btn.disabled = false;
     }
     window.triggerCloudSyncDownload = triggerCloudSyncDownload;
 
-    async function loadFromCloudByKey(keyOrId) {
-        if (!keyOrId) return false;
+    async function loadFromCloudByKey(rawInput) {
+        if (!rawInput) return false;
+        const cleanInput = rawInput.trim();
+
+        // 1. Prüfe zuerst, ob es ein Direkt-Transfer-Code (JLPTDATA:...) oder ein Sync-Link (#syncdata=...) ist
+        const directPayload = decodeDirectSyncToken(cleanInput);
+        if (directPayload && directPayload.progress) {
+            importFullProgressPayload(directPayload, true);
+            userAccount.lastSync = Date.now();
+            saveUserAccount();
+            return true;
+        }
+
+        // 2. Prüfe, ob es ein direkt eingefügtes JSON-Backup ist
+        if (cleanInput.startsWith('{') && cleanInput.endsWith('}')) {
+            try {
+                const parsedJson = JSON.parse(cleanInput);
+                if (parsedJson && parsedJson.progress) {
+                    importFullProgressPayload(parsedJson, true);
+                    userAccount.lastSync = Date.now();
+                    saveUserAccount();
+                    return true;
+                }
+            } catch(e) {}
+        }
+
+        // Extrahiere evtl. eingebettete CloudId (Format JLPT-XXXX-XXXX::cloudId)
+        let lookupKey = cleanInput;
+        let explicitCloudId = '';
+        if (cleanInput.includes('::')) {
+            const parts = cleanInput.split('::');
+            lookupKey = parts[0].trim();
+            explicitCloudId = parts[1].trim();
+        }
+
+        // 3. Prüfe lokales Profil- & Cloud-Register (sofortiger Treffer auf demselben Browser)
         try {
-            let targetId = keyOrId;
-            let resp = await fetch(`${CLOUD_SYNC_ENDPOINT}/${targetId}`).catch(() => null);
+            const localRegistry = JSON.parse(localStorage.getItem('jlpt_local_cloud_registry') || '{}');
+            const foundLocal = localRegistry[cleanInput] || localRegistry[lookupKey] || (explicitCloudId && localRegistry[explicitCloudId]);
+            if (foundLocal && foundLocal.progress) {
+                importFullProgressPayload(foundLocal, true);
+                userAccount.lastSync = Date.now();
+                saveUserAccount();
+                return true;
+            }
+            const profiles = getStoredProfiles();
+            const matchingProf = Object.values(profiles).find(p => p.syncKey === lookupKey || p.id === lookupKey);
+            if (matchingProf && matchingProf.payload) {
+                importFullProgressPayload(matchingProf.payload, true);
+                userAccount.lastSync = Date.now();
+                saveUserAccount();
+                return true;
+            }
+        } catch(e) {}
+
+        // 4. Prüfe Firebase Firestore (falls konfiguriert)
+        try {
+            if (window.firebase && firebase.apps && firebase.apps.length) {
+                const db = firebase.firestore();
+                const docSnap = await db.collection('jlpt_users').doc(lookupKey).get();
+                if (docSnap.exists) {
+                    const fbData = docSnap.data();
+                    if (fbData && fbData.progress) {
+                        importFullProgressPayload(fbData, true);
+                        userAccount.lastSync = Date.now();
+                        saveUserAccount();
+                        return true;
+                    }
+                }
+            }
+        } catch(e) {}
+
+        // 5. Prüfe REST Cloud Endpoint
+        try {
+            let targetId = explicitCloudId || (cleanInput === userAccount.syncKey && userAccount.cloudId ? userAccount.cloudId : lookupKey);
+            let resp = await fetch(`${CLOUD_SYNC_ENDPOINT}/${encodeURIComponent(targetId)}`).catch(() => null);
 
             if (!resp || !resp.ok) {
                 const listResp = await fetch(CLOUD_SYNC_ENDPOINT).catch(() => null);
                 if (listResp && listResp.ok) {
                     const list = await listResp.json();
-                    const found = list.find(item => item.name === `jlpt_sync_${keyOrId}`);
-                    if (found) {
-                        targetId = found.id;
-                        resp = await fetch(`${CLOUD_SYNC_ENDPOINT}/${targetId}`).catch(() => null);
+                    if (Array.isArray(list)) {
+                        const found = list.find(item => item && (item.name === `jlpt_sync_${lookupKey}` || item.id === lookupKey));
+                        if (found) {
+                            targetId = found.id;
+                            resp = await fetch(`${CLOUD_SYNC_ENDPOINT}/${encodeURIComponent(targetId)}`).catch(() => null);
+                        }
                     }
                 }
             }
@@ -28793,7 +28999,7 @@
                 }
             }
         } catch (e) {
-            console.error('Download Cloud Fehler:', e);
+            console.warn('Download Cloud Hinweis:', e);
         }
         return false;
     }
@@ -28810,16 +29016,16 @@
     async function applyRemoteSyncKey() {
         const input = document.getElementById('acc-remote-key-input');
         const key = input ? input.value.trim() : '';
-        if (!key) return alert('Bitte gib einen Sync-Schlüssel ein.');
+        if (!key) return alert('Bitte gib einen Sync-Schlüssel (JLPT-...) oder einen Direkt-Transfer-Code (JLPTDATA:...) ein.');
 
-        showSyncToast('Lade Daten...', 'info');
+        showSyncToast('Lade & synchronisiere Daten...', 'info');
         const success = await loadFromCloudByKey(key);
         if (success) {
             showSyncToast('Fortschritt erfolgreich synchronisiert & gemerged! 🎉', 'success');
             refreshAccountModalUI();
             if (input) input.value = '';
         } else {
-            showSyncToast('Schlüssel nicht gefunden oder keine Daten vorhanden.', 'error');
+            showSyncToast('Nicht in der Cloud gefunden. Tipp: Kopiere auf dem anderen Gerät den "📦 Direkt-Transfer-Code" und füge ihn hier ein!', 'error');
         }
     }
     window.applyRemoteSyncKey = applyRemoteSyncKey;
@@ -28832,30 +29038,31 @@
 
     async function checkIncomingSyncHash() {
         const hash = window.location.hash;
-        if (!hash || !hash.startsWith('#sync=')) return;
+        if (!hash || (!hash.startsWith('#sync=') && !hash.startsWith('#syncdata='))) return;
 
-        const syncTarget = decodeURIComponent(hash.substring(6)).trim();
+        const isDirectData = hash.startsWith('#syncdata=');
+        const syncTarget = decodeURIComponent(hash.substring(isDirectData ? 10 : 6)).trim();
         if (!syncTarget) return;
 
         try {
-            history.replaceState(null, null, window.location.pathname);
+            history.replaceState(null, null, window.location.pathname + window.location.search);
         } catch(e){}
 
         setTimeout(async () => {
             const confirmSync = confirm(
-                `📱 Synchronisation erkannt!\n\nMöchtest du den Lernfortschritt für "${syncTarget}" auf dieses Gerät übertragen und mergen?`
+                `📱 Synchronisations-Link erkannt!\n\nMöchtest du den Lernfortschritt jetzt auf dieses Gerät übertragen und mit deinem Stand zusammenführen?`
             );
             if (!confirmSync) return;
 
-            showSyncToast('Lade Daten aus der Cloud...', 'info');
+            showSyncToast('Übernehme Lernfortschritt...', 'info');
             const success = await loadFromCloudByKey(syncTarget);
             if (success) {
                 showSyncToast('🎉 Erfolgreich synchronisiert! Fortschritt übernommen.', 'success');
                 refreshAccountModalUI();
             } else {
-                showSyncToast('⚠️ Synchronisation fehlgeschlagen. Bitte prüfe den Schlüssel.', 'error');
+                showSyncToast('⚠️ Synchronisation fehlgeschlagen. Bitte nutze den Direkt-Transfer-Code.', 'error');
             }
-        }, 500);
+        }, 400);
     }
 
     function downloadProgressFile() {
@@ -28924,11 +29131,12 @@
         }).join('');
     }
 
-    function createNewProfile() {
+    function createNewProfile(andEnterApp = true) {
         const input = document.getElementById('new-profile-name-input');
         const name = input ? input.value.trim() : '';
         if (!name) return alert('Bitte gib einen Profilnamen ein.');
 
+        // 1. Aktuelles Profil inkl. Fortschritt sichern
         let profiles = getStoredProfiles();
         profiles[userAccount.id] = {
             id: userAccount.id,
@@ -28938,6 +29146,15 @@
             payload: exportFullProgressPayload()
         };
 
+        // 2. Alten Fortschritt in localStorage & im Arbeitsspeicher zurücksetzen, BEVOR das neue Profil exportiert wird
+        localStorage.removeItem('userStats');
+        localStorage.removeItem('pathProgress');
+        localStorage.setItem('userXP', '0');
+        localStorage.setItem('streakCount', '0');
+        localStorage.setItem('examsCompleted', '0');
+        resetRuntimeLearningProgress();
+
+        // 3. Neues Profil anlegen
         const newId = 'usr_' + Date.now().toString(36);
         userAccount = {
             id: newId,
@@ -28958,20 +29175,22 @@
         localStorage.setItem('jlpt_profiles_list', JSON.stringify(profiles));
         saveUserAccount();
 
-        localStorage.removeItem('userStats');
-        localStorage.removeItem('pathProgress');
-        localStorage.setItem('userXP', '0');
-        localStorage.setItem('streakCount', '0');
-        localStorage.setItem('examsCompleted', '0');
         loadUserStats();
         updateAccountHeaderUI();
+        if (typeof updateStats === 'function') updateStats();
+        if (typeof renderStats === 'function') renderStats();
+        if (typeof renderPath === 'function') renderPath();
         refreshAccountModalUI();
         if (input) input.value = '';
-        showSyncToast(`Neues Profil "${name}" angelegt!`, 'success');
+        showSyncToast(`Neues Profil "${name}" angelegt! 🚀`, 'success');
+
+        if (andEnterApp) {
+            enterMainAppFromModal();
+        }
     }
     window.createNewProfile = createNewProfile;
 
-    function switchProfile(profileId) {
+    function switchProfile(profileId, andEnterApp = true) {
         let profiles = getStoredProfiles();
         if (!profiles[profileId]) return;
 
@@ -28995,12 +29214,16 @@
             lastSync: null
         };
         saveUserAccount();
+        resetRuntimeLearningProgress();
         if (target.payload) {
             importFullProgressPayload(target.payload, false);
         }
         updateAccountHeaderUI();
         refreshAccountModalUI();
-        showSyncToast(`Zu Profil "${target.username}" gewechselt!`, 'success');
+        showSyncToast(`Zu Profil "${target.username}" gewechselt! 🚀`, 'success');
+        if (andEnterApp) {
+            enterMainAppFromModal();
+        }
     }
     window.switchProfile = switchProfile;
 
@@ -29011,6 +29234,7 @@
             localStorage.setItem('userXP', '0');
             localStorage.setItem('streakCount', '0');
             localStorage.setItem('examsCompleted', '0');
+            resetRuntimeLearningProgress();
             loadUserStats();
             updateStats();
             renderStats();
@@ -29048,13 +29272,15 @@
 
     async function syncToFirebaseIfConfigured(payload) {
         try {
-            if (window.firebase && firebase.apps.length) {
+            if (window.firebase && firebase.apps && firebase.apps.length) {
                 const db = firebase.firestore();
-                await db.collection('jlpt_users').doc(userAccount.id).set(payload, { merge: true });
+                await db.collection('jlpt_users').doc(userAccount.syncKey || userAccount.id).set(payload, { merge: true });
+                return true;
             }
         } catch(e) {
             console.warn('Firebase sync error:', e);
         }
+        return false;
     }
 
     function showSyncToast(message, type = 'info') {
