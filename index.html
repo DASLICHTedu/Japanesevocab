@@ -1237,8 +1237,28 @@
         .exercise-container { background: var(--subtle-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; color: var(--text-main); }
         .exercise-feedback { margin-top: 15px; font-weight: normal; min-height: 24px; font-size: 14px; background: var(--white); color: var(--text-main); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); }
 
-        /* --- JLPT REACH & SATZ-KONTEXT STYLES --- */
-        .sensei-chat-box, #view-sensei { display: none !important; }
+        /* --- SENSEI / TUTOR, JLPT REACH & SATZ-KONTEXT STYLES --- */
+        .sensei-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 18px; }
+        .sensei-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 16px; padding: 14px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 6px; position: relative; }
+        .sensei-card:hover { transform: translateY(-2px); border-color: var(--primary-dark); box-shadow: var(--card-shadow); }
+        .sensei-card.active { border-color: var(--accent-pink); background: var(--accent-pink-light); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+        .sensei-avatar { font-size: 30px; width: 48px; height: 48px; border-radius: 50%; background: var(--subtle-bg); display: flex; align-items: center; justify-content: center; border: 2px solid var(--border-color); flex-shrink: 0; }
+        .sensei-role-badge { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: var(--badge-blue-bg); color: var(--badge-blue-text); align-self: flex-start; }
+        .sensei-chat-box { background: var(--white); border: 2px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); display: flex; flex-direction: column; height: 520px; }
+        .sensei-chat-messages { flex: 1; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: var(--subtle-bg); }
+        .sensei-msg { max-width: 88%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.55; word-wrap: break-word; }
+        .sensei-msg.tutor { background: var(--white); color: var(--text-main); border: 1px solid var(--border-color); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+        .sensei-msg.user { background: var(--primary-dark); color: #ffffff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .sensei-quick-chips { display: flex; gap: 8px; padding: 10px 16px; background: var(--white); border-top: 1px solid var(--border-color); overflow-x: auto; white-space: nowrap; }
+        .sensei-chip { padding: 6px 12px; border-radius: 16px; border: 1px solid var(--border-color); background: var(--subtle-bg); color: var(--text-main); font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.15s; }
+        .sensei-chip:hover { border-color: var(--accent-pink); background: var(--accent-pink-light); color: var(--accent-pink); }
+        .sensei-input-bar { display: flex; gap: 10px; padding: 12px 16px; background: var(--white); border-top: 1px solid var(--border-color); }
+        .sensei-input-bar input { flex: 1; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--subtle-bg); color: var(--text-main); font-size: 14px; outline: none; }
+        .sensei-input-bar input:focus { border-color: var(--primary-dark); background: var(--white); }
+        .sensei-conj-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12.5px; }
+        .sensei-conj-table td { padding: 5px 8px; border-bottom: 1px solid var(--border-color); }
+        .sensei-conj-table td:first-child { font-weight: 700; color: var(--text-light); width: 42%; }
+
         .reach-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 18px; padding: 20px; margin-bottom: 18px; box-shadow: var(--card-shadow); }
         .reach-meter-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 16px 0; }
         .reach-pillar { background: var(--subtle-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px; text-align: center; }
@@ -1424,6 +1444,7 @@
         <div class="tabs">
             <button class="tab active" onclick="switchTab('lernen')" id="tab-lernen">Lernen</button>
             <button class="tab" onclick="switchTab('reach')" id="tab-reach">🎯 JLPT Reach</button>
+            <button class="tab" onclick="switchTab('sensei')" id="tab-sensei">👨‍🏫 Sensei</button>
             <button class="tab" onclick="switchTab('liste')" id="tab-liste">Liste</button>
             <button class="tab" onclick="switchTab('lesen')" id="tab-lesen">Lesen</button>
             <button class="tab" onclick="switchTab('kana')" id="tab-kana">あア Kana</button>
@@ -2064,6 +2085,36 @@
                 </div>
             </div>
             <div id="reach-syllabus-content"></div>
+        </div>
+    </main>
+
+    <!-- NEUE ANSICHT: SENSEI / TUTOREN-LOUNGE (OHNE PERMANENTE INTRO-HEADER-BOX) -->
+    <main id="view-sensei" class="hidden">
+        <h1>👨‍🏫 Dein JLPT Sensei</h1>
+        <p class="subtitle">Frag nach Vokabeln (DE/JP/Romaji), Verb-Konjugationen, Kanji, Partikeln, Grammatik oder lass ganze japanische Sätze zerlegen.</p>
+
+        <!-- Tutor Selection Cards -->
+        <div class="sensei-grid" id="sensei-roster-grid"></div>
+
+        <!-- Clean Interactive Tutor Chat (ohne Intro-Header-Box mit Mini-Lektion & Prüf mich) -->
+        <div class="sensei-chat-box">
+            <div class="sensei-chat-messages" id="sensei-chat-messages"></div>
+
+            <div class="sensei-quick-chips" id="sensei-quick-chips">
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('what_to_learn')">📋 Was muss ich für <span class="current-lvl">N5</span> lernen?</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('explain_grammar')">📐 Grammatikpunkt erklären</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('wa_vs_ga')">⚖️ は (wa) vs. が (ga)</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('ni_vs_de')">📍 に (ni) vs. で (de)</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('te_form')">🔄 て-Form Regeln</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('kanji_tip')">漢 Kanji-Analyse</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('weak_words')">⚠️ Meine Problemwörter</button>
+                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('exam_strategy')">🏛️ JLPT Strategie</button>
+            </div>
+
+            <div class="sensei-input-bar">
+                <input type="text" id="sensei-user-input" placeholder="Frag z.B. 'konjugiere 食べる', 'Unterschied は und が', '私は学生です' oder eine Vokabel..." onkeydown="if(event.key==='Enter') handleSenseiUserSend()">
+                <button class="btn-main" style="width:auto; padding:10px 20px; font-size:14px;" onclick="handleSenseiUserSend()">Fragen →</button>
+            </div>
         </div>
     </main>
 
@@ -25280,6 +25331,7 @@
 
         if (tabId === 'lernen') updateStats();
         if (tabId === 'reach' && typeof renderReachView === 'function') renderReachView();
+        if (tabId === 'sensei' && typeof renderSenseiView === 'function') renderSenseiView();
         if (tabId === 'alltag') renderAlltagCategories();
         if (tabId === 'pfad') renderPath();
         if (tabId === 'liste') renderList();
@@ -28761,6 +28813,7 @@
 
     function explainKanjiWithSenseiModal(char) {
         speak(char);
+        openSenseiWithCustomQuery(char);
     }
     window.explainKanjiWithSenseiModal = explainKanjiWithSenseiModal;
 
@@ -28990,6 +29043,21 @@
                     <i>Tipp:</i> Sprich sie laut aus und bilde mit jedem Wort einen kurzen Satz!
                 `);
             }
+        } else if (key === 'te_form') {
+            appendSenseiMessage('user', 'Wie bilde ich die て-Form (Te-Form) im Japanischen?');
+            appendSenseiMessage('tutor', `
+                <b>🔄 Die て-Form (Te-Form) – Kompakt-Spickzettel:</b><br><br>
+                <b>1. Ichidan-Verben (る-Verben):</b> る weg → <b>て</b><br>
+                • 食べる → <b>食べて</b> · 見る → <b>見て</b><br><br>
+                <b>2. Godan-Verben (う-Verben) – Eselsbrücke:</b><br>
+                • う / つ / る → <b>って</b> (買う → 買って, 待つ → 待って)<br>
+                • む / ぶ / ぬ → <b>んで</b> (飲む → 飲んで, 遊ぶ → 遊んで)<br>
+                • く → <b>いて</b> (書く → 書いて) · <i>Ausnahme:</i> 行く → <b>行って</b><br>
+                • ぐ → <b>いで</b> (泳ぐ → 泳いで)<br>
+                • す → <b>して</b> (話す → 話して)<br><br>
+                <b>3. Unregelmäßig:</b> する → <b>して</b> · 来る (くる) → <b>来て (きて)</b><br><br>
+                <i>Tipp:</i> Schreib mir einfach <b>„konjugiere [Verb]“</b> (z.B. <i>konjugiere 書く</i>), dann zeige ich dir alle Formen direkt!
+            `);
         } else if (key === 'exam_strategy') {
             appendSenseiMessage('user', `Welche Prüfungsstrategie empfiehlst du für JLPT ${lvl}?`);
             appendSenseiMessage('tutor', `
@@ -29017,22 +29085,276 @@
     }
     window.handleSenseiUserSend = handleSenseiUserSend;
 
-    function generateSenseiKnowledgeResponse(rawQuery) {
-        const q = rawQuery.trim().toLowerCase();
-        const active = getActiveSensei();
+    // --- SMARTER SENSEI: KONJUGATION, ROMAJI, SATZANALYSE & INTENT ENGINE ---
+    const SENSEI_PARTICLE_GUIDE = {
+        'は': '<b>は (wa) – Themen-Partikel:</b> Markiert das Gesprächsthema („Was X betrifft...“) oder einen Kontrast. Beispiel: 私は学生です (Ich bin Student).',
+        'が': '<b>が (ga) – Subjekt-Partikel:</b> Hebt das genaue Subjekt hervor, steht bei neuen Infos, Fragewörtern (誰が) und bei ある/いる/好き/わかる.',
+        'を': '<b>を (o/wo) – Direktes Objekt:</b> Markiert das Ziel einer aktiven Handlung. Beispiel: りんごを食べます (Ich esse einen Apfel).',
+        'に': '<b>に (ni) – Ziel, Zeitpunkt & statischer Ort:</b> Steht für Uhrzeiten/Tage (七時に), Bewegungsziele (学校に行く) und Existenzorte (部屋にある/いる).',
+        'で': '<b>で (de) – Handlungsort & Mittel:</b> Steht für den Ort, an dem etwas aktiv <i>getan</i> wird (レストランで食べる) oder für Werkzeuge/Verkehrsmittel (電車で行く).',
+        'へ': '<b>へ (e) – Richtung:</b> Betont die Richtung einer Bewegung (日本へ行きます = Richtung Japan gehen).',
+        'と': '<b>と (to) – „und“ / „mit“ / Zitat:</b> Verbindet Nomen vollständig (パンと牛乳), bedeutet „mit jemandem“ (友達と遊ぶ) oder markiert Zitate (～と言う).',
+        'の': '<b>の (no) – Besitz & Zugehörigkeit:</b> Verbindet zwei Nomen wie „von“ (私の本 = mein Buch, 日本語の先生 = Japanischlehrer).',
+        'も': '<b>も (mo) – „auch“:</b> Ersetzt は/が/を und drückt „auch / ebenfalls“ aus (私も行きます = Ich gehe auch).',
+        'から': '<b>から (kara) – „ab / von / weil“:</b> Ausgangspunkt (九時から = ab 9 Uhr) oder Grund am Satzende (暑いから = weil es heiß ist).',
+        'まで': '<b>まで (made) – „bis“:</b> Endpunkt in Zeit oder Raum (五時まで = bis 5 Uhr, 駅まで = bis zum Bahnhof).',
+        'か': '<b>か (ka) – Fragepartikel / „oder“:</b> Macht einen Satz zur Frage (元気ですか = Geht es dir gut?) oder verbindet Alternativen (お茶かコーヒー).',
+        'よ': '<b>よ (yo) – Betonung / neue Info:</b> Am Satzende, um dem Gegenüber etwas Neues mitzuteilen oder Nachdruck zu verleihen (おいしいですよ！).',
+        'ね': '<b>ね (ne) – Zustimmung („nicht wahr?“):</b> Am Satzende, um Bestätigung zu suchen (いい天気ですね = Schönes Wetter, oder?).'
+    };
 
-        // 1. Check Grammar across all levels
-        for (const lvl of ['N5', 'N4', 'N3', 'N2', 'N1']) {
-            const gList = window.grammarData[lvl] || [];
+    function romajiToHiraganaFull(input) {
+        if (!input) return '';
+        let s = input.toLowerCase().trim();
+        // Double consonants (tt, kk, pp, ss, etc.) -> っ
+        s = s.replace(/([bcdfghjklmpqrstvwxyz])\1/g, 'っ$1');
+        // Standalone n before consonant (not y/vowel) or end -> ん
+        s = s.replace(/n(?=[bcdfghjklmpqrstvwxz]|$)/g, 'ん');
+        const keys = Object.keys(ROMAJI_TO_HIRAGANA).sort((a, b) => b.length - a.length);
+        let out = '';
+        let i = 0;
+        while (i < s.length) {
+            let matched = false;
+            for (const k of keys) {
+                if (s.startsWith(k, i)) {
+                    out += ROMAJI_TO_HIRAGANA[k];
+                    i += k.length;
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                out += s[i];
+                i++;
+            }
+        }
+        return out;
+    }
+
+    function conjugateJapaneseVerb(dictForm, kanaForm) {
+        const w = (dictForm || kanaForm || '').trim();
+        const k = (kanaForm || w).trim();
+        if (!w) return null;
+
+        // Irregular verbs
+        if (w === 'する' || w.endsWith('する')) {
+            const stem = w.slice(0, -2);
+            return { group: 'Unregelmäßig (する-Verb)', dict: w, masu: stem + 'します', te: stem + 'して', nai: stem + 'しない', ta: stem + 'した', potential: stem + 'できる' };
+        }
+        if (w === '来る' || w === 'くる') {
+            return { group: 'Unregelmäßig (来る)', dict: '来る (くる)', masu: '来ます (きます)', te: '来て (きて)', nai: '来ない (こない)', ta: '来た (きた)', potential: '来られる (こられる)' };
+        }
+        if (w === '行く' || w === 'いく') {
+            return { group: 'Godan (Ausnahme て/た)', dict: w, masu: w.slice(0, -1) + 'きます', te: w.slice(0, -1) + 'って', nai: w.slice(0, -1) + 'かない', ta: w.slice(0, -1) + 'った', potential: w.slice(0, -1) + 'ける' };
+        }
+
+        // Common Godan -ru exceptions
+        const godanRuExceptions = new Set(['帰る','かえる','走る','はしる','切る','きる','知る','しる','入る','はいる','要る','いる','喋る','しゃべる','滑る','すべる','減る','へる','蹴る','ける','参る','まいる','限る','かぎる','握る','にぎる']);
+        const last = w.slice(-1);
+        const kLast = k.slice(-1);
+        const prevKana = k.length >= 2 ? k.slice(-2, -1) : '';
+        const ieRow = 'いきしちにひみりぎじぢびぴえけせてねへめれげぜでべぺ';
+
+        const isIchidan = (last === 'る' && kLast === 'る' && ieRow.includes(prevKana) && !godanRuExceptions.has(w) && !godanRuExceptions.has(k));
+        if (isIchidan) {
+            const stem = w.slice(0, -1);
+            return { group: 'Ichidan (る-Verb)', dict: w, masu: stem + 'ます', te: stem + 'て', nai: stem + 'ない', ta: stem + 'た', potential: stem + 'られる' };
+        }
+
+        const godanMap = {
+            'う': { i: 'い', a: 'わ', e: 'え', te: 'って', ta: 'った' },
+            'く': { i: 'き', a: 'か', e: 'け', te: 'いて', ta: 'いた' },
+            'ぐ': { i: 'ぎ', a: 'が', e: 'げ', te: 'いで', ta: 'いだ' },
+            'す': { i: 'し', a: 'さ', e: 'せ', te: 'して', ta: 'した' },
+            'つ': { i: 'ち', a: 'た', e: 'て', te: 'って', ta: 'った' },
+            'ぬ': { i: 'に', a: 'な', e: 'ね', te: 'んで', ta: 'んだ' },
+            'ぶ': { i: 'び', a: 'ば', e: 'べ', te: 'んで', ta: 'んだ' },
+            'む': { i: 'み', a: 'ま', e: 'め', te: 'んで', ta: 'んだ' },
+            'る': { i: 'り', a: 'ら', e: 'れ', te: 'って', ta: 'った' }
+        };
+        const m = godanMap[last];
+        if (!m) return null;
+        const stem = w.slice(0, -1);
+        return {
+            group: 'Godan (う-Verb)',
+            dict: w,
+            masu: stem + m.i + 'ます',
+            te: stem + m.te,
+            nai: stem + m.a + 'ない',
+            ta: stem + m.ta,
+            potential: stem + m.e + 'る'
+        };
+    }
+
+    function conjugateJapaneseAdjective(dictForm, kanaForm) {
+        const w = (dictForm || kanaForm || '').trim();
+        if (!w) return null;
+        if (w === 'いい' || w === '良い' || w === 'よい') {
+            return { group: 'い-Adjektiv (unregelmäßig)', present: 'いいです', negative: 'よくないです', past: 'よかったです', pastNeg: 'よくなかったです', adverb: 'よく' };
+        }
+        const naExceptions = new Set(['きれい', '綺麗', 'きらい', '嫌い', 'ゆうめい', '有名', 'げんき', '元気', 'ていねい', '丁寧']);
+        if (w.endsWith('い') && !naExceptions.has(w) && !naExceptions.has(kanaForm)) {
+            const stem = w.slice(0, -1);
+            return { group: 'い-Adjektiv', present: w + 'です', negative: stem + 'くないです', past: stem + 'かったです', pastNeg: stem + 'くなかったです', adverb: stem + 'く' };
+        }
+        const base = w.endsWith('な') ? w.slice(0, -1) : w;
+        return { group: 'な-Adjektiv', present: base + 'です', negative: base + 'じゃないです', past: base + 'でした', pastNeg: base + 'じゃなかったです', adverb: base + 'に' };
+    }
+
+    function analyzeJapaneseSentence(sentence) {
+        const clean = sentence.replace(/[。、！？!?\s「」『』]/g, '');
+        const foundVocab = [];
+        const seenTerms = new Set();
+        const allLevels = ['N5', 'N4', 'N3', 'N2', 'N1'];
+
+        // Longest-match vocabulary scan
+        for (const lvl of allLevels) {
+            const vList = window.vocabData[lvl] || [];
+            for (const v of vList) {
+                const key = (v.kanji && v.kanji.length >= 2) ? v.kanji : (v.kanji || v.kana);
+                if (key && key.length >= 2 && clean.includes(key) && !seenTerms.has(key)) {
+                    seenTerms.add(key);
+                    foundVocab.push({ ...v, level: lvl, matched: key });
+                }
+            }
+        }
+        foundVocab.sort((a, b) => clean.indexOf(a.matched) - clean.indexOf(b.matched));
+
+        // Particles present
+        const particles = Object.keys(SENSEI_PARTICLE_GUIDE).filter(p => clean.includes(p));
+
+        // Kanji breakdown
+        const kanjiChars = [...new Set(Array.from(clean).filter(ch => /[\u4e00-\u9faf]/.test(ch)))];
+        const kanjiInfos = kanjiChars.map(ch => {
+            for (const lvl of allLevels) {
+                const k = (kanjiData[lvl] || []).find(item => item.kanji === ch);
+                if (k) return `<b>${ch}</b> = ${k.de} (${k.on || '-'} / ${k.kun || '-'}, ${lvl})`;
+            }
+            return `<b>${ch}</b>`;
+        });
+
+        const escSent = sentence.replace(/'/g, "\\'");
+        return { foundVocab: foundVocab.slice(0, 8), particles: particles.slice(0, 5), kanjiInfos: kanjiInfos.slice(0, 8), escSent };
+    }
+
+    function generateSenseiKnowledgeResponse(rawQuery) {
+        const trimmed = rawQuery.trim();
+        const q = trimmed.toLowerCase();
+        const active = getActiveSensei();
+        const lvl = state.level;
+
+        // 0. Intent: Greeting / Smalltalk
+        if (/^(hallo|hi|hey|servus|moin|guten tag|konnichiwa|ohayou|おはよう|こんにちは|こんばんは|danke|arigatou|ありがとう)[!.\s]*$/i.test(trimmed)) {
+            return `
+                <b>${active.avatar} ${active.name}:</b><br>
+                こんにちは！ Schön, dass du da bist. Wobei kann ich dir heute für <b>JLPT ${lvl}</b> helfen?<br>
+                • Gib eine <b>Vokabel</b> ein (Deutsch, Japanisch oder Romaji)<br>
+                • Schreib <b>„konjugiere 食べる“</b> für alle Verbformen<br>
+                • Füge einen <b>japanischen Satz</b> ein, damit ich ihn für dich zerlege!
+            `;
+        }
+
+        // 1. Intent: Personal progress / what to study next
+        if (/(fortschritt|statistik|wie weit|was soll ich|empfehlung|lernplan|schwäche|problemwörter)/i.test(q)) {
+            const stats = calculateLevelReachStats(lvl);
+            const now = Date.now();
+            const srsDue = (window.vocabData[lvl] || []).filter(w => w.learned && (!w.nextReview || w.nextReview <= now)).length;
+            const weak = (window.vocabData[lvl] || []).filter(w => (w.mistakeCount && w.mistakeCount > 0) || w.srsBox === 1).slice(0, 4);
+            return `
+                <b>${active.avatar} ${active.name} – Deine persönliche Lern-Analyse (${lvl}):</b><br><br>
+                • <b>JLPT ${lvl} Reach:</b> <b>${stats.overallReach}%</b> (Prognose: ~${stats.estimatedPoints}/180 Pkt.)<br>
+                • <b>Vokabeln:</b> ${stats.vLearned}/${stats.vTotal} (${stats.vPct}%) · <b>SRS fällig:</b> ${srsDue}<br>
+                • <b>Grammatik:</b> ${stats.gLearned}/${stats.gTotal} (${stats.gPct}%) · <b>Kanji:</b> ${stats.kLearned}/${stats.kTotal} (${stats.kPct}%)<br><br>
+                ${weak.length ? `<b>Fokus-Wörter zum Wiederholen:</b><br>${weak.map(w => `• <b>${w.kanji || w.kana}</b> (${w.kana}) = ${w.de}`).join('<br>')}<br><br>` : ''}
+                <b>Meine Empfehlung jetzt:</b> ${srsDue > 0 ? `Starte zuerst dein <b>Smart Review (${srsDue} Wörter)</b>!` : `Übe heute eine Runde <b>Satz-Kontext</b> für ${lvl}, um Vokabeln im echten Satz zu verankern.`}<br>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+                    <button class="sensei-chip" onclick="setMode('satz'); startLearning(-1);">💬 Satz-Kontext starten</button>
+                    <button class="sensei-chip" onclick="switchTab('reach')">🎯 JLPT Reach öffnen</button>
+                </div>
+            `;
+        }
+
+        // 2. Intent: Particle comparisons & individual particles
+        if ((q.includes('は') && q.includes('が')) || (q.includes('wa') && q.includes('ga'))) {
+            return `
+                <b>⚖️ Unterschied は (wa) vs. が (ga):</b><br><br>
+                • <b>は (wa)</b> = Thema („Was X betrifft...“) & Kontrast. Fokus liegt auf der Aussage <i>nach</i> は: <b>私は田中です</b>.<br>
+                • <b>が (ga)</b> = Konkretes Subjekt („Genau X ist es!“), neue Infos, Fragewörter (<b>誰が</b>来たの？) und Verben wie ある/いる/好き/わかる (<b>猫がいます</b>).
+            `;
+        }
+        if ((q.includes('に') && q.includes('で')) || (/\bni\b/.test(q) && /\bde\b/.test(q))) {
+            return `
+                <b>📍 Unterschied に (ni) vs. で (de):</b><br><br>
+                • <b>に (ni)</b> = Statischer Ort (いる/ある/住む), Ziel einer Bewegung (学校<b>に</b>行く) oder exakter Zeitpunkt (七時<b>に</b>).<br>
+                • <b>で (de)</b> = Aktiver Handlungsort (カフェ<b>で</b>勉強する) oder Mittel/Verkehrsmittel (バス<b>で</b>行く).
+            `;
+        }
+        if (/(te-form|te form|て形|て-form|てフォーム)/i.test(q) && q.length < 30) {
+            return `
+                <b>🔄 Bildung der て-Form (Te-Form):</b><br><br>
+                • <b>Ichidan (る-Verben):</b> る → <b>て</b> (食べる → 食べて)<br>
+                • <b>Godan:</b> う/つ/る → <b>って</b> · む/ぶ/ぬ → <b>んで</b> · く → <b>いて</b> (Ausnahme: 行く → 行って) · ぐ → <b>いで</b> · す → <b>して</b><br>
+                • <b>Unregelmäßig:</b> する → <b>して</b> · 来る → <b>来て (きて)</b><br><br>
+                <i>Tipp:</i> Schreib <b>„konjugiere [Verb]“</b>, um jedes beliebige Verb komplett durchkonjugieren zu lassen!
+            `;
+        }
+        if (/(keigo|höflich|sonkeigo|kenjougo|敬語)/i.test(q)) {
+            return `
+                <b>🙇‍♂️ Keigo (敬語) – Die 3 Höflichkeitsstufen:</b><br><br>
+                1. <b>Teineigo (丁寧語 – Höflich):</b> です / ます – Standard gegenüber Fremden & Kollegen.<br>
+                2. <b>Sonkeigo (尊敬語 – Respektsprache):</b> Hebt das Gegenüber an (z.B. 食べる → 召し上がる, 行く → いらっしゃる).<br>
+                3. <b>Kenjōgo (謙譲語 – Bescheidenheitssprache):</b> Senkt die eigene Handlung ab (z.B. 食べる → いただく, 行く → 参る).
+            `;
+        }
+        if (/(partikel|joshi|助詞)/i.test(q) && q.length < 30) {
+            return `<b>🧩 Die wichtigsten japanischen Partikeln:</b><br><br>` +
+                ['は','が','を','に','で','へ','と','の','も'].map(p => `• ${SENSEI_PARTICLE_GUIDE[p]}`).join('<br>');
+        }
+        if (SENSEI_PARTICLE_GUIDE[trimmed]) {
+            return `<b>${active.avatar} ${active.name} – Partikel-Erklärung:</b><br><br>${SENSEI_PARTICLE_GUIDE[trimmed]}`;
+        }
+
+        // 3. Extract core term from natural German/English questions
+        let extracted = trimmed
+            .replace(/^(was bedeutet|was heißt|was ist|wie sagt man|wie schreibt man|übersetze|erkläre mir|erkläre|konjugiere|konjugation von|beispielsatz für|beispiel für|zerlege|analysiere|what does|how do you say|explain|conjugate)\s+/i, '')
+            .replace(/\s+(auf japanisch|auf deutsch|in japanese|in german|bedeutet|heißt|erklären)$/i, '')
+            .replace(/[?!„“"'\u300c\u300d]/g, '')
+            .trim();
+        const isConjugationRequest = /(konjugier|formen von|te-form von|masu-form von|nai-form von|conjugat)/i.test(q);
+        const extractedLower = extracted.toLowerCase();
+        const romajiAsHira = /^[a-z\s\-]+$/i.test(extracted) ? romajiToHiraganaFull(extracted) : '';
+
+        // 4. If user entered a full Japanese sentence (>= 5 JP chars and not a single dictionary word), analyze it!
+        const jpCharCount = (extracted.match(/[\u3040-\u30ff\u4e00-\u9faf]/g) || []).length;
+        const isExactSingleWord = ['N5','N4','N3','N2','N1'].some(l =>
+            (window.vocabData[l] || []).some(v => v.kanji === extracted || v.kana === extracted)
+        );
+        if (jpCharCount >= 5 && !isExactSingleWord && !isConjugationRequest) {
+            const analysis = analyzeJapaneseSentence(extracted);
+            return `
+                <b>${active.avatar} ${active.name} – Satz-Analyse:</b><br>
+                <div style="margin:6px 0 10px 0; padding:8px 12px; background:var(--subtle-bg); border-radius:10px; font-weight:700; color:var(--primary-dark);">
+                    「${escapeHtmlStr(extracted)}」 <button class="sensei-chip" style="margin-left:6px;" onclick="speak('${analysis.escSent}')">🔊 Anhören</button>
+                </div>
+                ${analysis.foundVocab.length ? `<b>📚 Erkannte Vokabeln:</b><br>${analysis.foundVocab.map(v => `• <b>${v.kanji || v.kana}</b> (${v.kana}) = ${v.de} <span class="badge">${v.level} · ${v.type}</span>`).join('<br>')}<br><br>` : ''}
+                ${analysis.particles.length ? `<b>🧩 Verwendete Partikeln:</b><br>${analysis.particles.map(p => `• ${SENSEI_PARTICLE_GUIDE[p]}`).join('<br>')}<br><br>` : ''}
+                ${analysis.kanjiInfos.length ? `<b>漢 Kanji-Aufschlüsselung:</b><br>${analysis.kanjiInfos.map(k => `• ${k}`).join('<br>')}` : ''}
+            `;
+        }
+
+        // 5. Check Grammar across all levels
+        for (const l of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+            const gList = window.grammarData[l] || [];
             const foundG = gList.find(g =>
-                g.title.toLowerCase().includes(q) ||
-                g.summary.toLowerCase().includes(q)
+                g.title.toLowerCase().includes(extractedLower) ||
+                (romajiAsHira && g.title.includes(romajiAsHira)) ||
+                g.summary.toLowerCase().includes(extractedLower)
             );
-            if (foundG) {
+            if (foundG && extractedLower.length >= 2) {
                 const sec = foundG.explanation?.sections?.[0];
                 const exs = sec?.examples || [];
                 return `
-                    <b>${active.avatar} ${active.name} – Grammatik-Erklärung (${lvl}): ${foundG.title}</b><br><br>
+                    <b>${active.avatar} ${active.name} – Grammatik (${l}): ${foundG.title}</b><br><br>
                     ${foundG.explanation?.introduction || foundG.summary}<br><br>
                     ${sec ? `<b>${sec.title}:</b> ${sec.content}<br>` : ''}
                     ${exs.map(e => `• <b>${e.jp}</b> → <i>${e.de}</i>`).join('<br>')}
@@ -29040,66 +29362,149 @@
             }
         }
 
-        // 2. Check Kanji across all levels
-        for (const lvl of ['N5', 'N4', 'N3', 'N2', 'N1']) {
-            const kList = kanjiData[lvl] || [];
-            const foundK = kList.find(k =>
-                k.kanji === rawQuery.trim() ||
-                (k.de && k.de.toLowerCase() === q)
-            );
-            if (foundK) {
-                const relatedVocab = (window.vocabData[lvl] || []).filter(v => v.kanji && v.kanji.includes(foundK.kanji)).slice(0, 4);
+        // 6. Check Kanji across all levels (exact char or exact meaning)
+        if (extracted.length === 1 && /[\u4e00-\u9faf]/.test(extracted)) {
+            for (const l of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+                const foundK = (kanjiData[l] || []).find(k => k.kanji === extracted);
+                if (foundK) {
+                    const relatedVocab = [];
+                    for (const vl of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+                        for (const v of (window.vocabData[vl] || [])) {
+                            if (v.kanji && v.kanji.includes(foundK.kanji)) {
+                                relatedVocab.push({ ...v, level: vl });
+                                if (relatedVocab.length >= 5) break;
+                            }
+                        }
+                        if (relatedVocab.length >= 5) break;
+                    }
+                    return `
+                        <b>${active.avatar} ${active.name} – Kanji-Analyse (${l}): 「${foundK.kanji}」</b>
+                        <button class="sensei-chip" style="margin-left:6px;" onclick="speak('${foundK.kanji}')">🔊</button><br><br>
+                        • <b>Bedeutung:</b> ${foundK.de}<br>
+                        • <b>On-Lesung:</b> ${foundK.on || '-'} | <b>Kun-Lesung:</b> ${foundK.kun || '-'}<br>
+                        • <b>Striche:</b> ${foundK.strokes || '-'}<br><br>
+                        ${relatedVocab.length ? `<b>Wichtige Wörter mit ${foundK.kanji}:</b><br>${relatedVocab.map(v => `• <b>${v.kanji}</b> (${v.kana}) = ${v.de} <span class="badge">${v.level}</span>`).join('<br>')}` : ''}
+                    `;
+                }
+            }
+        }
+
+        // 7. Search Vocabulary + Everyday Phrases (exact, kana, Romaji, or German/English)
+        const exactMatches = [];
+        const partialMatches = [];
+        for (const l of ['N5', 'N4', 'N3', 'N2', 'N1']) {
+            for (const v of (window.vocabData[l] || [])) {
+                const vK = (v.kanji || '').toLowerCase();
+                const vKana = (v.kana || '').toLowerCase();
+                const vDe = (v.de || '').toLowerCase();
+                const vEn = (v.en || '').toLowerCase();
+                if (vK === extractedLower || vKana === extractedLower || (romajiAsHira && vKana === romajiAsHira) || vDe === extractedLower || vEn === extractedLower) {
+                    exactMatches.push({ ...v, level: l });
+                } else if (extractedLower.length >= 2 && (vDe.includes(extractedLower) || vEn.includes(extractedLower) || vK.includes(extractedLower) || vKana.includes(extractedLower))) {
+                    if (partialMatches.length < 5) partialMatches.push({ ...v, level: l });
+                }
+            }
+        }
+        // Also check everydayVocabData
+        for (const [cat, arr] of Object.entries(window.everydayVocabData || {})) {
+            for (const v of arr) {
+                if ((v.kanji || '').includes(extracted) || (v.kana || '').includes(extracted) || (v.de || '').toLowerCase().includes(extractedLower)) {
+                    if (partialMatches.length < 5) partialMatches.push({ ...v, level: 'Alltag' });
+                }
+            }
+        }
+
+        const matches = [...exactMatches, ...partialMatches].slice(0, 4);
+        if (matches.length > 0) {
+            const primary = matches[0];
+            const ctx = typeof getVocabContextSentence === 'function' ? getVocabContextSentence(primary, primary.level) : null;
+            const escWord = (primary.kana || primary.kanji || '').replace(/'/g, "\\'");
+            const escSent = ctx ? (ctx.jpPlain || '').replace(/'/g, "\\'") : '';
+
+            let conjHtml = '';
+            if (primary.type && primary.type.toLowerCase().includes('verb')) {
+                const c = conjugateJapaneseVerb(primary.kanji || primary.kana, primary.kana);
+                if (c) {
+                    conjHtml = `
+                        <div style="margin-top:10px; padding:10px; background:var(--subtle-bg); border-radius:10px; border:1px solid var(--border-color);">
+                            <b>🔄 Verb-Konjugation (${c.group}):</b>
+                            <table class="sensei-conj-table">
+                                <tr><td>Höflich (ます)</td><td><b>${c.masu}</b></td></tr>
+                                <tr><td>て-Form</td><td><b>${c.te}</b></td></tr>
+                                <tr><td>Verneinung (ない)</td><td><b>${c.nai}</b></td></tr>
+                                <tr><td>Vergangenheit (た)</td><td><b>${c.ta}</b></td></tr>
+                                <tr><td>Potential (können)</td><td><b>${c.potential}</b></td></tr>
+                            </table>
+                        </div>
+                    `;
+                }
+            } else if (primary.type && primary.type.toLowerCase().includes('adjektiv')) {
+                const a = conjugateJapaneseAdjective(primary.kanji || primary.kana, primary.kana);
+                if (a) {
+                    conjHtml = `
+                        <div style="margin-top:10px; padding:10px; background:var(--subtle-bg); border-radius:10px; border:1px solid var(--border-color);">
+                            <b>🎨 Adjektiv-Formen (${a.group}):</b>
+                            <table class="sensei-conj-table">
+                                <tr><td>Gegenwart</td><td><b>${a.present}</b></td></tr>
+                                <tr><td>Verneinung</td><td><b>${a.negative}</b></td></tr>
+                                <tr><td>Vergangenheit</td><td><b>${a.past}</b></td></tr>
+                                <tr><td>Adverbial</td><td><b>${a.adverb}</b></td></tr>
+                            </table>
+                        </div>
+                    `;
+                }
+            }
+
+            // Kanji components of primary word
+            const kChars = Array.from(primary.kanji || '').filter(ch => /[\u4e00-\u9faf]/.test(ch));
+            const kParts = kChars.map(ch => {
+                for (const l of ['N5','N4','N3','N2','N1']) {
+                    const fk = (kanjiData[l] || []).find(item => item.kanji === ch);
+                    if (fk) return `<b>${ch}</b> (${fk.de})`;
+                }
+                return `<b>${ch}</b>`;
+            });
+
+            return `
+                <b>${active.avatar} ${active.name} – Erklärung & Kontext:</b>
+                <button class="sensei-chip" style="margin-left:6px;" onclick="speak('${escWord}')">🔊 Wort</button><br><br>
+                ${matches.map(m => `• <b>${m.kanji || m.kana}</b> (${m.kana}) = <b>${m.de}</b> <span class="badge">${m.level} · ${m.type}</span>`).join('<br>')}
+                ${kParts.length ? `<div style="margin-top:8px; font-size:13px;">漢 <b>Kanji-Bausteine:</b> ${kParts.join(' + ')}</div>` : ''}
+                ${ctx ? `<div style="margin-top:10px; padding:10px 12px; background:var(--subtle-bg); border-left:3px solid var(--accent-pink); border-radius:8px;">
+                    <div><b>💬 Beispielsatz:</b> ${ctx.jpHighlighted} <button class="sensei-chip" style="padding:2px 8px; margin-left:4px;" onclick="speak('${escSent}')">🔊</button></div>
+                    <div style="color:var(--text-light); margin-top:3px;">→ ${ctx.de}</div>
+                </div>` : ''}
+                ${conjHtml}
+            `;
+        }
+
+        // 8. If conjugation was explicitly requested for a verb not in vocab list
+        if (isConjugationRequest && extracted) {
+            const targetVerb = romajiAsHira || extracted;
+            const c = conjugateJapaneseVerb(targetVerb, targetVerb);
+            if (c) {
                 return `
-                    <b>${active.avatar} ${active.name} – Kanji-Analyse (${lvl}): 「${foundK.kanji}」</b><br><br>
-                    • <b>Bedeutung:</b> ${foundK.de}<br>
-                    • <b>On-Lesung:</b> ${foundK.on || '-'} | <b>Kun-Lesung:</b> ${foundK.kun || '-'}<br>
-                    • <b>Strichanzahl:</b> ${foundK.strokes || '-'}<br><br>
-                    ${relatedVocab.length ? `<b>Wichtige Wörter mit ${foundK.kanji}:</b><br>${relatedVocab.map(v => `• <b>${v.kanji}</b> (${v.kana}) = ${v.de}`).join('<br>')}` : ''}
+                    <b>${active.avatar} ${active.name} – Konjugation für 「${targetVerb}」 (${c.group}):</b>
+                    <table class="sensei-conj-table">
+                        <tr><td>Höflich (ます)</td><td><b>${c.masu}</b></td></tr>
+                        <tr><td>て-Form</td><td><b>${c.te}</b></td></tr>
+                        <tr><td>Verneinung (ない)</td><td><b>${c.nai}</b></td></tr>
+                        <tr><td>Vergangenheit (た)</td><td><b>${c.ta}</b></td></tr>
+                        <tr><td>Potential (können)</td><td><b>${c.potential}</b></td></tr>
+                    </table>
                 `;
             }
         }
 
-        // 3. Check Vocabulary across all levels
-        const matches = [];
-        for (const lvl of ['N5', 'N4', 'N3', 'N2', 'N1']) {
-            const vList = window.vocabData[lvl] || [];
-            for (const v of vList) {
-                if (
-                    (v.kanji && v.kanji.toLowerCase() === q) ||
-                    (v.kana && v.kana.toLowerCase() === q) ||
-                    (v.de && v.de.toLowerCase().includes(q))
-                ) {
-                    matches.push({ ...v, level: lvl });
-                    if (matches.length >= 4) break;
-                }
-            }
-            if (matches.length >= 4) break;
-        }
-
-        if (matches.length > 0) {
-            const primary = matches[0];
-            let sampleSentence = '';
-            if (primary.type === 'Verb') {
-                sampleSentence = `<i>Beispielstruktur:</i> 毎日、<b>${primary.kanji || primary.kana}</b> (Im Satz steht das Verb am Ende).`;
-            } else if (primary.type && primary.type.includes('Adjektiv')) {
-                sampleSentence = `<i>Beispielstruktur:</i> とても <b>${primary.kanji || primary.kana}</b> です (Sehr ${primary.de}).`;
-            } else {
-                sampleSentence = `<i>Beispielstruktur:</i> これは <b>${primary.kanji || primary.kana}</b> です (Das ist ${primary.de}).`;
-            }
-            return `
-                <b>${active.avatar} ${active.name} – Wörterbuch & Tutor-Erklärung:</b><br><br>
-                ${matches.map(m => `• <b>${m.kanji || m.kana}</b> (${m.kana}) = <b>${m.de}</b> <span class="badge">${m.level} · ${m.type}</span>`).join('<br>')}<br><br>
-                ${sampleSentence}
-            `;
-        }
-
-        // 4. Fallback intelligent tutor advice
-        const bp = JLPT_LEVEL_BLUEPRINTS[state.level] || JLPT_LEVEL_BLUEPRINTS.N5;
+        // 9. Smart fallback
+        const bp = JLPT_LEVEL_BLUEPRINTS[lvl] || JLPT_LEVEL_BLUEPRINTS.N5;
         return `
             <b>${active.avatar} ${active.name}:</b><br>
-            Zu <i>„${rawQuery}“</i> empfehle ich dir auf deinem aktuellen Level <b>JLPT ${state.level}</b>:<br>
-            • Schau dir die <b>${bp.focusAreas[0]}</b> an.<br>
-            • Du kannst mich jederzeit nach einem konkreten <b>Kanji</b> (z.B. 食, 車), einer <b>Vokabel</b> (auf Deutsch oder Japanisch) oder einer <b>Grammatikregel</b> (z.B. て-Form, はおろか, につれて) fragen!
+            Zu <i>„${escapeHtmlStr(rawQuery)}“</i> habe ich keinen exakten Eintrag gefunden, aber so kann ich dir optimal helfen:<br>
+            • <b>Vokabeln & Romaji:</b> z.B. <i>„食べる“</i>, <i>„taberu“</i> oder <i>„Bahnhof“</i><br>
+            • <b>Konjugationen:</b> z.B. <i>„konjugiere 書く“</i> oder <i>„て-Form“</i><br>
+            • <b>Satz-Analyse:</b> Füge einfach einen ganzen japanischen Satz ein (z.B. <i>„私は毎日日本語を勉強します“</i>)<br>
+            • <b>Partikeln & Grammatik:</b> z.B. <i>„は vs が“</i>, <i>„に vs で“</i>, <i>„Keigo“</i> oder deinen aktuellen <b>${lvl}</b>-Fokus: <i>${bp.focusAreas[0]}</i>.
         `;
     }
 
