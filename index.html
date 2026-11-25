@@ -1237,26 +1237,8 @@
         .exercise-container { background: var(--subtle-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; color: var(--text-main); }
         .exercise-feedback { margin-top: 15px; font-weight: normal; min-height: 24px; font-size: 14px; background: var(--white); color: var(--text-main); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); }
 
-        /* --- SENSEI / TUTOR & JLPT REACH SYSTEM STYLES --- */
-        .sensei-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px; }
-        .sensei-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 16px; padding: 18px; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 8px; position: relative; }
-        .sensei-card:hover { transform: translateY(-3px); border-color: var(--primary-dark); box-shadow: var(--card-shadow); }
-        .sensei-card.active { border-color: var(--accent-pink); background: var(--accent-pink-light); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-        .sensei-avatar { font-size: 38px; width: 60px; height: 60px; border-radius: 50%; background: var(--subtle-bg); display: flex; align-items: center; justify-content: center; border: 2px solid var(--border-color); }
-        .sensei-role-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 10px; background: var(--badge-blue-bg); color: var(--badge-blue-text); align-self: flex-start; }
-        .sensei-chat-box { background: var(--white); border: 2px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); display: flex; flex-direction: column; height: 480px; }
-        .sensei-chat-header { padding: 14px 20px; background: var(--primary-dark); color: #ffffff; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-        .sensei-chat-messages { flex: 1; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: var(--subtle-bg); }
-        .sensei-msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.55; word-wrap: break-word; }
-        .sensei-msg.tutor { background: var(--white); color: var(--text-main); border: 1px solid var(--border-color); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
-        .sensei-msg.user { background: var(--primary-dark); color: #ffffff; align-self: flex-end; border-bottom-right-radius: 4px; }
-        .sensei-quick-chips { display: flex; gap: 8px; padding: 10px 16px; background: var(--white); border-top: 1px solid var(--border-color); overflow-x: auto; white-space: nowrap; }
-        .sensei-chip { padding: 6px 12px; border-radius: 16px; border: 1px solid var(--border-color); background: var(--subtle-bg); color: var(--text-main); font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.15s; }
-        .sensei-chip:hover { border-color: var(--accent-pink); background: var(--accent-pink-light); color: var(--accent-pink); }
-        .sensei-input-bar { display: flex; gap: 10px; padding: 12px 16px; background: var(--white); border-top: 1px solid var(--border-color); }
-        .sensei-input-bar input { flex: 1; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--subtle-bg); color: var(--text-main); font-size: 14px; outline: none; }
-        .sensei-input-bar input:focus { border-color: var(--primary-dark); background: var(--white); }
-
+        /* --- JLPT REACH & SATZ-KONTEXT STYLES --- */
+        .sensei-chat-box, #view-sensei { display: none !important; }
         .reach-card { background: var(--white); border: 2px solid var(--border-color); border-radius: 18px; padding: 20px; margin-bottom: 18px; box-shadow: var(--card-shadow); }
         .reach-meter-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 16px 0; }
         .reach-pillar { background: var(--subtle-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px; text-align: center; }
@@ -1266,6 +1248,123 @@
         .syllabus-tab { padding: 8px 16px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--white); color: var(--text-main); font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.15s; }
         .syllabus-tab.active { background: var(--primary-dark); color: #ffffff; border-color: var(--primary-dark); }
         .tutor-explain-box { margin-top: 14px; padding: 16px; border-radius: 14px; background: var(--subtle-bg); border: 1.5px solid var(--accent-pink); color: var(--text-main); text-align: left; font-size: 14px; line-height: 1.6; animation: fadeIn 0.25s ease-out; }
+
+        /* --- SATZ-KONTEXT LERNMODUS STYLES --- */
+        .ctx-sentence-box {
+            margin-top: 16px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: var(--subtle-bg);
+            border: 1.5px solid var(--border-color);
+            border-left: 4px solid var(--accent-pink);
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .ctx-sentence-jp {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            line-height: 1.55;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .ctx-sentence-de {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 5px;
+            line-height: 1.45;
+        }
+        .ctx-word-highlight {
+            color: var(--accent-pink);
+            background: var(--accent-pink-light);
+            padding: 1px 7px;
+            border-radius: 6px;
+            font-weight: 800;
+            text-decoration: underline;
+            text-decoration-color: var(--accent-pink);
+            text-underline-offset: 3px;
+        }
+        .ctx-word-blank {
+            display: inline-block;
+            min-width: 76px;
+            padding: 2px 10px;
+            margin: 0 3px;
+            border-radius: 8px;
+            background: var(--accent-pink-light);
+            border: 2px dashed var(--accent-pink);
+            color: var(--accent-pink);
+            font-weight: 800;
+            text-align: center;
+        }
+        .fc-ctx-front {
+            margin-top: 14px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: var(--subtle-bg);
+            border: 1px solid var(--border-color);
+            font-size: 15px;
+            color: var(--text-main);
+            max-width: 92%;
+            text-align: center;
+            line-height: 1.45;
+        }
+        .fc-ctx-back {
+            margin-top: 14px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            font-size: 14px;
+            color: #ffffff;
+            max-width: 92%;
+            text-align: center;
+            line-height: 1.45;
+        }
+        .sentence-card-main {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 28px 24px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+        .sentence-big-jp {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.6;
+            margin: 14px 0 8px 0;
+        }
+        .sentence-big-reading {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 14px;
+        }
+        .sentence-big-de {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+            background: var(--subtle-bg);
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            margin: 14px 0;
+            line-height: 1.5;
+        }
+        .sentence-word-spotlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            border-radius: 14px;
+            background: var(--accent-pink-light);
+            color: var(--accent-pink);
+            font-weight: 700;
+            font-size: 15px;
+            margin-top: 6px;
+        }
     </style>
     <link rel="manifest" href="manifest.json" />
     <!-- NEUE STYLES FÜR LEVEL-AUSWAHL-MODAL -->
@@ -1301,6 +1400,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/kanji.js@latest/dist/kanji.min.js"></script>
+</head>
+<body>
     <div class="app-top-banner">
         <div class="app-top-title">JLPT StudyDE</div>
         <div class="app-top-sub">powered by Duckling</div>
@@ -1323,7 +1424,6 @@
         <div class="tabs">
             <button class="tab active" onclick="switchTab('lernen')" id="tab-lernen">Lernen</button>
             <button class="tab" onclick="switchTab('reach')" id="tab-reach">🎯 JLPT Reach</button>
-            <button class="tab" onclick="switchTab('sensei')" id="tab-sensei">👨‍🏫 Sensei</button>
             <button class="tab" onclick="switchTab('liste')" id="tab-liste">Liste</button>
             <button class="tab" onclick="switchTab('lesen')" id="tab-lesen">Lesen</button>
             <button class="tab" onclick="switchTab('kana')" id="tab-kana">あア Kana</button>
@@ -1447,7 +1547,7 @@
         <div class="card-grid">
             <div class="option-card active" id="mode-karteikarten" onclick="setMode('karteikarten', this)">
                 <h3 id="ui-mode-flash">🗂️ Karteikarten</h3>
-                <p id="ui-mode-flash-desc">3D-Karte umdrehen, Audio & SRS</p>
+                <p id="ui-mode-flash-desc">3D-Karte umdrehen, Beispielsatz, Audio & SRS</p>
             </div>
             <div class="option-card" id="mode-schreiben" onclick="setMode('schreiben', this)">
                 <h3 id="ui-mode-write">✍️ Schreib-Training</h3>
@@ -1460,6 +1560,10 @@
             <div class="option-card" id="mode-match" onclick="setMode('match', this)">
                 <h3 id="ui-mode-match">🧩 Speed-Match</h3>
                 <p id="ui-mode-match-desc">Paare auf Zeit zuordnen</p>
+            </div>
+            <div class="option-card" id="mode-satz" onclick="setMode('satz', this)" style="grid-column: 1 / -1; border-color: var(--accent-pink);">
+                <h3 id="ui-mode-sentence">💬 Satz-Kontext (Im Satz lernen) <span class="badge" style="background:var(--accent-pink); color:white; margin-left:6px;">NEU</span></h3>
+                <p id="ui-mode-sentence-desc">Vokabeln im ganzen japanischen Satz mit deutscher Übersetzung, Audio & Lückentext-Training lernen statt nur einzeln</p>
             </div>
         </div>
 
@@ -1646,11 +1750,10 @@
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
             <div>
                 <h1>Grammatik Trainer <span class="badge" id="grammatik-level-badge">N5</span></h1>
-                <p class="subtitle" style="margin-bottom:0;">Lerne wichtige Grammatikregeln, frag deinen Sensei und teste dein Wissen.</p>
+                <p class="subtitle" style="margin-bottom:0;">Lerne wichtige Grammatikregeln und teste dein Wissen.</p>
             </div>
             <div style="display:flex; gap:8px;">
                 <button class="btn-main" style="width:auto; padding:10px 18px; font-size:13px;" onclick="startQuickGrammarTest()">📐 Grammatik-Test (<span class="current-lvl">N5</span>) starten</button>
-                <button class="btn-main" style="width:auto; padding:10px 18px; font-size:13px; background:var(--accent-pink);" onclick="openSenseiWithTopic('grammar_overview')">👨‍🏫 Sensei fragen</button>
             </div>
         </div>
         
@@ -1964,46 +2067,78 @@
         </div>
     </main>
 
-    <!-- NEUE ANSICHT: SENSEI / TUTOREN-LOUNGE -->
-    <main id="view-sensei" class="hidden">
-        <h1>👨‍🏫 Deine JLPT Sensei-Tutoren</h1>
-        <p class="subtitle">Wähle deinen persönlichen Tutor zum Unterrichten, Erklären von Grammatik, Vokabel-Nuancen, Eselsbrücken und Prüfungsfragen.</p>
+    <!-- NEUE ANSICHT: SATZ-KONTEXT VOKABEL-TRAINER (IM SATZ LERNEN) -->
+    <main id="view-sentence-context" class="hidden">
+        <div class="fc-header">
+            <span style="cursor:pointer;" onclick="switchTab('lernen')">← Menü</span>
+            <span id="sctx-header-title" style="font-weight:800; color:var(--primary-dark);">💬 Satz-Kontext Training</span>
+            <span style="font-weight:700;"><span id="sctx-current-num">1</span>/<span id="sctx-total-num">20</span></span>
+        </div>
 
-        <!-- Tutor Selection Cards -->
-        <div class="sensei-grid" id="sensei-roster-grid"></div>
+        <div class="toggle-group" style="margin-bottom: 12px;">
+            <button class="toggle-btn" onclick="switchActiveBlockMode('karteikarten')">🗂️ Karten</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('schreiben')">✍️ Schreiben</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('multiple')">🎯 Multiple Choice</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('match')">🧩 Match</button>
+            <button class="toggle-btn active" onclick="switchActiveBlockMode('satz')">💬 Satz</button>
+        </div>
 
-        <!-- Interactive Tutor Classroom & Chat -->
-        <div class="sensei-chat-box">
-            <div class="sensei-chat-header">
-                <div style="display:flex; align-items:center; gap:12px;">
-                    <span id="active-sensei-avatar" style="font-size:28px;">🌸</span>
-                    <div>
-                        <div id="active-sensei-name" style="font-weight:800; font-size:16px;">Hana-sensei</div>
-                        <div id="active-sensei-specialty" style="font-size:11px; opacity:0.85;">Grundlagen, Motivation & N5/N4</div>
-                    </div>
+        <div class="toggle-group" style="margin-bottom: 14px; background: var(--subtle-bg);">
+            <button class="toggle-btn active" id="sctx-sub-study" onclick="setSentenceContextSubMode('study')" style="padding:9px; font-size:12.5px;">📖 Kontext-Karte (Satz & Übersetzung)</button>
+            <button class="toggle-btn" id="sctx-sub-cloze" onclick="setSentenceContextSubMode('cloze')" style="padding:9px; font-size:12.5px;">🧩 Satz-Lückentext (Quiz)</button>
+            <button class="toggle-btn" id="sctx-sub-write" onclick="setSentenceContextSubMode('write')" style="padding:9px; font-size:12.5px;">✍️ Im Satz schreiben</button>
+        </div>
+
+        <div class="progress-bar" style="margin-bottom: 18px;">
+            <div class="progress-fill" id="sctx-progress" style="width: 5%;"></div>
+        </div>
+
+        <div class="sentence-card-main">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <span class="badge" id="sctx-word-type">Verb</span>
+                    <span class="srs-pill" id="sctx-srs-badge">Box 1</span>
                 </div>
-                <div style="display:flex; gap:8px;">
-                    <button class="btn-stroke-ctl" style="background:rgba(255,255,255,0.15); color:white; border:none;" onclick="triggerSenseiMiniLesson()">🎓 Mini-Lektion (<span class="current-lvl">N5</span>)</button>
-                    <button class="btn-stroke-ctl" style="background:rgba(255,255,255,0.15); color:white; border:none;" onclick="triggerSenseiQuizMe()">🎯 Prüf mich!</button>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <button type="button" class="btn-stroke-ctl" onclick="speakCurrentContextSentence()" title="Ganzen Beispielsatz vorlesen">🔊 Satz anhören</button>
+                    <button type="button" class="btn-stroke-ctl" onclick="speakCurrentWord(event)" title="Einzelne Vokabel vorlesen">🔊 Wort</button>
+                    <button type="button" class="star-btn" id="sctx-fav-btn" onclick="toggleCurrentWordFavorite(event)" title="Als Favorit markieren">★</button>
                 </div>
             </div>
 
-            <div class="sensei-chat-messages" id="sensei-chat-messages"></div>
+            <!-- Fokussierte Vokabel-Info -->
+            <div id="sctx-word-spotlight" class="sentence-word-spotlight"></div>
 
-            <div class="sensei-quick-chips" id="sensei-quick-chips">
-                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('what_to_learn')">📋 Was muss ich für dieses Level lernen?</button>
-                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('explain_grammar')">📐 Erkläre einen Grammatikpunkt</button>
-                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('wa_vs_ga')">⚖️ Unterschied は (wa) vs. が (ga)</button>
-                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('ni_vs_de')">📍 Unterschied に (ni) vs. で (de)</button>
-                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('kanji_tip')">漢 Kanji-Eselsbrücke zeigen</button>
-                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('weak_words')">⚠️ Meine Problemwörter erklären</button>
-                <button class="sensei-chip" onclick="sendSenseiQuickPrompt('exam_strategy')">🏛️ JLPT Prüfungs-Strategie</button>
+            <!-- Japanischer Beispielsatz im Kontext -->
+            <div id="sctx-sentence-jp" class="sentence-big-jp"></div>
+            <div id="sctx-sentence-reading" class="sentence-big-reading"></div>
+
+            <!-- Deutsche Satz-Übersetzung -->
+            <div id="sctx-sentence-de" class="sentence-big-de"></div>
+
+            <!-- Sub-Mode 1: Kontext-Karte Aktionen -->
+            <div id="sctx-study-area" style="margin-top: 18px;">
+                <button type="button" id="sctx-btn-reveal" class="btn-main" style="background: var(--primary-light); margin-bottom: 14px;" onclick="revealSentenceContextCard()">👁️ Übersetzung & Wortbedeutung aufdecken</button>
+                <div id="sctx-study-actions" class="hidden" style="display:flex; gap:14px; justify-content:center;">
+                    <button type="button" class="btn-fc btn-nochmal" style="flex:1;" onclick="gradeSentenceContextCard(false)">✕ Nochmal üben</button>
+                    <button type="button" class="btn-fc btn-gewusst" style="flex:1;" onclick="gradeSentenceContextCard(true)">✓ Im Kontext verstanden</button>
+                </div>
             </div>
 
-            <div class="sensei-input-bar">
-                <input type="text" id="sensei-user-input" placeholder="Frage deinen Sensei nach einer Vokabel, einem Kanji, einer Grammatikregel oder einem Satz..." onkeydown="if(event.key==='Enter') handleSenseiUserSend()">
-                <button class="btn-main" style="width:auto; padding:10px 20px; font-size:14px;" onclick="handleSenseiUserSend()">Fragen →</button>
+            <!-- Sub-Mode 2: Satz-Lückentext Multiple Choice -->
+            <div id="sctx-cloze-area" class="hidden" style="display:grid; gap:10px; margin-top:18px;"></div>
+
+            <!-- Sub-Mode 3: Im Satz schreiben -->
+            <div id="sctx-write-area" class="hidden" style="margin-top:16px;">
+                <div class="typing-input-row">
+                    <input type="text" id="sctx-write-input" class="typing-input" placeholder="Fehlendes Wort im Satz eingeben..." autocomplete="off" onkeydown="if(event.key==='Enter') submitSentenceContextWrite()" oninput="applyRomajiToKana(this)">
+                    <button type="button" class="btn-check-answer" onclick="submitSentenceContextWrite()">Prüfen ✓</button>
+                </div>
+                <div style="font-size:12px; color:var(--text-light); margin-top:8px;" id="sctx-write-hint"></div>
             </div>
+
+            <div id="sctx-feedback" class="typing-feedback" style="margin-top:14px;"></div>
+            <button type="button" id="sctx-next-btn" class="btn-main hidden" style="margin-top:16px; background:var(--primary-light);" onclick="nextSentenceContextItem()">Nächster Satz →</button>
         </div>
     </main>
 
@@ -2100,6 +2235,7 @@
             <button class="toggle-btn" onclick="switchActiveBlockMode('schreiben')">✍️ Schreiben</button>
             <button class="toggle-btn" onclick="switchActiveBlockMode('multiple')">🎯 Multiple Choice</button>
             <button class="toggle-btn active" onclick="switchActiveBlockMode('match')">🧩 Match</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('satz')">💬 Satz</button>
         </div>
         <p class="subtitle" style="text-align:center; margin-bottom:10px;">Finde die zusammenpassenden Paare aus Japanisch und Bedeutung!</p>
         <div class="match-grid">
@@ -2231,12 +2367,13 @@
             <button class="toggle-btn" onclick="switchActiveBlockMode('schreiben')">✍️ Schreiben</button>
             <button class="toggle-btn" onclick="switchActiveBlockMode('multiple')">🎯 Multiple Choice</button>
             <button class="toggle-btn" onclick="switchActiveBlockMode('match')">🧩 Match</button>
+            <button class="toggle-btn" onclick="switchActiveBlockMode('satz')">💬 Satz</button>
         </div>
         
         <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-light); margin-bottom:5px;">
             <span>Karte <span id="fc-current-num">1</span>/<span id="fc-total-num">20</span> · <span id="fc-srs-badge" class="srs-pill">Box 1</span></span>
             <div style="display:flex; gap:8px; align-items:center;">
-                <button class="btn-stroke-ctl" style="padding:4px 10px; font-size:11px; border-color:var(--accent-pink); color:var(--accent-pink);" onclick="explainCurrentVocabWithSensei('fc')" title="Sensei erklärt Nuancen & Beispielsatz">👨‍🏫 Sensei</button>
+                <button class="btn-stroke-ctl" style="padding:4px 10px; font-size:11px; border-color:var(--accent-pink); color:var(--accent-pink);" onclick="explainCurrentVocabWithSensei('fc')" title="Nuancen & Beispielsatz anzeigen">💡 Details</button>
                 <button class="icon-btn" onclick="speakCurrentWord(event)" title="Aussprache anhören">🔊</button>
                 <button class="star-btn" id="fc-fav-btn" onclick="toggleCurrentWordFavorite(event)" title="Als Favorit markieren">★</button>
             </div>
@@ -2252,13 +2389,15 @@
                     <span class="badge" id="fc-type-front" style="position:absolute; top:20px; left:20px;">Verben</span>
                     <div class="fc-reading" id="fc-reading-front"></div>
                     <div class="fc-word" id="fc-word-front">ある</div>
+                    <div class="fc-ctx-front" id="fc-ctx-front" onclick="event.stopPropagation(); speakCurrentContextSentence();"></div>
                     <div class="fc-hint">← KLICKEN ODER LEERTASTE ZUM UMDREHEN →</div>
                 </div>
                 <div class="fc-back">
                     <span class="badge" id="fc-type-back" style="position:absolute; top:20px; left:20px; background:rgba(255,255,255,0.2); color:white;">Verben</span>
                     <div class="fc-word" id="fc-word-back">ある</div>
-                    <div class="fc-divider"></div>
-                    <div class="fc-translation" id="fc-trans-back">haben / existieren (unbelebt)</div>
+                    <div class="fc-divider" style="margin: 10px 0;"></div>
+                    <div class="fc-translation" id="fc-trans-back" style="margin-top: 6px;">haben / existieren (unbelebt)</div>
+                    <div class="fc-ctx-back" id="fc-ctx-back" onclick="event.stopPropagation(); speakCurrentContextSentence();"></div>
                 </div>
             </div>
         </div>
@@ -2281,6 +2420,7 @@
             <button class="toggle-btn active" id="bm-btn-write" onclick="switchActiveBlockMode('schreiben')">✍️ Schreiben</button>
             <button class="toggle-btn" id="bm-btn-mc" onclick="switchActiveBlockMode('multiple')">🎯 Multiple Choice</button>
             <button class="toggle-btn" id="bm-btn-match" onclick="switchActiveBlockMode('match')">🧩 Match</button>
+            <button class="toggle-btn" id="bm-btn-satz" onclick="switchActiveBlockMode('satz')">💬 Satz</button>
         </div>
 
         <div id="typing-dir-switch-bar" class="toggle-group" style="margin-bottom: 14px; background:#eaeef6;">
@@ -2297,7 +2437,7 @@
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <span class="badge" id="type-badge">Verben</span>
                 <div style="display:flex; gap:8px; align-items:center;">
-                    <button class="btn-stroke-ctl" style="padding:4px 10px; font-size:11px; border-color:var(--accent-pink); color:var(--accent-pink);" onclick="explainCurrentVocabWithSensei('type')" title="Sensei erklärt diese Vokabel">👨‍🏫 Sensei</button>
+                    <button class="btn-stroke-ctl" style="padding:4px 10px; font-size:11px; border-color:var(--accent-pink); color:var(--accent-pink);" onclick="explainCurrentVocabWithSensei('type')" title="Details & Kanji-Bausteine zu dieser Vokabel">💡 Details</button>
                     <button class="icon-btn" onclick="speakCurrentWord(event)" title="Aussprache anhören">🔊</button>
                     <button class="icon-btn" id="btn-typing-hint" onclick="showTypingHint()" title="Buchstaben-Tipp anzeigen">💡</button>
                     <button class="star-btn" id="type-fav-btn" onclick="toggleCurrentWordFavorite(event)" title="Favorit">★</button>
@@ -2306,6 +2446,7 @@
             <div id="type-sensei-explain-box" class="tutor-explain-box hidden"></div>
             <div class="fc-reading" id="type-reading" style="margin-top:14px; margin-bottom:0; font-size:20px; min-height:24px; cursor:pointer;" onclick="this.style.opacity = this.style.opacity === '0.15' ? '1' : '0.15'" title="Klicken zum Ein-/Ausblenden der Lesung"></div>
             <div class="fc-word" id="type-word" style="margin-top:4px; color:var(--primary-dark);">ある</div>
+            <div id="type-ctx-box" class="ctx-sentence-box"></div>
             <div>
                 <span id="type-target-lang-badge" class="target-lang-banner">✍️ Schreibe auf Deutsch</span>
             </div>
@@ -2702,7 +2843,7 @@
             learnedLabel: "gelernt",
             modeLabel: "Lernmodus",
             modeFlash: "🗂️ Karteikarten",
-            modeFlashDesc: "3D-Karte umdrehen, Audio & SRS",
+            modeFlashDesc: "3D-Karte umdrehen, Beispielsatz, Audio & SRS",
             modeWrite: "✍️ Schreib-Training",
             modeWriteDesc: "Antwort in der jeweiligen Sprache schreiben",
             modeQuiz: "✍️ Schreib-Training",
@@ -2711,6 +2852,8 @@
             modeMcDesc: "4 Optionen & Hörverständnis",
             modeMatch: "🧩 Speed-Match",
             modeMatchDesc: "Paare auf Zeit zuordnen",
+            modeSentence: "💬 Satz-Kontext (Im Satz lernen)",
+            modeSentenceDesc: "Vokabeln im ganzen japanischen Satz mit deutscher Übersetzung, Audio & Lückentext-Training lernen statt nur einzeln",
             dirLabel: "Richtung / Zielsprache",
             startBtn: "Lernen starten",
             blockLabel: "Wähle einen Block (je 20 Vokabeln)",
@@ -2746,7 +2889,7 @@
             learnedLabel: "learned",
             modeLabel: "Learning Mode",
             modeFlash: "🗂️ Flashcards",
-            modeFlashDesc: "Flip 3D card, audio & SRS",
+            modeFlashDesc: "Flip 3D card, context sentence, audio & SRS",
             modeWrite: "✍️ Writing Training",
             modeWriteDesc: "Write the answer in the respective language",
             modeQuiz: "✍️ Writing Training",
@@ -2755,6 +2898,8 @@
             modeMcDesc: "4 options & audio",
             modeMatch: "🧩 Speed-Match",
             modeMatchDesc: "Match pairs against the clock",
+            modeSentence: "💬 Sentence Context (Learn in Context)",
+            modeSentenceDesc: "Learn vocabulary in full Japanese sentences with translations, audio & cloze exercises instead of isolated words",
             dirLabel: "Direction / Target Language",
             startBtn: "Start Learning",
             blockLabel: "Select a block (20 words each)",
@@ -2837,6 +2982,8 @@
         setTxt('ui-mode-mc-desc', t.modeMcDesc);
         setTxt('ui-mode-match', t.modeMatch);
         setTxt('ui-mode-match-desc', t.modeMatchDesc);
+        setTxt('ui-mode-sentence', t.modeSentence);
+        setTxt('ui-mode-sentence-desc', t.modeSentenceDesc);
         setTxt('ui-dir-label', t.dirLabel);
         setTxt('dir-jp-de', state.lang === 'en' ? 'JP → English' : 'JP → Deutsch');
         setTxt('dir-de-jp', state.lang === 'en' ? 'English → JP' : 'Deutsch → JP');
@@ -25127,13 +25274,12 @@
         if (targetView) targetView.classList.remove('hidden');
 
         const tabBtn = document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`);
-        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson', 'path-results', 'exam-session', 'exam-results', 'exam-review', 'match', 'kana', 'modular-test'].includes(tabId)) {
+        if (tabBtn && !['flashcards', 'typing', 'results', 'kanji-results', 'path-lesson', 'path-results', 'exam-session', 'exam-results', 'exam-review', 'match', 'kana', 'modular-test', 'sentence-context'].includes(tabId)) {
             tabBtn.classList.add('active');
         }
 
         if (tabId === 'lernen') updateStats();
         if (tabId === 'reach' && typeof renderReachView === 'function') renderReachView();
-        if (tabId === 'sensei' && typeof renderSenseiView === 'function') renderSenseiView();
         if (tabId === 'alltag') renderAlltagCategories();
         if (tabId === 'pfad') renderPath();
         if (tabId === 'liste') renderList();
@@ -25350,6 +25496,7 @@
                         <button type="button" class="block-mode-pill write-pill" onclick="startBlockWithMode(${i}, 'schreiben', event)" title="Schreib-Training starten">✍️ Schreiben</button>
                         <button type="button" class="block-mode-pill" onclick="startBlockWithMode(${i}, 'multiple', event)" title="Multiple Choice starten">🎯 Quiz</button>
                         <button type="button" class="block-mode-pill" onclick="startBlockWithMode(${i}, 'match', event)" title="Speed-Match starten">🧩 Match</button>
+                        <button type="button" class="block-mode-pill write-pill" onclick="startBlockWithMode(${i}, 'satz', event)" title="Im Satz-Kontext lernen">💬 Satz</button>
                     </div>
                 </div>`;
         }
@@ -25421,8 +25568,10 @@
         saveUserStats();
         const fcFav = document.getElementById('fc-fav-btn');
         const typeFav = document.getElementById('type-fav-btn');
+        const sctxFav = document.getElementById('sctx-fav-btn');
         if (fcFav) fcFav.classList.toggle('active', !!word.favorite);
         if (typeFav) typeFav.classList.toggle('active', !!word.favorite);
+        if (sctxFav) sctxFav.classList.toggle('active', !!word.favorite);
     }
     window.toggleCurrentWordFavorite = toggleCurrentWordFavorite;
 
@@ -25472,15 +25621,21 @@
             const check = word.learned ? '<span class="status-check">✓</span>' : '';
             const srsBadge = word.srsBox ? `<span class="srs-pill">Box ${word.srsBox}</span>` : '';
             const escapedSpeak = (word.kana || word.kanji).replace(/'/g, "\\'");
+            const ctx = typeof getVocabContextSentence === 'function' ? getVocabContextSentence(word, state.level) : null;
+            const escSentence = ctx ? (ctx.jpPlain || '').replace(/'/g, "\\'") : '';
             html += `
-                <div class="list-item">
-                    <div class="list-num">${index + 1}</div>
-                    <button class="icon-btn" onclick="speak('${escapedSpeak}')" title="Anhören">🔊</button>
+                <div class="list-item" style="align-items:flex-start;">
+                    <div class="list-num" style="margin-top:4px;">${index + 1}</div>
+                    <button class="icon-btn" style="margin-top:2px;" onclick="speak('${escapedSpeak}')" title="Wort anhören">🔊</button>
                     <div class="list-content">
                         <div class="list-jp">${displayJp} ${srsBadge}</div>
-                        <div class="list-de">${word[state.lang]}</div>
+                        <div class="list-de" style="font-weight:600;">${word[state.lang] || word.de}</div>
+                        ${ctx ? `<div style="margin-top:6px; padding:6px 10px; border-radius:8px; background:var(--subtle-bg); border-left:3px solid var(--accent-pink); font-size:12.5px; cursor:pointer;" onclick="speak('${escSentence}')" title="Klicken, um den Beispielsatz anzuhören">
+                            <div style="color:var(--primary-dark); font-weight:600;">💬 ${ctx.jpHighlighted} <span style="font-size:11px; opacity:0.75;">🔊</span></div>
+                            <div style="color:var(--text-light); margin-top:2px;">→ ${state.lang === 'en' ? (ctx.en || ctx.de) : ctx.de}</div>
+                        </div>` : ''}
                     </div>
-                    <div class="badge ${getBadgeClass(word.type)}">${word.type}</div>
+                    <div class="badge ${getBadgeClass(word.type)}" style="margin-top:4px;">${word.type}</div>
                     <button class="star-btn ${word.favorite ? 'active' : ''}" onclick="toggleWordFavorite('${state.level}', ${index}, event)" title="Favorit">★</button>
                     ${check}
                 </div>`;
@@ -25524,6 +25679,9 @@
         if (state.mode === 'karteikarten') {
             switchTab('flashcards');
             loadFlashcard();
+        } else if (state.mode === 'satz') {
+            switchTab('sentence-context');
+            loadSentenceContextItem();
         } else if (state.mode === 'match') {
             startMatchGame(state.currentQueue);
         } else if (state.mode === 'multiple') {
@@ -25620,16 +25778,32 @@
         document.querySelector('.btn-nochmal').innerText = t.btnAgain;
         document.querySelector('.btn-gewusst').innerText = t.btnKnow;
 
+        const ctx = typeof getVocabContextSentence === 'function' ? getVocabContextSentence(word, state.level) : null;
+        const fcCtxFront = document.getElementById('fc-ctx-front');
+        const fcCtxBack = document.getElementById('fc-ctx-back');
+
         if (isJpToDe) {
             document.getElementById('fc-word-front').innerText = word.kanji || word.kana;
             document.getElementById('fc-reading-front').innerText = word.kanji ? word.kana : '';
             document.getElementById('fc-word-back').innerText = word.kanji || word.kana;
             document.getElementById('fc-trans-back').innerText = word[state.lang] || word.de;
+            if (fcCtxFront && ctx) {
+                fcCtxFront.innerHTML = `<div style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-light); margin-bottom:3px;">💬 Beispielsatz (Tippen für Audio 🔊)</div><div>${ctx.jpHighlighted}</div>`;
+            }
+            if (fcCtxBack && ctx) {
+                fcCtxBack.innerHTML = `<div style="font-weight:700; margin-bottom:3px;">${ctx.jpPlain} 🔊</div><div style="opacity:0.92;">${state.lang === 'en' ? (ctx.en || ctx.de) : ctx.de}</div>`;
+            }
         } else {
             document.getElementById('fc-word-front').innerText = word[state.lang] || word.de;
             document.getElementById('fc-reading-front').innerText = '';
             document.getElementById('fc-word-back').innerText = word[state.lang] || word.de;
             document.getElementById('fc-trans-back').innerText = word.kanji ? `${word.kanji} (${word.kana})` : word.kana;
+            if (fcCtxFront && ctx) {
+                fcCtxFront.innerHTML = `<div style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-light); margin-bottom:3px;">💬 Satz-Kontext</div><div>${state.lang === 'en' ? (ctx.en || ctx.de) : ctx.de}</div>`;
+            }
+            if (fcCtxBack && ctx) {
+                fcCtxBack.innerHTML = `<div style="font-weight:700; margin-bottom:3px;">${ctx.jpPlain} 🔊</div><div style="opacity:0.92;">${state.lang === 'en' ? (ctx.en || ctx.de) : ctx.de}</div>`;
+            }
         }
     }
 
@@ -25777,11 +25951,24 @@
         const liveKanaLabel = document.getElementById('live-kana-label');
         const kanaHelper = document.getElementById('type-kana-helper');
 
+        const typeCtxBox = document.getElementById('type-ctx-box');
+        const ctx = typeof getVocabContextSentence === 'function' ? getVocabContextSentence(word, state.level) : null;
+
         if (isJpToDe) {
             document.getElementById('type-word').innerText = word.kanji || word.kana;
             if (readingEl) {
                 readingEl.innerText = (word.kanji && word.kanji !== word.kana) ? word.kana : '';
                 readingEl.style.opacity = '1';
+            }
+            if (typeCtxBox && ctx) {
+                typeCtxBox.classList.remove('hidden');
+                typeCtxBox.innerHTML = `
+                    <div class="ctx-sentence-jp">
+                        <span>💬 ${ctx.jpHighlighted}</span>
+                        <button type="button" class="icon-btn" style="width:28px; height:28px; font-size:13px; flex-shrink:0;" onclick="speakCurrentContextSentence()" title="Satz anhören">🔊</button>
+                    </div>
+                    <div class="ctx-sentence-de" id="type-ctx-de" style="opacity:0.75; font-style:italic;">Tipp: Übersetze das markierte Wort aus dem Satzkontext.</div>
+                `;
             }
             if (targetBadge) {
                 targetBadge.className = 'target-lang-banner';
@@ -25798,6 +25985,15 @@
         } else {
             document.getElementById('type-word').innerText = word[state.lang] || word.de;
             if (readingEl) readingEl.innerText = '';
+            if (typeCtxBox && ctx) {
+                typeCtxBox.classList.remove('hidden');
+                typeCtxBox.innerHTML = `
+                    <div class="ctx-sentence-jp">
+                        <span>💬 ${ctx.jpCloze}</span>
+                    </div>
+                    <div class="ctx-sentence-de" id="type-ctx-de">→ ${state.lang === 'en' ? (ctx.en || ctx.de) : ctx.de}</div>
+                `;
+            }
             if (targetBadge) {
                 targetBadge.className = 'target-lang-banner lang-jp';
                 targetBadge.innerText = state.lang === 'en'
@@ -25871,9 +26067,22 @@
         document.getElementById('btn-next-typing').classList.add('hidden');
         document.getElementById('btn-next-typing').innerText = t.nextVocab;
 
+        const typeCtxBox = document.getElementById('type-ctx-box');
+        const ctx = typeof getVocabContextSentence === 'function' ? getVocabContextSentence(word, state.level) : null;
+
         if (isJpToDe) {
             document.getElementById('type-word').innerText = word.kanji || word.kana;
             document.getElementById('type-hint').innerText = word.kanji ? `Lesung: ${word.kana}` : 'Wähle die richtige Bedeutung';
+            if (typeCtxBox && ctx) {
+                typeCtxBox.classList.remove('hidden');
+                typeCtxBox.innerHTML = `
+                    <div class="ctx-sentence-jp">
+                        <span>💬 ${ctx.jpHighlighted}</span>
+                        <button type="button" class="icon-btn" style="width:28px; height:28px; font-size:13px; flex-shrink:0;" onclick="speakCurrentContextSentence()" title="Satz anhören">🔊</button>
+                    </div>
+                    <div class="ctx-sentence-de" id="type-ctx-de" style="opacity:0.75; font-style:italic;">Beispielsatz im Kontext (Übersetzung erscheint nach Antwort)</div>
+                `;
+            }
             if (targetBadge) {
                 targetBadge.className = 'target-lang-banner';
                 targetBadge.innerText = state.lang === 'en' ? '🎯 Choose English meaning' : '🎯 Richtige Bedeutung wählen';
@@ -25881,6 +26090,15 @@
         } else {
             document.getElementById('type-word').innerText = word[state.lang] || word.de;
             document.getElementById('type-hint').innerText = 'Wähle das passende japanische Wort';
+            if (typeCtxBox && ctx) {
+                typeCtxBox.classList.remove('hidden');
+                typeCtxBox.innerHTML = `
+                    <div class="ctx-sentence-jp">
+                        <span>💬 ${ctx.jpCloze}</span>
+                    </div>
+                    <div class="ctx-sentence-de" id="type-ctx-de">→ ${state.lang === 'en' ? (ctx.en || ctx.de) : ctx.de}</div>
+                `;
+            }
             if (targetBadge) {
                 targetBadge.className = 'target-lang-banner lang-jp';
                 targetBadge.innerText = state.lang === 'en' ? '🎯 Choose Japanese word' : '🎯 Passendes japanisches Wort wählen';
@@ -25910,6 +26128,18 @@
         const word = state.currentQueue[state.currentIndex];
         const feedback = document.getElementById('typing-feedback');
         document.querySelectorAll('#type-choice-area .quiz-option').forEach(b => b.disabled = true);
+
+        const ctx = typeof getVocabContextSentence === 'function' ? getVocabContextSentence(word, state.level) : null;
+        const typeCtxBox = document.getElementById('type-ctx-box');
+        if (typeCtxBox && ctx) {
+            typeCtxBox.innerHTML = `
+                <div class="ctx-sentence-jp">
+                    <span>💬 ${ctx.jpHighlighted}</span>
+                    <button type="button" class="icon-btn" style="width:28px; height:28px; font-size:13px; flex-shrink:0;" onclick="speakCurrentContextSentence()" title="Satz anhören">🔊</button>
+                </div>
+                <div class="ctx-sentence-de">→ ${state.lang === 'en' ? (ctx.en || ctx.de) : ctx.de}</div>
+            `;
+        }
 
         if (selected === correct) {
             playSound('correct');
@@ -26065,6 +26295,18 @@
         const isJpToDe = (state.currentWordDirection || state.direction) === 'jp-de';
         const feedback = document.getElementById('typing-feedback');
         const isCorrect = evaluateTypingAnswer(word, answer, isJpToDe);
+
+        const ctx = typeof getVocabContextSentence === 'function' ? getVocabContextSentence(word, state.level) : null;
+        const typeCtxBox = document.getElementById('type-ctx-box');
+        if (typeCtxBox && ctx) {
+            typeCtxBox.innerHTML = `
+                <div class="ctx-sentence-jp">
+                    <span>💬 ${ctx.jpHighlighted}</span>
+                    <button type="button" class="icon-btn" style="width:28px; height:28px; font-size:13px; flex-shrink:0;" onclick="speakCurrentContextSentence()" title="Satz anhören">🔊</button>
+                </div>
+                <div class="ctx-sentence-de">→ ${state.lang === 'en' ? (ctx.en || ctx.de) : ctx.de}</div>
+            `;
+        }
 
         // Falls der Nutzer nach einem Fehler die richtige Lösung zum Üben nachtippt:
         if (state.awaitingRetype) {
@@ -28386,9 +28628,9 @@
                         <div class="smart-card-title"><span>漢 ${lvl} Kanji-Test</span><span class="smart-count-pill">+XP</span></div>
                         <div class="smart-card-sub">Lesungen & Bedeutungen der ${lvl}-Pflichtkanji testen</div>
                     </div>
-                    <div class="smart-card" onclick="openSenseiWithTopic('what_to_learn')">
-                        <div class="smart-card-title"><span>👨‍🏫 Sensei Lehrstunde</span><span class="smart-count-pill" style="background:var(--accent-pink);">Live</span></div>
-                        <div class="smart-card-sub">Lass dir vom Sensei die wichtigsten ${lvl}-Schwerpunkte erklären</div>
+                    <div class="smart-card" onclick="setMode('satz'); startLearning(-1);">
+                        <div class="smart-card-title"><span>💬 ${lvl} Satz-Kontext</span><span class="smart-count-pill" style="background:var(--accent-pink);">NEU</span></div>
+                        <div class="smart-card-sub">Lerne ${lvl}-Vokabeln direkt im ganzen Satz mit Übersetzung</div>
                     </div>
                 </div>
             `;
@@ -28427,7 +28669,7 @@
                         <ul style="padding-left:18px; font-size:13.5px; line-height:1.6; color:var(--text-main);">
                             ${bp.focusAreas.map(f => `<li style="margin-bottom:6px;">${f}</li>`).join('')}
                         </ul>
-                        <button class="btn-main" style="margin-top:12px; padding:10px; font-size:13px;" onclick="openSenseiWithTopic('what_to_learn')">👨‍🏫 Sensei: Erkläre mir diese Schwerpunkte!</button>
+                        <button class="btn-main" style="margin-top:12px; padding:10px; font-size:13px;" onclick="setMode('satz'); startLearning(-1);">💬 Vokabeln im Satz-Kontext üben</button>
                     </div>
                 </div>
                 <div style="margin-top:16px; background:var(--subtle-bg); padding:16px; border-radius:14px; border:1px solid var(--border-color);">
@@ -28519,7 +28761,6 @@
 
     function explainKanjiWithSenseiModal(char) {
         speak(char);
-        openSenseiWithCustomQuery(char);
     }
     window.explainKanjiWithSenseiModal = explainKanjiWithSenseiModal;
 
@@ -29375,6 +29616,472 @@
         document.getElementById('res-wrong-count').innerText = modularTestState.questions.length - modularTestState.correctCount;
         document.getElementById('btn-retry-mistakes')?.classList.add('hidden');
     }
+
+    // =========================================================================
+    // --- SATZ-KONTEXT ENGINE & TRAINER (VOKABELN IM SATZ LERNEN) ---
+    // =========================================================================
+    const CURATED_VOCAB_SENTENCES = {
+        "会う": { jp: "明日、駅前で友達に会う予定です。", de: "Morgen habe ich vor, meinen Freund vor dem Bahnhof zu treffen.", en: "Tomorrow I plan to meet my friend in front of the station." },
+        "青い": { jp: "今日は空がとても青いですね。", de: "Heute ist der Himmel sehr blau, nicht wahr?", en: "The sky is very blue today, isn't it?" },
+        "赤い": { jp: "テーブルの上に赤いりんごがあります。", de: "Auf dem Tisch liegt ein roter Apfel.", en: "There is a red apple on the table." },
+        "明るい": { jp: "この部屋は窓が大きくて明るいです。", de: "Dieses Zimmer hat große Fenster und ist hell.", en: "This room has large windows and is bright." },
+        "秋": { jp: "日本の秋は紅葉がとてもきれいです。", de: "Der japanische Herbst hat wunderschönes Herbstlaub.", en: "Autumn in Japan has very beautiful autumn leaves." },
+        "開く": { jp: "店のドアは朝九時に開く。", de: "Die Tür des Ladens öffnet sich morgens um 9 Uhr.", en: "The shop door opens at 9 in the morning." },
+        "開ける": { jp: "暑いので、窓を開けることができますか。", de: "Da es heiß ist, können wir das Fenster öffnen?", en: "Since it's hot, can we open the window?" },
+        "朝": { jp: "毎朝六時に起きて散歩します。", de: "Jeden Morgen stehe ich um 6 Uhr auf und gehe spazieren.", en: "Every morning I wake up at 6 and take a walk." },
+        "朝御飯": { jp: "今日はパンとコーヒーで朝御飯を食べました。", de: "Heute habe ich Brot und Kaffee zum Frühstück gegessen.", en: "Today I had bread and coffee for breakfast." },
+        "明日": { jp: "明日は大事なテストがあります。", de: "Morgen habe ich einen wichtigen Test.", en: "Tomorrow I have an important test." },
+        "遊ぶ": { jp: "週末に公園で子供たちと遊ぶのが好きです。", de: "Am Wochenende spiele ich gerne mit den Kindern im Park.", en: "I like playing with the children in the park on weekends." },
+        "暖かい": { jp: "春になって、毎日暖かい日が続いています。", de: "Es ist Frühling geworden und die warmen Tage halten an.", en: "Spring has come and warm days continue." },
+        "新しい": { jp: "昨日、新しい日本語の辞書を買いました。", de: "Gestern habe ich ein neues Japanisch-Wörterbuch gekauft.", en: "Yesterday I bought a new Japanese dictionary." },
+        "暑い": { jp: "今年の夏は本当に暑いですね。", de: "Dieser Sommer ist wirklich heiß, oder?", en: "This summer is really hot, isn't it?" },
+        "熱い": { jp: "このお茶はまだ熱いので気をつけてください。", de: "Dieser Tee ist noch heiß, bitte pass auf.", en: "This tea is still hot, please be careful." },
+        "雨": { jp: "外は雨が降っているので、傘を持って行きます。", de: "Draußen regnet es, also nehme ich einen Regenschirm mit.", en: "It is raining outside, so I'll take an umbrella." },
+        "洗う": { jp: "食事の前にしっかり手を洗うことが大切です。", de: "Vor dem Essen ist es wichtig, sich gründlich die Hände zu waschen.", en: "It is important to wash your hands thoroughly before meals." },
+        "歩く": { jp: "健康のために毎日三十分歩くようにしています。", de: "Für meine Gesundheit versuche ich, jeden Tag 30 Minuten zu gehen.", en: "For my health, I try to walk 30 minutes every day." },
+        "言う": { jp: "日本語で「ありがとう」と言うと喜ばれます。", de: "Wenn man auf Japanisch 'Danke' sagt, freuen sich die Leute.", en: "When you say 'thank you' in Japanese, people are happy." },
+        "家": { jp: "私の家は駅から歩いて十分のところにあります。", de: "Mein Haus liegt zehn Minuten zu Fuß vom Bahnhof entfernt.", en: "My house is a ten-minute walk from the station." },
+        "行く": { jp: "来月、友達と一緒に京都へ行くつもりです。", de: "Nächsten Monat habe ich vor, mit Freunden nach Kyoto zu fahren.", en: "Next month I plan to go to Kyoto with my friends." },
+        "医者": { jp: "熱が高いので、午後に医者に診てもらいます。", de: "Da ich hohes Fieber habe, lasse ich mich am Nachmittag vom Arzt untersuchen.", en: "Since I have a high fever, I'll see a doctor this afternoon." },
+        "忙しい": { jp: "今週は仕事がとても忙しいです。", de: "Diese Woche bin ich bei der Arbeit sehr beschäftigt.", en: "I am very busy with work this week." },
+        "犬": { jp: "隣のお宅にはとても可愛い犬がいます。", de: "Im Nachbarhaus gibt es einen sehr süßen Hund.", en: "There is a very cute dog at the neighbor's house." },
+        "海": { jp: "夏休みには家族みんなで海へ泳ぎに行きます。", de: "In den Sommerferien fahren wir mit der ganzen Familie ans Meer schwimmen.", en: "During summer vacation we go swimming at the sea with the whole family." },
+        "映画": { jp: "昨夜、日本の有名な映画を見ました。", de: "Gestern Abend habe ich einen berühmten japanischen Film gesehen.", en: "Last night I watched a famous Japanese movie." },
+        "駅": { jp: "次の駅で電車を乗り換えます。", de: "Am nächsten Bahnhof steige ich in einen anderen Zug um.", en: "I will transfer trains at the next station." },
+        "おいしい": { jp: "この店のラーメンは本当においしいです。", de: "Die Ramen in diesem Restaurant sind wirklich lecker.", en: "The ramen at this shop is really delicious." },
+        "大きい": { jp: "東京には大きい建物がたくさんあります。", de: "In Tokio gibt es viele große Gebäude.", en: "There are many big buildings in Tokyo." },
+        "お金": { jp: "旅行のためにお金を少しずつ貯めています。", de: "Für die Reise spare ich nach und nach Geld.", en: "I am saving money little by little for the trip." },
+        "起きる": { jp: "平日は毎朝七時に起きるようにしています。", de: "An Wochentagen versuche ich, jeden Morgen um 7 Uhr aufzustehen.", en: "On weekdays I try to wake up at 7 every morning." },
+        "教える": { jp: "田中先生は留学生に日本語を教える仕事をしています。", de: "Herr Tanaka arbeitet als Lehrer und bringt Austauschstudenten Japanisch bei.", en: "Mr. Tanaka works teaching Japanese to international students." },
+        "お茶": { jp: "食後に温かいお茶を飲むと落ち着きます。", de: "Nach dem Essen warmen Tee zu trinken beruhigt mich.", en: "Drinking warm tea after a meal is relaxing." },
+        "覚える": { jp: "毎日十個ずつ新しい漢字を覚えるのが目標です。", de: "Mein Ziel ist es, jeden Tag zehn neue Kanji zu lernen.", en: "My goal is to memorize ten new kanji every day." },
+        "面白い": { jp: "この本はとても面白いので、ぜひ読んでみてください。", de: "Dieses Buch ist sehr interessant, lies es unbedingt einmal.", en: "This book is very interesting, please try reading it." },
+        "音楽": { jp: "電車の中ではいつも好きな音楽を聴いています。", de: "Im Zug höre ich immer meine Lieblingsmusik.", en: "I always listen to my favorite music on the train." },
+        "買う": { jp: "帰りにスーパーで野菜と果物を買うつもりです。", de: "Auf dem Heimweg will ich im Supermarkt Gemüse und Obst kaufen.", en: "On the way home I plan to buy vegetables and fruit at the supermarket." },
+        "帰る": { jp: "仕事が終わったら、まっすぐ家に帰る予定です。", de: "Wenn die Arbeit vorbei ist, habe ich vor, direkt nach Hause zu gehen.", en: "When work finishes, I plan to go straight home." },
+        "書く": { jp: "毎日少しずつ日本語で日記を書く練習をしています。", de: "Ich übe jeden Tag, ein wenig Tagebuch auf Japanisch zu schreiben.", en: "I practice writing a diary in Japanese a little every day." },
+        "学生": { jp: "私は大学で日本語を勉強している学生です。", de: "Ich bin ein Student, der an der Universität Japanisch lernt.", en: "I am a student studying Japanese at university." },
+        "学校": { jp: "毎日自転車で学校まで通っています。", de: "Ich fahre jeden Tag mit dem Fahrrad zur Schule.", en: "I commute to school by bicycle every day." },
+        "聞く": { jp: "分からないことがあれば、すぐ先生に聞くといいですよ。", de: "Wenn du etwas nicht verstehst, frag am besten sofort den Lehrer.", en: "If there is something you don't understand, it's good to ask the teacher right away." },
+        "今日": { jp: "今日は天気がいいので、公園を散歩しましょう。", de: "Da heute schönes Wetter ist, lass uns im Park spazieren gehen.", en: "Since the weather is nice today, let's take a walk in the park." },
+        "来る": { jp: "もうすぐバスが来る時間ですよ。", de: "Es ist bald Zeit, dass der Bus kommt.", en: "It's almost time for the bus to come." },
+        "車": { jp: "休みの日は車で海までドライブに行きます。", de: "An freien Tagen fahre ich mit dem Auto ans Meer.", en: "On days off I go for a drive to the sea by car." },
+        "元気": { jp: "お久しぶりです。最近お元気ですか。", de: "Lange nicht gesehen! Geht es dir in letzter Zeit gut?", en: "Long time no see. Have you been well lately?" },
+        "仕事": { jp: "新しい仕事にもようやく慣れてきました。", de: "Ich habe mich endlich an die neue Arbeit gewöhnt.", en: "I have finally gotten used to my new job." },
+        "時間": { jp: "朝の忙しい時間でもコーヒーだけは飲みます。", de: "Selbst in der hektischen Morgenzeit trinke ich zumindest Kaffee.", en: "Even during the busy morning hours, I at least drink coffee." },
+        "食べる": { jp: "日本へ行ったら、本場のお寿司を食べるのが夢です。", de: "Wenn ich nach Japan reise, ist es mein Traum, echtes Sushi zu essen.", en: "When I go to Japan, it's my dream to eat authentic sushi." },
+        "楽しい": { jp: "友達と旅行するのは本当に楽しいですね。", de: "Mit Freunden zu verreisen macht wirklich Spaß, oder?", en: "Traveling with friends is really fun, isn't it?" },
+        "使う": { jp: "このアプリは毎日日本語の勉強に使うことができます。", de: "Man kann diese App jeden Tag zum Japanischlernen benutzen.", en: "You can use this app every day to study Japanese." },
+        "作る": { jp: "日曜日は家でカレーを作るのが楽しみです。", de: "Am Sonntag freue ich mich darauf, zu Hause Curry zu kochen.", en: "On Sunday I look forward to making curry at home." },
+        "天気": { jp: "明日の天気は晴れだそうです。", de: "Das Wetter morgen soll sonnig werden.", en: "They say tomorrow's weather will be sunny." },
+        "電車": { jp: "日本の電車はとても時間に正確です。", de: "Japanische Züge sind sehr pünktlich.", en: "Japanese trains are very punctual." },
+        "友達": { jp: "カフェで友達と二時間くらい話しました。", de: "Ich habe mich im Café etwa zwei Stunden mit einem Freund unterhalten.", en: "I talked with a friend at a cafe for about two hours." },
+        "飲む": { jp: "朝起きたらまず冷たい水を飲むようにしています。", de: "Nach dem Aufstehen trinke ich immer zuerst kaltes Wasser.", en: "When I wake up in the morning, I make sure to drink cold water first." },
+        "話す": { jp: "ネイティブの人と日本語で話すのはいい練習になります。", de: "Mit Muttersprachlern auf Japanisch zu sprechen ist eine gute Übung.", en: "Speaking Japanese with native speakers is good practice." },
+        "本": { jp: "寝る前に三十分くらい本を読むのが習慣です。", de: "Es ist meine Gewohnheit, vor dem Schlafen etwa 30 Minuten ein Buch zu lesen.", en: "It's my habit to read a book for about 30 minutes before bed." },
+        "見る": { jp: "週末は家でゆっくりアニメを見るつもりです。", de: "Am Wochenende will ich zu Hause gemütlich Anime schauen.", en: "On the weekend I plan to relax at home and watch anime." },
+        "読む": { jp: "日本語のニュースを辞書なしで読むのが目標です。", de: "Mein Ziel ist es, japanische Nachrichten ohne Wörterbuch zu lesen.", en: "My goal is to read Japanese news without a dictionary." },
+        "分かる": { jp: "少しずつ日本語の会話が分かるようになってきました。", de: "Nach und nach beginne ich, japanische Gespräche zu verstehen.", en: "Little by little I am starting to understand Japanese conversations." }
+    };
+
+    let _corpusSentenceIndex = null;
+    function getCorpusSentences() {
+        if (_corpusSentenceIndex) return _corpusSentenceIndex;
+        const list = [];
+        try {
+            if (typeof readingData !== 'undefined') {
+                Object.values(readingData).forEach(arr => {
+                    (arr || []).forEach(txt => {
+                        (txt.content || []).forEach(s => {
+                            if (s && s.jp && s.de) {
+                                const cleanJp = s.jp.replace(/<rt>.*?<\/rt>/g, '').replace(/<[^>]+>/g, '');
+                                list.push({ jp: cleanJp, de: s.de, en: s.en || s.de });
+                            }
+                        });
+                    });
+                });
+            }
+            if (window.grammarData) {
+                Object.values(window.grammarData).forEach(arr => {
+                    (arr || []).forEach(g => {
+                        (g.explanation?.sections || []).forEach(sec => {
+                            (sec.examples || []).forEach(ex => {
+                                if (ex && ex.jp && ex.de) {
+                                    const cleanJp = ex.jp.replace(/<rt>.*?<\/rt>/g, '').replace(/<[^>]+>/g, '');
+                                    list.push({ jp: cleanJp, de: ex.de, en: ex.en || ex.de });
+                                }
+                            });
+                        });
+                    });
+                });
+            }
+        } catch (e) {}
+        _corpusSentenceIndex = list;
+        return list;
+    }
+
+    function escapeHtmlStr(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function buildHighlightedContext(jpPlain, targetTerm, de, en, word) {
+        const safePlain = escapeHtmlStr(jpPlain);
+        const safeTerm = escapeHtmlStr(targetTerm);
+        let jpHighlighted = safePlain;
+        let jpCloze = safePlain;
+        if (safeTerm && safePlain.includes(safeTerm)) {
+            jpHighlighted = safePlain.replace(safeTerm, `<span class="ctx-word-highlight">${safeTerm}</span>`);
+            jpCloze = safePlain.replace(safeTerm, `<span class="ctx-word-blank">[ ＿＿＿ ]</span>`);
+        } else {
+            jpHighlighted = `<span class="ctx-word-highlight">${safeTerm}</span> — ${safePlain}`;
+            jpCloze = `<span class="ctx-word-blank">[ ＿＿＿ ]</span> — ${safePlain}`;
+        }
+        return {
+            jpPlain,
+            jpHighlighted,
+            jpCloze,
+            de,
+            en: en || de,
+            targetTerm,
+            readingHint: word.kanji && word.kanji !== word.kana ? `${word.kanji} (${word.kana})` : (word.kana || word.kanji || '')
+        };
+    }
+
+    function getVocabContextSentence(word, level) {
+        if (!word) return null;
+        if (word._cachedCtx && word._cachedCtx.de) return word._cachedCtx;
+
+        const term = (word.kanji && word.kanji.trim()) ? word.kanji.trim() : (word.kana || '').trim();
+        const kana = (word.kana || '').trim();
+        const deRaw = (word.de || '').trim();
+        const enRaw = (word.en || word.de || '').trim();
+        const mainDe = deRaw.split(/[\/,;]/)[0].replace(/\(.*?\)/g, '').trim() || deRaw;
+        const mainEn = enRaw.split(/[\/,;]/)[0].replace(/\(.*?\)/g, '').trim() || enRaw;
+        const type = (word.type || 'Nomen').toLowerCase();
+
+        // 1. Custom example on word itself
+        if (word.exampleJp && word.exampleDe) {
+            const res = buildHighlightedContext(word.exampleJp, term, word.exampleDe, word.exampleEn || word.exampleDe, word);
+            word._cachedCtx = res;
+            return res;
+        }
+
+        // 2. Curated dictionary lookup
+        const curated = CURATED_VOCAB_SENTENCES[term] || CURATED_VOCAB_SENTENCES[kana];
+        if (curated) {
+            const matchTerm = curated.jp.includes(term) ? term : (curated.jp.includes(kana) ? kana : term);
+            const res = buildHighlightedContext(curated.jp, matchTerm, curated.de, curated.en, word);
+            word._cachedCtx = res;
+            return res;
+        }
+
+        // 3. Authentic sentence from readingData / grammarData corpus
+        if (term.length >= 2 || /[\u4e00-\u9faf]/.test(term)) {
+            const corpus = getCorpusSentences();
+            const found = corpus.find(s => s.jp.includes(term) && s.jp.length <= 42);
+            if (found) {
+                const res = buildHighlightedContext(found.jp, term, found.de, found.en, word);
+                word._cachedCtx = res;
+                return res;
+            }
+        }
+
+        // 4. Smart natural sentence generator based on word type
+        const cleanTerm = term.replace(/[～~]/g, '');
+        let jpPlain = '';
+        let de = '';
+        let en = '';
+
+        if (type.includes('verb')) {
+            jpPlain = `毎日、よく${cleanTerm}ようにしています。`;
+            de = `Ich versuche, jeden Tag oft „${mainDe}“ zu tun / anzuwenden.`;
+            en = `I try to "${mainEn}" often every day.`;
+        } else if (type.includes('adjektiv')) {
+            if (cleanTerm.endsWith('い') && cleanTerm !== 'きれい' && cleanTerm !== 'きらい' && cleanTerm !== '綺麗' && cleanTerm !== '嫌い') {
+                jpPlain = `これはとても${cleanTerm}と思います。`;
+                de = `Ich finde, dass das sehr „${mainDe}“ ist.`;
+                en = `I think this is very "${mainEn}".`;
+            } else {
+                jpPlain = `ここはとても${cleanTerm}ですね。`;
+                de = `Hier ist es wirklich sehr „${mainDe}“, nicht wahr?`;
+                en = `It is very "${mainEn}" here, isn't it?`;
+            }
+        } else if (type.includes('adverb')) {
+            jpPlain = `日本語を${cleanTerm}勉強しています。`;
+            de = `Ich lerne Japanisch (${mainDe}).`;
+            en = `I am studying Japanese (${mainEn}).`;
+        } else if (type.includes('ausdruck') || type.includes('begrüßung') || type.includes('höflichkeit') || type.includes('konversation') || type.includes('restaurant') || type.includes('hotel') || type.includes('business') || type.includes('shopping')) {
+            jpPlain = `日本の会話では「${cleanTerm}」とよく言います。`;
+            de = `In japanischen Gesprächen sagt man oft: „${mainDe}“.`;
+            en = `In Japanese conversation, people often say: "${mainEn}".`;
+        } else if (type.includes('fragewort')) {
+            jpPlain = `すみません、${cleanTerm}ですか。`;
+            de = `Entschuldigung, ${mainDe} ist es?`;
+            en = `Excuse me, ${mainEn} is it?`;
+        } else if (type.includes('zahl')) {
+            jpPlain = `全部で${cleanTerm}あります。`;
+            de = `Insgesamt gibt es ${mainDe}.`;
+            en = `There are ${mainEn} in total.`;
+        } else if (type.includes('pronomen')) {
+            jpPlain = `${cleanTerm}はとても大切だと思います。`;
+            de = `Ich denke, ${mainDe} ist sehr wichtig.`;
+            en = `I think ${mainEn} is very important.`;
+        } else if (type.includes('konjunktion')) {
+            jpPlain = `少し難しいです。${cleanTerm}、とても面白いです。`;
+            de = `Es ist etwas schwierig. ${mainDe}, es ist sehr interessant.`;
+            en = `It is a bit difficult. ${mainEn}, it is very interesting.`;
+        } else {
+            // Default for Nomen / Suffix / Präfix / etc.
+            jpPlain = `この文では「${cleanTerm}」という言葉を使います。`;
+            de = `In diesem Satz verwendet man das Wort „${mainDe}“.`;
+            en = `In this sentence, we use the word "${mainEn}".`;
+        }
+
+        const res = buildHighlightedContext(jpPlain, cleanTerm, de, en, word);
+        word._cachedCtx = res;
+        return res;
+    }
+    window.getVocabContextSentence = getVocabContextSentence;
+
+    function speakCurrentContextSentence() {
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return;
+        const ctx = getVocabContextSentence(word, state.level);
+        if (ctx && ctx.jpPlain) speak(ctx.jpPlain);
+    }
+    window.speakCurrentContextSentence = speakCurrentContextSentence;
+
+    // --- DEDICATED SENTENCE CONTEXT TRAINER STATE & FUNCTIONS ---
+    let sentenceCtxSubMode = 'study'; // 'study' | 'cloze' | 'write'
+    let sentenceCtxAnswered = false;
+
+    function setSentenceContextSubMode(subMode) {
+        sentenceCtxSubMode = subMode;
+        ['study', 'cloze', 'write'].forEach(m => {
+            document.getElementById('sctx-sub-' + m)?.classList.toggle('active', m === subMode);
+        });
+        loadSentenceContextItem();
+    }
+    window.setSentenceContextSubMode = setSentenceContextSubMode;
+
+    function loadSentenceContextItem() {
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return finishSession();
+        sentenceCtxAnswered = false;
+
+        const ctx = getVocabContextSentence(word, state.level);
+        const isEn = state.lang === 'en';
+        const transSentence = isEn ? (ctx.en || ctx.de) : ctx.de;
+        const transWord = isEn ? (word.en || word.de) : word.de;
+        const displayWord = word.kanji && word.kanji !== word.kana ? `${word.kanji} (${word.kana})` : (word.kana || word.kanji);
+
+        const headerTitle = document.getElementById('sctx-header-title');
+        if (headerTitle) {
+            headerTitle.innerText = state.currentBlockTitle
+                ? `💬 Satz-Kontext · ${state.currentBlockTitle}`
+                : '💬 Satz-Kontext Training';
+        }
+        document.getElementById('sctx-current-num').innerText = state.currentIndex + 1;
+        document.getElementById('sctx-total-num').innerText = state.currentQueue.length;
+        const prog = document.getElementById('sctx-progress');
+        if (prog) prog.style.width = `${(state.currentIndex / Math.max(1, state.currentQueue.length)) * 100}%`;
+
+        document.getElementById('sctx-word-type').innerText = word.type || 'Vokabel';
+        document.getElementById('sctx-srs-badge').innerText = `Box ${word.srsBox || 1}`;
+        document.getElementById('sctx-fav-btn')?.classList.toggle('active', !!word.favorite);
+
+        const spotlightEl = document.getElementById('sctx-word-spotlight');
+        const jpEl = document.getElementById('sctx-sentence-jp');
+        const readEl = document.getElementById('sctx-sentence-reading');
+        const deEl = document.getElementById('sctx-sentence-de');
+        const studyArea = document.getElementById('sctx-study-area');
+        const clozeArea = document.getElementById('sctx-cloze-area');
+        const writeArea = document.getElementById('sctx-write-area');
+        const fbEl = document.getElementById('sctx-feedback');
+        const nextBtn = document.getElementById('sctx-next-btn');
+
+        fbEl.innerHTML = '';
+        nextBtn.classList.add('hidden');
+        studyArea.classList.add('hidden');
+        clozeArea.classList.add('hidden');
+        writeArea.classList.add('hidden');
+
+        if (sentenceCtxSubMode === 'study') {
+            // Mode 1: Kontext-Karte (Entdecken & Verstehen)
+            spotlightEl.classList.remove('hidden');
+            spotlightEl.innerHTML = `🎯 Fokus-Vokabel: <b>${displayWord}</b>`;
+            jpEl.innerHTML = ctx.jpHighlighted;
+            readEl.innerText = 'Lies den ganzen Satz und überlege dir die Bedeutung im Kontext.';
+            deEl.classList.add('hidden');
+            deEl.innerHTML = `
+                <div style="font-size:17px; font-weight:700; color:var(--primary-dark); margin-bottom:6px;">🇩🇪 ${transSentence}</div>
+                <div style="font-size:14px; color:var(--accent-pink); font-weight:700;">📌 ${displayWord} = ${transWord}</div>
+            `;
+            studyArea.classList.remove('hidden');
+            document.getElementById('sctx-btn-reveal').classList.remove('hidden');
+            document.getElementById('sctx-study-actions').classList.add('hidden');
+        } else if (sentenceCtxSubMode === 'cloze') {
+            // Mode 2: Satz-Lückentext Quiz
+            spotlightEl.classList.remove('hidden');
+            spotlightEl.innerHTML = `🧩 Ergänze die passende Vokabel für: <b>„${transWord}“</b>`;
+            jpEl.innerHTML = ctx.jpCloze;
+            readEl.innerText = 'Wähle das japanische Wort, das in die Lücke passt:';
+            deEl.classList.remove('hidden');
+            deEl.innerHTML = `💬 <i>${transSentence}</i>`;
+
+            clozeArea.classList.remove('hidden');
+            const pool = (window.vocabData[state.level] || state.currentQueue).filter(w => w !== word);
+            const getOptLabel = w => (w.kanji && w.kanji !== w.kana) ? `${w.kanji} (${w.kana})` : (w.kana || w.kanji);
+            const correctLabel = getOptLabel(word);
+            const options = [correctLabel];
+            const shuffledPool = [...pool].sort(() => Math.random() - 0.5);
+            for (const cand of shuffledPool) {
+                if (options.length >= 4) break;
+                const lbl = getOptLabel(cand);
+                if (lbl && !options.includes(lbl)) options.push(lbl);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            clozeArea.innerHTML = options.map(opt => {
+                const escOpt = String(opt).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                const escCorr = String(correctLabel).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                return `<button type="button" class="quiz-option" onclick="checkSentenceContextCloze('${escOpt}', '${escCorr}', this)">${opt}</button>`;
+            }).join('');
+        } else {
+            // Mode 3: Im Satz schreiben
+            const isJpToDe = resolveActiveDirection() === 'jp-de';
+            state.currentWordDirection = isJpToDe ? 'jp-de' : 'de-jp';
+            spotlightEl.classList.remove('hidden');
+            writeArea.classList.remove('hidden');
+            const inp = document.getElementById('sctx-write-input');
+            inp.value = '';
+            inp.disabled = false;
+
+            if (isJpToDe) {
+                spotlightEl.innerHTML = `✍️ Übersetze das markierte Wort im Satz: <b>${displayWord}</b>`;
+                jpEl.innerHTML = ctx.jpHighlighted;
+                readEl.innerText = 'Schreibe die deutsche Bedeutung des markierten Wortes:';
+                deEl.classList.add('hidden');
+                deEl.innerHTML = `💬 <i>${transSentence}</i>`;
+                inp.placeholder = isEn ? 'English meaning of the highlighted word...' : 'Deutsche Bedeutung des markierten Wortes...';
+                document.getElementById('sctx-write-hint').innerText = 'Nach deiner Antwort wird die komplette Satzübersetzung eingeblendet.';
+            } else {
+                spotlightEl.innerHTML = `✍️ Schreibe das fehlende japanische Wort für: <b>„${transWord}“</b>`;
+                jpEl.innerHTML = ctx.jpCloze;
+                readEl.innerText = 'Gib Kana, Kanji oder Romaji für die Lücke ein:';
+                deEl.classList.remove('hidden');
+                deEl.innerHTML = `💬 <i>${transSentence}</i>`;
+                inp.placeholder = 'Fehlendes Wort auf Japanisch (Kana, Kanji oder Romaji)...';
+                document.getElementById('sctx-write-hint').innerText = 'Live Romaji → Kana ist aktiv.';
+            }
+            setTimeout(() => inp.focus(), 50);
+        }
+    }
+    window.loadSentenceContextItem = loadSentenceContextItem;
+
+    function revealSentenceContextCard() {
+        document.getElementById('sctx-sentence-de')?.classList.remove('hidden');
+        document.getElementById('sctx-btn-reveal')?.classList.add('hidden');
+        document.getElementById('sctx-study-actions')?.classList.remove('hidden');
+    }
+    window.revealSentenceContextCard = revealSentenceContextCard;
+
+    function gradeSentenceContextCard(knewIt) {
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return;
+        if (knewIt) {
+            playSound('correct');
+            updateWordSRS(word, true);
+            state.sessionCorrectCount++;
+        } else {
+            playSound('wrong');
+            updateWordSRS(word, false);
+            if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
+        }
+        saveUserStats();
+        nextSentenceContextItem();
+    }
+    window.gradeSentenceContextCard = gradeSentenceContextCard;
+
+    function checkSentenceContextCloze(selected, correct, btn) {
+        if (sentenceCtxAnswered) return;
+        sentenceCtxAnswered = true;
+        const word = state.currentQueue[state.currentIndex];
+        const ctx = getVocabContextSentence(word, state.level);
+        document.querySelectorAll('#sctx-cloze-area .quiz-option').forEach(b => b.disabled = true);
+
+        const jpEl = document.getElementById('sctx-sentence-jp');
+        if (jpEl && ctx) jpEl.innerHTML = ctx.jpHighlighted;
+        const fbEl = document.getElementById('sctx-feedback');
+
+        if (selected === correct) {
+            playSound('correct');
+            if (btn) btn.classList.add('correct');
+            fbEl.innerHTML = `<span class="feedback-correct">✓ Perfekt im Satz eingesetzt! (+10 XP)</span>`;
+            updateWordSRS(word, true);
+            if (!state.sessionMistakes.includes(word)) state.sessionCorrectCount++;
+            saveUserStats();
+            setTimeout(() => nextSentenceContextItem(), 1100);
+        } else {
+            playSound('wrong');
+            if (btn) btn.classList.add('wrong');
+            fbEl.innerHTML = `<span class="feedback-wrong">✕ Falsch! Richtig im Satz ist: <b>${correct}</b></span>`;
+            updateWordSRS(word, false);
+            if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
+            saveUserStats();
+            document.getElementById('sctx-next-btn').classList.remove('hidden');
+        }
+    }
+    window.checkSentenceContextCloze = checkSentenceContextCloze;
+
+    function submitSentenceContextWrite() {
+        if (sentenceCtxAnswered) {
+            nextSentenceContextItem();
+            return;
+        }
+        const word = state.currentQueue[state.currentIndex];
+        if (!word) return;
+        const inp = document.getElementById('sctx-write-input');
+        const val = inp ? inp.value.trim() : '';
+        if (!val) return;
+
+        sentenceCtxAnswered = true;
+        inp.disabled = true;
+        const isJpToDe = state.currentWordDirection === 'jp-de';
+        const isCorrect = evaluateTypingAnswer(word, val, isJpToDe);
+        const ctx = getVocabContextSentence(word, state.level);
+
+        document.getElementById('sctx-sentence-jp').innerHTML = ctx.jpHighlighted;
+        document.getElementById('sctx-sentence-de').classList.remove('hidden');
+        const fbEl = document.getElementById('sctx-feedback');
+        const rightDisp = isJpToDe
+            ? (word[state.lang] || word.de)
+            : (word.kanji && word.kanji !== word.kana ? `${word.kanji} (${word.kana})` : word.kana);
+
+        if (isCorrect) {
+            playSound('correct');
+            fbEl.innerHTML = `<span class="feedback-correct">✓ Richtig im Kontext! (${rightDisp}) +10 XP</span>`;
+            updateWordSRS(word, true);
+            if (!state.sessionMistakes.includes(word)) state.sessionCorrectCount++;
+            saveUserStats();
+            setTimeout(() => nextSentenceContextItem(), 1100);
+        } else {
+            playSound('wrong');
+            fbEl.innerHTML = `<span class="feedback-wrong">✕ Nicht ganz! Richtig wäre: <b>${rightDisp}</b></span>`;
+            updateWordSRS(word, false);
+            if (!state.sessionMistakes.includes(word)) state.sessionMistakes.push(word);
+            saveUserStats();
+            document.getElementById('sctx-next-btn').classList.remove('hidden');
+        }
+    }
+    window.submitSentenceContextWrite = submitSentenceContextWrite;
+
+    function nextSentenceContextItem() {
+        state.currentIndex++;
+        if (state.currentIndex >= state.currentQueue.length) finishSession();
+        else loadSentenceContextItem();
+    }
+    window.nextSentenceContextItem = nextSentenceContextItem;
 
     loadAllData();
     setTimeout(initAppTheme, 100); // Startet den gesamten Lade- und Initialisierungsprozess
